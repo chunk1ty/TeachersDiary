@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB83402B-2AD7-49BC-9515-170238901714}</ProjectGuid>
+    <ProjectGuid>{455282A1-00D7-42BD-93C8-EE1A754704E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TeacherDiary.CiDependencies</RootNamespace>
