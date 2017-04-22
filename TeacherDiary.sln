@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services.Contracts", "src\Data\TeacherDiary.Data.Services.Contracts\TeacherDiary.Data.Services.Contracts.csproj", "{35C455BF-326C-47B4-A20E-2E4E67E59649}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{16B6903A-2B4C-4CEC-A2B0-A2174E0A8429}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Common.Constants", "src\Common\TeacherDiary.Common.Constants\TeacherDiary.Common.Constants.csproj", "{650857DB-DDBE-4586-9E16-62A27E0FF209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,10 @@ Global
 		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +106,7 @@ Global
 		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{32C7407C-43B7-4208-828F-030323646860} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{35C455BF-326C-47B4-A20E-2E4E67E59649} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{16B6903A-2B4C-4CEC-A2B0-A2174E0A8429} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
+		{650857DB-DDBE-4586-9E16-62A27E0FF209} = {16B6903A-2B4C-4CEC-A2B0-A2174E0A8429}
 	EndGlobalSection
 EndGlobal
