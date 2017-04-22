@@ -78,6 +78,7 @@
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="Contracts\IIdentitySignInService.cs" />
     <Compile Include="Contracts\IIdentityUserManagerService.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

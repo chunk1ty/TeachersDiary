@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+
 using TeacherDiary.Clients.Mvc.ViewModels.Account;
 using TeacherDiary.Data.Ef;
 using TeacherDiary.Services.Identity.Contracts;
@@ -24,8 +23,18 @@ namespace TeacherDiary.Clients.Mvc.Controllers
             IIdentitySignInService identitySignInService,
             IIdentityUserManagerService identityUserManagerService)
         {
-            _identitySignInService = identitySignInService; //?? throw new ArgumentNullException(nameof(identitySignInService));
-            _identityUserManagerService = identityUserManagerService; //?? throw new ArgumentNullException(nameof(identityUserManagerService));
+            if (identitySignInService == null)
+            {
+                throw new ArgumentNullException(nameof(identitySignInService));
+            }
+
+            if (identityUserManagerService == null)
+            {
+                throw new ArgumentNullException(nameof(identityUserManagerService));
+            }
+
+            _identitySignInService = identitySignInService;
+            _identityUserManagerService = identityUserManagerService;
         }
 
         [HttpGet]
@@ -87,7 +96,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser();
+                var user = new AspNetUser();
 
                 user.UserName = model.Email;
                 user.Email = model.Email;
@@ -96,10 +105,6 @@ namespace TeacherDiary.Clients.Mvc.Controllers
 
                 if (result.Succeeded)
                 {
-                    // generate token
-                    //await SendEmalForNewUser(user);
-                    //AddNotification("Проверете имейлът си за да активирате акаунта.", NotificationType.Warning);
-
                     await _identitySignInService.SignInAsync(user, false, false);
 
                     return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
@@ -143,104 +148,6 @@ namespace TeacherDiary.Clients.Mvc.Controllers
             AddErrors(result);
 
             return this.View(model);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult ForgotPassword(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _identityUserManagerService.FindByNameAsync(model.Email);
-
-                if (user == null || !(await _identityUserManagerService.IsEmailConfirmedAsync(user.Id)))
-                {
-                    //this.AddNotification("Въведеният имейл не съществува.", NotificationType.Error);
-
-                    return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
-                }
-
-                //await SendEmailForForgottenPasswordAsync(user);
-
-                //this.AddNotification("Проверете вашият имейл за въвеждане на нова парола.", NotificationType.Info);
-
-                return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
-            }
-
-            return View(model);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = await _identityUserManagerService.FindByNameAsync(model.Email);
-
-            if (user == null)
-            {
-                ModelState.AddModelError("IncorectEmail", "Имейл адресът не съществува.");
-
-                return View(model);
-            }
-
-            var result = await _identityUserManagerService.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                //this.AddNotification("Успешно променихте вашата парола.", NotificationType.Success);
-
-                return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
-            }
-
-            ModelState.AddModelError(string.Empty, "Невалиден имейл адрес или токен.");
-
-            return View(model);
-
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-
-            var result = await _identityUserManagerService.ConfirmEmailAsync(userId, code);
-
-            //if (result.Succeeded)
-            //{
-            //    this.AddNotification("Успешно активирахте вашият акаунт.", NotificationType.Success);
-            //}
-            //else
-            //{
-            //    this.AddNotification("Неуспешно активирахте вашият акаунт.", NotificationType.Error);
-            //}
-
-            return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
         }
 
         protected override void Dispose(bool disposing)

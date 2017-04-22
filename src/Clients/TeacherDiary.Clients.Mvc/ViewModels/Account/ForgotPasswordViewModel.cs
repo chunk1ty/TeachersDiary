@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TeacherDiary.Clients.Mvc.ViewModels.Account
 {
+    [ExcludeFromCodeCoverage]
     public class ForgotPasswordViewModel
     {        
         [Display(Name = "Email")]
