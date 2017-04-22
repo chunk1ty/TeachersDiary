@@ -31,6 +31,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.CiDependencies", "src\TeacherDiary.CiDependencies\TeacherDiary.CiDependencies.csproj", "{455282A1-00D7-42BD-93C8-EE1A754704E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Contracts", "src\Data\TeacherDiary.Data.Contracts\TeacherDiary.Data.Contracts.csproj", "{F9468348-493F-47E5-B0F3-8A952B7BCC53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Entities", "src\Data\TeacherDiary.Data.Entities\TeacherDiary.Data.Entities.csproj", "{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services", "src\Data\TeacherDiary.Data.Services\TeacherDiary.Data.Services.csproj", "{32C7407C-43B7-4208-828F-030323646860}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services.Contracts", "TeacherDiary.Data.Services.Contracts\TeacherDiary.Data.Services.Contracts.csproj", "{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,22 @@ Global
 		{455282A1-00D7-42BD-93C8-EE1A754704E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455282A1-00D7-42BD-93C8-EE1A754704E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{455282A1-00D7-42BD-93C8-EE1A754704E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C7407C-43B7-4208-828F-030323646860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C7407C-43B7-4208-828F-030323646860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C7407C-43B7-4208-828F-030323646860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C7407C-43B7-4208-828F-030323646860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +94,9 @@ Global
 		{CDC2DD1B-3420-467A-B330-A90D71396999} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{695FDC8F-367C-4839-9BB9-5B7DFBF2411C} = {69487108-D63E-4C0E-B118-73F15491CA7C}
 		{455282A1-00D7-42BD-93C8-EE1A754704E2} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
+		{F9468348-493F-47E5-B0F3-8A952B7BCC53} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{32C7407C-43B7-4208-828F-030323646860} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 	EndGlobalSection
 EndGlobal
