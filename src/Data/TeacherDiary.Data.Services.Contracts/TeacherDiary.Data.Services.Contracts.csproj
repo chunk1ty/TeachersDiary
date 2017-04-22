@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}</ProjectGuid>
+    <ProjectGuid>{35C455BF-326C-47B4-A20E-2E4E67E59649}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TeacherDiary.Data.Services.Contracts</RootNamespace>

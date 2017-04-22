@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Entities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services", "src\Data\TeacherDiary.Data.Services\TeacherDiary.Data.Services.csproj", "{32C7407C-43B7-4208-828F-030323646860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services.Contracts", "TeacherDiary.Data.Services.Contracts\TeacherDiary.Data.Services.Contracts.csproj", "{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Data.Services.Contracts", "src\Data\TeacherDiary.Data.Services.Contracts\TeacherDiary.Data.Services.Contracts.csproj", "{35C455BF-326C-47B4-A20E-2E4E67E59649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,10 @@ Global
 		{32C7407C-43B7-4208-828F-030323646860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C7407C-43B7-4208-828F-030323646860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C7407C-43B7-4208-828F-030323646860}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C455BF-326C-47B4-A20E-2E4E67E59649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +97,6 @@ Global
 		{F9468348-493F-47E5-B0F3-8A952B7BCC53} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{32C7407C-43B7-4208-828F-030323646860} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
-		{55E4BA1B-E3CA-436D-9558-B27BEB99EDFD} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{35C455BF-326C-47B4-A20E-2E4E67E59649} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 	EndGlobalSection
 EndGlobal
