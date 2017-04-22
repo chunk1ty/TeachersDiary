@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TeacherDiary.Clients.Mvc.ViewModels.Account
 {
+    [ExcludeFromCodeCoverage]
     public class RegisterViewModel
     {        
         [Required(ErrorMessage = "Имeйла е задължителен.")]

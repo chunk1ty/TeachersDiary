@@ -1,7 +1,9 @@
-﻿using System.Web.Optimization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Optimization;
 
 namespace TeacherDiary.Clients.Mvc
 {
+    [ExcludeFromCodeCoverage]
     public class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)
@@ -28,9 +30,7 @@ namespace TeacherDiary.Clients.Mvc
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
+         
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 

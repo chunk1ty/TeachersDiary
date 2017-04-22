@@ -28,28 +28,28 @@ namespace TeacherDiary.Clients.Mvc.Tests
             _mockedIdentitySignInService = new Mock<IIdentitySignInService>();
         }
 
-        //[Test]
-        //public void Constructor_WithNullIdendityUserNamagerService_ShouldThrowsArgumentNullException()
-        //{
-        //    var ex = Assert.Catch<ArgumentNullException>(() =>
-        //        new AccountController(
-        //            null,
-        //            _mockedIdentityUserManagerService.Object
-        //        ));
+        [Test]
+        public void Constructor_WithNullIdendityUserNamagerService_ShouldThrowsArgumentNullException()
+        {
+            var ex = Assert.Catch<ArgumentNullException>(() =>
+                new AccountController(
+                    null,
+                    _mockedIdentityUserManagerService.Object
+                ));
 
-        //    StringAssert.Contains("identitySignInService", ex.Message);
-        //}
+            StringAssert.Contains("identitySignInService", ex.Message);
+        }
 
-        //[Test]
-        //public void Constructor_WithNullIdentitySignInServic_ShouldThrowsArgumentNullException()
-        //{
-        //    var ex = Assert.Catch<ArgumentNullException>(() =>
-        //        new AccountController(
-        //            _mockedIdentitySignInService.Object,
-        //            null));
+        [Test]
+        public void Constructor_WithNullIdentitySignInServic_ShouldThrowsArgumentNullException()
+        {
+            var ex = Assert.Catch<ArgumentNullException>(() =>
+                new AccountController(
+                    _mockedIdentitySignInService.Object,
+                    null));
 
-        //    StringAssert.Contains("identityUserManagerService", ex.Message);
-        //}
+            StringAssert.Contains("identityUserManagerService", ex.Message);
+        }
 
         [Test]
         public void LoginOnGetRequest_WithAuthenticateUser_ShouldRedirectToDashboardIndex()
@@ -118,7 +118,7 @@ namespace TeacherDiary.Clients.Mvc.Tests
         }
 
         [Test]
-        public async Task LoginOnPostRequest_WithValidModelStateAndSuccessResult_ShouldRedirectToLocalUrl()
+        public void LoginOnPostRequest_WithValidModelStateAndSuccessResult_ShouldRedirectToLocalUrl()
         {
             // Arrange
             Mock<HttpContextBase> mockedHttpContextBase = new Mock<HttpContextBase>();
@@ -144,7 +144,7 @@ namespace TeacherDiary.Clients.Mvc.Tests
         }
 
         [Test]
-        public async Task LoginOnPostRequest_WithValidModelStateAndSuccessResult_ShouldRedirectToDashboardIndex()
+        public void LoginOnPostRequest_WithValidModelStateAndSuccessResult_ShouldRedirectToDashboardIndex()
         {
             // Arrange
             Mock<HttpContextBase> mockedHttpContextBase = new Mock<HttpContextBase>();
@@ -170,7 +170,7 @@ namespace TeacherDiary.Clients.Mvc.Tests
         }
 
         [Test]
-        public async Task LoginOnPostRequest_WithValidModelStateAndNotSuccessResult_ShouldRenderDefaultView()
+        public void LoginOnPostRequest_WithValidModelStateAndNotSuccessResult_ShouldRenderDefaultView()
         {
             // Arrange
 
@@ -231,12 +231,11 @@ namespace TeacherDiary.Clients.Mvc.Tests
         public void RegisterOnPostRequest_WithValidModelAndSucceededCreateResult_ShouldRedirectToAccountController()
         {
             // Arrange
-
-            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<AspNetUser>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Success);
 
             _mockedIdentitySignInService.Setup(
-                    x => x.SignInAsync(It.IsAny<ApplicationUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
+                    x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(0));
 
             var accountController = new AccountController(
@@ -255,13 +254,11 @@ namespace TeacherDiary.Clients.Mvc.Tests
         public void RegisterOnPostRequest_WithValidModelAndFailedCreateResult_ShouldRenderDefaultView()
         {
             // Arrange
-            
-
-            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<AspNetUser>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Failed());
 
             _mockedIdentitySignInService.Setup(
-                    x => x.SignInAsync(It.IsAny<ApplicationUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
+                    x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(0));
 
             var accountController = new AccountController(
@@ -273,6 +270,129 @@ namespace TeacherDiary.Clients.Mvc.Tests
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Register(model))
+                .ShouldRenderDefaultView()
+                .WithModel(model);
+        }
+
+        [Test]
+        public void ChangePasswordOnGetRequest_WithDefaultFlow_ShouldRenderDefaultView()
+        {
+            // Arrange
+            var accountController = new AccountController(
+                _mockedIdentitySignInService.Object,
+                _mockedIdentityUserManagerService.Object);
+
+            // Act & Assert
+            accountController
+                .WithCallTo(c => c.ChangePassword())
+                .ShouldRenderDefaultView();
+        }
+
+        [Test]
+        public void ChangePasswordOnPostRequest_WithInvalidModelState_ShouldRenderDefaultViewWithErrors()
+        {
+            // Arrange
+            var accountController = new AccountController(
+                _mockedIdentitySignInService.Object,
+                _mockedIdentityUserManagerService.Object);
+
+            accountController.ModelState.AddModelError("errorKey", "error");
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+
+            // Act & Assert
+            accountController
+                .WithCallTo(c => c.ChangePassword(model))
+                .ShouldRenderDefaultView()
+                .WithModel(model)
+                .AndModelError("errorKey");
+        }
+
+        [Test]
+        public void ChangePasswordOnPostRequest_WithValidModelStateAndSucceededResultAndExistingUser_ShouldRedirectToHomeController()
+        {
+            // Arrange
+            var mockContext = new Mock<ControllerContext>();
+            mockContext.Setup(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(false);
+
+            _mockedIdentityUserManagerService.Setup(x => x.ChangePasswordAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
+
+            _mockedIdentityUserManagerService.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new AspNetUser());
+
+            var accountController = new AccountController(
+                _mockedIdentitySignInService.Object,
+                _mockedIdentityUserManagerService.Object)
+            {
+                ControllerContext = mockContext.Object
+            };
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+
+            // Act & Assert
+            accountController
+                .WithCallTo(c => c.ChangePassword(model))
+                .ShouldRedirectTo<HomeController>(x => x.Index());
+
+            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once);
+        }
+
+        [Test]
+        public void ChangePasswordOnPostRequest_WithValidModelStateAndSucceededResultAndNotExistingUser_ShouldRedirectToHomeController()
+        {
+            // Arrange
+            var mockContext = new Mock<ControllerContext>();
+            mockContext.Setup(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(false);
+
+            _mockedIdentityUserManagerService.Setup(x => x.ChangePasswordAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
+
+            Func<AspNetUser> nullUserFunc = () => null;
+
+            _mockedIdentityUserManagerService.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(nullUserFunc);
+
+            var accountController = new AccountController(
+                _mockedIdentitySignInService.Object,
+                _mockedIdentityUserManagerService.Object)
+            {
+                ControllerContext = mockContext.Object
+            };
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+
+            // Act & Assert
+            accountController
+                .WithCallTo(c => c.ChangePassword(model))
+                .ShouldRedirectTo<HomeController>(x => x.Index());
+
+            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Never);
+        }
+
+        [Test]
+        public void ChangePasswordOnPostRequest_WithValidModelStateAndNotSucceededResult_ShouldRenderDefaultViewWithErrors()
+        {
+            // Arrange
+            var mockContext = new Mock<ControllerContext>();
+            mockContext.Setup(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(false);
+
+            _mockedIdentityUserManagerService.Setup(x => x.ChangePasswordAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Failed());
+
+            var accountController = new AccountController(
+                _mockedIdentitySignInService.Object,
+                _mockedIdentityUserManagerService.Object)
+            {
+                ControllerContext = mockContext.Object
+            };
+
+
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+
+            // Act & Assert
+            accountController
+                .WithCallTo(c => c.ChangePassword(model))
                 .ShouldRenderDefaultView()
                 .WithModel(model);
         }

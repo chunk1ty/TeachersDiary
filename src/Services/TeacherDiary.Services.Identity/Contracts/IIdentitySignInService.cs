@@ -10,6 +10,6 @@ namespace TeacherDiary.Services.Identity.Contracts
     {
         Task<SignInStatus> PasswordSignInAsync(string userName, string password, bool isPersistent, bool shouldLockout);
 
-        Task SignInAsync(ApplicationUser user, bool isPersistent, bool rememberBrowser);
+        Task SignInAsync(AspNetUser user, bool isPersistent, bool rememberBrowser);
     }
 }
