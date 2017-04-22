@@ -53,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ITeacherDiaryDbContext.cs" />
+    <Compile Include="Contracts\ITeacherDiaryDbContextSaveChanges.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\EfClassRepository.cs" />
     <Compile Include="TeacherDiaryDbContext.cs" />
     <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TeacherDiary.Data.Contracts\TeacherDiary.Data.Contracts.csproj">
+      <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
+      <Name>TeacherDiary.Data.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeacherDiary.Data.Entities\TeacherDiary.Data.Entities.csproj">
       <Project>{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}</Project>
       <Name>TeacherDiary.Data.Entities</Name>

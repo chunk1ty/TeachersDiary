@@ -34,7 +34,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IClassService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeacherDiary.Data.Entities\TeacherDiary.Data.Entities.csproj">
+      <Project>{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}</Project>
+      <Name>TeacherDiary.Data.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

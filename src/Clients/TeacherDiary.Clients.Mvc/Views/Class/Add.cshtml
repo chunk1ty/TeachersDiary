@@ -4,5 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add</h2>
+@using (Html.BeginForm<ClassController>(x => x.Add(), FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        <div>
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+
+    <button class="btn btn-default" type="submit">
+        Създай
+    </button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
