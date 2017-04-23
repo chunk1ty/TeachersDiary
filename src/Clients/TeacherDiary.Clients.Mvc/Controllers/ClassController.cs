@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 using AutoMapper;
 using TeacherDiary.Clients.Mvc.ViewModels.Class;
 using TeacherDiary.Data.Entities;
@@ -40,7 +41,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
 
             _classService.Add(classAsDbEntity);
 
-            return View();
+            return this.RedirectToAction<ClassController>(x => x.Index());
         }
     }
 }
