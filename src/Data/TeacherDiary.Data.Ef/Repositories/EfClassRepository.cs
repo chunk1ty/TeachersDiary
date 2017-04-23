@@ -1,4 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Threading.Tasks;
+
 using TeacherDiary.Data.Contracts;
 using TeacherDiary.Data.Ef.Contracts;
 using TeacherDiary.Data.Entities;
@@ -26,6 +30,20 @@ namespace TeacherDiary.Data.Ef.Repositories
             {
                 _teacherDiaryDbContext.Classes.Add(system);
             }
+        }
+
+        public async Task<IEnumerable<Class>> GetAllAsync()
+        {
+            return await _teacherDiaryDbContext.Classes.ToListAsync();
+        }
+
+        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        {
+            var @class = await _teacherDiaryDbContext.Classes
+                .Include(x => x.Students)
+                .SingleOrDefaultAsync(x => x.Id == classId);
+
+            return @class;
         }
     }
 }
