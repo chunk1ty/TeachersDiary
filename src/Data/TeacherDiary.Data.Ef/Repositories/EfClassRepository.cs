@@ -32,9 +32,11 @@ namespace TeacherDiary.Data.Ef.Repositories
             }
         }
 
-        public async Task<IEnumerable<Class>> GetAllAsync()
+        public async Task<IEnumerable<Class>> GetAllWithStudentsAsync()
         {
-            return await _teacherDiaryDbContext.Classes.ToListAsync();
+            return await _teacherDiaryDbContext.Classes
+                .Include(x => x.Students)
+                .ToListAsync();
         }
 
         public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)

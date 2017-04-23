@@ -9,7 +9,7 @@ namespace TeacherDiary.Data.Contracts
     {
         void Add(Class system);
 
-        Task<IEnumerable<Class>> GetAllAsync();
+        Task<IEnumerable<Class>> GetAllWithStudentsAsync();
 
         Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId);
     }

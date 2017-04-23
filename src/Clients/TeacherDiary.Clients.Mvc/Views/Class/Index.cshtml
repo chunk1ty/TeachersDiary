@@ -1,6 +1,20 @@
-﻿@{
+﻿@model IEnumerable<ClassViewModel>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-index
+<div>
+    @foreach(var clas in Model)
+    { 
+        <div>
+            @clas.Name
 
+            @foreach (var student in clas.Students)
+            {
+                @student.FirstName @student.MiddleName @student.LastName
+            }
+        </div>
+       
+    }
+</div>

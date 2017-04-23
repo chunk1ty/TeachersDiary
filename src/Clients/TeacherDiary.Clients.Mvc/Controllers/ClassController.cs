@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
 using AutoMapper;
+using TeacherDiary.Clients.Mvc.Infrastructure.Mapping;
 using TeacherDiary.Clients.Mvc.ViewModels.Class;
 using TeacherDiary.Data.Entities;
 using TeacherDiary.Data.Services.Contracts;
@@ -17,9 +20,13 @@ namespace TeacherDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var classesAsDbEntities =  await _classService.GetAllAsync();
+
+            var classesAsViewModel = classesAsDbEntities.To<ClassViewModel>().ToList();
+
+            return View(classesAsViewModel);
         }
 
         [HttpGet]

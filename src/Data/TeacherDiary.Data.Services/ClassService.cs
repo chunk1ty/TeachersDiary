@@ -36,5 +36,10 @@ namespace TeacherDiary.Data.Services
 
             _contextSaveChanges.SaveChanges();
         }
+
+        public async Task<IEnumerable<Class>> GetAllAsync()
+        {
+            return await _classRepository.GetAllWithStudentsAsync();
+        }
     }
 }
