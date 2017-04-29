@@ -5,14 +5,10 @@ using System.IO;
 using Excel;
 using TeacherDiary.Data.Entities;
 using TeacherDiary.Data.Services.Contracts;
+using TeacherDiary.Services.Contracts;
 
 namespace TeacherDiary.Services
 {
-    public interface IExelParser
-    {
-        void ReadFile(string filePath);
-    }
-
     public class ExelParser : IExelParser
     {
         private readonly IClassService _classService;
@@ -116,7 +112,6 @@ namespace TeacherDiary.Services
             }
 
             _classService.AddRange(clases);
-           
 
             excelReader.Close();
         }
