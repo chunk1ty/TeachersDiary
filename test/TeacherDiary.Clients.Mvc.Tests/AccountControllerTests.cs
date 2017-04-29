@@ -72,7 +72,7 @@ namespace TeacherDiary.Clients.Mvc.Tests
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Login(returnUrl))
-                .ShouldRedirectTo<HomeController>(x => x.Index());
+                .ShouldRedirectTo<DashboardController>(x => x.Index());
         }
 
         [Test]
@@ -167,7 +167,7 @@ namespace TeacherDiary.Clients.Mvc.Tests
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Login(model, returnUrl))
-                .ShouldRedirectTo<HomeController>(x => x.Index());
+                .ShouldRedirectTo<DashboardController>(x => x.Index());
         }
 
         [Test]

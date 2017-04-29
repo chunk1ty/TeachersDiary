@@ -18,11 +18,6 @@ namespace TeacherDiary.Clients.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var path = Path.Combine(Server.MapPath("~/UploadedFiles"), "ankk.xlsx");
-
-            var reader = new ExelParser(_classService);
-            reader.ReadFile(path);
-
             return View();
         }
 

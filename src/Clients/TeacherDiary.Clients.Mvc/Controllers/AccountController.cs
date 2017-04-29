@@ -36,7 +36,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return this.RedirectToAction<HomeController>(x => x.Index());
+                return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
             // TODO do i need returnUrl ?
@@ -179,7 +179,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
                 return Redirect(returnUrl);
             }
 
-            return this.RedirectToAction<ClassController>(x => x.Add());
+            return this.RedirectToAction<DashboardController>(x => x.Index());
         }
     }
 }
