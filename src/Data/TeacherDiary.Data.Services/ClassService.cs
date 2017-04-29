@@ -37,6 +37,20 @@ namespace TeacherDiary.Data.Services
             _contextSaveChanges.SaveChanges();
         }
 
+        public void AddRange(List<Class> classes)
+        {
+            Guard.WhenArgument(classes, nameof(classes)).IsNull().Throw();
+
+            if (classes == null)
+            {
+                throw new ArgumentNullException(nameof(classes));
+            }
+
+            _classRepository.AddRange(classes);
+
+            _contextSaveChanges.SaveChanges();
+        }
+
         public async Task<IEnumerable<Class>> GetAllAsync()
         {
             return await _classRepository.GetAllWithStudentsAsync();

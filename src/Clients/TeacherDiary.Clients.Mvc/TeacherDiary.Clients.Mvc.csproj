@@ -227,6 +227,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -283,8 +284,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -292,9 +291,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
     <Content Include="Views\Class\Add.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -339,6 +342,10 @@
     <ProjectReference Include="..\..\Services\TeacherDiary.Services.Identity\TeacherDiary.Services.Identity.csproj">
       <Project>{9E4C3233-D138-463D-96B0-87F94C40E1D2}</Project>
       <Name>TeacherDiary.Services.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\TeacherDiary.Services\TeacherDiary.Services.csproj">
+      <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
+      <Name>TeacherDiary.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

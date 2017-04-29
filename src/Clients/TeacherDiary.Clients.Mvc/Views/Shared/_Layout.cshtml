@@ -29,6 +29,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Class", "Index", "Class")</li>
+                        <li>@Html.ActionLink("Upload File", "Index", "Dashboard")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

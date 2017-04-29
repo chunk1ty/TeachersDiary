@@ -7,7 +7,7 @@ namespace TeacherDiary.Data.Entities
         public int Id { get; set; }
 
         public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
 
         public int MonthId { get; set; }
 

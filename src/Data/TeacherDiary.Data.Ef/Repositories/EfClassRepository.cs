@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
-
+using Bytes2you.Validation;
 using TeacherDiary.Data.Contracts;
 using TeacherDiary.Data.Ef.Contracts;
+using TeacherDiary.Data.Ef.Extensions;
 using TeacherDiary.Data.Entities;
 
 namespace TeacherDiary.Data.Ef.Repositories
@@ -18,9 +19,11 @@ namespace TeacherDiary.Data.Ef.Repositories
             _teacherDiaryDbContext = teacherDiaryDbContext;
         }
 
-        public void Add(Class system)
+        public void Add(Class @class)
         {
-            var entry = _teacherDiaryDbContext.Entry(system);
+            Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
+
+            var entry = _teacherDiaryDbContext.Entry(@class);
 
             if (entry.State != EntityState.Detached)
             {
@@ -28,8 +31,15 @@ namespace TeacherDiary.Data.Ef.Repositories
             }
             else
             {
-                _teacherDiaryDbContext.Classes.Add(system);
+                _teacherDiaryDbContext.Classes.Add(@class);
             }
+        }
+
+        public void AddRange(List<Class> clases)
+        {
+            Guard.WhenArgument(clases, nameof(clases)).IsNull().Throw();
+
+            _teacherDiaryDbContext.Classes.AddRange(clases);
         }
 
         public async Task<IEnumerable<Class>> GetAllWithStudentsAsync()

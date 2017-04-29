@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -14,6 +15,10 @@ namespace TeacherDiary.Data.Ef
             : base("DefaultConnection", false)
         {
         }
+
+        public virtual IDbSet<Teacher> Teachers { get; set; }
+
+        public virtual IDbSet<School> Schools { get; set; }
 
         public virtual IDbSet<Class> Classes { get; set; }
 
@@ -32,6 +37,11 @@ namespace TeacherDiary.Data.Ef
             where TEntity : class
         {
             return base.Set<TEntity>();
+        }
+
+        public void SaveChanges()
+        {
+            base.SaveChanges();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace TeacherDiary.Data.Services.Contracts
     {
         void Add(Class system);
 
+        void AddRange(List<Class> classes);
+
         Task<IEnumerable<Class>> GetAllAsync();
     }
 }

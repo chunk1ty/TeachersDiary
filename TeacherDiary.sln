@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{16B690
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Common.Constants", "src\Common\TeacherDiary.Common.Constants\TeacherDiary.Common.Constants.csproj", "{650857DB-DDBE-4586-9E16-62A27E0FF209}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherDiary.Services", "src\Services\TeacherDiary.Services\TeacherDiary.Services.csproj", "{BCDA0869-B632-4B8D-B0E3-167C039BFF19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{650857DB-DDBE-4586-9E16-62A27E0FF209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,5 +114,6 @@ Global
 		{35C455BF-326C-47B4-A20E-2E4E67E59649} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{16B6903A-2B4C-4CEC-A2B0-A2174E0A8429} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
 		{650857DB-DDBE-4586-9E16-62A27E0FF209} = {16B6903A-2B4C-4CEC-A2B0-A2174E0A8429}
+		{BCDA0869-B632-4B8D-B0E3-167C039BFF19} = {1D257161-D3F2-422D-86BA-1AEF33BF7208}
 	EndGlobalSection
 EndGlobal
