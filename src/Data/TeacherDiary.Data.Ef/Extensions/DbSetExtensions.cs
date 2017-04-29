@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
+using System.Data.Entity; 
 
 namespace TeacherDiary.Data.Ef.Extensions
 {
