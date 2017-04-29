@@ -8,6 +8,12 @@ using Ninject;
 using Ninject.Web.Common;
 
 using TeacherDiary.Clients.Mvc;
+using TeacherDiary.Data.Contracts;
+using TeacherDiary.Data.Ef;
+using TeacherDiary.Data.Ef.Contracts;
+using TeacherDiary.Data.Ef.Repositories;
+using TeacherDiary.Data.Services;
+using TeacherDiary.Data.Services.Contracts;
 using TeacherDiary.Services.Identity;
 using TeacherDiary.Services.Identity.Contracts;
 
@@ -67,6 +73,15 @@ namespace TeacherDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind(typeof(ITeacherDiaryDbContext),
+                    typeof(ITeacherDiaryDbContextSaveChanges))
+                .ToMethod(ctx => ctx.Kernel.Get<TeacherDiaryDbContext>())
+                .InRequestScope();
+           
+            kernel.Bind<IClassRepository>().To<EfClassRepository>();
+            kernel.Bind<IClassService>().To<ClassService>();
+           
+
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
         }        

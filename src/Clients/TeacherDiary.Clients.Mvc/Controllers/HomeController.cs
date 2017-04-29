@@ -1,15 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
 using System.Web.Mvc;
+
+using TeacherDiary.Data.Ef.Contracts;
+using TeacherDiary.Data.Services.Contracts;
+using TeacherDiary.Services;
 
 namespace TeacherDiary.Clients.Mvc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IClassService _classService;
+
+        public HomeController(IClassService classService)
+        {
+            _classService = classService;
+        }
+
         public ActionResult Index()
         {
+            var path = Path.Combine(Server.MapPath("~/UploadedFiles"), "ankk.xlsx");
+
+            var reader = new ExelParser(_classService);
+            reader.ReadFile(path);
+
             return View();
         }
 

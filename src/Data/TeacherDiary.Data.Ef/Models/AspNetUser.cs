@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace TeacherDiary.Data.Ef
+namespace TeacherDiary.Data.Ef.Models
 {
     public class AspNetUser : IdentityUser
     {

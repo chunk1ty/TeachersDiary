@@ -3,18 +3,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-
+using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using TeacherDiary.Clients.Mvc.ViewModels.Account;
 using TeacherDiary.Data.Ef;
+using TeacherDiary.Data.Ef.Models;
 using TeacherDiary.Services.Identity.Contracts;
 
 namespace TeacherDiary.Clients.Mvc.Controllers
 {
-    [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private IIdentityUserManagerService _identityUserManagerService;
         private readonly IIdentitySignInService _identitySignInService;
@@ -23,15 +23,8 @@ namespace TeacherDiary.Clients.Mvc.Controllers
             IIdentitySignInService identitySignInService,
             IIdentityUserManagerService identityUserManagerService)
         {
-            if (identitySignInService == null)
-            {
-                throw new ArgumentNullException(nameof(identitySignInService));
-            }
-
-            if (identityUserManagerService == null)
-            {
-                throw new ArgumentNullException(nameof(identityUserManagerService));
-            }
+            Guard.WhenArgument(identitySignInService, nameof(identitySignInService)).IsNull().Throw();
+            Guard.WhenArgument(identityUserManagerService, nameof(identityUserManagerService)).IsNull().Throw();
 
             _identitySignInService = identitySignInService;
             _identityUserManagerService = identityUserManagerService;
@@ -46,6 +39,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
                 return this.RedirectToAction<HomeController>(x => x.Index());
             }
 
+            // TODO do i need returnUrl ?
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -185,7 +179,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
                 return Redirect(returnUrl);
             }
 
-            return this.RedirectToAction<HomeController>(x => x.Index());
+            return this.RedirectToAction<ClassController>(x => x.Add());
         }
     }
 }

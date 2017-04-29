@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using TeacherDiary.Data.Ef;
+using TeacherDiary.Data.Ef.Models;
 using TeacherDiary.Services.Identity;
 
 namespace TeacherDiary.Clients.Mvc

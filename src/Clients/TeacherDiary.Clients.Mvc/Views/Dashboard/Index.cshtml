@@ -1,0 +1,15 @@
+﻿@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="file" name="file" id="file" />
+
+    <br />
+
+    <input type="submit" value="Upload"/>
+}

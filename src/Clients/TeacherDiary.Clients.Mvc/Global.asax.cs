@@ -13,6 +13,7 @@ namespace TeacherDiary.Clients.Mvc
         protected void Application_Start()
         {
             ViewEngineConfig.RegisterViewEngine();
+            AutomapperConfig.RegisterMap();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

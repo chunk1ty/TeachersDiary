@@ -1,0 +1,48 @@
+﻿@model ClassViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm<ClassController>(x => x.Add(), FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        <div>
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        
+        <span id="add-student" class="btn-default">Add Students</span>
+        <div id="students"></div>
+    </div>
+
+    <button class="btn btn-default" type="submit">
+        Създай
+    </button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $students = $('#students');
+            var index = 0;
+
+            $('#add-student').click(function (e) {
+
+                e.preventDefault();
+                $('<input type="text" name="Students['+ index +'].FirstName" />').appendTo($students);
+                $('<input type="text" name="Students[' + index +'].MiddleName" />').appendTo($students);
+                $('<input type="text" name="Students[' + index + '].LastName" /> <br />').appendTo($students);
+
+                index++;
+            });
+        });
+    </script>
+}
+
+
