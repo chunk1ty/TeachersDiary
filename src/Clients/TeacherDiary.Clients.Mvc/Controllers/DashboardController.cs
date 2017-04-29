@@ -35,7 +35,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
                 // extract only the filename
                 var fileName = Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
                 file.SaveAs(path);
 
                 var reader = new ExelParser(_classService);
