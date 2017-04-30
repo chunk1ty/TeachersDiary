@@ -8,13 +8,7 @@
     @foreach(var clas in Model)
     { 
         <div>
-            @clas.Name
-
-            @foreach (var student in clas.Students)
-            {
-                @student.FirstName @student.MiddleName @student.LastName
-            }
+            @(Html.ActionLink<ClassController>(clas.Name, c => c.Students(clas.Id), new { area = string.Empty }, new { @class = "btn btn-dark" }))
         </div>
-       
     }
 </div>

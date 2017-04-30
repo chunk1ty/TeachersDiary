@@ -51,9 +51,14 @@ namespace TeacherDiary.Data.Services
             _contextSaveChanges.SaveChanges();
         }
 
+        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        {
+            return await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
+        }
+
         public async Task<IEnumerable<Class>> GetAllAsync()
         {
-            return await _classRepository.GetAllWithStudentsAsync();
+            return await _classRepository.GetAllAsync();
         }
     }
 }

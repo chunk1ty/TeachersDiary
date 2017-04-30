@@ -1,0 +1,185 @@
+﻿@model ClassViewModel
+
+@{
+    ViewBag.Title = "Students";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <style ></style>
+
+    @Styles.Render("~/Content/jqueryDataTable");
+
+    <style>
+        .container.body-content {
+            max-width: 100%;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+}
+
+<h2>Students</h2>
+@using (Html.BeginForm<ClassController>(c => c.Students(Guid.Empty), FormMethod.Post))
+{
+    @Html.HiddenFor(x => Model.Id)
+    @Html.HiddenFor(x => Model.Name)
+
+    <input type="submit" value="Sent"/>
+    <table id="student-grid" class="display">
+        <thead>
+            <tr>
+                <th class="center" rowspan="2">Имена</th>
+                <th class="center" colspan="2">Януари</th>
+                <th class="center" colspan="2">Февруари</th>
+                <th class="center" colspan="2">Март</th>
+                <th class="center" colspan="2">Април</th>
+                <th class="center" colspan="2">Май</th>
+                <th class="center" colspan="2">Юни</th>
+            </tr>
+            <tr>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @for (var i = 0; i < Model.Students.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => x.Students[i].FirstName)
+                        @Html.HiddenFor(x => x.Students[i].MiddleName)
+                        @Html.HiddenFor(x => x.Students[i].LastName)
+                        @Html.HiddenFor(x => x.Students[i].Id)
+
+                        @Model.Students[i].FirstName @Model.Students[i].MiddleName @Model.Students[i].LastName
+                    </td>
+
+                    @{ int mounthCounter = 0; }
+
+
+                    @for (var j = 0; j < Model.Students[i].Absences.Count; j++)
+                    {
+                        @Html.HiddenFor(x => x.Students[i].Absences[j].Id)
+                        @Html.HiddenFor(x => x.Students[i].Absences[j].MonthId)
+                        <td>
+                            @Html.EditorFor(model => Model.Students[i].Absences[j].Excused)
+                            @*<input type="text" name="@Model.Students[i].Absences[j]" value="@Model.Students[i].Absences[j].Excused" maxlength="5" size="5">*@
+
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => Model.Students[i].Absences[j].NotExcused)
+                            @*<input type="text" name="@Model.Students[i].Absences[j]" value="@Model.Students[i].Absences[j].NotExcused" maxlength="5" size="5">*@
+
+                        </td>
+                        {
+                            mounthCounter += 1;
+                        }
+                    }
+
+                    @while (mounthCounter < 6)
+                    {
+
+                        <td>
+                            <input type="text" id="row-5-age" name="row-5-age" value=" " maxlength="5" size="5">
+                        </td>
+                        <td>
+                            <input type="text" id="row-5-age" name="row-5-age" value=" " maxlength="5" size="5">
+                        </td>
+                        {
+                            mounthCounter += 1;
+                        }
+
+                    }
+                </tr>
+                        }
+
+
+        </tbody>
+    </table>
+                        }
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryDataTable")
+
+    @*<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>*@
+
+    <script>
+        // $(function ($) {
+        "use strict";
+        $(document).ready(function () {
+
+
+            //grid settings
+            var table = $('#student-grid').DataTable({
+                columnDefs: [{
+                    targets: [0],
+                    searchable: false,
+                    orderable: false,
+                    className: 'dt-body-center'
+                }, {
+                    targets: [1],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [2],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [3],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [4],
+                    searchable: true,
+                    sortable: true
+                }],
+                paging: false,
+                "bFilter": false,
+                //pagingType: "full_numbers",
+                //aaSorting: [],
+                language: {
+                    //search: "Търсене по колони: ",
+                    //info: "Страница _PAGE_ от _PAGES_ страници.",
+                    //lengthMenu: "Покажи _MENU_ потребителя.",
+                    //emptyTable: "Няма налични потребители.",
+                    //paginate: {
+                    //    first: "Първа",
+                    //    last: "Последна",
+                    //    next: "Следваща",
+                    //    previous: "Предишна"
+                    //}
+                }
+            });
+
+
+            $('#student-grid tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#button').click(function () {
+                table.row('.selected').remove().draw(false);
+            });
+        });
+       // }($));
+    </script>
+}

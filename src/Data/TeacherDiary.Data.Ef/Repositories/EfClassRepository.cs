@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
 using TeacherDiary.Data.Contracts;
@@ -49,10 +50,16 @@ namespace TeacherDiary.Data.Ef.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        public async Task<IEnumerable<Class>> GetAllAsync()
+        {
+            return await _teacherDiaryDbContext.Classes
+                .ToListAsync();
+        }
+
+        public async Task<Class> GetClassWithStudentsAndAbsencesByClassIdAsync(Guid classId)
         {
             var @class = await _teacherDiaryDbContext.Classes
-                .Include(x => x.Students)
+                .Include(x => x.Students.Select(y => y.Absences))
                 .SingleOrDefaultAsync(x => x.Id == classId);
 
             return @class;

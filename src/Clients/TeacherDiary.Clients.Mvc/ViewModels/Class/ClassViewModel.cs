@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TeacherDiary.Clients.Mvc.Infrastructure.Mapping.Contracts;
 using TeacherDiary.Clients.Mvc.ViewModels.Student;
@@ -10,13 +11,15 @@ namespace TeacherDiary.Clients.Mvc.ViewModels.Class
     {
         public ClassViewModel()
         {
-            Students = new HashSet<StudentViewModel>();
+            Students = new List<StudentViewModel>();
         }
+
+        public Guid Id { get; set; }
 
         [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
-        public ICollection<StudentViewModel> Students { get; set; }
+        public List<StudentViewModel> Students { get; set; }
     }
 }

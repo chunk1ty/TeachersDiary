@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TeacherDiary.Data.Entities;
 
@@ -11,5 +12,7 @@ namespace TeacherDiary.Data.Services.Contracts
         void AddRange(List<Class> classes);
 
         Task<IEnumerable<Class>> GetAllAsync();
+
+        Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId);
     }
 }

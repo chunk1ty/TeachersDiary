@@ -11,8 +11,8 @@ namespace TeacherDiary.Data.Contracts
 
         void AddRange(List<Class> clases);
 
-        Task<IEnumerable<Class>> GetAllWithStudentsAsync();
+        Task<Class> GetClassWithStudentsAndAbsencesByClassIdAsync(Guid classId);
 
-        Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId);
+        Task<IEnumerable<Class>> GetAllAsync();
     }
 }

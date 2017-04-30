@@ -30,6 +30,7 @@ namespace TeacherDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(HttpPostedFileBase file)
         {
+            // TODO file validation
             if(file != null && file.ContentLength > 0)
             {
                 // extract only the filename

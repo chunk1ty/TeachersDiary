@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
@@ -27,6 +28,23 @@ namespace TeacherDiary.Clients.Mvc.Controllers
             var classesAsViewModel = classesAsDbEntities.To<ClassViewModel>().ToList();
 
             return View(classesAsViewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Students(Guid classId)
+        {
+            var classAsDbEntities = await _classService.GetClassWithStudentsByClassIdAsync(classId);
+
+            var classAsViewModel = Mapper.Map<ClassViewModel>(classAsDbEntities);
+
+            return View(classAsViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Students(ClassViewModel model)
+        {
+
+            return this.RedirectToAction<ClassController>(x => x.Students(model.Id));
         }
 
         [HttpGet]
