@@ -23,6 +23,16 @@ namespace TeacherDiary.Data.Services
             _contextSaveChanges = contextSaveChanges;
         }
 
+        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        {
+            return await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
+        }
+
+        public async Task<IEnumerable<Class>> GetAllAsync()
+        {
+            return await _classRepository.GetAllAsync();
+        }
+
         public void Add(Class @class)
         {
             Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
@@ -41,24 +51,18 @@ namespace TeacherDiary.Data.Services
         {
             Guard.WhenArgument(classes, nameof(classes)).IsNull().Throw();
 
-            if (classes == null)
-            {
-                throw new ArgumentNullException(nameof(classes));
-            }
-
             _classRepository.AddRange(classes);
 
             _contextSaveChanges.SaveChanges();
         }
 
-        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        public async Task DeleteById(Guid classId)
         {
-            return await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
-        }
+            var @class = await _classRepository.GetByIdAsync(classId);
 
-        public async Task<IEnumerable<Class>> GetAllAsync()
-        {
-            return await _classRepository.GetAllAsync();
+            _classRepository.Delete(@class);
+
+            _contextSaveChanges.SaveChanges();
         }
     }
 }

@@ -8,16 +8,19 @@ using System.Web.Mvc.Expressions;
 using TeacherDiary.Data.Ef.Contracts;
 using TeacherDiary.Data.Services.Contracts;
 using TeacherDiary.Services;
+using TeacherDiary.Services.Contracts;
 
 namespace TeacherDiary.Clients.Mvc.Controllers
 {
     public class DashboardController : BaseController
     {
         private readonly IClassService _classService;
+        private readonly IExelParser _exelParser;
 
-        public DashboardController(IClassService classService)
+        public DashboardController(IClassService classService, IExelParser exelParser)
         {
             _classService = classService;
+            _exelParser = exelParser;
         }
 
         [HttpGet]
@@ -30,21 +33,27 @@ namespace TeacherDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(HttpPostedFileBase file)
         {
-            // TODO file validation
-            if(file != null && file.ContentLength > 0)
+            string extenstion = Path.GetExtension(file.FileName);
+
+            if (file != null && file.ContentLength > 0)
             {
-                // extract only the filename
-                var fileName = Path.GetFileName(file.FileName);
-                // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-                file.SaveAs(path);
+                if (extenstion == ".xls" || extenstion == ".xlsx")
+                {
+                    // extract only the filename
+                    var fileName = Path.GetFileName(file.FileName);
+                    // store the file inside ~/App_Data/uploads folder
+                    var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                    file.SaveAs(path);
 
-                var reader = new ExelParser(_classService);
+                    _exelParser.ReadFile(path);
 
-                reader.ReadFile(path);
+                    return this.RedirectToAction<ClassController>(x => x.Index());
+                }
+              
+                ModelState.AddModelError("", "Невалиден файл формат!");
             }
-            
-            return RedirectToAction("Index");
+
+            return View();
         }
     }
 }

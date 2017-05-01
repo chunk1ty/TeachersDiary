@@ -19,30 +19,33 @@
 
                 <div>
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл." })
-                </div>
-                <div >
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
+              
+                <br/>
+
                 <div>
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола." })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })  
                 </div>
-                <div>
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })                    
-                </div>
+
+                <br />
 
                 <div>
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтори парола." })
-                </div>
-                <div>
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
+
+                <br />
 
                 <div>
                     <button id="submit-btn" type="submit">
                         Създай
                     </button>
                 </div>
+
+                <br />
 
                 <div>
                     <p>

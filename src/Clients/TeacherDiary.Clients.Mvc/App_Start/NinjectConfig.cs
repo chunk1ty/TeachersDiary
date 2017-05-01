@@ -14,6 +14,8 @@ using TeacherDiary.Data.Ef.Contracts;
 using TeacherDiary.Data.Ef.Repositories;
 using TeacherDiary.Data.Services;
 using TeacherDiary.Data.Services.Contracts;
+using TeacherDiary.Services;
+using TeacherDiary.Services.Contracts;
 using TeacherDiary.Services.Identity;
 using TeacherDiary.Services.Identity.Contracts;
 
@@ -80,7 +82,10 @@ namespace TeacherDiary.Clients.Mvc
            
             kernel.Bind<IClassRepository>().To<EfClassRepository>();
             kernel.Bind<IClassService>().To<ClassService>();
-           
+
+            kernel.Bind<IAbsenceService>().To<AbsenceService>();
+
+            kernel.Bind<IExelParser>().To<ExelParser>();
 
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());

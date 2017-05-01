@@ -14,5 +14,7 @@ namespace TeacherDiary.Data.Services.Contracts
         Task<IEnumerable<Class>> GetAllAsync();
 
         Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId);
+
+        Task DeleteById(Guid classId);
     }
 }
