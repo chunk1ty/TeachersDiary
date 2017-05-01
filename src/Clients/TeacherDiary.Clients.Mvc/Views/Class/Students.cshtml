@@ -1,4 +1,5 @@
-﻿@model ClassViewModel
+﻿@using System.Runtime.CompilerServices
+@model ClassViewModel
 
 @{
     ViewBag.Title = "Students";
@@ -101,7 +102,20 @@
                         @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsenceAsString, new { maxlength = "8", size = "8" })
                     </td>
                 </tr>
-}
+            }
+        <tr>
+            <td class="center">Общо</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.TotalExcusedAbsences).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.TotalNotExcusedAbsence).Sum().ToFractionalNumber()</td>
+        </tr>
 
         </tbody>
     </table>

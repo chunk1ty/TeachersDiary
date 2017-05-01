@@ -12,6 +12,7 @@ namespace TeacherDiary.Clients.Mvc.Infrastructure.Extensions
         {
             var integerPart = (int)number;
             var floatingPart = number - Math.Truncate(number);
+
             var floatingPartAstring = floatingPart.ToString();
             var fractionalPart = string.Empty;
 
@@ -23,6 +24,11 @@ namespace TeacherDiary.Clients.Mvc.Infrastructure.Extensions
             if (floatingPartAstring.Contains(".6666"))
             {
                 fractionalPart = " 2/3";
+            }
+
+            if (floatingPartAstring.Contains(".99999"))
+            {
+                integerPart++;
             }
 
             var result = integerPart + fractionalPart;
