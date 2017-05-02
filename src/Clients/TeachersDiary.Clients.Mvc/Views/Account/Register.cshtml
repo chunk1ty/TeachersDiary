@@ -1,0 +1,63 @@
+﻿@model TeachersDiary.Clients.Mvc.ViewModels.Account.RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    @Styles.Render("~/Content/forms-css")
+}
+
+<div id="wrapper">
+    <div>
+        <section>
+            @using (Html.BeginForm<AccountController>(c => c.Register(), FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <h1>Нов профил</h1>
+
+                <div>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл." })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+              
+                <br/>
+
+                <div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола." })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })  
+                </div>
+
+                <br />
+
+                <div>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтори парола." })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+
+                <br />
+
+                <div>
+                    <button id="submit-btn" type="submit">
+                        Създай
+                    </button>
+                </div>
+
+                <br />
+
+                <div>
+                    <p>
+                        @(Html.ActionLink<AccountController>("Вход", c => c.Login(string.Empty)))    
+                        @(Html.ActionLink<HomeController>("Начало", c => c.Index()))
+                    </p>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}              
