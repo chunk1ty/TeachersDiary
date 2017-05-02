@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
 using TeacherDiary.Data.Contracts;
@@ -17,6 +18,33 @@ namespace TeacherDiary.Data.Ef.Repositories
         public EfClassRepository(ITeacherDiaryDbContext teacherDiaryDbContext)
         {
             _teacherDiaryDbContext = teacherDiaryDbContext;
+        }
+
+        public async Task<IEnumerable<Class>> GetAllWithStudentsAsync()
+        {
+            return await _teacherDiaryDbContext.Classes
+                .Include(x => x.Students)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Class>> GetAllAsync()
+        {
+            return await _teacherDiaryDbContext.Classes
+                .ToListAsync();
+        }
+
+        public async Task<Class> GetClassWithStudentsAndAbsencesByClassIdAsync(Guid classId)
+        {
+            var @class = await _teacherDiaryDbContext.Classes
+                .Include(x => x.Students.Select(y => y.Absences))
+                .SingleOrDefaultAsync(x => x.Id == classId);
+
+            return @class;
+        }
+
+        public async Task<Class> GetByIdAsync(Guid classId)
+        {
+            return await _teacherDiaryDbContext.Classes.FirstOrDefaultAsync(x => x.Id == classId);
         }
 
         public void Add(Class @class)
@@ -42,20 +70,9 @@ namespace TeacherDiary.Data.Ef.Repositories
             _teacherDiaryDbContext.Classes.AddRange(clases);
         }
 
-        public async Task<IEnumerable<Class>> GetAllWithStudentsAsync()
+        public void Delete(Class @class)
         {
-            return await _teacherDiaryDbContext.Classes
-                .Include(x => x.Students)
-                .ToListAsync();
-        }
-
-        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
-        {
-            var @class = await _teacherDiaryDbContext.Classes
-                .Include(x => x.Students)
-                .SingleOrDefaultAsync(x => x.Id == classId);
-
-            return @class;
+            _teacherDiaryDbContext.Classes.Remove(@class);
         }
     }
 }

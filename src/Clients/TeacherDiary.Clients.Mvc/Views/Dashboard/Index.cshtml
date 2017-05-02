@@ -7,9 +7,13 @@
 {
     @Html.AntiForgeryToken()
 
+    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+    <br />
+
     <input type="file" name="file" id="file" />
 
     <br />
 
-    <input type="submit" value="Upload"/>
+    <input type="submit" value="Изпрати"/>
 }

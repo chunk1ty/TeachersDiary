@@ -43,5 +43,20 @@ namespace TeacherDiary.Data.Ef
         {
             base.SaveChanges();
         }
+
+        public void Insert<T>(IEnumerable<T> entities) where T : class
+        {
+            Create().BulkInsert(entities);
+        }
+
+        public void Update<T>(IEnumerable<T> entities) where T : class
+        {
+            Create().BulkUpdate(entities);
+        }
+
+        public void BulkSave()
+        {
+            Create().BulkSaveChanges();
+        }
     }
 }
