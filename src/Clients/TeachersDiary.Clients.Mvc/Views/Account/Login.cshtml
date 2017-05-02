@@ -1,0 +1,59 @@
+﻿@using System.Web.Mvc.Expressions
+
+@model TeachersDiary.Clients.Mvc.ViewModels.Account.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string returnUrl = (string)ViewBag.ReturnUrl;
+}
+
+@section Styles {
+    @Styles.Render("~/Content/forms-css")
+}
+
+<div id="wrapper">
+    <div id="login">
+        <section>
+            @using (Html.BeginForm<AccountController>(c => c.Login(returnUrl), FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <h1>Вход</h1>
+
+                <div>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+               
+                <br/>
+
+                <div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+
+                <br />
+
+                <div>
+                    <button id="submit-btn" type="submit">
+                        Вход
+                    </button>
+                </div>
+
+                <br />
+
+                <div>
+                    <p>
+                        @(Html.ActionLink<AccountController>("Регистрация", c => c.Register()))
+                        @(Html.ActionLink<HomeController>("Начало", c => c.Index()))
+                    </p>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
