@@ -1,4 +1,4 @@
-﻿namespace TeachersDiary.Data.Entities
+﻿namespace TeachersDiary.Data.Ef.Entities
 {
     public class Month
     {

@@ -3,7 +3,7 @@ using System.Data;
 using System.IO;
 
 using Excel;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services.Contracts;
 

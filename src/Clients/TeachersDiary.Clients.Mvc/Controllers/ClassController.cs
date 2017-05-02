@@ -7,7 +7,8 @@ using AutoMapper;
 using TeachersDiary.Clients.Mvc.Infrastructure.Mapping;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Data.Contracts;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers

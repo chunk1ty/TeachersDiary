@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef.Contracts
 {

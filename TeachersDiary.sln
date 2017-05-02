@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BD9A4336-EB90-4D20-A2DC-F0ADC2543643}"
 EndProject
@@ -33,8 +33,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.CiDependencie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Contracts", "src\Data\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj", "{F9468348-493F-47E5-B0F3-8A952B7BCC53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Entities", "src\Data\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj", "{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Services", "src\Data\TeachersDiary.Data.Services\TeachersDiary.Data.Services.csproj", "{32C7407C-43B7-4208-828F-030323646860}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Services.Contracts", "src\Data\TeachersDiary.Data.Services.Contracts\TeachersDiary.Data.Services.Contracts.csproj", "{35C455BF-326C-47B4-A20E-2E4E67E59649}"
@@ -44,6 +42,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Common.Constants", "src\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj", "{650857DB-DDBE-4586-9E16-62A27E0FF209}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Services", "src\Services\TeachersDiary.Services\TeachersDiary.Services.csproj", "{BCDA0869-B632-4B8D-B0E3-167C039BFF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Domain", "src\Data\TeachersDiary.Data.Domain\TeachersDiary.Data.Domain.csproj", "{4CA9AA8B-C6C1-494E-B326-121E3202B740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Ef.Entities", "src\Data\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj", "{5C2B5521-8EBE-4659-A77D-EF896687D5CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,10 +77,6 @@ Global
 		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9468348-493F-47E5-B0F3-8A952B7BCC53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32C7407C-43B7-4208-828F-030323646860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32C7407C-43B7-4208-828F-030323646860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C7407C-43B7-4208-828F-030323646860}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,6 +93,14 @@ Global
 		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCDA0869-B632-4B8D-B0E3-167C039BFF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA9AA8B-C6C1-494E-B326-121E3202B740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA9AA8B-C6C1-494E-B326-121E3202B740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA9AA8B-C6C1-494E-B326-121E3202B740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA9AA8B-C6C1-494E-B326-121E3202B740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C2B5521-8EBE-4659-A77D-EF896687D5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C2B5521-8EBE-4659-A77D-EF896687D5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C2B5521-8EBE-4659-A77D-EF896687D5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C2B5521-8EBE-4659-A77D-EF896687D5CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,11 +115,12 @@ Global
 		{695FDC8F-367C-4839-9BB9-5B7DFBF2411C} = {69487108-D63E-4C0E-B118-73F15491CA7C}
 		{455282A1-00D7-42BD-93C8-EE1A754704E2} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
 		{F9468348-493F-47E5-B0F3-8A952B7BCC53} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
-		{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{32C7407C-43B7-4208-828F-030323646860} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{35C455BF-326C-47B4-A20E-2E4E67E59649} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{16B6903A-2B4C-4CEC-A2B0-A2174E0A8429} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
 		{650857DB-DDBE-4586-9E16-62A27E0FF209} = {16B6903A-2B4C-4CEC-A2B0-A2174E0A8429}
 		{BCDA0869-B632-4B8D-B0E3-167C039BFF19} = {1D257161-D3F2-422D-86BA-1AEF33BF7208}
+		{4CA9AA8B-C6C1-494E-B326-121E3202B740} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{5C2B5521-8EBE-4659-A77D-EF896687D5CB} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 	EndGlobalSection
 EndGlobal

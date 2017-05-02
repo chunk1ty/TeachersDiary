@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace TeachersDiary.Data.Entities
+namespace TeachersDiary.Data.Ef.Entities
 {
     public class Student
     {

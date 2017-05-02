@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TeachersDiary.Data.Entities
+namespace TeachersDiary.Data.Ef.Entities
 {
     public class School
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Services.Identity.Contracts;
 
 namespace TeachersDiary.Services.Identity

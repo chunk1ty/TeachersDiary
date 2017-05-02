@@ -7,7 +7,7 @@ using TeachersDiary.Common.Constants.Validation;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Class
 {
-    public class ClassViewModel : IMapTo<Data.Entities.Class>, IMapFrom<Data.Entities.Class>
+    public class ClassViewModel : IMapTo<Data.Ef.Entities.Class>, IMapFrom<Data.Ef.Entities.Class>
     {
         public ClassViewModel()
         {

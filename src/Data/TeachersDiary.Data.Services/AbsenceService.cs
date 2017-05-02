@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.Validation;
+using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Data.Services

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services;
 
 namespace TeachersDiary.Data.Services.Contracts

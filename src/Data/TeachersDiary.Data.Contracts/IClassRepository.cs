@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Contracts
 {

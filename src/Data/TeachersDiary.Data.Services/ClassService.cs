@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Bytes2you.Validation;
+
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
@@ -36,11 +38,6 @@ namespace TeachersDiary.Data.Services
         public void Add(Class @class)
         {
             Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
-
-            if (@class == null)
-            {
-                throw new ArgumentNullException(nameof(@class));
-            }
 
             _classRepository.Add(@class);
 

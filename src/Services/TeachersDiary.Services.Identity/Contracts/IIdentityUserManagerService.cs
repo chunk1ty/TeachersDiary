@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNet.Identity;
-using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Services.Identity.Contracts
 {

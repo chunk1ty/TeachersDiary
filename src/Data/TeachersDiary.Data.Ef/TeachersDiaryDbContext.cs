@@ -4,8 +4,7 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Models;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef
 {

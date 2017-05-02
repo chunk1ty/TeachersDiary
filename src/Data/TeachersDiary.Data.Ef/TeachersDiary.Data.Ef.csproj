@@ -72,7 +72,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\EfClassRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
-    <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +83,9 @@
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
-      <Project>{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}</Project>
-      <Name>TeachersDiary.Data.Entities</Name>
+    <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
+      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
+      <Name>TeachersDiary.Data.Ef.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

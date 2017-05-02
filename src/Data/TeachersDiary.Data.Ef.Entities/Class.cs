@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 using TeachersDiary.Common.Constants.Validation;
 
-namespace TeachersDiary.Data.Entities
+namespace TeachersDiary.Data.Ef.Entities
 {
     public class Class
     {
