@@ -23,6 +23,9 @@ namespace TeachersDiary.Data.Ef.Entities
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
+        public Guid? SchoolId { get; set; }
+        public virtual SchoolEntity School { get; set; }
+
         public ICollection<StudentEntity> Students { get; set; }
     }
 }

@@ -49,6 +49,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TeachersDiary.Data.Domain\TeachersDiary.Data.Domain.csproj">
+      <Project>{4CA9AA8B-C6C1-494E-B326-121E3202B740}</Project>
+      <Name>TeachersDiary.Data.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
       <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
       <Name>TeachersDiary.Data.Ef.Entities</Name>

@@ -47,5 +47,15 @@
     <Compile Include="StudentDomain.cs" />
     <Compile Include="TeacherDomain.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
+      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
+      <Name>TeachersDiary.Services.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
+      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
+      <Name>TeachersDiary.Data.Ef.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

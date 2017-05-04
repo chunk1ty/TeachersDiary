@@ -2,28 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web.Mvc;
 using AutoMapper;
+using AutoMapper.Configuration;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Services.Mapping
 {
     public class AutoMapperConfig
     {
-        public static MapperConfiguration Configuration { get; private set; }
-
-        public void Execute(Assembly assembly)
+        public static void Register()
         {
-            Configuration = new MapperConfiguration(
-                cfg =>
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            List<Assembly> myAssemblies = new List<Assembly>();
+
+            foreach (Assembly assembly in assemblies)
+            {
+                if (assembly.GetName().Name.Contains("TeachersDiary."))
                 {
-                    var types = assembly.GetExportedTypes();
-                    LoadStandardMappings(types, cfg);
-                    LoadReverseMappings(types, cfg);
-                    LoadCustomMappings(types, cfg);
-                });
+                    myAssemblies.Add(assembly);
+                }
+            }
+
+            Mapper.Initialize(x => RegisterMappings(x, myAssemblies));
         }
 
-        private static void LoadStandardMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
+        private static void RegisterMappings(IMapperConfigurationExpression config, IEnumerable<Assembly> assemblies)
+        {
+            // TODO remove DependencyResolver because it has dependency to MVC
+            config.ConstructServicesUsing(t => DependencyResolver.Current.GetService(t));
+
+            var types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                types.AddRange(assembly.GetExportedTypes());
+            }
+
+            LoadStandardMappings(config, types);
+            LoadCustomMappings(config, types);
+        }
+
+        private static void LoadStandardMappings(IMapperConfigurationExpression config, IEnumerable<Type> types)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
@@ -38,30 +57,12 @@ namespace TeachersDiary.Services.Mapping
 
             foreach (var map in maps)
             {
-                mapperConfiguration.CreateMap(map.Source, map.Destination);
+                config.CreateMap(map.Source, map.Destination);
+                config.CreateMap(map.Destination, map.Source);
             }
         }
 
-        private static void LoadReverseMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
-        {
-            var maps = (from t in types
-                        from i in t.GetInterfaces()
-                        where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapTo<>) &&
-                              !t.IsAbstract &&
-                              !t.IsInterface
-                        select new
-                        {
-                            Destination = i.GetGenericArguments()[0],
-                            Source = t
-                        }).ToArray();
-
-            foreach (var map in maps)
-            {
-                mapperConfiguration.CreateMap(map.Source, map.Destination);
-            }
-        }
-
-        private static void LoadCustomMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
+        private static void LoadCustomMappings(IMapperConfigurationExpression config, IEnumerable<Type> types)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
@@ -72,7 +73,7 @@ namespace TeachersDiary.Services.Mapping
 
             foreach (var map in maps)
             {
-                map.CreateMappings(mapperConfiguration);
+                map.CreateMappings(config);
             }
         }
     }

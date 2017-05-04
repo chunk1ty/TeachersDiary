@@ -1,11 +1,10 @@
 ﻿using System;
-
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
-namespace TeachersDiary.Data.Domain
+namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
 {
-   public class AbsenceDomain : IMapTo<AbsenceEntity>, IMapFrom<AbsenceEntity>
+    public class AbsenceViewModel : IMapFrom<AbsenceDomain>, IMapTo<AbsenceDomain>
     {
         public int Id { get; set; }
 

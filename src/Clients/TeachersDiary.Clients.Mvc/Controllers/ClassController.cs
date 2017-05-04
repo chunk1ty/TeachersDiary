@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -6,10 +8,12 @@ using System.Web.Mvc.Expressions;
 using AutoMapper;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Data.Contracts;
+using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -17,21 +21,26 @@ namespace TeachersDiary.Clients.Mvc.Controllers
     {
         private readonly IClassService _classService;
         private readonly IAbsenceService _absenceService;
+        private readonly IMappingService _mappingService;
 
-        public ClassController(IClassService classService, IAbsenceService absenceService)
+        public ClassController(
+            IClassService classService, 
+            IAbsenceService absenceService, 
+            IMappingService mappingService)
         {
             _classService = classService;
             _absenceService = absenceService;
+            _mappingService = mappingService;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var classesAsDbEntities =  await _classService.GetAllAsync();
+            var classDomains =  await _classService.GetAllAsync();
 
-            var classesAsViewModel = classesAsDbEntities.To<ClassViewModel>().ToList();
+            var classViewModels = _mappingService.Map<IEnumerable<ClassViewModel>>(classDomains);
 
-            return View(classesAsViewModel);
+            return View(classViewModels);
         }
 
         [HttpGet]
@@ -95,9 +104,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 student.TotalNotExcusedAbsence = intPart + floatingPart;
             }
 
-            var studentsAsDbEntities = model.Students.To<StudentDto>().ToList();
+            var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students); 
 
-            _absenceService.CalculateStudentsAbsencesForLastMonth(studentsAsDbEntities);
+            _absenceService.CalculateStudentsAbsencesForLastMonth(studentDomains);
 
             return this.RedirectToAction<ClassController>(x => x.Students(model.Id));
         }
@@ -117,9 +126,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return View(model);
             }
 
-            var classAsDbEntity = Mapper.Map<ClassEntity>(model);
+            var classDomain = Mapper.Map<ClassDomain>(model);
 
-            _classService.Add(classAsDbEntity);
+            _classService.Add(classDomain);
 
             return this.RedirectToAction<ClassController>(x => x.Index());
         }

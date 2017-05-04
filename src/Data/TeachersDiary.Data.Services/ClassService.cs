@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Bytes2you.Validation;
 
 using TeachersDiary.Data.Contracts;
+using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services
 {
@@ -15,50 +18,65 @@ namespace TeachersDiary.Data.Services
     {
         private readonly IClassRepository _classRepository;
         private readonly ITeachersDiaryDbContextSaveChanges _contextSaveChanges;
+        private readonly IMappingService _mappingService;
 
-        public ClassService(IClassRepository classRepository, ITeachersDiaryDbContextSaveChanges contextSaveChanges)
+        public ClassService(
+            IClassRepository classRepository, 
+            ITeachersDiaryDbContextSaveChanges contextSaveChanges, 
+            IMappingService mappingService)
         {
             Guard.WhenArgument(classRepository, nameof(classRepository)).IsNull().Throw();
             Guard.WhenArgument(contextSaveChanges, nameof(contextSaveChanges)).IsNull().Throw();
+            Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
 
             _classRepository = classRepository;
             _contextSaveChanges = contextSaveChanges;
+            _mappingService = mappingService;
         }
 
-        public async Task<ClassEntity> GetClassWithStudentsByClassIdAsync(Guid classId)
+        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(Guid classId)
         {
-            return await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
+            var claaEntity = await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
+
+            var classDomain = _mappingService.Map<ClassDomain>(claaEntity);
+
+            return classDomain;
         }
 
-        public async Task<IEnumerable<ClassEntity>> GetAllAsync()
+        public async Task<IEnumerable<ClassDomain>> GetAllAsync()
         {
-            return await _classRepository.GetAllAsync();
+            var classeEntities = await _classRepository.GetAllAsync();
+
+            var classDomains = _mappingService.Map<IEnumerable<ClassDomain>>(classeEntities);
+
+            return classDomains;
         }
 
-        public void Add(ClassEntity @class)
+        public void Add(ClassDomain classDomain)
         {
-            Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
+            Guard.WhenArgument(classDomain, nameof(classDomain)).IsNull().Throw();
 
-            _classRepository.Add(@class);
+            var classEntity = _mappingService.Map<ClassEntity>(classDomain);
 
+            _classRepository.Add(classEntity);
             _contextSaveChanges.SaveChanges();
         }
 
-        public void AddRange(List<ClassEntity> classes)
+        public void AddRange(List<ClassDomain> classDomains)
         {
-            Guard.WhenArgument(classes, nameof(classes)).IsNull().Throw();
+            Guard.WhenArgument(classDomains, nameof(classDomains)).IsNull().Throw();
 
-            _classRepository.AddRange(classes);
+            var classEntities = _mappingService.Map<List<ClassEntity>>(classDomains);
 
+            _classRepository.AddRange(classEntities);
             _contextSaveChanges.SaveChanges();
         }
 
         public async Task DeleteById(Guid classId)
         {
-            var @class = await _classRepository.GetByIdAsync(classId);
+            var classEntity = await _classRepository.GetByIdAsync(classId);
 
-            _classRepository.Delete(@class);
-
+            _classRepository.Delete(classEntity);
             _contextSaveChanges.SaveChanges();
         }
     }

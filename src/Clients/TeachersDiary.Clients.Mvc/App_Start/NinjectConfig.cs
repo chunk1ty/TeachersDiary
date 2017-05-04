@@ -18,6 +18,8 @@ using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectConfig), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectConfig), "Stop")]
@@ -75,20 +77,26 @@ namespace TeachersDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            RegisterDbModule(kernel);
+
+            kernel.Bind<IExelParser>().To<ExelParser>();
+            kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
+
+            kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
+            kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+        }
+
+        private static void RegisterDbModule(IKernel kernel)
+        {
             kernel.Bind(typeof(ITeachersDiaryDbContext),
                     typeof(ITeachersDiaryDbContextSaveChanges))
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
                 .InRequestScope();
-           
+
             kernel.Bind<IClassRepository>().To<EfClassRepository>();
-            kernel.Bind<IClassService>().To<ClassService>();
 
             kernel.Bind<IAbsenceService>().To<AbsenceService>();
-
-            kernel.Bind<IExelParser>().To<ExelParser>();
-
-            kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
-            kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
-        }        
+            kernel.Bind<IClassService>().To<ClassService>();
+        }
     }
 }

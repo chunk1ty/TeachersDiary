@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TeachersDiary.Data.Domain
 {
     public class TeacherDomain
     {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public Guid ShoolId { get; set; }
     }
 }

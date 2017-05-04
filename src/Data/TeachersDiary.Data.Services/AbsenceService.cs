@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.Validation;
+using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Entities;
@@ -18,7 +19,7 @@ namespace TeachersDiary.Data.Services
             _teacherDiaryDbContext = teacherDiaryDbContext;
         }
 
-        public void CalculateStudentsAbsencesForLastMonth(List<StudentDto> students)
+        public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
         {
             Guard.WhenArgument(students, nameof(students)).IsNull().Throw();
 

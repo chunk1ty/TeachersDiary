@@ -12,8 +12,7 @@ namespace TeachersDiary.Data.Ef.Entities
 
         public string LastName { get; set; }
 
-        public Guid ShoolId { get; set; }
-
+        public Guid? SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
     }
 }

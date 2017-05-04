@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services;
 
@@ -7,7 +8,7 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IAbsenceService
     {
-        void CalculateStudentsAbsencesForLastMonth(List<StudentDto> students);
+        void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students);
     }
 
     public class StudentDto
