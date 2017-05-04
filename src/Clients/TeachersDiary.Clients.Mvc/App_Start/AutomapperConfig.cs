@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping;
+using TeachersDiary.Services.Mapping;
 
 namespace TeachersDiary.Clients.Mvc
 {

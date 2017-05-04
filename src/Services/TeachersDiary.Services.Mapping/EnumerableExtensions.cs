@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper.QueryableExtensions;
 
-namespace TeachersDiary.Clients.Mvc.Infrastructure.Mapping
+namespace TeachersDiary.Services.Mapping
 {
     public static class EnumerableExtensions
     {

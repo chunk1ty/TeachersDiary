@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using Microsoft.AspNet.Identity.Owin;
 using TeachersDiary.Data.Ef.Entities;
 
-namespace TeachersDiary.Services.Identity.Contracts
+namespace TeachersDiary.Data.Identity.Contracts
 {
     public interface IIdentitySignInService : IDisposable
     {

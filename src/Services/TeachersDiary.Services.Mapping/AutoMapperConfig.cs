@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts;
+using TeachersDiary.Services.Mapping.Contracts;
 
-namespace TeachersDiary.Clients.Mvc.Infrastructure.Mapping
+namespace TeachersDiary.Services.Mapping
 {
     public class AutoMapperConfig
     {

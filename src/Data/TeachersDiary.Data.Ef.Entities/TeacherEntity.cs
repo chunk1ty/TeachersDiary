@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachersDiary.Data.Ef.Entities
 {
-    public class Teacher
+    [Table("Teachers")]
+    public class TeacherEntity
     {
         public Guid Id { get; set; }
 
@@ -12,6 +14,6 @@ namespace TeachersDiary.Data.Ef.Entities
 
         public Guid ShoolId { get; set; }
 
-        public virtual School School { get; set; }
+        public virtual SchoolEntity School { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Ninject;
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping;
+using TeachersDiary.Services.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {

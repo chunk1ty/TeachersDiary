@@ -6,11 +6,12 @@ using TeachersDiary.Common.Constants.Validation;
 
 namespace TeachersDiary.Data.Ef.Entities
 {
-    public class Class
+    [Table("Classes")]
+    public class ClassEntity
     {
-        public Class()
+        public ClassEntity()
         {
-            Students = new HashSet<Student>();
+            Students = new HashSet<StudentEntity>();
         }
 
         [Key]
@@ -22,6 +23,6 @@ namespace TeachersDiary.Data.Ef.Entities
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public ICollection<StudentEntity> Students { get; set; }
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachersDiary.Data.Ef.Entities
 {
-    public class Absence
+    [Table("Absences")]
+    public class AbsenceEntity
     {
         public int Id { get; set; }
 
         public Guid StudentId { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual StudentEntity Student { get; set; }
 
         public int MonthId { get; set; }
 

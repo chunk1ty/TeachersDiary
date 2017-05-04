@@ -2,12 +2,11 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Data.Identity.Contracts;
 
-namespace TeachersDiary.Services.Identity
+namespace TeachersDiary.Data.Identity
 {
     public class ApplicationUserManager : UserManager<AspNetUser>, IIdentityUserManagerService
     {

@@ -22,7 +22,7 @@ namespace TeachersDiary.Data.Services
         {
             Guard.WhenArgument(students, nameof(students)).IsNull().Throw();
 
-            var absences = new List<Absence>();
+            var absences = new List<AbsenceEntity>();
 
             if (students.FirstOrDefault().Absences.Count == 3)
             {
@@ -31,7 +31,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
 
-                    var absence = new Absence()
+                    var absence = new AbsenceEntity()
                     {
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
                         NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
@@ -52,7 +52,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Take(3).Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Take(3).Sum(x => x.NotExcused);
 
-                    var absence = new Absence()
+                    var absence = new AbsenceEntity()
                     {
                         Id = student.Absences.LastOrDefault().Id,
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,

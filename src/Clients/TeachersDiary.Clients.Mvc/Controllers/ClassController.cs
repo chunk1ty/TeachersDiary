@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
 using AutoMapper;
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -117,7 +117,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return View(model);
             }
 
-            var classAsDbEntity = Mapper.Map<Class>(model);
+            var classAsDbEntity = Mapper.Map<ClassEntity>(model);
 
             _classService.Add(classAsDbEntity);
 

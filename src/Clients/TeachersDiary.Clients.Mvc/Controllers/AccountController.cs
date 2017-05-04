@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {

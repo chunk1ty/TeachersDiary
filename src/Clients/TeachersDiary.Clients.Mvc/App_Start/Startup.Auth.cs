@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services.Identity;
+using TeachersDiary.Data.Identity;
 
 namespace TeachersDiary.Clients.Mvc
 {

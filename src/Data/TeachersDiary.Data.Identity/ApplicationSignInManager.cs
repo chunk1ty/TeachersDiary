@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Data.Identity.Contracts;
 
-namespace TeachersDiary.Services.Identity
+namespace TeachersDiary.Data.Identity
 {
     public class ApplicationSignInManager : SignInManager<AspNetUser, string>, IIdentitySignInService
     {

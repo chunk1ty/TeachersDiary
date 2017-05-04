@@ -38,11 +38,11 @@ namespace TeachersDiary.Services
             //DataSet result = excelReader.AsDataSet();
 
             //5. Data Reader methods
-            var clases = new List<Class>();
+            var clases = new List<ClassEntity>();
 
             for (int i = 0; i < result.Tables.Count; i++)
             {
-                var @class = new Class();
+                var @class = new ClassEntity();
                 @class.Name = result.Tables[i].TableName;
 
                 DataTable sheet = result.Tables[i];
@@ -56,7 +56,7 @@ namespace TeachersDiary.Services
                         break;
                     }
 
-                    var student = new Student
+                    var student = new StudentEntity
                     {
                         Number = int.Parse(sheet.Rows[j].ItemArray[0].ToString()),
                         FirstName = sheet.Rows[j].ItemArray[1].ToString(),
@@ -73,7 +73,7 @@ namespace TeachersDiary.Services
                             break;
                         }
 
-                        var absence = new Absence();
+                        var absence = new AbsenceEntity();
 
                         double excusedAbsence;
                         string excusedAbsenceAsString = sheet.Rows[j].ItemArray[k].ToString();

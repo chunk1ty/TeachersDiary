@@ -6,11 +6,12 @@ using System.Linq;
 
 namespace TeachersDiary.Data.Ef.Entities
 {
-    public class Student
+    [Table("Students")]
+    public class StudentEntity
     {
-        public Student()
+        public StudentEntity()
         {
-            Absences = new HashSet<Absence>();
+            Absences = new HashSet<AbsenceEntity>();
         }
 
         [Key]
@@ -26,9 +27,9 @@ namespace TeachersDiary.Data.Ef.Entities
         public string LastName { get; set; }
 
         public Guid ClassId { get; set; }
-        public virtual Class Class { get; set; }
+        public virtual ClassEntity Class { get; set; }
 
-        public ICollection<Absence> Absences { get; set; }
+        public ICollection<AbsenceEntity> Absences { get; set; }
 
         public double TotalExcusedAbsences
         {

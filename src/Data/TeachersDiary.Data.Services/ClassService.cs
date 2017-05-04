@@ -25,17 +25,17 @@ namespace TeachersDiary.Data.Services
             _contextSaveChanges = contextSaveChanges;
         }
 
-        public async Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId)
+        public async Task<ClassEntity> GetClassWithStudentsByClassIdAsync(Guid classId)
         {
             return await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
         }
 
-        public async Task<IEnumerable<Class>> GetAllAsync()
+        public async Task<IEnumerable<ClassEntity>> GetAllAsync()
         {
             return await _classRepository.GetAllAsync();
         }
 
-        public void Add(Class @class)
+        public void Add(ClassEntity @class)
         {
             Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
 
@@ -44,7 +44,7 @@ namespace TeachersDiary.Data.Services
             _contextSaveChanges.SaveChanges();
         }
 
-        public void AddRange(List<Class> classes)
+        public void AddRange(List<ClassEntity> classes)
         {
             Guard.WhenArgument(classes, nameof(classes)).IsNull().Throw();
 

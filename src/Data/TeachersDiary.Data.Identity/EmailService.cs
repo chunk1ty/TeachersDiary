@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace TeachersDiary.Services.Identity
+namespace TeachersDiary.Data.Identity
 {
     public class EmailService : IIdentityMessageService
     {

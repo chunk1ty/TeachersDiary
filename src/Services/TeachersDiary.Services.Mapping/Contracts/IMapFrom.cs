@@ -1,4 +1,4 @@
-﻿namespace TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts
+﻿namespace TeachersDiary.Services.Mapping.Contracts
 {
     /// <summary>
     /// Map from view model to db model. Must be use only in view models.

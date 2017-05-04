@@ -14,7 +14,7 @@ namespace TeachersDiary.Data.Services.Contracts
     {
         public StudentDto()
         {
-            Absences = new HashSet<Absence>();
+            Absences = new HashSet<AbsenceEntity>();
         }
 
         public Guid Id { get; set; }
@@ -23,6 +23,6 @@ namespace TeachersDiary.Data.Services.Contracts
 
         public double TotalNotExcusedAbsence { get; set; }
 
-        public ICollection<Absence> Absences { get; set; }
+        public ICollection<AbsenceEntity> Absences { get; set; }
     }
 }

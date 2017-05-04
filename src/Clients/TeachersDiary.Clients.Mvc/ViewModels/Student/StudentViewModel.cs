@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Mapping.Contracts;
 
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Student
 {
-    public class StudentViewModel : IMapFrom<Data.Ef.Entities.Student>, IMapTo<Data.Ef.Entities.Student>, IMapTo<StudentDto>
+    public class StudentViewModel : IMapFrom<StudentEntity>, IMapTo<StudentEntity>, IMapTo<StudentDto>
     {
         public StudentViewModel()
         {
@@ -34,7 +33,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
         public string TotalNotExcusedAbsenceAsString { get; set; }
     }
 
-    public class AbsenceViewModel : IMapFrom<Absence>, IMapTo<Absence>
+    public class AbsenceViewModel : IMapFrom<AbsenceEntity>, IMapTo<AbsenceEntity>
     {
         public int Id { get; set; }
 

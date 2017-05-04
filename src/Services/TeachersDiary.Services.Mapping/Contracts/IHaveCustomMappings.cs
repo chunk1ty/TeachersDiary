@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts
+namespace TeachersDiary.Services.Mapping.Contracts
 {
     public interface IHaveCustomMappings
     {

@@ -126,9 +126,9 @@
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Services\TeachersDiary.Services.Identity\TeachersDiary.Services.Identity.csproj">
-      <Project>{9E4C3233-D138-463D-96B0-87F94C40E1D2}</Project>
-      <Name>TeachersDiary.Services.Identity</Name>
+    <ProjectReference Include="..\..\src\Data\TeachersDiary.Data.Identity\TeachersDiary.Data.Identity.csproj">
+      <Project>{7B1AF903-26DD-451D-A37C-DE14FBBD8047}</Project>
+      <Name>TeachersDiary.Data.Identity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

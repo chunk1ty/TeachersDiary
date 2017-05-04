@@ -12,12 +12,12 @@ using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Repositories;
+using TeachersDiary.Data.Identity;
+using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
-using TeachersDiary.Services.Identity;
-using TeachersDiary.Services.Identity.Contracts;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectConfig), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectConfig), "Stop")]

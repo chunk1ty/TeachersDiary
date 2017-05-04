@@ -15,17 +15,15 @@ namespace TeachersDiary.Data.Ef
         {
         }
 
-        public virtual IDbSet<Teacher> Teachers { get; set; }
+        public virtual IDbSet<TeacherEntity> Teachers { get; set; }
 
-        public virtual IDbSet<School> Schools { get; set; }
+        public virtual IDbSet<SchoolEntity> Schools { get; set; }
 
-        public virtual IDbSet<Class> Classes { get; set; }
+        public virtual IDbSet<ClassEntity> Classes { get; set; }
 
-        public virtual IDbSet<Student> Students { get; set; }
+        public virtual IDbSet<StudentEntity> Students { get; set; }
 
-        public virtual IDbSet<Absence> Absences { get; set; }
-
-        public virtual IDbSet<Month> Months { get; set; }
+        public virtual IDbSet<AbsenceEntity> Absences { get; set; }
 
         public static TeachersDiaryDbContext Create()
         {

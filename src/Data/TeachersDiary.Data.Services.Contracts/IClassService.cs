@@ -7,13 +7,13 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IClassService
     {
-        void Add(Class system);
+        void Add(ClassEntity system);
 
-        void AddRange(List<Class> classes);
+        void AddRange(List<ClassEntity> classes);
 
-        Task<IEnumerable<Class>> GetAllAsync();
+        Task<IEnumerable<ClassEntity>> GetAllAsync();
 
-        Task<Class> GetClassWithStudentsByClassIdAsync(Guid classId);
+        Task<ClassEntity> GetClassWithStudentsByClassIdAsync(Guid classId);
 
         Task DeleteById(Guid classId);
     }
