@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-using AutoMapper;
+
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
-using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Domain;
-using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.Mapping;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
@@ -46,11 +40,11 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Students(Guid classId)
         {
-            var classAsDbEntities = await _classService.GetClassWithStudentsByClassIdAsync(classId);
+            var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
 
-            var classAsViewModel = Mapper.Map<ClassViewModel>(classAsDbEntities);
+            var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
 
-            return View(classAsViewModel);
+            return View(classViewModel);
         }
 
         [HttpPost]
@@ -126,7 +120,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return View(model);
             }
 
-            var classDomain = Mapper.Map<ClassDomain>(model);
+            var classDomain = _mappingService.Map<ClassDomain>(model);
 
             _classService.Add(classDomain);
 
