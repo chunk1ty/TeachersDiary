@@ -11,7 +11,7 @@ namespace TeachersDiary.Services.Mapping
 {
     public class AutoMapperConfig
     {
-        public static void Register()
+        public static void RegisterAutomapper()
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             List<Assembly> myAssemblies = new List<Assembly>();

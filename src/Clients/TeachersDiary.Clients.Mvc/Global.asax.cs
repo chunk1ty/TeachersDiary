@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using TeachersDiary.Services.Mapping;
@@ -15,7 +10,9 @@ namespace TeachersDiary.Clients.Mvc
         protected void Application_Start()
         {
             ViewEngineConfig.RegisterViewEngine();
-            AutoMapperConfig.Register();
+            AutoMapperConfig.RegisterAutomapper();
+            DbConfig.RegisterDb();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
