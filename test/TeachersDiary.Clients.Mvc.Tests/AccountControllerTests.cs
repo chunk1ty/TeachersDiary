@@ -10,8 +10,8 @@ using NUnit.Framework;
 using TeachersDiary.Clients.Mvc.Controllers;
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Models;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Identity.Contracts;
 using TestStack.FluentMVCTesting;
 
 namespace TeachersDiary.Clients.Mvc.Tests

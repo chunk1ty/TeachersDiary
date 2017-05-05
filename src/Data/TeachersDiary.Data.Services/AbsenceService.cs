@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.Validation;
+using TeachersDiary.Data.Domain;
+using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
@@ -17,11 +19,11 @@ namespace TeachersDiary.Data.Services
             _teacherDiaryDbContext = teacherDiaryDbContext;
         }
 
-        public void CalculateStudentsAbsencesForLastMonth(List<StudentDto> students)
+        public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
         {
             Guard.WhenArgument(students, nameof(students)).IsNull().Throw();
 
-            var absences = new List<Absence>();
+            var absences = new List<AbsenceEntity>();
 
             if (students.FirstOrDefault().Absences.Count == 3)
             {
@@ -30,7 +32,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
 
-                    var absence = new Absence()
+                    var absence = new AbsenceEntity()
                     {
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
                         NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
@@ -51,7 +53,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Take(3).Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Take(3).Sum(x => x.NotExcused);
 
-                    var absence = new Absence()
+                    var absence = new AbsenceEntity()
                     {
                         Id = student.Absences.LastOrDefault().Id,
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,

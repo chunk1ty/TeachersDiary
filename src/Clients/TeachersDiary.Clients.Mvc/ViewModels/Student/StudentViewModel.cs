@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts;
-using TeachersDiary.Data.Entities;
-using TeachersDiary.Data.Services;
-using TeachersDiary.Data.Services.Contracts;
-
+using TeachersDiary.Clients.Mvc.ViewModels.Absence;
+using TeachersDiary.Data.Domain;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Student
 {
-    public class StudentViewModel : IMapFrom<Data.Entities.Student>, IMapTo<Data.Entities.Student>, IMapTo<StudentDto>
+    public class StudentViewModel : IMapFrom<StudentDomain>, IMapTo<StudentDomain>
     {
         public StudentViewModel()
         {
@@ -31,18 +29,5 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
         public double TotalNotExcusedAbsence { get; set; }
 
         public string TotalNotExcusedAbsenceAsString { get; set; }
-    }
-
-    public class AbsenceViewModel : IMapFrom<Absence>, IMapTo<Absence>
-    {
-        public int Id { get; set; }
-
-        public Guid StudentId { get; set; }
-
-        public int MonthId { get; set; }
-
-        public double Excused { get; set; }
-
-        public double NotExcused { get; set; }
     }
 }

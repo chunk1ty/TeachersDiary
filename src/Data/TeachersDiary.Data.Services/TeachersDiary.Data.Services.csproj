@@ -49,17 +49,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
+      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
+      <Name>TeachersDiary.Services.Mapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Domain\TeachersDiary.Data.Domain.csproj">
+      <Project>{4CA9AA8B-C6C1-494E-B326-121E3202B740}</Project>
+      <Name>TeachersDiary.Data.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
+      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
+      <Name>TeachersDiary.Data.Ef.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
-      <Project>{CC9C2CC6-ED73-4A6C-B7F0-301A289BDE03}</Project>
-      <Name>TeachersDiary.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Services.Contracts\TeachersDiary.Data.Services.Contracts.csproj">
       <Project>{35C455BF-326C-47B4-A20E-2E4E67E59649}</Project>

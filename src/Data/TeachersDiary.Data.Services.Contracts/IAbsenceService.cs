@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Domain;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services;
 
 namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IAbsenceService
     {
-        void CalculateStudentsAbsencesForLastMonth(List<StudentDto> students);
+        void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students);
     }
 
     public class StudentDto
     {
         public StudentDto()
         {
-            Absences = new HashSet<Absence>();
+            Absences = new HashSet<AbsenceEntity>();
         }
 
         public Guid Id { get; set; }
@@ -24,6 +24,6 @@ namespace TeachersDiary.Data.Services.Contracts
 
         public double TotalNotExcusedAbsence { get; set; }
 
-        public ICollection<Absence> Absences { get; set; }
+        public ICollection<AbsenceEntity> Absences { get; set; }
     }
 }

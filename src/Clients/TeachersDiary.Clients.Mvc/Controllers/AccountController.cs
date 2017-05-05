@@ -8,9 +8,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
+using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Models;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {

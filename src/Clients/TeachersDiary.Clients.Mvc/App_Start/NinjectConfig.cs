@@ -12,12 +12,14 @@ using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Repositories;
+using TeachersDiary.Data.Identity;
+using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
-using TeachersDiary.Services.Identity;
-using TeachersDiary.Services.Identity.Contracts;
+using TeachersDiary.Services.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectConfig), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectConfig), "Stop")]
@@ -75,20 +77,26 @@ namespace TeachersDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind(typeof(ITeachersDiaryDbContext),
-                    typeof(ITeachersDiaryDbContextSaveChanges))
-                .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
-                .InRequestScope();
-           
-            kernel.Bind<IClassRepository>().To<EfClassRepository>();
-            kernel.Bind<IClassService>().To<ClassService>();
-
-            kernel.Bind<IAbsenceService>().To<AbsenceService>();
+            RegisterDbModule(kernel);
 
             kernel.Bind<IExelParser>().To<ExelParser>();
+            kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
 
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
-        }        
+        }
+
+        private static void RegisterDbModule(IKernel kernel)
+        {
+            kernel.Bind(typeof(ITeachersDiaryDbContext),
+                    typeof(IUnitOfWork))
+                .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
+                .InRequestScope();
+
+            kernel.Bind<IClassRepository>().To<EfClassRepository>();
+
+            kernel.Bind<IAbsenceService>().To<AbsenceService>();
+            kernel.Bind<IClassService>().To<ClassService>();
+        }
     }
 }

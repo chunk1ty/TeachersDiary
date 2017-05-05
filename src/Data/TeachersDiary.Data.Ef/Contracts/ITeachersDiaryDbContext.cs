@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef.Contracts
 {
     public interface ITeachersDiaryDbContext
     {
-        IDbSet<Teacher> Teachers { get; set; }
+        IDbSet<TeacherEntity> Teachers { get; set; }
 
-        IDbSet<School> Schools { get; set; }
+        IDbSet<SchoolEntity> Schools { get; set; }
 
-        IDbSet<Class> Classes { get; set; }
+        IDbSet<ClassEntity> Classes { get; set; }
 
-        IDbSet<Student> Students { get; set; }
+        IDbSet<StudentEntity> Students { get; set; }
 
-        IDbSet<Absence> Absences { get; set; }
-
-        IDbSet<Month> Months { get; set; }
+        IDbSet<AbsenceEntity> Absences { get; set; }
 
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
 
