@@ -17,12 +17,12 @@ namespace TeachersDiary.Data.Services
     public class ClassService : IClassService
     {
         private readonly IClassRepository _classRepository;
-        private readonly ITeachersDiaryDbContextSaveChanges _contextSaveChanges;
+        private readonly IUnitOfWork _contextSaveChanges;
         private readonly IMappingService _mappingService;
 
         public ClassService(
             IClassRepository classRepository, 
-            ITeachersDiaryDbContextSaveChanges contextSaveChanges, 
+            IUnitOfWork contextSaveChanges, 
             IMappingService mappingService)
         {
             Guard.WhenArgument(classRepository, nameof(classRepository)).IsNull().Throw();

@@ -8,7 +8,7 @@ using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef
 {
-    public class TeachersDiaryDbContext : IdentityDbContext<AspNetUser>, ITeachersDiaryDbContext, ITeachersDiaryDbContextSaveChanges
+    public class TeachersDiaryDbContext : IdentityDbContext<AspNetUser>, ITeachersDiaryDbContext, IUnitOfWork
     {
         public TeachersDiaryDbContext()
             : base("DefaultConnection", false)

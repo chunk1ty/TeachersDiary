@@ -89,7 +89,7 @@ namespace TeachersDiary.Clients.Mvc
         private static void RegisterDbModule(IKernel kernel)
         {
             kernel.Bind(typeof(ITeachersDiaryDbContext),
-                    typeof(ITeachersDiaryDbContextSaveChanges))
+                    typeof(IUnitOfWork))
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
                 .InRequestScope();
 

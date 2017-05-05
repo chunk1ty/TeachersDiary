@@ -1,6 +1,6 @@
 ﻿namespace TeachersDiary.Data.Ef.Contracts
 {
-    public interface ITeachersDiaryDbContextSaveChanges
+    public interface IUnitOfWork
     {
         int SaveChanges();
     }
