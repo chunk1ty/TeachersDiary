@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TeachersDiary.Clients.Mvc.Infrastructure.Mapping.Contracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Common.Constants.Validation;
+using TeachersDiary.Data.Domain;
+using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Class
 {
-    public class ClassViewModel : IMapTo<Data.Entities.Class>, IMapFrom<Data.Entities.Class>
+    public class ClassViewModel : IMapTo<ClassDomain>, IMapFrom<ClassDomain>
     {
         public ClassViewModel()
         {

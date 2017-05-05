@@ -3,7 +3,8 @@ using System.Data;
 using System.IO;
 
 using Excel;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Domain;
+using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services.Contracts;
 
@@ -21,6 +22,7 @@ namespace TeachersDiary.Services
         public void ReadFile(string filePath)
         {
             FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+            //TODO exel file extension validation
 
             //Choose one of either 1 or 2
             //1. Reading from a binary Excel file ('97-2003 format; *.xls)
@@ -38,11 +40,11 @@ namespace TeachersDiary.Services
             //DataSet result = excelReader.AsDataSet();
 
             //5. Data Reader methods
-            var clases = new List<Class>();
+            var clases = new List<ClassDomain>();
 
             for (int i = 0; i < result.Tables.Count; i++)
             {
-                var @class = new Class();
+                var @class = new ClassDomain();
                 @class.Name = result.Tables[i].TableName;
 
                 DataTable sheet = result.Tables[i];
@@ -56,7 +58,7 @@ namespace TeachersDiary.Services
                         break;
                     }
 
-                    var student = new Student
+                    var student = new StudentDomain
                     {
                         Number = int.Parse(sheet.Rows[j].ItemArray[0].ToString()),
                         FirstName = sheet.Rows[j].ItemArray[1].ToString(),
@@ -73,7 +75,7 @@ namespace TeachersDiary.Services
                             break;
                         }
 
-                        var absence = new Absence();
+                        var absence = new AbsenceDomain();
 
                         double excusedAbsence;
                         string excusedAbsenceAsString = sheet.Rows[j].ItemArray[k].ToString();
@@ -104,7 +106,7 @@ namespace TeachersDiary.Services
                         student.Absences.Add(absence);
                         monthId++;
                     }
-                    
+                   
                     @class.Students.Add(student);
                 }
 
