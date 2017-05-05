@@ -1,6 +1,6 @@
 ﻿namespace TeachersDiary.Common.Constants
 {
-    public class Roles
+    public class ApplicationRole
     {
         public const string Student = "Student";
 

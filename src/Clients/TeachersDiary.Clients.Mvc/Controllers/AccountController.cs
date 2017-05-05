@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
@@ -7,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
+using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 
@@ -78,6 +80,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            TeachersDiaryDbContext dbContext = new TeachersDiaryDbContext();
+            var roles = dbContext.Roles.OrderBy(x => x.Name);
+
             return View();
         }
 

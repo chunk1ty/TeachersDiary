@@ -2,11 +2,12 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-
+using TeachersDiary.Common.Constants;
 using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
+    [Authorize(Roles = ApplicationRole.Teacher)]
     public class FileController : BaseController
     {
         private readonly IExelParser _exelParser;

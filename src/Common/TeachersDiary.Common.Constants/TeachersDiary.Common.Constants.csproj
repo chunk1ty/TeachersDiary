@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles.cs" />
+    <Compile Include="ApplicationRole.cs" />
     <Compile Include="Validation\DbEntitesValidationConstants.cs" />
     <Compile Include="Views\PartialViewConstants.cs" />
   </ItemGroup>

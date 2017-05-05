@@ -7,6 +7,9 @@ namespace TeachersDiary.Data.Ef.Entities
 {
     public class AspNetUser : IdentityUser
     {
+        public int? ShchoolId { get; set; }
+        public virtual SchoolEntity SchoolId { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AspNetUser> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
