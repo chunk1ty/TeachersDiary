@@ -63,6 +63,10 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\ITeachersDiaryDbContextSaveChanges.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
+    <Compile Include="Migrations\201705050023317_DeleteSchoolName.cs" />
+    <Compile Include="Migrations\201705050023317_DeleteSchoolName.Designer.cs">
+      <DependentUpon>201705050023317_DeleteSchoolName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\EfClassRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
@@ -81,6 +85,11 @@
       <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
       <Name>TeachersDiary.Data.Ef.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705050023317_DeleteSchoolName.resx">
+      <DependentUpon>201705050023317_DeleteSchoolName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
