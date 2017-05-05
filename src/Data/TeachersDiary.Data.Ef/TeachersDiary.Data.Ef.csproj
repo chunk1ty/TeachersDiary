@@ -73,6 +73,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
+      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
+      <Name>TeachersDiary.Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
@@ -82,7 +86,6 @@
       <Name>TeachersDiary.Data.Ef.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
