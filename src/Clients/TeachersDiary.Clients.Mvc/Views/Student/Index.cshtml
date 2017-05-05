@@ -1,5 +1,4 @@
-﻿@using System.Runtime.CompilerServices
-@model ClassViewModel
+﻿@model ClassViewModel
 
 @{
     ViewBag.Title = "Students";
@@ -18,9 +17,9 @@
     </style>
 }
 
-<h2>Ученици</h2>
+<h2>@GlobalResources.StudentLabel</h2>
 
-@using (Html.BeginForm<ClassController>(c => c.Students(Guid.Empty), FormMethod.Post))
+@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(Model), FormMethod.Post))
 {
     @Html.HiddenFor(x => Model.Id)
     @Html.HiddenFor(x => Model.Name)

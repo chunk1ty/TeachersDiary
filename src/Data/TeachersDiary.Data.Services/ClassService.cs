@@ -34,7 +34,7 @@ namespace TeachersDiary.Data.Services
             _mappingService = mappingService;
         }
 
-        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(Guid classId)
+        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(int classId)
         {
             var claaEntity = await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
 
@@ -72,7 +72,7 @@ namespace TeachersDiary.Data.Services
             _contextSaveChanges.SaveChanges();
         }
 
-        public async Task DeleteById(Guid classId)
+        public async Task DeleteById(int classId)
         {
             var classEntity = await _classRepository.GetByIdAsync(classId);
 

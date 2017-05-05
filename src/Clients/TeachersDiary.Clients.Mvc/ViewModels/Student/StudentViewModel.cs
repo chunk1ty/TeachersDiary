@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Absence;
 using TeachersDiary.Data.Domain;
@@ -14,7 +13,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
             Absences = new List<AbsenceViewModel>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 

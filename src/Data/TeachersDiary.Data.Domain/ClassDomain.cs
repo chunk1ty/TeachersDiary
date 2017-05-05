@@ -15,7 +15,7 @@ namespace TeachersDiary.Data.Domain
             Students = new HashSet<StudentDomain>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

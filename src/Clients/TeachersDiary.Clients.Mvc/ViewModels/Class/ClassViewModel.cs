@@ -16,7 +16,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
             Students = new List<StudentViewModel>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]

@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Services.Mapp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Identity", "src\Data\TeachersDiary.Data.Identity\TeachersDiary.Data.Identity.csproj", "{7B1AF903-26DD-451D-A37C-DE14FBBD8047}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Common.Extensions", "src\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj", "{5D12CB90-074A-452C-911A-BBBB7CF2CB07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{7B1AF903-26DD-451D-A37C-DE14FBBD8047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1AF903-26DD-451D-A37C-DE14FBBD8047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1AF903-26DD-451D-A37C-DE14FBBD8047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D12CB90-074A-452C-911A-BBBB7CF2CB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D12CB90-074A-452C-911A-BBBB7CF2CB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D12CB90-074A-452C-911A-BBBB7CF2CB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D12CB90-074A-452C-911A-BBBB7CF2CB07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +135,6 @@ Global
 		{5C2B5521-8EBE-4659-A77D-EF896687D5CB} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
 		{1D928A42-C202-4A10-96D0-2FA59B7EE73B} = {1D257161-D3F2-422D-86BA-1AEF33BF7208}
 		{7B1AF903-26DD-451D-A37C-DE14FBBD8047} = {B3B52A78-365C-42AC-BD87-A5EA269573B9}
+		{5D12CB90-074A-452C-911A-BBBB7CF2CB07} = {16B6903A-2B4C-4CEC-A2B0-A2174E0A8429}
 	EndGlobalSection
 EndGlobal

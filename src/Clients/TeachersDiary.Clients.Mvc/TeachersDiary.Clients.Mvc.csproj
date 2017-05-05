@@ -187,7 +187,9 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -476,12 +478,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
     <Content Include="Views\Class\Add.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Class\Students.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Mapping\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -502,6 +504,10 @@
     <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
       <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
       <Name>TeachersDiary.Common.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
+      <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
+      <Name>TeachersDiary.Common.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>

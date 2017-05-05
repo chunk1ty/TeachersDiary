@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AndriyanKrastevLabel" xml:space="preserve">
+    <value>Andriyan Krastev</value>
+  </data>
+  <data name="ClassesLabel" xml:space="preserve">
+    <value>Classes</value>
+  </data>
+  <data name="CreateButton" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="FileSentLabel" xml:space="preserve">
+    <value>Sent file</value>
+  </data>
+  <data name="HomeLabel" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="LogInLabel" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="LogOffLabel" xml:space="preserve">
+    <value>Log oOff</value>
+  </data>
+  <data name="NewProfileLabel" xml:space="preserve">
+    <value>Create new profile</value>
+  </data>
+  <data name="SignUpLabel" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="StudentLabel" xml:space="preserve">
+    <value>Students</value>
+  </data>
   <data name="TeachersDiaryTitle" xml:space="preserve">
-    <value>Teacher Diary</value>
+    <value>Teacher's Diary</value>
   </data>
 </root>

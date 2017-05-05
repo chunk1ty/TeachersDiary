@@ -9,7 +9,7 @@ namespace TeachersDiary.Data.Domain
     {
         public int Id { get; set; }
 
-        public Guid StudentId { get; set; }
+        public int StudentId { get; set; }
 
         public int MonthId { get; set; }
 

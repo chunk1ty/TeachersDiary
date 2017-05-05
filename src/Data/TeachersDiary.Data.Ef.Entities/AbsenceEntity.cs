@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachersDiary.Data.Ef.Entities
 {
@@ -8,7 +7,7 @@ namespace TeachersDiary.Data.Ef.Entities
     {
         public int Id { get; set; }
 
-        public Guid StudentId { get; set; }
+        public int StudentId { get; set; }
         public virtual StudentEntity Student { get; set; }
 
         public int MonthId { get; set; }

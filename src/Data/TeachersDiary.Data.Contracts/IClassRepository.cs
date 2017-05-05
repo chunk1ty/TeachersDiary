@@ -7,11 +7,11 @@ namespace TeachersDiary.Data.Contracts
 {
     public interface IClassRepository
     {
-        Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(Guid classId);
+        Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(int classId);
 
         Task<IEnumerable<ClassEntity>> GetAllAsync();
 
-        Task<ClassEntity> GetByIdAsync(Guid classId);
+        Task<ClassEntity> GetByIdAsync(int classId);
 
         void Add(ClassEntity system);
 

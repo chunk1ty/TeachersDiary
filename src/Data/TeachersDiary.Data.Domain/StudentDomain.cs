@@ -14,7 +14,7 @@ namespace TeachersDiary.Data.Domain
             Absences = new HashSet<AbsenceDomain>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public int Number { get; set; }
 
@@ -24,7 +24,7 @@ namespace TeachersDiary.Data.Domain
 
         public string LastName { get; set; }
 
-        public Guid ClassId { get; set; }
+        public int ClassId { get; set; }
 
         public ICollection<AbsenceDomain> Absences { get; set; }
 

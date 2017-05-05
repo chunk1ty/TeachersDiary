@@ -1,4 +1,4 @@
-﻿@model TeachersDiary.Clients.Mvc.ViewModels.Account.RegisterViewModel
+﻿@model RegisterViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +15,7 @@
             {
                 @Html.AntiForgeryToken()
 
-                <h1>Нов профил</h1>
+                <h1>@GlobalResources.NewProfileLabel</h1>
 
                 <div>
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл." })
@@ -41,7 +41,7 @@
 
                 <div>
                     <button id="submit-btn" type="submit">
-                        Създай
+                        @GlobalResources.CreateButton
                     </button>
                 </div>
 
@@ -49,8 +49,8 @@
 
                 <div>
                     <p>
-                        @(Html.ActionLink<AccountController>("Вход", c => c.Login(string.Empty)))    
-                        @(Html.ActionLink<HomeController>("Начало", c => c.Index()))
+                        @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login(string.Empty)))
+                        @(Html.ActionLink<HomeController>(GlobalResources.HomeLabel, c => c.Index()))
                     </p>
                 </div>
             }

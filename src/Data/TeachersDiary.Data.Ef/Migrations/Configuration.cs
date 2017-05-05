@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations;
 
 namespace TeachersDiary.Data.Ef.Migrations
 {
