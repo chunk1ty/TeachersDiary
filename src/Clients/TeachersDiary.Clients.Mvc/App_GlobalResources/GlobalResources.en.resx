@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AndriyanKrastevLabel" xml:space="preserve">
-    <value>Андриян Кръстев</value>
+    <value>Andriyan Krastev</value>
   </data>
   <data name="ClassesLabel" xml:space="preserve">
-    <value>Класове</value>
+    <value>Classes</value>
   </data>
   <data name="CreateButton" xml:space="preserve">
-    <value>Създай</value>
+    <value>Create</value>
   </data>
   <data name="FileSentLabel" xml:space="preserve">
-    <value>Изпрати файл</value>
+    <value>Sent file</value>
   </data>
   <data name="HomeLabel" xml:space="preserve">
-    <value>Начало</value>
+    <value>Home</value>
   </data>
   <data name="LogInLabel" xml:space="preserve">
-    <value>Вход</value>
+    <value>Log In</value>
   </data>
   <data name="LogOffLabel" xml:space="preserve">
-    <value>Изход</value>
+    <value>Log Off</value>
   </data>
   <data name="NewProfileLabel" xml:space="preserve">
-    <value>Нов профил</value>
+    <value>Create new profile</value>
   </data>
   <data name="SignUpLabel" xml:space="preserve">
-    <value>Регистрация</value>
+    <value>Sign Up</value>
   </data>
   <data name="StudentLabel" xml:space="preserve">
-    <value>Ученици</value>
+    <value>Students</value>
   </data>
   <data name="TeachersDiaryTitle" xml:space="preserve">
-    <value>Учителски дневник</value>
+    <value>Teacher's Diary</value>
   </data>
 </root>

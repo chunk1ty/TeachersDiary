@@ -166,10 +166,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\GlobalResources.bg.designer.cs">
+    <Compile Include="App_GlobalResources\GlobalResources.en.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalResources.bg.resx</DependentUpon>
+      <DependentUpon>GlobalResources.en.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\GlobalResources.designer.cs">
       <AutoGen>True</AutoGen>
@@ -553,9 +553,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\GlobalResources.bg.resx">
+    <EmbeddedResource Include="App_GlobalResources\GlobalResources.en.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>GlobalResources.bg.designer.cs</LastGenOutput>
+      <LastGenOutput>GlobalResources.en.designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

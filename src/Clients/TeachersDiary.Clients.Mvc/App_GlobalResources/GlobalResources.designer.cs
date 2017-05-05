@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Andriyan Krastev.
+        ///   Looks up a localized string similar to Андриян Кръстев.
         /// </summary>
         internal static string AndriyanKrastevLabel {
             get {
@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Classes.
+        ///   Looks up a localized string similar to Класове.
         /// </summary>
         internal static string ClassesLabel {
             get {
@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create.
+        ///   Looks up a localized string similar to Създай.
         /// </summary>
         internal static string CreateButton {
             get {
@@ -88,7 +88,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sent file.
+        ///   Looks up a localized string similar to Изпрати файл.
         /// </summary>
         internal static string FileSentLabel {
             get {
@@ -97,7 +97,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Начало.
         /// </summary>
         internal static string HomeLabel {
             get {
@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log In.
+        ///   Looks up a localized string similar to Вход.
         /// </summary>
         internal static string LogInLabel {
             get {
@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log oOff.
+        ///   Looks up a localized string similar to Изход.
         /// </summary>
         internal static string LogOffLabel {
             get {
@@ -124,7 +124,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new profile.
+        ///   Looks up a localized string similar to Нов профил.
         /// </summary>
         internal static string NewProfileLabel {
             get {
@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign Up.
+        ///   Looks up a localized string similar to Регистрация.
         /// </summary>
         internal static string SignUpLabel {
             get {
@@ -142,7 +142,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Students.
+        ///   Looks up a localized string similar to Ученици.
         /// </summary>
         internal static string StudentLabel {
             get {
@@ -151,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Teacher&apos;s Diary.
+        ///   Looks up a localized string similar to Учителски дневник.
         /// </summary>
         internal static string TeachersDiaryTitle {
             get {
