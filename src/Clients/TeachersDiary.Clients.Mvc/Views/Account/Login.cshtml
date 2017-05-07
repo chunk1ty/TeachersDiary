@@ -2,7 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string returnUrl = (string)ViewBag.ReturnUrl;
 }
 
 @section Styles {
@@ -12,7 +11,7 @@
 <div id="wrapper">
     <div id="login">
         <section>
-            @using (Html.BeginForm<AccountController>(c => c.Login(returnUrl), FormMethod.Post))
+            @using (Html.BeginForm<AccountController>(c => c.Login(), FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 

@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Невалиден имейл или парола..
+        /// </summary>
+        internal static string IncorrentEmailOrPasswordMessage {
+            get {
+                return ResourceManager.GetString("IncorrentEmailOrPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         internal static string LogInLabel {
@@ -129,6 +138,15 @@ namespace Resources {
         internal static string NewProfileLabel {
             get {
                 return ResourceManager.GetString("NewProfileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Друго.
+        /// </summary>
+        internal static string OtherLabel {
+            get {
+                return ResourceManager.GetString("OtherLabel", resourceCulture);
             }
         }
         

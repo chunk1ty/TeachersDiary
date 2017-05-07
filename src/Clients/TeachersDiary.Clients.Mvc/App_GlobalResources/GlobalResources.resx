@@ -132,6 +132,9 @@
   <data name="HomeLabel" xml:space="preserve">
     <value>Начало</value>
   </data>
+  <data name="IncorrentEmailOrPasswordMessage" xml:space="preserve">
+    <value>Невалиден имейл или парола.</value>
+  </data>
   <data name="LogInLabel" xml:space="preserve">
     <value>Вход</value>
   </data>
@@ -140,6 +143,10 @@
   </data>
   <data name="NewProfileLabel" xml:space="preserve">
     <value>Нов профил</value>
+  </data>
+  <data name="OtherLabel" xml:space="preserve">
+    <value>Друго</value>
+    <comment>Register dropdown list</comment>
   </data>
   <data name="SelectSchool" xml:space="preserve">
     <value>Изберете училище</value>

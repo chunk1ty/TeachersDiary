@@ -132,6 +132,9 @@
   <data name="HomeLabel" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="IncorrentEmailOrPasswordMessage" xml:space="preserve">
+    <value>Incorrent email or password.</value>
+  </data>
   <data name="LogInLabel" xml:space="preserve">
     <value>Log In</value>
   </data>
@@ -140,6 +143,10 @@
   </data>
   <data name="NewProfileLabel" xml:space="preserve">
     <value>Create new profile</value>
+  </data>
+  <data name="OtherLabel" xml:space="preserve">
+    <value>Other</value>
+    <comment>Register dropdown list</comment>
   </data>
   <data name="SelectSchool" xml:space="preserve">
     <value>Select school</value>
