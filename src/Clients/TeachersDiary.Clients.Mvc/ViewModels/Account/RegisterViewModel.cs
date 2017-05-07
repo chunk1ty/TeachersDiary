@@ -20,8 +20,10 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         [DataType(DataType.Password)]       
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Паролата несъвпада.")]
         public string ConfirmPassword { get; set; }
-      
+
+        [Required(ErrorMessage = "Моля изберете училище!")]
         public string SelectedSchool { get; set; }
+
         public IEnumerable<SelectListItem> Schools { get; set; }
     }
 }

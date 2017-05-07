@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +14,7 @@ using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Encrypting;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -21,10 +23,12 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         private IIdentityUserManagerService _identityUserManagerService;
         private readonly IIdentitySignInService _identitySignInService;
         private readonly ISchoolService _schoolService;
+        private readonly IEncryptingService _encryptingService;
+        private readonly IAuthenticationService _authenticationService;
 
         public AccountController(
             IIdentitySignInService identitySignInService,
-            IIdentityUserManagerService identityUserManagerService, ISchoolService schoolService)
+            IIdentityUserManagerService identityUserManagerService, ISchoolService schoolService, IEncryptingService encryptingService, IAuthenticationService authenticationService)
         {
             Guard.WhenArgument(identitySignInService, nameof(identitySignInService)).IsNull().Throw();
             Guard.WhenArgument(identityUserManagerService, nameof(identityUserManagerService)).IsNull().Throw();
@@ -32,6 +36,8 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             _identitySignInService = identitySignInService;
             _identityUserManagerService = identityUserManagerService;
             _schoolService = schoolService;
+            _encryptingService = encryptingService;
+            _authenticationService = authenticationService;
         }
 
         [HttpGet]
@@ -84,22 +90,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Register()
         {
-            var schoolNames = await _schoolService.GetAllSchoolNamesAsync();
-            var schoolLists = schoolNames.Select(x => new SelectListItem()
-            {
-                Text = x.Name,
-                Value = x.Id.ToString()
-            }).ToList();
-
-            schoolLists.Add(new SelectListItem()
-            {
-                Text = "Друго",
-                Value = "-1"
-            });
-
             RegisterViewModel model = new RegisterViewModel()
             {
-                Schools = schoolLists
+                Schools = await GetAllAvailableSchools()
             };
 
             return View(model);
@@ -112,34 +105,20 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.Schools = await GetAllAvailableSchools();
                 return View(model);
             }
 
-            if (model.SelectedSchool == null)
-            {
-                // TODO bind to school property
-                ModelState.AddModelError("model.SelectedSchool", "Моля изберете училище!");
-                return View(model);
-            }
-
-            var user = new UserEntity();
-
-            user.UserName = model.Email;
-            user.Email = model.Email;
-            user.SchoolId = model.SelectedSchool != null && model.SelectedSchool != "-1" ? int.Parse(model.SelectedSchool) : 0;
-
-            var result = await _identityUserManagerService.CreateAsync(user, model.Password);
+            var result = await _authenticationService.CreateAccountAsync(model.Email, model.Password, model.SelectedSchool);
 
             if (result.Succeeded)
             {
-                await _identitySignInService.SignInAsync(user, false, false);
-                await _identityUserManagerService.AddToRoleAsync(user.Id, ApplicationRole.Teacher);
-
                 return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
             }
 
             AddErrors(result);
 
+            model.Schools = await GetAllAvailableSchools();
             return View(model);
         }
 
@@ -213,6 +192,24 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             }
 
             return this.RedirectToAction<DashboardController>(x => x.Index());
+        }
+
+        private async Task<IEnumerable<SelectListItem>> GetAllAvailableSchools()
+        {
+            var schoolNames = await _schoolService.GetAllSchoolNamesAsync();
+            var schoolLists = schoolNames.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
+
+            schoolLists.Add(new SelectListItem()
+            {
+                Text = "Друго",
+                Value = "-1"
+            });
+
+            return schoolLists;
         }
     }
 }

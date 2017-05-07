@@ -14,6 +14,7 @@ namespace TeachersDiary.Data.Ef.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(TeachersDiaryDbContext context)

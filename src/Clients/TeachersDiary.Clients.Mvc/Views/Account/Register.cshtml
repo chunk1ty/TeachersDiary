@@ -41,6 +41,7 @@
 
                 <div>
                     @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, GlobalResources.SelectSchool)
+                    @Html.ValidationMessageFor(model => model.SelectedSchool, "", new {@class = "text-danger"})
                 </div>
 
                 <br />

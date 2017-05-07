@@ -102,6 +102,7 @@ namespace TeachersDiary.Clients.Mvc
             kernel.Bind<IAbsenceService>().To<AbsenceService>();
             kernel.Bind<IClassService>().To<ClassService>();
             kernel.Bind<ISchoolService>().To<SchoolService>();
+            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
 
         }
     }
