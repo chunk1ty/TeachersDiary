@@ -43,6 +43,7 @@
     <Compile Include="SchoolDomain.cs" />
     <Compile Include="StudentDomain.cs" />
     <Compile Include="TeacherDomain.cs" />
+    <Compile Include="UserDomain.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Encrypting\TeachersDiary.Services.Encrypting.csproj">

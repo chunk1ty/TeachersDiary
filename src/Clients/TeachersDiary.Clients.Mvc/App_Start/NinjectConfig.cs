@@ -81,7 +81,7 @@ namespace TeachersDiary.Clients.Mvc
             RegisterDbModule(kernel);
 
             kernel.Bind<IExelParser>().To<ExelParser>();
-            kernel.Bind<IIdentifierProvider>().To<IdentifierProvider>().InSingletonScope();
+            kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
 
             kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
 

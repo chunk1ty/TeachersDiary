@@ -3,7 +3,7 @@ using System.Text;
 
 namespace TeachersDiary.Services.Encrypting
 {
-    public class IdentifierProvider : IIdentifierProvider
+    public class EncryptingService : IEncryptingService
     {
         private const string Salt = "ankSallt";
 

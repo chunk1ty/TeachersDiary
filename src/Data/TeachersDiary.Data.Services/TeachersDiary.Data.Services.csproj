@@ -48,6 +48,7 @@
     <Compile Include="AbsenceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Encrypting\TeachersDiary.Services.Encrypting.csproj">
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Identity\TeachersDiary.Data.Identity.csproj">
+      <Project>{7B1AF903-26DD-451D-A37C-DE14FBBD8047}</Project>
+      <Name>TeachersDiary.Data.Identity</Name>
     </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Services.Contracts\TeachersDiary.Data.Services.Contracts.csproj">
       <Project>{35C455BF-326C-47B4-A20E-2E4E67E59649}</Project>

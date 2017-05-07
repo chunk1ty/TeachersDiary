@@ -8,21 +8,19 @@ namespace TeachersDiary.Data.Domain
 {
     public class SchoolDomain : IMapFrom<SchoolEntity>, IHaveCustomMappings
     {
-        private readonly IIdentifierProvider _identifierProvider;
-
-        public SchoolDomain(IIdentifierProvider identifierProvider)
-        {
-            _identifierProvider = identifierProvider;
-        }
-
         public string Id { get; set; }
 
         public string Name { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            //configuration.CreateMap<SchoolEntity, SchoolDomain>()
-            //    .ForMember(domain => domain.Id, entity => entity.MapFrom(x => "ss"));
+            IEncryptingService encryptingService = new EncryptingService();
+
+            configuration.CreateMap<SchoolEntity, SchoolDomain>()
+                .ForMember(domain => domain.Id, x => x.MapFrom(entity => encryptingService.EncodeId(entity.Id)));
+
+            configuration.CreateMap<SchoolDomain, SchoolEntity>()
+                .ForMember(entity => entity.Id, x => x.MapFrom(domain => encryptingService.DecodeId(domain.Id)));
         }
     }
 }

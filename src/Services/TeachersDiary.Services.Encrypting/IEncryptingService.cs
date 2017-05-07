@@ -1,6 +1,6 @@
 namespace TeachersDiary.Services.Encrypting
 {
-    public interface IIdentifierProvider
+    public interface IEncryptingService
     {
         int DecodeId(string id);
 
