@@ -9,7 +9,7 @@ using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Data.Identity
 {
-    public class ApplicationSignInManager : SignInManager<AspNetUser, string>, IIdentitySignInService
+    public class ApplicationSignInManager : SignInManager<UserEntity, string>, IIdentitySignInService
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
            : base(userManager, authenticationManager)
@@ -21,7 +21,7 @@ namespace TeachersDiary.Data.Identity
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(AspNetUser aspNetUser)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(UserEntity aspNetUser)
         {
             return aspNetUser.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }

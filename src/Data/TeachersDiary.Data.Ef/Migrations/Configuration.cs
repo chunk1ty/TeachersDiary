@@ -13,7 +13,7 @@ namespace TeachersDiary.Data.Ef.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(TeachersDiaryDbContext context)
@@ -37,24 +37,37 @@ namespace TeachersDiary.Data.Ef.Migrations
 
         private void CreateRoles(TeachersDiaryDbContext context)
         {
-            if (!context.Roles.Any())
+            if (context.Roles.Any())
+                return;
+            var roles = new List<RoleEntity>
             {
-                var roles = new List<string>
+                new RoleEntity
                 {
-                    ApplicationRole.Student,
-                    ApplicationRole.Teacher,
-                    ApplicationRole.SchoolAdministrator,
-                    ApplicationRole.Administrator
-                };
-
-                foreach (var roleName in roles)
+                    Name = ApplicationRole.Student,
+                    IsVisible = true
+                },
+                new RoleEntity
                 {
-                    var roleStore = new RoleStore<IdentityRole>(context);
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    var role = new IdentityRole { Name = roleName };
-
-                    roleManager.Create(role);
+                    Name = ApplicationRole.Teacher,
+                    IsVisible = true
+                },
+                new RoleEntity
+                {
+                    Name = ApplicationRole.SchoolAdministrator,
+                    IsVisible = false
+                },
+                new RoleEntity
+                {
+                    Name = ApplicationRole.Administrator,
+                    IsVisible = false
                 }
+            };
+
+            foreach (var role in roles)
+            {
+                context.Roles.Add(role);
+
+                context.SaveChanges(); ;
             }
         }
     }

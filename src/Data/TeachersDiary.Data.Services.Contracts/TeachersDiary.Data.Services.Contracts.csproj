@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IAbsenceService.cs" />
     <Compile Include="IClassService.cs" />
+    <Compile Include="ISchoolService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

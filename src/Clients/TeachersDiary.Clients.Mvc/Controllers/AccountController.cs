@@ -8,9 +8,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
+using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Identity.Contracts;
+using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -18,16 +20,18 @@ namespace TeachersDiary.Clients.Mvc.Controllers
     {
         private IIdentityUserManagerService _identityUserManagerService;
         private readonly IIdentitySignInService _identitySignInService;
+        private readonly ISchoolService _schoolService;
 
         public AccountController(
             IIdentitySignInService identitySignInService,
-            IIdentityUserManagerService identityUserManagerService)
+            IIdentityUserManagerService identityUserManagerService, ISchoolService schoolService)
         {
             Guard.WhenArgument(identitySignInService, nameof(identitySignInService)).IsNull().Throw();
             Guard.WhenArgument(identityUserManagerService, nameof(identityUserManagerService)).IsNull().Throw();
 
             _identitySignInService = identitySignInService;
             _identityUserManagerService = identityUserManagerService;
+            _schoolService = schoolService;
         }
 
         [HttpGet]
@@ -78,12 +82,27 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            TeachersDiaryDbContext dbContext = new TeachersDiaryDbContext();
-            var roles = dbContext.Roles.OrderBy(x => x.Name);
+            var schoolNames = await _schoolService.GetAllSchoolNamesAsync();
+            var schoolLists = schoolNames.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
 
-            return View();
+            schoolLists.Add(new SelectListItem()
+            {
+                Text = "Друго",
+                Value = "-1"
+            });
+
+            RegisterViewModel model = new RegisterViewModel()
+            {
+                Schools = schoolLists
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -91,24 +110,35 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = new AspNetUser();
-
-                user.UserName = model.Email;
-                user.Email = model.Email;
-
-                var result = await _identityUserManagerService.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await _identitySignInService.SignInAsync(user, false, false);
-
-                    return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
-                }
-
-                AddErrors(result);
+                return View(model);
             }
+
+            if (model.SelectedSchool == null)
+            {
+                // TODO bind to school property
+                ModelState.AddModelError("model.SelectedSchool", "Моля изберете училище!");
+                return View(model);
+            }
+
+            var user = new UserEntity();
+
+            user.UserName = model.Email;
+            user.Email = model.Email;
+            user.SchoolId = model.SelectedSchool != null && model.SelectedSchool != "-1" ? int.Parse(model.SelectedSchool) : 0;
+
+            var result = await _identityUserManagerService.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await _identitySignInService.SignInAsync(user, false, false);
+                await _identityUserManagerService.AddToRoleAsync(user.Id, ApplicationRole.Teacher);
+
+                return this.RedirectToAction<AccountController>(c => c.Login(string.Empty));
+            }
+
+            AddErrors(result);
 
             return View(model);
         }

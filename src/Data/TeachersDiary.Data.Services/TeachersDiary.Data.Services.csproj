@@ -47,8 +47,13 @@
     <Compile Include="ClassService.cs" />
     <Compile Include="AbsenceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchoolService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Encrypting\TeachersDiary.Services.Encrypting.csproj">
+      <Project>{6EB988A1-B81D-4709-B4F8-F7A40C58F3E7}</Project>
+      <Name>TeachersDiary.Services.Encrypting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
       <Name>TeachersDiary.Services.Mapping</Name>

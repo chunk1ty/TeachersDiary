@@ -1,23 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+
+using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Domain
 {
-    public class SchoolDomain
+    public class SchoolDomain : IMapFrom<SchoolEntity>, IHaveCustomMappings
     {
-        public SchoolDomain()
+        private readonly IIdentifierProvider _identifierProvider;
+
+        public SchoolDomain(IIdentifierProvider identifierProvider)
         {
-            Teachers = new HashSet<TeacherDomain>();
-            Classes = new HashSet<ClassDomain>();
+            _identifierProvider = identifierProvider;
         }
+
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
-        public IEnumerable<TeacherDomain> Teachers { get; set; }
-
-        public IEnumerable<ClassDomain> Classes { get; set; }
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            //configuration.CreateMap<SchoolEntity, SchoolDomain>()
+            //    .ForMember(domain => domain.Id, entity => entity.MapFrom(x => "ss"));
+        }
     }
 }

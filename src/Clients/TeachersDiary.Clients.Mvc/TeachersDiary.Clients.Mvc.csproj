@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Class\ClassViewModel.cs" />
+    <Compile Include="ViewModels\School\SchoolViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -536,6 +537,10 @@
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Services\TeachersDiary.Data.Services.csproj">
       <Project>{32C7407C-43B7-4208-828F-030323646860}</Project>
       <Name>TeachersDiary.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Encrypting\TeachersDiary.Services.Encrypting.csproj">
+      <Project>{6EB988A1-B81D-4709-B4F8-F7A40C58F3E7}</Project>
+      <Name>TeachersDiary.Services.Encrypting</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>

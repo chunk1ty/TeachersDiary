@@ -40,15 +40,7 @@
                 <br />
 
                 <div>
-                    @Html.LabelFor(m => m.SelectedSchoolId)
-                    @Html.DropDownListFor(x => x.SelectedSchoolId, Model.Schools)
-                </div>
-
-                <br />
-
-                <div>
-                    @Html.LabelFor(m => m.SelectedApplicationRoleId)
-                    @Html.DropDownListFor(x => x.SelectedApplicationRoleId, Model.ApplicationRoles)
+                    @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, GlobalResources.SelectSchool)
                 </div>
 
                 <br />

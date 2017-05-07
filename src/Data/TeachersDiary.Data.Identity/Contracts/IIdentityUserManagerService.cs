@@ -7,10 +7,12 @@ namespace TeachersDiary.Data.Identity.Contracts
 {
     public interface IIdentityUserManagerService : IDisposable
     {
-        Task<IdentityResult> CreateAsync(AspNetUser user, string password);
+        Task<IdentityResult> CreateAsync(UserEntity user, string password);
 
-        Task<AspNetUser> FindByIdAsync(string userId);
+        Task<UserEntity> FindByIdAsync(string userId);
 
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
+
+        Task<IdentityResult> AddToRoleAsync(string userId, string role);
     }
 }

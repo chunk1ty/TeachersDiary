@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изберете училище.
+        /// </summary>
+        internal static string SelectSchool {
+            get {
+                return ResourceManager.GetString("SelectSchool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Регистрация.
         /// </summary>
         internal static string SignUpLabel {

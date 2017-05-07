@@ -232,11 +232,11 @@ namespace TeachersDiary.Clients.Mvc.Tests
         public void RegisterOnPostRequest_WithValidModelAndSucceededCreateResult_ShouldRedirectToAccountController()
         {
             // Arrange
-            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<AspNetUser>(), It.IsAny<string>()))
+            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<UserEntity>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Success);
 
             _mockedIdentitySignInService.Setup(
-                    x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
+                    x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(0));
 
             var accountController = new AccountController(
@@ -255,11 +255,11 @@ namespace TeachersDiary.Clients.Mvc.Tests
         public void RegisterOnPostRequest_WithValidModelAndFailedCreateResult_ShouldRenderDefaultView()
         {
             // Arrange
-            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<AspNetUser>(), It.IsAny<string>()))
+            _mockedIdentityUserManagerService.Setup(x => x.CreateAsync(It.IsAny<UserEntity>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Failed());
 
             _mockedIdentitySignInService.Setup(
-                    x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()))
+                    x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(0));
 
             var accountController = new AccountController(
@@ -320,7 +320,7 @@ namespace TeachersDiary.Clients.Mvc.Tests
                 .ReturnsAsync(IdentityResult.Success);
 
             _mockedIdentityUserManagerService.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
-                .ReturnsAsync(new AspNetUser());
+                .ReturnsAsync(new UserEntity());
 
             var accountController = new AccountController(
                 _mockedIdentitySignInService.Object,
@@ -336,7 +336,7 @@ namespace TeachersDiary.Clients.Mvc.Tests
                 .WithCallTo(c => c.ChangePassword(model))
                 .ShouldRedirectTo<HomeController>(x => x.Index());
 
-            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once);
+            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once);
         }
 
         [Test]
@@ -349,7 +349,7 @@ namespace TeachersDiary.Clients.Mvc.Tests
             _mockedIdentityUserManagerService.Setup(x => x.ChangePasswordAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Success);
 
-            Func<AspNetUser> nullUserFunc = () => null;
+            Func<UserEntity> nullUserFunc = () => null;
 
             _mockedIdentityUserManagerService.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
                 .ReturnsAsync(nullUserFunc);
@@ -368,7 +368,7 @@ namespace TeachersDiary.Clients.Mvc.Tests
                 .WithCallTo(c => c.ChangePassword(model))
                 .ShouldRedirectTo<HomeController>(x => x.Index());
 
-            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<AspNetUser>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Never);
+            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Never);
         }
 
         [Test]

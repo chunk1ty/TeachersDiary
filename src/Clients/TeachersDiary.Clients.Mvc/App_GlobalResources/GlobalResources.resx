@@ -141,6 +141,9 @@
   <data name="NewProfileLabel" xml:space="preserve">
     <value>Нов профил</value>
   </data>
+  <data name="SelectSchool" xml:space="preserve">
+    <value>Изберете училище</value>
+  </data>
   <data name="SignUpLabel" xml:space="preserve">
     <value>Регистрация</value>
   </data>
