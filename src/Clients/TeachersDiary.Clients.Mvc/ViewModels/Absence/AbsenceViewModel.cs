@@ -1,19 +1,21 @@
 ﻿using System;
-using TeachersDiary.Data.Domain;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
 {
     public class AbsenceViewModel : IMapFrom<AbsenceDomain>, IMapTo<AbsenceDomain>
     {
-        public int Id { get; set; }
+        public string EncodedId { get; set; }
 
-        public Guid StudentId { get; set; }
+        public string EncodedStudentId { get; set; }
 
         public int MonthId { get; set; }
 
         public double Excused { get; set; }
 
         public double NotExcused { get; set; }
+
+        public string NotExcusedAsFractionNumber { get; set; }
     }
 }

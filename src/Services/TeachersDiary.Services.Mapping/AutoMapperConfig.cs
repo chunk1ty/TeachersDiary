@@ -64,12 +64,12 @@ namespace TeachersDiary.Services.Mapping
 
         private static void LoadCustomMappings(IMapperConfigurationExpression config, IEnumerable<Type> types)
         {
-            var maps = (from t in types
-                        from i in t.GetInterfaces()
-                        where typeof(IHaveCustomMappings).IsAssignableFrom(t) &&
-                              !t.IsAbstract &&
-                              !t.IsInterface
-                        select (IHaveCustomMappings)Activator.CreateInstance(t)).ToArray();
+            var maps = types.SelectMany(t => t.GetInterfaces(), (t, i) => new { t, i })
+                .Where(type =>
+                    typeof(ICustomMappings).IsAssignableFrom(type.t)
+                    && !type.t.IsAbstract
+                    && !type.t.IsInterface)
+                .Select(type => (ICustomMappings)Activator.CreateInstance(type.t));
 
             foreach (var map in maps)
             {

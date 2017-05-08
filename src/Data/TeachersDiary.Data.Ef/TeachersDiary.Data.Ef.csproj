@@ -63,16 +63,17 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="Migrations\201705050023317_DeleteSchoolName.cs" />
-    <Compile Include="Migrations\201705050023317_DeleteSchoolName.Designer.cs">
-      <DependentUpon>201705050023317_DeleteSchoolName.cs</DependentUpon>
+    <Compile Include="Migrations\201705051346395_Initial.cs" />
+    <Compile Include="Migrations\201705051346395_Initial.Designer.cs">
+      <DependentUpon>201705051346395_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705050026429_AddSchoolName.cs" />
-    <Compile Include="Migrations\201705050026429_AddSchoolName.Designer.cs">
-      <DependentUpon>201705050026429_AddSchoolName.cs</DependentUpon>
+    <Compile Include="Migrations\201705051807508_AddIsVisibleColumnInRole.cs" />
+    <Compile Include="Migrations\201705051807508_AddIsVisibleColumnInRole.Designer.cs">
+      <DependentUpon>201705051807508_AddIsVisibleColumnInRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\EfClassRepository.cs" />
+    <Compile Include="Repositories\EfSchoolRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +82,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
+      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
+      <Name>TeachersDiary.Common.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
+      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
+      <Name>TeachersDiary.Services.Mapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
@@ -91,11 +100,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705050023317_DeleteSchoolName.resx">
-      <DependentUpon>201705050023317_DeleteSchoolName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705051346395_Initial.resx">
+      <DependentUpon>201705051346395_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705050026429_AddSchoolName.resx">
-      <DependentUpon>201705050026429_AddSchoolName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705051807508_AddIsVisibleColumnInRole.resx">
+      <DependentUpon>201705051807508_AddIsVisibleColumnInRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

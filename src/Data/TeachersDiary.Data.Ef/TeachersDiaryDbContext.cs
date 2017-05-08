@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,7 +9,7 @@ using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef
 {
-    public class TeachersDiaryDbContext : IdentityDbContext<AspNetUser>, ITeachersDiaryDbContext, IUnitOfWork
+    public class TeachersDiaryDbContext : IdentityDbContext<UserEntity>, ITeachersDiaryDbContext, IUnitOfWork
     {
         public TeachersDiaryDbContext()
             : base("DefaultConnection", false)

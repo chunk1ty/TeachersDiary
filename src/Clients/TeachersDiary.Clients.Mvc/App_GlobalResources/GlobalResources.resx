@@ -117,7 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AndriyanKrastevLabel" xml:space="preserve">
+    <value>Андриян Кръстев</value>
+  </data>
+  <data name="ClassesLabel" xml:space="preserve">
+    <value>Класове</value>
+  </data>
+  <data name="CreateButton" xml:space="preserve">
+    <value>Създай</value>
+  </data>
+  <data name="FileSentLabel" xml:space="preserve">
+    <value>Изпрати файл</value>
+  </data>
+  <data name="HomeLabel" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="IncorrentEmailOrPasswordMessage" xml:space="preserve">
+    <value>Невалиден имейл или парола.</value>
+  </data>
+  <data name="LogInLabel" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="LogOffLabel" xml:space="preserve">
+    <value>Изход</value>
+  </data>
+  <data name="NewProfileLabel" xml:space="preserve">
+    <value>Нов профил</value>
+  </data>
+  <data name="OtherLabel" xml:space="preserve">
+    <value>Друго</value>
+    <comment>Register dropdown list</comment>
+  </data>
+  <data name="SelectSchool" xml:space="preserve">
+    <value>Изберете училище</value>
+  </data>
+  <data name="SignUpLabel" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="StudentLabel" xml:space="preserve">
+    <value>Ученици</value>
+  </data>
   <data name="TeachersDiaryTitle" xml:space="preserve">
-    <value>Teacher Diary</value>
+    <value>Учителски дневник</value>
   </data>
 </root>

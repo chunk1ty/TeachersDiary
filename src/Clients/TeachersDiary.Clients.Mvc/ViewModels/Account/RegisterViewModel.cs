@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Account
 {
@@ -16,7 +18,12 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         public string Password { get; set; }
 
         [DataType(DataType.Password)]       
-        [Compare("Password", ErrorMessage = "Паролата несъвпада.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Паролата несъвпада.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Моля изберете училище!")]
+        public string SelectedSchool { get; set; }
+
+        public IEnumerable<SelectListItem> Schools { get; set; }
     }
 }

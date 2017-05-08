@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/teacherDiary")
-    @Styles.Render("~/Content/bootstrap")
-    @RenderSection("styles", false)
+    <meta name="keywords" content="teachers, diary, teacher's diary, teachers diary, учител, дневник, учителски дневник, дневник на учителя">
 
+    <title>@GlobalResources.TeachersDiaryTitle</title>
+    
+    @Styles.Render("~/Content/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/teacherDiary")
+    @RenderSection("styles", false)
 
 </head>
 <body>
@@ -20,18 +22,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Класове", "Index", "Class")</li>
-                        <li>@Html.ActionLink("Изпрати файл", "Index", "Dashboard")</li>
+                        <li>@(Html.ActionLink<DashboardController>(GlobalResources.HomeLabel, x => x.Index()))</li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @Html.Partial(PartialViewConstants.LoginPartial)
             </div>
         </div>
     </div>
@@ -40,13 +39,14 @@
             @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Андриян Кръстев</p>
+            <p>&copy; @DateTime.Now.Year - @GlobalResources.AndriyanKrastevLabel</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/respond")
+
     @RenderSection("scripts", false)
 </body>
 </html>

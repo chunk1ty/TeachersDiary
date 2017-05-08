@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using TeachersDiary.Data.Domain;
+using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
 {
@@ -14,8 +13,8 @@ namespace TeachersDiary.Data.Services.Contracts
 
         Task<IEnumerable<ClassDomain>> GetAllAsync();
 
-        Task<ClassDomain> GetClassWithStudentsByClassIdAsync(Guid classId);
+        Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId);
 
-        Task DeleteById(Guid classId);
+        Task DeleteById(string classId);
     }
 }

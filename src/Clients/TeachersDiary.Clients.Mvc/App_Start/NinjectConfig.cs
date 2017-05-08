@@ -18,6 +18,7 @@ using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.ExcelParser;
 using TeachersDiary.Services.Mapping;
 using TeachersDiary.Services.Mapping.Contracts;
 
@@ -80,6 +81,8 @@ namespace TeachersDiary.Clients.Mvc
             RegisterDbModule(kernel);
 
             kernel.Bind<IExelParser>().To<ExelParser>();
+            kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
+
             kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
 
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
@@ -94,9 +97,13 @@ namespace TeachersDiary.Clients.Mvc
                 .InRequestScope();
 
             kernel.Bind<IClassRepository>().To<EfClassRepository>();
+            kernel.Bind<ISchoolRepository>().To<EfSchoolRepository>();
 
             kernel.Bind<IAbsenceService>().To<AbsenceService>();
             kernel.Bind<IClassService>().To<ClassService>();
+            kernel.Bind<ISchoolService>().To<SchoolService>();
+            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
+
         }
     }
 }

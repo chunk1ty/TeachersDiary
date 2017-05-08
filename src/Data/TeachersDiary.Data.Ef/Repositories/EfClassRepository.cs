@@ -33,7 +33,7 @@ namespace TeachersDiary.Data.Ef.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(Guid classId)
+        public async Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(int classId)
         {
             var @class = await _teacherDiaryDbContext.Classes
                 .Include(x => x.Students.Select(y => y.Absences))
@@ -42,7 +42,7 @@ namespace TeachersDiary.Data.Ef.Repositories
             return @class;
         }
 
-        public async Task<ClassEntity> GetByIdAsync(Guid classId)
+        public async Task<ClassEntity> GetByIdAsync(int classId)
         {
             return await _teacherDiaryDbContext.Classes.FirstOrDefaultAsync(x => x.Id == classId);
         }

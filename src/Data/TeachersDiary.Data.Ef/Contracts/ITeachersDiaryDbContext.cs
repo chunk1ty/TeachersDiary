@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 using TeachersDiary.Data.Ef.Entities;
 
 namespace TeachersDiary.Data.Ef.Contracts
 {
     public interface ITeachersDiaryDbContext
     {
+        IDbSet<UserEntity> Users { get; set; }
+
+        // TODO WHY is not working ??
+        //IDbSet<RoleEntity> Roles { get; set; }
+
         IDbSet<TeacherEntity> Teachers { get; set; }
 
         IDbSet<SchoolEntity> Schools { get; set; }

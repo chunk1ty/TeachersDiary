@@ -34,47 +34,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IExelParser.cs" />
-    <Compile Include="ExelParser.cs" />
+    <Compile Include="EncryptingService.cs" />
+    <Compile Include="Contracts\IEncryptingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Domain\TeachersDiary.Data.Domain.csproj">
-      <Project>{4CA9AA8B-C6C1-494E-B326-121E3202B740}</Project>
-      <Name>TeachersDiary.Data.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
-      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
-      <Name>TeachersDiary.Data.Ef.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Services.Contracts\TeachersDiary.Data.Services.Contracts.csproj">
-      <Project>{35C455BF-326C-47B4-A20E-2E4E67E59649}</Project>
-      <Name>TeachersDiary.Data.Services.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
-      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
-      <Name>TeachersDiary.Services.Mapping</Name>
-    </ProjectReference>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Absence;
-using TeachersDiary.Data.Domain;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Student
@@ -14,7 +13,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
             Absences = new List<AbsenceViewModel>();
         }
 
-        public Guid Id { get; set; }
+        public string EncodedId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -22,12 +21,12 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
 
         public string LastName { get; set; }
 
+        public string TotalExcusedAbsences { get; set; }
+
+        public double TotalNotExcusedAbsences { get; set; }
+
+        public string TotalNotExcusedAbsencesAsFractionNumber { get; set; }
+
         public List<AbsenceViewModel> Absences { get; set; }
-
-        public double TotalExcusedAbsences { get; set; }
-        
-        public double TotalNotExcusedAbsence { get; set; }
-
-        public string TotalNotExcusedAbsenceAsString { get; set; }
     }
 }

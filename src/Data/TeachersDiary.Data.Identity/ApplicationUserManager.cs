@@ -9,19 +9,19 @@ using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Data.Identity
 {
-    public class ApplicationUserManager : UserManager<AspNetUser>, IIdentityUserManagerService
+    public class ApplicationUserManager : UserManager<UserEntity>, IIdentityUserManagerService
     {
-        public ApplicationUserManager(IUserStore<AspNetUser> store)
+        public ApplicationUserManager(IUserStore<UserEntity> store)
             : base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<AspNetUser>(context.Get<TeachersDiaryDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<UserEntity>(context.Get<TeachersDiaryDbContext>()));
 
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<AspNetUser>(manager)
+            manager.UserValidator = new UserValidator<UserEntity>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -46,14 +46,14 @@ namespace TeachersDiary.Data.Identity
             // You can write your own provider and plug it in here.
             manager.RegisterTwoFactorProvider(
                 "Phone Code",
-                new PhoneNumberTokenProvider<AspNetUser>
+                new PhoneNumberTokenProvider<UserEntity>
                 {
                     MessageFormat = "Your security code is {0}"
                 });
 
             manager.RegisterTwoFactorProvider(
                 "Email Code",
-                new EmailTokenProvider<AspNetUser>
+                new EmailTokenProvider<UserEntity>
                 {
                     Subject = "Security Code",
                     BodyFormat = "Your security code is {0}"
@@ -65,7 +65,7 @@ namespace TeachersDiary.Data.Identity
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<AspNetUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<UserEntity>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return manager;

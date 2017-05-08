@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.Validation;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
+using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
 {
     public class AbsenceService : IAbsenceService
     {
         private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
+        private readonly IEncryptingService _encryptingService;
 
-        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext)
+
+        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext, IEncryptingService encryptingService)
         {
             _teacherDiaryDbContext = teacherDiaryDbContext;
+            _encryptingService = encryptingService;
         }
 
         public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
@@ -31,12 +35,13 @@ namespace TeachersDiary.Data.Services
                 {
                     var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
+                    var studentId = _encryptingService.DecodeId(student.EncodedId);
 
                     var absence = new AbsenceEntity()
                     {
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
-                        StudentId = student.Id,
+                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
+                        StudentId = studentId,
                         // MonthId = 4 == April
                         MonthId = 4
                     };
@@ -52,13 +57,15 @@ namespace TeachersDiary.Data.Services
                 {
                     var totalExcusedAbsences = student.Absences.Take(3).Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Take(3).Sum(x => x.NotExcused);
+                    var studentId = _encryptingService.DecodeId(student.EncodedId);
+                    var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().EncodedId);
 
                     var absence = new AbsenceEntity()
                     {
-                        Id = student.Absences.LastOrDefault().Id,
+                        Id = absenseId,
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
-                        StudentId = student.Id,
+                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
+                        StudentId = studentId,
                         // MonthId = 4 == April
                         MonthId = 4
                     };

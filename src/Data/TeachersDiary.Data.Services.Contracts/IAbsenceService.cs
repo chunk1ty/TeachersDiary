@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services;
+using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
 {

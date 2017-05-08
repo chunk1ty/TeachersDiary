@@ -1,0 +1,191 @@
+﻿@model ClassViewModel
+
+@{
+    ViewBag.Title = "Students";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <style ></style>
+
+    @Styles.Render("~/Content/jqueryDataTable");
+
+    <style>
+        .container.body-content {
+            max-width: 100% !important;
+        }
+    </style>
+}
+
+<h2>@GlobalResources.StudentLabel</h2>
+
+@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.EncodedId)
+    @Html.HiddenFor(x => Model.Name)
+    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+    <input class="center" type="submit" value="Изчисли"/>
+    <table id="student-grid" class="display">
+        <thead>
+            <tr>
+                <th class="center" rowspan="2">Имена</th>
+                <th class="center" colspan="2">Септември - Януари</th>
+                <th class="center" colspan="2">Февруари</th>
+                <th class="center" colspan="2">Март</th>
+                <th class="center" colspan="2">Април</th>
+                <th class="center" colspan="2">Общо</th>
+            </tr>
+            <tr>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+                <th class="center">Изв</th>
+                <th class="center">Неизв</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var studentIndex = 0; studentIndex < Model.Students.Count; studentIndex++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => x.Students[studentIndex].FirstName)
+                        @Html.HiddenFor(x => x.Students[studentIndex].MiddleName)
+                        @Html.HiddenFor(x => x.Students[studentIndex].LastName)
+                        @Html.HiddenFor(x => x.Students[studentIndex].EncodedId)
+
+                        @Model.Students[studentIndex].FirstName @Model.Students[studentIndex].MiddleName @Model.Students[studentIndex].LastName
+                    </td>
+
+                    @{ int mounthIndex = 0; }
+
+
+                    @for (var absenceIndex = 0; absenceIndex < Model.Students[studentIndex].Absences.Count; absenceIndex++)
+                    {
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].EncodedId)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].MonthId)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].EncodedStudentId)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Excused)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
+
+                        <td class="center">
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))
+                        </td>
+
+                        <td class="center">
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber))
+                        </td>
+                        {
+                            mounthIndex += 1;
+                        }
+                    }
+                   
+                    @while (mounthIndex < 4)
+                    {
+                        <td></td>
+                        <td></td>
+                        {
+                            mounthIndex += 1;
+                        }
+                    }
+                    
+                    <td>
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new { maxlength = "8", size = "8" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new { maxlength = "8", size = "8" })
+                    </td>
+                </tr>
+            }
+        <tr>
+            <td class="center">Общо</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
+            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.TotalExcusedAbsences</td>
+            <td class="center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
+        </tr>
+
+        </tbody>
+    </table>
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryDataTable")
+  
+    <script>
+        // $(function ($) {
+        "use strict";
+        $(document).ready(function () {
+
+
+            //grid settings
+            var table = $('#student-grid').DataTable({
+                columnDefs: [{
+                    targets: [0],
+                    searchable: false,
+                    orderable: false,
+                    className: 'dt-body-center'
+                }, {
+                    targets: [1],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [2],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [3],
+                    searchable: true,
+                    sortable: true
+                }, {
+                    targets: [4],
+                    searchable: true,
+                    sortable: true
+                }],
+                paging: false,
+                "bFilter": false,
+                //pagingType: "full_numbers",
+                //aaSorting: [],
+                language: {
+                    //search: "Търсене по колони: ",
+                    //info: "Страница _PAGE_ от _PAGES_ страници.",
+                    //lengthMenu: "Покажи _MENU_ потребителя.",
+                    //emptyTable: "Няма налични потребители.",
+                    //paginate: {
+                    //    first: "Първа",
+                    //    last: "Последна",
+                    //    next: "Следваща",
+                    //    previous: "Предишна"
+                    //}
+                }
+            });
+
+
+            $('#student-grid tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#button').click(function () {
+                table.row('.selected').remove().draw(false);
+            });
+        });
+       // }($));
+    </script>
+}

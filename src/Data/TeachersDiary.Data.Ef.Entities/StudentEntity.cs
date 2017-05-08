@@ -15,8 +15,7 @@ namespace TeachersDiary.Data.Ef.Entities
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public int Number { get; set; }
 
@@ -24,7 +23,7 @@ namespace TeachersDiary.Data.Ef.Entities
 
         public string LastName { get; set; }
 
-        public Guid ClassId { get; set; }
+        public int ClassId { get; set; }
         public virtual ClassEntity Class { get; set; }
 
         public ICollection<AbsenceEntity> Absences { get; set; }

@@ -8,6 +8,7 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.HttpModules
     public class CultureModule : IHttpModule
     {
         private const string Bg = "bg";
+        private const string En = "en";
 
         public void Init(HttpApplication context)
         {
@@ -26,10 +27,10 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.HttpModules
             {
                 string lang = urlParts[2];
 
-                if (lang == Bg)
+                if (lang == En)
                 {
-                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Bg);
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Bg);
+                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(En);
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(En);
                 }
             }
         }

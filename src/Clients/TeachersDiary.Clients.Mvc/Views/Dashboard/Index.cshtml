@@ -1,19 +1,8 @@
-﻿@{
-   
+﻿
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Index", "Dashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+<h2>Login home page</h2>
 
-    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
-
-    <br />
-
-    <input type="file" name="file" id="file" />
-
-    <br />
-
-    <input type="submit" value="Изпрати"/>
-}

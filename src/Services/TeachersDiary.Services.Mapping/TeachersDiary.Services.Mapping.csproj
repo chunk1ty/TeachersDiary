@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
-    <Compile Include="Contracts\IHaveCustomMappings.cs" />
+    <Compile Include="Contracts\ICustomMappings.cs" />
     <Compile Include="Contracts\IMapFrom.cs" />
     <Compile Include="Contracts\IMappingService.cs" />
     <Compile Include="Contracts\IMapTo.cs" />
