@@ -38,7 +38,7 @@ else
         <li>
             @(Html.ActionLink<AccountController>(
                   GlobalResources.LogInLabel,
-                  x => x.Login(string.Empty),
+                  x => x.Login(),
                   null,
                   new {id = "loginLink" }))
         </li>

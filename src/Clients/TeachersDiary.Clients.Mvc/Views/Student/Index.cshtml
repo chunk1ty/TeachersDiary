@@ -19,8 +19,9 @@
 
 <h2>@GlobalResources.StudentLabel</h2>
 
-@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(Model), FormMethod.Post))
+@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(x => Model.Id)
     @Html.HiddenFor(x => Model.Name)
     @Html.ValidationSummary(true, null, new { @class = "text-danger" })

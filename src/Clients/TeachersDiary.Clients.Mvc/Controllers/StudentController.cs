@@ -7,8 +7,8 @@ using System.Web.Mvc.Expressions;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Extensions;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
@@ -28,7 +28,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(int classId)
+        public async Task<ActionResult> Index(string classId)
         {
             var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
 
@@ -93,7 +93,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             _absenceService.CalculateStudentsAbsencesForLastMonth(studentDomains);
 
-            return this.RedirectToAction<StudentController>(x => x.Index(model.Id));
+            return this.RedirectToAction<StudentController>(x => x.Index(model.EncodedId));
         }
     }
 }

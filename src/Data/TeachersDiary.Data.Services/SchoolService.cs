@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using TeachersDiary.Data.Contracts;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services

@@ -1,4 +1,4 @@
-﻿namespace TeachersDiary.Services.Contracts
+﻿namespace TeachersDiary.Services.ExcelParser
 {
     public interface IExelParser
     {

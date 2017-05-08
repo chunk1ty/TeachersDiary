@@ -514,10 +514,6 @@
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Domain\TeachersDiary.Data.Domain.csproj">
-      <Project>{4CA9AA8B-C6C1-494E-B326-121E3202B740}</Project>
-      <Name>TeachersDiary.Data.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
       <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
       <Name>TeachersDiary.Data.Ef.Entities</Name>
@@ -538,9 +534,9 @@
       <Project>{32C7407C-43B7-4208-828F-030323646860}</Project>
       <Name>TeachersDiary.Data.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Encrypting\TeachersDiary.Services.Encrypting.csproj">
-      <Project>{6EB988A1-B81D-4709-B4F8-F7A40C58F3E7}</Project>
-      <Name>TeachersDiary.Services.Encrypting</Name>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.ExcelParser\TeachersDiary.Services.ExcelParser.csproj">
+      <Project>{1A9EC2F9-335B-49BB-9533-C3846267A555}</Project>
+      <Name>TeachersDiary.Services.ExcelParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
@@ -549,6 +545,10 @@
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
       <Name>TeachersDiary.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TeachersDiary.Domain\TeachersDiary.Domain.csproj">
+      <Project>{2EF30906-2AB7-46F5-AAA3-C1AEDCAB824C}</Project>
+      <Name>TeachersDiary.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

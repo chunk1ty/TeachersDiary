@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-
 using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services;
+using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Mapping.Contracts;
 
-namespace TeachersDiary.Data.Domain
+namespace TeachersDiary.Domain
 {
-    public class SchoolDomain : IMapFrom<SchoolEntity>, IHaveCustomMappings
+    public class SchoolDomain : IMapFrom<SchoolEntity>, ICustomMappings
     {
         public string Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeachersDiary.Data.Domain
+namespace TeachersDiary.Domain
 {
     public class TeacherDomain
     {

@@ -16,22 +16,22 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.Extensions
             var floatingPartAstring = floatingPart.ToString();
             var fractionalPart = string.Empty;
 
-            if (floatingPartAstring.Contains(".3333"))
+            if (floatingPartAstring.Contains("3333"))
             {
                 fractionalPart = " 1/3";
             }
 
-            if (floatingPartAstring.Contains(".6666"))
+            if (floatingPartAstring.Contains("6666"))
             {
                 fractionalPart = " 2/3";
             }
 
-            if (floatingPartAstring.Contains(".99999"))
+            if (floatingPartAstring.Contains("9999"))
             {
                 integerPart++;
             }
 
-            var result = integerPart + fractionalPart;
+            var result = integerPart != 0 ? integerPart + fractionalPart : fractionalPart == string.Empty ? "0" : fractionalPart;
 
             return result;
         }

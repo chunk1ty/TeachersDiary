@@ -1,4 +1,4 @@
-﻿using TeachersDiary.Data.Domain;
+﻿using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.School

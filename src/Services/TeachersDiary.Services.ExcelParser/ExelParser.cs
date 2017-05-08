@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.IO;
-
 using Excel;
-using TeachersDiary.Data.Domain;
-using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts;
 
-namespace TeachersDiary.Services
+namespace TeachersDiary.Services.ExcelParser
 {
     public class ExelParser : IExelParser
     {
         private readonly IClassService _classService;
+        private readonly IEncryptingService _encryptingService;
 
-        public ExelParser(IClassService classService)
+        public ExelParser(IClassService classService, IEncryptingService encryptingService)
         {
             _classService = classService;
+            _encryptingService = encryptingService;
         }
 
         public void ReadFile(string filePath)
@@ -49,7 +49,7 @@ namespace TeachersDiary.Services
 
                 DataTable sheet = result.Tables[i];
 
-                
+
                 // skip first rows
                 for (int j = 2; j < sheet.Rows.Count; j++)
                 {
@@ -70,7 +70,7 @@ namespace TeachersDiary.Services
 
                     for (var k = 4; k <= sheet.Rows[j].ItemArray.Length; k += 2)
                     {
-                        if (sheet.Rows[j].ItemArray[k].ToString() == "" && sheet.Rows[j].ItemArray[k+1].ToString() == "")
+                        if (sheet.Rows[j].ItemArray[k].ToString() == "" && sheet.Rows[j].ItemArray[k + 1].ToString() == "")
                         {
                             break;
                         }
@@ -106,7 +106,7 @@ namespace TeachersDiary.Services
                         student.Absences.Add(absence);
                         monthId++;
                     }
-                   
+
                     @class.Students.Add(student);
                 }
 

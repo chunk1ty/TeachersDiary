@@ -10,7 +10,7 @@
     @foreach(var clas in Model)
     { 
         <div>
-            @(Html.ActionLink<ClassController>(clas.Name, c => c.Students(clas.Id), new { area = string.Empty }, new { @class = "btn btn-default" }))
+            @(Html.ActionLink<StudentController>(clas.Name, c => c.Index(clas.Id), new { area = string.Empty }, new { @class = "btn btn-default" }))
             @(Html.ActionLink<ClassController>("Изтрий", c => c.Delete(clas.Id), new { area = string.Empty }, new { @class = "btn btn-danger" }))
         </div>
         <br/>

@@ -5,8 +5,8 @@ using System.Web.Mvc.Expressions;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
@@ -58,7 +58,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(int classId)
+        public async Task<ActionResult> Delete(string classId)
         {
             await _classService.DeleteById(classId);
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TeachersDiary.Data.Domain;
+using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
 {

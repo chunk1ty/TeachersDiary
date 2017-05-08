@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Bytes2you.Validation;
 
 using TeachersDiary.Data.Contracts;
-using TeachersDiary.Data.Domain;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
+using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services
@@ -19,11 +17,13 @@ namespace TeachersDiary.Data.Services
         private readonly IClassRepository _classRepository;
         private readonly IUnitOfWork _contextSaveChanges;
         private readonly IMappingService _mappingService;
+        private readonly IEncryptingService _encryptingService;
 
         public ClassService(
             IClassRepository classRepository, 
             IUnitOfWork contextSaveChanges, 
-            IMappingService mappingService)
+            IMappingService mappingService, 
+            IEncryptingService encryptingService)
         {
             Guard.WhenArgument(classRepository, nameof(classRepository)).IsNull().Throw();
             Guard.WhenArgument(contextSaveChanges, nameof(contextSaveChanges)).IsNull().Throw();
@@ -32,11 +32,14 @@ namespace TeachersDiary.Data.Services
             _classRepository = classRepository;
             _contextSaveChanges = contextSaveChanges;
             _mappingService = mappingService;
+            _encryptingService = encryptingService;
         }
 
-        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(int classId)
+        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId)
         {
-            var claaEntity = await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(classId);
+            var decodedClassId = _encryptingService.DecodeId(classId);
+
+            var claaEntity = await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(decodedClassId);
 
             var classDomain = _mappingService.Map<ClassDomain>(claaEntity);
 
@@ -72,9 +75,11 @@ namespace TeachersDiary.Data.Services
             _contextSaveChanges.SaveChanges();
         }
 
-        public async Task DeleteById(int classId)
+        public async Task DeleteById(string classId)
         {
-            var classEntity = await _classRepository.GetByIdAsync(classId);
+            var decodedClassId = _encryptingService.DecodeId(classId);
+
+            var classEntity = await _classRepository.GetByIdAsync(decodedClassId);
 
             _classRepository.Delete(classEntity);
             _contextSaveChanges.SaveChanges();

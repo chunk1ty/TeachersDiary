@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using TeachersDiary.Clients.Mvc.ViewModels.Absence;
-using TeachersDiary.Data.Domain;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Student
@@ -13,7 +13,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
             Absences = new List<AbsenceViewModel>();
         }
 
-        public int Id { get; set; }
+        public string EncodedId { get; set; }
 
         public string FirstName { get; set; }
 

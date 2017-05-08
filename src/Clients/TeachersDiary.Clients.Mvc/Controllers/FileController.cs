@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
 using TeachersDiary.Common.Constants;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.ExcelParser;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {

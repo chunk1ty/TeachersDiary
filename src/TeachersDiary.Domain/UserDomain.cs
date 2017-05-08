@@ -1,7 +1,7 @@
 ﻿using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Services.Mapping.Contracts;
 
-namespace TeachersDiary.Data.Domain
+namespace TeachersDiary.Domain
 {
     public class UserDomain : IMapFrom<UserEntity>, IMapTo<UserEntity>
     {

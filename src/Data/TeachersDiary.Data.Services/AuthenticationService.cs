@@ -7,7 +7,7 @@ using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
 {

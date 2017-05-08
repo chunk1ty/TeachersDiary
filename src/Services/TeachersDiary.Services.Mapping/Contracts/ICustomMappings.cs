@@ -3,7 +3,7 @@ using AutoMapper.Configuration;
 
 namespace TeachersDiary.Services.Mapping.Contracts
 {
-    public interface IHaveCustomMappings
+    public interface ICustomMappings
     {
         void CreateMappings(IMapperConfigurationExpression configuration);
     }
