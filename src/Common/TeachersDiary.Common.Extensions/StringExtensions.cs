@@ -10,7 +10,7 @@ namespace TeachersDiary.Common.Extensions
             return value.All(c => c >= '0' && c <= '9');
         }
 
-        public static double FromFractionToDoubleNumber(this string fraction)
+        public static double FractionToDoubleNumber(this string fraction)
         {
             double result;
             if (double.TryParse(fraction, out result))

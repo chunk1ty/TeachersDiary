@@ -72,7 +72,7 @@
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].MonthId)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].EncodedStudentId)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Excused)
-                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
 
                         <td class="center">
                             @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))

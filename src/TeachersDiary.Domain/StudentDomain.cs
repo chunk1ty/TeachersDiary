@@ -49,7 +49,7 @@ namespace TeachersDiary.Domain
         {
             get
             {
-                return Absences.Sum(x => x.Excused).ToFractionNumber();
+                return Absences.Sum(x => x.NotExcused).ToFractionNumber();
             }
         }
 
