@@ -15,5 +15,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
         public double Excused { get; set; }
 
         public double NotExcused { get; set; }
+
+        public string NotExcusedAsFractionNumber { get; set; }
     }
 }

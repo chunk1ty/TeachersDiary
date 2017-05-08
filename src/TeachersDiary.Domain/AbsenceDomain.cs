@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
@@ -17,6 +18,11 @@ namespace TeachersDiary.Domain
         public double Excused { get; set; }
 
         public double NotExcused { get; set; }
+
+        public string NotExcusedAsFractionNumber
+        {
+            get { return NotExcused.ToFractionNumber(); }
+        }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

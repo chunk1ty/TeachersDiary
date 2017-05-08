@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
@@ -28,8 +29,6 @@ namespace TeachersDiary.Domain
 
         public string EncodedIdClassId { get; set; }
 
-        public ICollection<AbsenceDomain> Absences { get; set; }
-
         public double TotalExcusedAbsences
         {
             get
@@ -38,7 +37,7 @@ namespace TeachersDiary.Domain
             }
         }
 
-        public double TotalNotExcusedAbsence
+        public double TotalNotExcusedAbsences
         {
             get
             {
@@ -46,16 +45,15 @@ namespace TeachersDiary.Domain
             }
         }
 
-        public string TotalNotExcusedAbsenceAsString
+        public string TotalNotExcusedAbsencesAsFractionNumber
         {
             get
             {
-                var numberConvertorService = new NumberConvertorService();
-
-                return numberConvertorService.FromDoubleToFractionNumber(TotalNotExcusedAbsence);
+                return Absences.Sum(x => x.Excused).ToFractionNumber();
             }
-
         }
+
+        public ICollection<AbsenceDomain> Absences { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

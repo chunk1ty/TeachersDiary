@@ -22,6 +22,10 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
+        public double TotalExcusedAbsences { get; set; }
+
+        public string TotalNotExcusedAbsencesAsFractionNumber { get; set; }
+
         public List<StudentViewModel> Students { get; set; }
     }
 }

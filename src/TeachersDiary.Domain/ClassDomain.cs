@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
+using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
@@ -17,6 +19,32 @@ namespace TeachersDiary.Domain
         public string EncodedId { get; set; }
 
         public string Name { get; set; }
+
+        public double TotalExcusedAbsences
+        {
+            get
+            {
+                return Students.Sum(x => x.TotalExcusedAbsences);
+            }
+        }
+
+        public double TotalNotExcusedAbsences
+        {
+            get
+            {
+                return Students.Sum(x => x.TotalNotExcusedAbsences);
+            }
+        }
+
+        public string TotalNotExcusedAbsencesAsFractionNumber
+        {
+            get
+            {
+                return Students.Sum(x => x.TotalNotExcusedAbsences).ToFractionNumber();
+            }
+        }
+
+
 
         public ICollection<StudentDomain> Students { get; set; }
 

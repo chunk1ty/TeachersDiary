@@ -46,6 +46,10 @@
     <Compile Include="UserDomain.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
+      <Project>{5D12CB90-074A-452C-911A-BBBB7CF2CB07}</Project>
+      <Name>TeachersDiary.Common.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
       <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
       <Name>TeachersDiary.Data.Ef.Entities</Name>

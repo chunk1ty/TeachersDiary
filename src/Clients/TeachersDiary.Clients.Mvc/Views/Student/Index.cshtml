@@ -22,7 +22,7 @@
 @using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => Model.Id)
+    @Html.HiddenFor(x => Model.EncodedId)
     @Html.HiddenFor(x => Model.Name)
     @Html.ValidationSummary(true, null, new { @class = "text-danger" })
 
@@ -58,7 +58,7 @@
                         @Html.HiddenFor(x => x.Students[studentIndex].FirstName)
                         @Html.HiddenFor(x => x.Students[studentIndex].MiddleName)
                         @Html.HiddenFor(x => x.Students[studentIndex].LastName)
-                        @Html.HiddenFor(x => x.Students[studentIndex].Id)
+                        @Html.HiddenFor(x => x.Students[studentIndex].EncodedId)
 
                         @Model.Students[studentIndex].FirstName @Model.Students[studentIndex].MiddleName @Model.Students[studentIndex].LastName
                     </td>
@@ -68,18 +68,18 @@
 
                     @for (var absenceIndex = 0; absenceIndex < Model.Students[studentIndex].Absences.Count; absenceIndex++)
                     {
-                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Id)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].EncodedId)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].MonthId)
-                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].StudentId)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].EncodedStudentId)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Excused)
-                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber)
 
                         <td class="center">
                             @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))
                         </td>
 
                         <td class="center">
-                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcused.ToFractionalNumber()))
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber))
                         </td>
                         {
                             mounthIndex += 1;
@@ -99,7 +99,7 @@
                         @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new { maxlength = "8", size = "8" })
                     </td>
                     <td>
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsenceAsString, new { maxlength = "8", size = "8" })
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new { maxlength = "8", size = "8" })
                     </td>
                 </tr>
             }
@@ -113,8 +113,8 @@
             <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
             <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
             <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.TotalExcusedAbsences).Sum()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.TotalNotExcusedAbsence).Sum().ToFractionalNumber()</td>
+            <td class="center" style="color: red">@Model.TotalExcusedAbsences</td>
+            <td class="center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
         </tr>
 
         </tbody>

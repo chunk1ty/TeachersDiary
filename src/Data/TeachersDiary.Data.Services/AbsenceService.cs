@@ -40,7 +40,7 @@ namespace TeachersDiary.Data.Services
                     var absence = new AbsenceEntity()
                     {
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
+                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
                         // MonthId = 4 == April
                         MonthId = 4
@@ -64,7 +64,7 @@ namespace TeachersDiary.Data.Services
                     {
                         Id = absenseId,
                         Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsence - totalNotExcusedAbsences,
+                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
                         // MonthId = 4 == April
                         MonthId = 4

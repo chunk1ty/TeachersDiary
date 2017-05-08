@@ -43,13 +43,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                var tokens = student.TotalNotExcusedAbsenceAsString.Split(' ');
+                var tokens = student.TotalNotExcusedAbsencesAsFractionNumber.Split(' ');
 
                 if (tokens.Length == 1)
                 {
                     if (tokens[0].IsContainsOnlyDigits())
                     {
-                        student.TotalNotExcusedAbsence = int.Parse(tokens[0]);
+                       // student.TotalNotExcusedAbsence = int.Parse(tokens[0]);
                         continue;
                     }
 
@@ -86,7 +86,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                     return View("Index", model);
                 }
 
-                student.TotalNotExcusedAbsence = intPart + floatingPart;
+                //student.TotalNotExcusedAbsences = intPart + floatingPart;
             }
 
             var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students);
