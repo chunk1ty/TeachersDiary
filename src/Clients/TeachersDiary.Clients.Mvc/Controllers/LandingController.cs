@@ -2,7 +2,7 @@
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class LandingController : Controller
     {
         public ActionResult Index()
         {
