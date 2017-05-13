@@ -21,11 +21,46 @@ namespace TeachersDiary.Clients.Mvc
         {
             bundles.UseCdn = true;
 
-            //RegisterScripts(bundles);
-            //RegisterStyles(bundles);
-            Inspinia(bundles);
+            RegisterScripts(bundles);
+            RegisterStyles(bundles);
+            RegisterFonts(bundles);
+            //Inspinia(bundles);
 
             BundleTable.EnableOptimizations = true;
+        }
+
+        private static void RegisterStyles(BundleCollection bundles)
+        {
+            // CSS style (bootstrap/inspinia)
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/bootstrap.min.css",
+                "~/Content/animate.css",
+                "~/Content/style.css"));
+        }
+
+        private static void RegisterScripts(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-3.1.1.min.js"));
+           
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstrap.min.js"));
+            
+            bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
+                "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
+                "~/Scripts/plugins/metisMenu/metisMenu.min.js",
+                "~/Scripts/plugins/pace/pace.min.js",
+                "~/Scripts/app/inspinia.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/landing-controller").Include(
+                "~/Scripts/app/landing-controller/landing-controller.js"));
+        }
+
+        private static void RegisterFonts(BundleCollection bundles)
+        {
+            bundles.Add(new StyleBundle("~/googleFonts", GoogleFontsCdn));
         }
 
         private static void Inspinia(BundleCollection bundles)
@@ -481,51 +516,6 @@ namespace TeachersDiary.Clients.Mvc
                 "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
                 "~/Scripts/plugins/pwstrength/zxcvbn.js"));
 
-        }
-
-        private static void RegisterStyles(BundleCollection bundles)
-        {
-            bundles.Add(new StyleBundle("~/Content/teacherDiary").Include(
-                "~/Content/teacherDiary.css"));
-
-            bundles.Add(new StyleBundle("~/Content/bootstrap", BootstrapCssCdn).Include(
-                "~/Content/bootstrap.css"));
-            
-            bundles.Add(new StyleBundle("~/Content/jqueryDataTable", JqueryDataTableCssCdn)
-                .Include("~/Content/DataTables/css/jquery.dataTables.min.css"));
-
-            //===================================================================
-            bundles.Add(new StyleBundle("jquery-ui")
-                .Include("~/Content/themes/base/jquery-ui.min.css"));
-
-            bundles.Add(new StyleBundle("google-fonts", GoogleFontsCdn));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.min.css",
-                "~/Content/animate.css",
-                "~/Content/style.css"));
-        }
-
-        private static void RegisterScripts(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/bundles/jquery", JqueryCdn).Include(
-                "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval", JqueryValidateCdn).Include(
-                "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap", BootstrapJsCdn).Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
-         
-            bundles.Add(new ScriptBundle("~/bundles/modernizr", ModernizrJsCdn).Include(
-                "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryDataTable", JqueryDataTableJsCdn)
-                .Include("~/Scripts/DataTables/jquery.dataTables.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/respond")
-                .Include("~/Scripts/respond.js"));
         }
     }
 }

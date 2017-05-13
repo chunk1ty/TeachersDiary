@@ -16,14 +16,26 @@ namespace TeachersDiary.Clients.Mvc
             routes.MapRoute(
                 name: "CultureDefault",
                 url: "{lang}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Landing", action = "Index", id = UrlParameter.Optional },
                 constraints: new { lang = "bg|en" }
+            );
+
+            routes.MapRoute(
+                name: "Register",
+                url: "register",
+                defaults: new { controller = "Account", action = "Register"}
+            );
+
+            routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new { controller = "Account", action = "Login"}
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Landing", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

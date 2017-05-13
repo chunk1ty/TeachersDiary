@@ -56,7 +56,7 @@
 
                 <div>
                     <p>
-                        @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login(string.Empty)))
+                        @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login()))
                         @(Html.ActionLink<LandingController>(GlobalResources.HomeLabel, c => c.Index()))
                     </p>
                 </div>
