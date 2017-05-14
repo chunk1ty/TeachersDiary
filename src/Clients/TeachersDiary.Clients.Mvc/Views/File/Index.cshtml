@@ -1,19 +1,32 @@
 ﻿@{
-   
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Index", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Създавате на клас от същеструващ файл</h5>
+            </div>
+            <div class="ibox-content">
+                <p>
+                    Моля изберете желания файл с ученици в долу посочената зона.
+                </p>
+                @using (Html.BeginForm("Index", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
 
-    <br />
+                    <br />
 
-    <input type="file" name="file" id="file" />
+                    <input type="file" name="file" id="file" />
 
-    <br />
+                    <br />
 
-    <input type="submit" value="Изпрати"/>
-}
+                    <input type="submit" value="Изпрати"/>
+                }
+            </div>
+        </div>
+    </div>
+</div>

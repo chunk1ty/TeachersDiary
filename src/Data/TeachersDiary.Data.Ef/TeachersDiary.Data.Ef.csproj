@@ -63,14 +63,6 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="Migrations\201705051346395_Initial.cs" />
-    <Compile Include="Migrations\201705051346395_Initial.Designer.cs">
-      <DependentUpon>201705051346395_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705051807508_AddIsVisibleColumnInRole.cs" />
-    <Compile Include="Migrations\201705051807508_AddIsVisibleColumnInRole.Designer.cs">
-      <DependentUpon>201705051807508_AddIsVisibleColumnInRole.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\EfClassRepository.cs" />
     <Compile Include="Repositories\EfSchoolRepository.cs" />
@@ -98,14 +90,6 @@
       <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
       <Name>TeachersDiary.Data.Ef.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705051346395_Initial.resx">
-      <DependentUpon>201705051346395_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705051807508_AddIsVisibleColumnInRole.resx">
-      <DependentUpon>201705051807508_AddIsVisibleColumnInRole.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
