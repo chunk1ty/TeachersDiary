@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNet.Identity
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="~/Images/profile_small.jpg" />
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">@User.Identity.GetUserName()</strong>
+                            </span> 
+                            <span class="text-muted text-xs block">
+                                Учител
+                                <b class="caret"></b>
+                            </span>
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li>
+                            <a href="#">Профил</a>
+                        </li>
+
+                        <li class="divider"></li>
+                        
+                        <li>
+                            <a href="javascript:document.getElementById('log-out-input').click()">
+                                @GlobalResources.LogOffLabel
+                            </a>
+                        </li>
+                    </ul>
+                    @using (Html.BeginForm<AccountController>(x => x.LogOff(), FormMethod.Post, null, new { id = "logoutForm"}))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input id="log-out-input" type="hidden" />
+                    }
+                </div>
+
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span class="nav-label" data-i18n="nav.metrics">
+                        Начало
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>

@@ -69,7 +69,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
-            return this.RedirectToAction<LandingController>(x => x.Index());
+            return this.RedirectToAction<AccountController>(x => x.Login());
         }
 
         [HttpGet]

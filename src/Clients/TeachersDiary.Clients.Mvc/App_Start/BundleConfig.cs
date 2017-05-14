@@ -64,6 +64,9 @@ namespace TeachersDiary.Clients.Mvc
         private static void RegisterFonts(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/googleFonts", GoogleFontsCdn));
+
+            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
+                "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
         }
 
         private static void Inspinia(BundleCollection bundles)

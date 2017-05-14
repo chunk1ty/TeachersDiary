@@ -7,45 +7,29 @@
 
     <title>@GlobalResources.TeachersDiaryTitle</title>
     
-    @Styles.Render("~/Content/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/teacherDiary")
-    @RenderSection("styles", false)
+    @Styles.Render("~/googleFonts")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
 
+    @RenderSection("styles", false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@(Html.ActionLink<DashboardController>(GlobalResources.HomeLabel, x => x.Index()))</li>
-                    }
-                </ul>
-                @Html.Partial(PartialViewConstants.LoginPartial)
-            </div>
-        </div>
-    </div>
-    <div id="container" class="container body-content">
-        <hr />
+    <div id="wrapper">
+        @Html.Partial("_Navigation")
+
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+            @Html.Partial("_TopNavbar")
+            
             @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - @GlobalResources.AndriyanKrastevLabel</p>
-        </footer>
+           
+            @Html.Partial("_Footer")
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/respond")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
 
     @RenderSection("scripts", false)
 </body>

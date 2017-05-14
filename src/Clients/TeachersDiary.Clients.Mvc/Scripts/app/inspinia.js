@@ -287,3 +287,7 @@ function WinMove() {
         })
         .disableSelection();
 }
+
+$('#log-out-input').on('click', function () {
+    $('#logoutForm').submit();
+});
