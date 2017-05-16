@@ -132,6 +132,9 @@
   <data name="HomeLabel" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="IncorrectlyEnteredData" xml:space="preserve">
+    <value>Incorrectly entered data for</value>
+  </data>
   <data name="IncorrentEmailOrPasswordMessage" xml:space="preserve">
     <value>Incorrent email or password.</value>
   </data>

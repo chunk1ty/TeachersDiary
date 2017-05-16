@@ -8,7 +8,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
     [ExcludeFromCodeCoverage]
     public class RegisterViewModel
     {        
-        [Required(ErrorMessage = "Имeйла е задължителен.")]
+        [Required(ErrorMessage = "Имeйлът е задължителен.")]
         [EmailAddress(ErrorMessage = "Невалиден имейл формат.")]
         public string Email { get; set; }
 
@@ -18,10 +18,10 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         public string Password { get; set; }
 
         [DataType(DataType.Password)]       
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Паролата несъвпада.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Паролата не съвпада.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Моля изберете училище!")]
+        [Required(ErrorMessage = "Моля, изберете училище!")]
         public string SelectedSchool { get; set; }
 
         public IEnumerable<SelectListItem> Schools { get; set; }

@@ -6,7 +6,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
     [ExcludeFromCodeCoverage]
     public class ResetPasswordViewModel
     {
-        [Required(ErrorMessage = "Имeйла е задължителен.")]
+        [Required(ErrorMessage = "Имeйлът е задължителен.")]
         [EmailAddress(ErrorMessage = "Невалиден имейл формат.")]
         public string Email { get; set; }
 
@@ -16,7 +16,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Паролата несъвпада.")]
+        [Compare("Password", ErrorMessage = "Паролата не съвпада.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

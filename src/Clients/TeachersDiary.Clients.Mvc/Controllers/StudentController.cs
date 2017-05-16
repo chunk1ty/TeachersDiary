@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 
 using System.Web.Mvc.Expressions;
-
+using Resources;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Extensions;
@@ -53,7 +53,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 catch (Exception ex)
                 {
                     var errorMsg =
-                        $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}! След като въведете цялата част оставете интервал след което въведете и дробната";
+                        $" {GlobalResources.IncorrectlyEnteredData + student.FirstName + " " + student.MiddleName + " " + student.LastName}! + { GlobalResources.FragmentErrorMessage }";
 
                     ModelState.AddModelError(string.Empty, errorMsg);
 

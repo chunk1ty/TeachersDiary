@@ -58,7 +58,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
-            ModelState.AddModelError(string.Empty, GlobalResources.IncorrentEmailOrPasswordMessage);
+            ModelState.AddModelError(string.Empty, GlobalResources.IncorrectEmailOrPasswordMessage);
 
             return View(model);
         }

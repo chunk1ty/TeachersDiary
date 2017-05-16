@@ -129,11 +129,17 @@
   <data name="FileSentLabel" xml:space="preserve">
     <value>Изпрати файл</value>
   </data>
+  <data name="FragmentErrorMessage" xml:space="preserve">
+    <value>След като въведете цялата част, оставете интервал, след което въведете и дробната част.</value>
+  </data>
   <data name="HomeLabel" xml:space="preserve">
     <value>Начало</value>
   </data>
-  <data name="IncorrentEmailOrPasswordMessage" xml:space="preserve">
+  <data name="IncorrectEmailOrPasswordMessage" xml:space="preserve">
     <value>Невалиден имейл или парола.</value>
+  </data>
+  <data name="IncorrectlyEnteredData" xml:space="preserve">
+    <value>Некоректно въведени данни за</value>
   </data>
   <data name="LogInLabel" xml:space="preserve">
     <value>Вход</value>
@@ -147,6 +153,9 @@
   <data name="OtherLabel" xml:space="preserve">
     <value>Друго</value>
     <comment>Register dropdown list</comment>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Паролите не съвпадат.</value>
   </data>
   <data name="SelectSchool" xml:space="preserve">
     <value>Изберете училище</value>

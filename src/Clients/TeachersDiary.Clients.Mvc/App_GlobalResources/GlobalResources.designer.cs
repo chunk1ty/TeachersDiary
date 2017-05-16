@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to След като въведете цялата част, оставете интервал, след което въведете и дробната част..
+        /// </summary>
+        internal static string FragmentErrorMessage {
+            get {
+                return ResourceManager.GetString("FragmentErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Начало.
         /// </summary>
         internal static string HomeLabel {
@@ -108,9 +117,18 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Невалиден имейл или парола..
         /// </summary>
-        internal static string IncorrentEmailOrPasswordMessage {
+        internal static string IncorrectEmailOrPasswordMessage {
             get {
-                return ResourceManager.GetString("IncorrentEmailOrPasswordMessage", resourceCulture);
+                return ResourceManager.GetString("IncorrectEmailOrPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Некоректно въведени данни за.
+        /// </summary>
+        internal static string IncorrectlyEnteredData {
+            get {
+                return ResourceManager.GetString("IncorrectlyEnteredData", resourceCulture);
             }
         }
         
@@ -147,6 +165,15 @@ namespace Resources {
         internal static string OtherLabel {
             get {
                 return ResourceManager.GetString("OtherLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Паролите не съвпадат..
+        /// </summary>
+        internal static string PasswordsDontMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDontMatch", resourceCulture);
             }
         }
         

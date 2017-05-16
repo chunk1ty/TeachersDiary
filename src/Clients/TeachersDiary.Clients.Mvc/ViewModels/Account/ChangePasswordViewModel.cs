@@ -20,7 +20,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         [DataType(DataType.Password)]
         [Display(Name = "Повтори новата парола")]
         [Required(ErrorMessage = "Потвърдете новата парола.")]
-        [Compare("NewPassword", ErrorMessage = "Паролите несъвпадат.")]
+        [Compare("NewPassword", ErrorMessage = "Паролите не съвпадат.")]
         public string ConfirmPassword { get; set; }
     }
 }
