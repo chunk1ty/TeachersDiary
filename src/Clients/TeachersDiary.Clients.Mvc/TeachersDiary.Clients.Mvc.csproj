@@ -196,7 +196,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -1621,7 +1620,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
     <Content Include="Views\Class\Add.cshtml" />
-    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Scripts\plugins\chartist\chartist.min.js.map" />

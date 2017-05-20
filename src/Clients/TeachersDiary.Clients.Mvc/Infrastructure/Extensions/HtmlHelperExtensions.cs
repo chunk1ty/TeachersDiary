@@ -23,8 +23,9 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.Extensions
             if (String.IsNullOrEmpty(action))
                 action = currentAction;
 
-            return controller == currentController && action == currentAction ?
-                cssClass : String.Empty;
+            var result = controller == currentController && action == currentAction ? cssClass : String.Empty;
+
+            return result;
         }
     }
 }
