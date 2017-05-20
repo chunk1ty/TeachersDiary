@@ -36,6 +36,9 @@ namespace TeachersDiary.Clients.Mvc
                 "~/Content/bootstrap.min.css",
                 "~/Content/animate.css",
                 "~/Content/style.css"));
+
+            bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
+                "~/Content/plugins/dataTables/datatables.min.css"));
         }
 
         private static void RegisterScripts(BundleCollection bundles)
@@ -59,6 +62,9 @@ namespace TeachersDiary.Clients.Mvc
 
             bundles.Add(new ScriptBundle("~/bundles/landing-controller").Include(
                 "~/Scripts/app/landing-controller/landing-controller.js"));
+
+            bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
+                "~/Scripts/plugins/dataTables/datatables.min.js"));
         }
 
         private static void RegisterFonts(BundleCollection bundles)

@@ -53,6 +53,10 @@ namespace TeachersDiary.Domain
             }
         }
 
+        public double EnteredTotalNotExcusedAbsences { get; set; }
+
+        public double EnteredTotalExcusedAbsences { get; set; }
+
         public ICollection<AbsenceDomain> Absences { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)

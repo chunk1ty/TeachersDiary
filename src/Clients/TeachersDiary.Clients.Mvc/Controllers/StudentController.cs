@@ -44,11 +44,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                double totalNoExcusedAbsences;
+                double totalNotExcusedAbsences;
+                double totalExcusedAbsences;
 
                 try
                 {
-                    totalNoExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
+                    totalNotExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
+                    totalExcusedAbsences = double.Parse(student.TotalExcusedAbsences);
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +62,10 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                     return View("Index", model);
                 }
 
-                student.TotalNotExcusedAbsences = totalNoExcusedAbsences;
+                student.TotalNotExcusedAbsences = totalNotExcusedAbsences;
+
+                student.EnteredTotalExcusedAbsences = totalExcusedAbsences;
+                student.EnteredTotalNotExcusedAbsences = totalNotExcusedAbsences;
             }
 
             var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students);

@@ -29,7 +29,11 @@ namespace TeachersDiary.Data.Services
 
             var absences = new List<AbsenceEntity>();
 
-            if (students.FirstOrDefault().Absences.Count == 3)
+            var previousMonthId = DateTime.UtcNow.Month - 1;
+            var twoMonthAgoId = previousMonthId - 1;
+
+            // first time calculate
+            if (students.FirstOrDefault().Absences.Count == twoMonthAgoId)
             {
                 foreach (var student in students)
                 {
@@ -39,11 +43,10 @@ namespace TeachersDiary.Data.Services
 
                     var absence = new AbsenceEntity()
                     {
-                        Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
+                        Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
+                        NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
-                        // MonthId = 4 == April
-                        MonthId = 4
+                        MonthId = previousMonthId
                     };
 
                     absences.Add(absence);
@@ -55,19 +58,18 @@ namespace TeachersDiary.Data.Services
             {
                 foreach (var student in students)
                 {
-                    var totalExcusedAbsences = student.Absences.Take(3).Sum(x => x.Excused);
-                    var totalNotExcusedAbsences = student.Absences.Take(3).Sum(x => x.NotExcused);
+                    var totalExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.Excused);
+                    var totalNotExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.NotExcused);
                     var studentId = _encryptingService.DecodeId(student.EncodedId);
                     var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().EncodedId);
 
                     var absence = new AbsenceEntity()
                     {
                         Id = absenseId,
-                        Excused = student.TotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.TotalNotExcusedAbsences - totalNotExcusedAbsences,
+                        Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
+                        NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
-                        // MonthId = 4 == April
-                        MonthId = 4
+                        MonthId = previousMonthId
                     };
 
                     absences.Add(absence);
