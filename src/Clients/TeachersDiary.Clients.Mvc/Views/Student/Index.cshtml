@@ -103,10 +103,12 @@
                     }
 
                     <td class="text-center">
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new {maxlength = "8", size = "8"})
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new {maxlength = "8", size = "8", @class = "total-absences"})
+                        <span class="hidden-values" style="display: none;"></span>
                     </td>
                     <td class="text-center">
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new {maxlength = "8", size = "8"})
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new {maxlength = "8", size = "8", @class = "total-absences" })
+                        <span class="hidden-values" style="display: none;"></span>
                     </td>
                 </tr>
              }
@@ -138,9 +140,9 @@
     @Scripts.Render("~/plugins/dataTables")
 
     <script>
-        $(function ($) {
+        //$(function($) {
             "use strict";
-            $(document).ready(function () {
+            $(document).ready(function() {
                 //grid settings
                 var table = $('#student-grid').DataTable({
                     "bSort": false,
@@ -148,63 +150,60 @@
                     "bFilter": false,
                     "bInfo": false,
                     pagingType: "full_numbers",
-                    //aaSorting: [],
-                    language: {
-                        //search: "Търсене по колони: ",
-                        //info: "Страница _PAGE_ от _PAGES_ страници.",
-                        //lengthMenu: "Покажи _MENU_ потребителя.",
-                        //emptyTable: "Няма налични потребители.",
-                        //paginate: {
-                        //    first: "Първа",
-                        //    last: "Последна",
-                        //    next: "Следваща",
-                        //    previous: "Предишна"
-                        //}
-                    },
                     dom: '<"html5buttons"B>lTfgitp',
-                    buttons: [
-                        //{ extend: 'copy' },
-                        //{ extend: 'csv' },
-                        //{ extend: 'excel', title: 'ExampleFile' },
-                        //{ extend: 'pdf', title: 'ExampleFile' },
-                        {
-                            extend: 'print',
-                            text: 'Принтирай',
-                            customize: function (win) {
-                                console.log(win);
-                                $(win.document.body).addClass('white-bg');
-                                $(win.document.body).css('font-size', '10px');
+                    buttons: [{
+                        extend: 'print',
+                        text: 'Принтирай',
+                        exportOptions: {
+                            stripHtml: false
+                        }, 
+                        customize: function(win) {
+                            var $body = $(win.document.body);
 
-                                $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                            }
-                        },
-                        {
-                            text: 'Изчисли',
-                            className: 'sent-data'
+                            $body.addClass('white-bg');
+                            $body.css('font-size', '10px');
+
+                            $body.find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+
+
+                            $body.find('thead').prepend(
+                                    " <th class='text-center' colspan='2'>Ученик</th> <th class='text-center' colspan='2'>Септември - Януари</th> <th class='text-center' colspan='2'>Февруари</th> <th class='text-center' colspan='2'>Март</th> <th class='text-center' colspan='2'>Април</th> <th class='text-center' colspan='2'>Май</th> <th class='text-center' colspan='2'>Юни</th> <th class='text-center' colspan='2'>Общо</th>");
+                           
+
+                            $body.find('.total-absences').each(function (i) {
+                                var val = $(this).val();
+                                $(this).next().text(val);
+                                $(this).css('display', 'none');
+                            });
+
+                            $body.find('.hidden-values')
+                                .css('display', 'block');
                         }
-                    ]
+                    },{
+                        text: 'Изчисли',
+                        className: 'sent-data'}]
                 });
 
-                $('#student-grid tbody').on('click', 'tr', function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
-                    }
-                    else {
-                        table.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                    }
-                });
+                $('#student-grid tbody').on('click','tr' , function() {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                        } else {
+                            table.$('tr.selected').removeClass('selected');
+                            $(this).addClass('selected');
+                        }
+                    });
 
-                $('#button').click(function () {
+                $('#button').click(function() {
                     table.row('.selected').remove().draw(false);
                 });
 
-                $('.sent-data').on('click', function() {
-                    $('#student-form').submit();
+                $('.sent-data').on('click',
+                    function() {
+                        $('#student-form').submit();
                 });
             });
-        }($));
+        //}($));
     </script>
 }
