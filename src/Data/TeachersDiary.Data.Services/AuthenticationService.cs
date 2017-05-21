@@ -48,8 +48,8 @@ namespace TeachersDiary.Data.Services
 
             if (result.Succeeded)
             {
-                await _identitySignInService.SignInAsync(userEntity, false, false);
                 await _identityUserManagerService.AddToRoleAsync(userEntity.Id, ApplicationRole.Teacher);
+                await _identitySignInService.SignInAsync(userEntity, false, false);
             }
 
             return result;

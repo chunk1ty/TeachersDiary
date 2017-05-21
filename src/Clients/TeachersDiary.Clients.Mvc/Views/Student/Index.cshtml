@@ -1,14 +1,11 @@
 ﻿@model ClassViewModel
 
 @{
-    ViewBag.Title = "Students";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section styles{
-    <style ></style>
-
-    @Styles.Render("~/Content/jqueryDataTable");
+    <link href='https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 
     <style>
         .container.body-content {
@@ -17,50 +14,60 @@
     </style>
 }
 
-<h2>@GlobalResources.StudentLabel</h2>
+<div class="row border-bottom white-bg dashboard-header">
+<h2 class="text-center">@Model.Name клас</h2>
 
-@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post))
+@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post, null, new {id= "student-form"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => Model.EncodedId)
     @Html.HiddenFor(x => Model.Name)
     @Html.ValidationSummary(true, null, new { @class = "text-danger" })
 
-    <input class="center" type="submit" value="Изчисли"/>
     <table id="student-grid" class="display">
         <thead>
-            <tr>
-                <th class="center" rowspan="2">Имена</th>
-                <th class="center" colspan="2">Септември - Януари</th>
-                <th class="center" colspan="2">Февруари</th>
-                <th class="center" colspan="2">Март</th>
-                <th class="center" colspan="2">Април</th>
-                <th class="center" colspan="2">Общо</th>
-            </tr>
-            <tr>
-                <th class="center">Изв</th>
-                <th class="center">Неизв</th>
-                <th class="center">Изв</th>
-                <th class="center">Неизв</th>
-                <th class="center">Изв</th>
-                <th class="center">Неизв</th>
-                <th class="center">Изв</th>
-                <th class="center">Неизв</th>
-                <th class="center">Изв</th>
-                <th class="center">Неизв</th>
-            </tr>
+        <tr>
+            <th class="text-center" colspan="2">Ученик</th>
+            <th class="text-center" colspan="2">Септември - Януари</th>
+            <th class="text-center" colspan="2">Февруари</th>
+            <th class="text-center" colspan="2">Март</th>
+            <th class="text-center" colspan="2">Април</th>
+            <th class="text-center" colspan="2">Май</th>
+            <th class="text-center" colspan="2">Юни</th>
+            <th class="text-center" colspan="2">Общо</th>
+        </tr>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Име</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+            <th class="text-center">Изв</th>
+            <th class="text-center">Неизв</th>
+        </tr>
         </thead>
         <tbody>
             @for (var studentIndex = 0; studentIndex < Model.Students.Count; studentIndex++)
             {
                 <tr>
-                    <td>
+                    <td class="text-center">
+                        @(studentIndex + 1)
+                    </td>
+                    <td class="text-center">
                         @Html.HiddenFor(x => x.Students[studentIndex].FirstName)
-                        @Html.HiddenFor(x => x.Students[studentIndex].MiddleName)
                         @Html.HiddenFor(x => x.Students[studentIndex].LastName)
                         @Html.HiddenFor(x => x.Students[studentIndex].EncodedId)
 
-                        @Model.Students[studentIndex].FirstName @Model.Students[studentIndex].MiddleName @Model.Students[studentIndex].LastName
+                        @Model.Students[studentIndex].FirstName @Model.Students[studentIndex].LastName
                     </td>
 
                     @{ int mounthIndex = 0; }
@@ -74,19 +81,19 @@
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Excused)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
 
-                        <td class="center">
+                        <td class="text-center">
                             @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))
                         </td>
 
-                        <td class="center">
+                        <td class="text-center">
                             @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber))
                         </td>
                         {
                             mounthIndex += 1;
                         }
                     }
-                   
-                    @while (mounthIndex < 4)
+
+                    @while (mounthIndex < 6)
                     {
                         <td></td>
                         <td></td>
@@ -94,98 +101,109 @@
                             mounthIndex += 1;
                         }
                     }
-                    
-                    <td>
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new { maxlength = "8", size = "8" })
+
+                    <td class="text-center">
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new {maxlength = "8", size = "8", @class = "total-absences"})
+                        <span class="hidden-values" style="display: none;"></span>
                     </td>
-                    <td>
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new { maxlength = "8", size = "8" })
+                    <td class="text-center">
+                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new {maxlength = "8", size = "8", @class = "total-absences" })
+                        <span class="hidden-values" style="display: none;"></span>
                     </td>
                 </tr>
-            }
+             }
         <tr>
-            <td class="center">Общо</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
-            <td class="center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="center" style="color: red">@Model.TotalExcusedAbsences</td>
-            <td class="center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
+            <td class="text-center"></td>
+            <td class="text-center">Общо</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.Excused)).Sum()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.TotalExcusedAbsences</td>
+            <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
         </tr>
 
         </tbody>
     </table>
 }
+    
+</div>
 @section scripts {
-    @Scripts.Render("~/bundles/jqueryDataTable")
-  
+    @Scripts.Render("~/plugins/dataTables")
+
     <script>
-        // $(function ($) {
-        "use strict";
-        $(document).ready(function () {
+        //$(function($) {
+            "use strict";
+            $(document).ready(function() {
+                //grid settings
+                var table = $('#student-grid').DataTable({
+                    "bSort": false,
+                    paging: false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    pagingType: "full_numbers",
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [{
+                        extend: 'print',
+                        text: 'Принтирай',
+                        exportOptions: {
+                            stripHtml: false
+                        }, 
+                        customize: function(win) {
+                            var $body = $(win.document.body);
+
+                            $body.addClass('white-bg');
+                            $body.css('font-size', '10px');
+
+                            $body.find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
 
 
-            //grid settings
-            var table = $('#student-grid').DataTable({
-                columnDefs: [{
-                    targets: [0],
-                    searchable: false,
-                    orderable: false,
-                    className: 'dt-body-center'
-                }, {
-                    targets: [1],
-                    searchable: true,
-                    sortable: true
-                }, {
-                    targets: [2],
-                    searchable: true,
-                    sortable: true
-                }, {
-                    targets: [3],
-                    searchable: true,
-                    sortable: true
-                }, {
-                    targets: [4],
-                    searchable: true,
-                    sortable: true
-                }],
-                paging: false,
-                "bFilter": false,
-                //pagingType: "full_numbers",
-                //aaSorting: [],
-                language: {
-                    //search: "Търсене по колони: ",
-                    //info: "Страница _PAGE_ от _PAGES_ страници.",
-                    //lengthMenu: "Покажи _MENU_ потребителя.",
-                    //emptyTable: "Няма налични потребители.",
-                    //paginate: {
-                    //    first: "Първа",
-                    //    last: "Последна",
-                    //    next: "Следваща",
-                    //    previous: "Предишна"
-                    //}
-                }
+                            $body.find('thead').prepend(
+                                    " <th class='text-center' colspan='2'>Ученик</th> <th class='text-center' colspan='2'>Септември - Януари</th> <th class='text-center' colspan='2'>Февруари</th> <th class='text-center' colspan='2'>Март</th> <th class='text-center' colspan='2'>Април</th> <th class='text-center' colspan='2'>Май</th> <th class='text-center' colspan='2'>Юни</th> <th class='text-center' colspan='2'>Общо</th>");
+                           
+
+                            $body.find('.total-absences').each(function (i) {
+                                var val = $(this).val();
+                                $(this).next().text(val);
+                                $(this).css('display', 'none');
+                            });
+
+                            $body.find('.hidden-values')
+                                .css('display', 'block');
+                        }
+                    },{
+                        text: 'Изчисли',
+                        className: 'sent-data'}]
+                });
+
+                $('#student-grid tbody').on('click','tr' , function() {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                        } else {
+                            table.$('tr.selected').removeClass('selected');
+                            $(this).addClass('selected');
+                        }
+                    });
+
+                $('#button').click(function() {
+                    table.row('.selected').remove().draw(false);
+                });
+
+                $('.sent-data').on('click',
+                    function() {
+                        $('#student-form').submit();
+                });
             });
-
-
-            $('#student-grid tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-
-            $('#button').click(function () {
-                table.row('.selected').remove().draw(false);
-            });
-        });
-       // }($));
+        //}($));
     </script>
 }

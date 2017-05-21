@@ -1,70 +1,75 @@
 ﻿@model RegisterViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-@section Styles {
-    @Styles.Render("~/Content/forms-css")
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div id="wrapper">
-    <div>
-        <section>
-            @using (Html.BeginForm<AccountController>(c => c.Register(), FormMethod.Post))
+    <title>Учителски Дневник | Вход</title>
+
+    @Styles.Render("~/googleFonts")
+    @Styles.Render("~/Content/css")
+
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <h3>Регистрация</h3>
+            @using (Html.BeginForm<AccountController>(c => c.Register(), FormMethod.Post, null, new {@class= "m-t" }))
             {
                 @Html.AntiForgeryToken()
 
-                <h1>@GlobalResources.NewProfileLabel</h1>
-
                 <div>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл." })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Имейл" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
-              
-                <br/>
 
-                <div>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола." })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })  
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
-
-                <br />
-
-                <div>
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтори парола." })
+              
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтори парола" })
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
 
-                <br />
-
-                <div>
-                    @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, GlobalResources.SelectSchool)
-                    @Html.ValidationMessageFor(model => model.SelectedSchool, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, GlobalResources.SelectSchool
+                   ,new {@class = "form-control m-b" })
+                    @Html.ValidationMessageFor(model => model.SelectedSchool, "", new { @class = "text-danger" })
                 </div>
 
-                <br />
-
                 <div>
-                    <button id="submit-btn" type="submit">
+                    <button id="submit-btn" class="btn btn-primary block full-width m-b" type="submit">
                         @GlobalResources.CreateButton
                     </button>
                 </div>
 
-                <br />
+                <p class="text-muted text-center">
+                    <small>Имате регистриран акаунт?</small>
+                </p>
 
-                <div>
-                    <p>
-                        @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login(string.Empty)))
-                        @(Html.ActionLink<HomeController>(GlobalResources.HomeLabel, c => c.Index()))
-                    </p>
-                </div>
+                @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login(), null, new {@class = "btn btn-sm btn-white btn-block" }))
+               
             }
-        </section>
+           
+            <p class="m-t">
+                <small>&copy; @DateTime.Now.Year Андриян Кръстев</small>
+            </p>
+        </div>
     </div>
-</div>
-
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}              
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

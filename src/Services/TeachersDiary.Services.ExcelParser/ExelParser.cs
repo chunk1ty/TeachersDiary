@@ -19,7 +19,7 @@ namespace TeachersDiary.Services.ExcelParser
             _encryptingService = encryptingService;
         }
 
-        public void ReadFile(string filePath)
+        public void CreateClassForUser(string filePath, string userId)
         {
             FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             //TODO exel file extension validation
@@ -46,6 +46,7 @@ namespace TeachersDiary.Services.ExcelParser
             {
                 var @class = new ClassDomain();
                 @class.Name = result.Tables[i].TableName;
+                @class.CreatedBy = userId;
 
                 DataTable sheet = result.Tables[i];
 

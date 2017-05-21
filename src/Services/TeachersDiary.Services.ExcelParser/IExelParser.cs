@@ -2,6 +2,6 @@
 {
     public interface IExelParser
     {
-        void ReadFile(string filePath);
+        void CreateClassForUser(string filePath, string userId);
     }
 }

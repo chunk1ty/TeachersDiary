@@ -46,9 +46,9 @@ namespace TeachersDiary.Data.Services
             return classDomain;
         }
 
-        public async Task<IEnumerable<ClassDomain>> GetAllAsync()
+        public async Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId)
         {
-            var classeEntities = await _classRepository.GetAllAsync();
+            var classeEntities = await _classRepository.GetAllForUserAsync(userId);
 
             var classDomains = _mappingService.Map<IEnumerable<ClassDomain>>(classeEntities);
 

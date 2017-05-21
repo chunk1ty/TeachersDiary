@@ -8,7 +8,7 @@ namespace TeachersDiary.Data.Contracts
     {
         Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(int classId);
 
-        Task<IEnumerable<ClassEntity>> GetAllAsync();
+        Task<IEnumerable<ClassEntity>> GetAllForUserAsync(string userId);
 
         Task<ClassEntity> GetByIdAsync(int classId);
 

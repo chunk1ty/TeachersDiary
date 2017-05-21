@@ -334,7 +334,7 @@
 //            // Act & Assert
 //            accountController
 //                .WithCallTo(c => c.ChangePassword(model))
-//                .ShouldRedirectTo<HomeController>(x => x.Index());
+//                .ShouldRedirectTo<LandingController>(x => x.Index());
 
 //            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once);
 //        }
@@ -366,7 +366,7 @@
 //            // Act & Assert
 //            accountController
 //                .WithCallTo(c => c.ChangePassword(model))
-//                .ShouldRedirectTo<HomeController>(x => x.Index());
+//                .ShouldRedirectTo<LandingController>(x => x.Index());
 
 //            _mockedIdentitySignInService.Verify(x => x.SignInAsync(It.IsAny<UserEntity>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Never);
 //        }

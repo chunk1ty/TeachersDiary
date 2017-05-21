@@ -25,6 +25,8 @@ namespace TeachersDiary.Data.Ef.Entities
         public int? SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
 
+        public string CreatedBy { get; set; }
+
         public ICollection<StudentEntity> Students { get; set; }
     }
 }

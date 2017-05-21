@@ -44,7 +44,7 @@ namespace TeachersDiary.Domain
             }
         }
 
-
+        public string CreatedBy { get; set; }
 
         public ICollection<StudentDomain> Students { get; set; }
 

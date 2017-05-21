@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 
 using System.Web.Mvc.Expressions;
-
+using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Extensions;
@@ -33,6 +33,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
 
+            User.Identity.GetUserId();
             var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
 
             return View(classViewModel);
@@ -44,11 +45,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                double totalNoExcusedAbsences;
+                double totalNotExcusedAbsences;
+                double totalExcusedAbsences;
 
                 try
                 {
-                    totalNoExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
+                    totalNotExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
+                    totalExcusedAbsences = double.Parse(student.TotalExcusedAbsences);
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +63,10 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                     return View("Index", model);
                 }
 
-                student.TotalNotExcusedAbsences = totalNoExcusedAbsences;
+                student.TotalNotExcusedAbsences = totalNotExcusedAbsences;
+
+                student.EnteredTotalExcusedAbsences = totalExcusedAbsences;
+                student.EnteredTotalNotExcusedAbsences = totalNotExcusedAbsences;
             }
 
             var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students);
