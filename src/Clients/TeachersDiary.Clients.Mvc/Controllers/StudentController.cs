@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 
 using System.Web.Mvc.Expressions;
-
+using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Extensions;
@@ -33,6 +33,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
 
+            User.Identity.GetUserId();
             var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
 
             return View(classViewModel);

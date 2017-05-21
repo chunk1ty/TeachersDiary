@@ -11,7 +11,7 @@ namespace TeachersDiary.Data.Services.Contracts
 
         void AddRange(List<ClassDomain> classes);
 
-        Task<IEnumerable<ClassDomain>> GetAllAsync();
+        Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId);
 
         Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId);
 

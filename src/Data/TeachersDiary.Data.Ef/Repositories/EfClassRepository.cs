@@ -27,9 +27,9 @@ namespace TeachersDiary.Data.Ef.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ClassEntity>> GetAllAsync()
+        public async Task<IEnumerable<ClassEntity>> GetAllForUserAsync(string userId)
         {
-            return await _teacherDiaryDbContext.Classes
+            return await _teacherDiaryDbContext.Classes.Where(x => x.CreatedBy == userId)
                 .ToListAsync();
         }
 

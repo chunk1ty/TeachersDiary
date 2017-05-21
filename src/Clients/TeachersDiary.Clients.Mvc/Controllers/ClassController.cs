@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-
+using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Services.Contracts;
@@ -34,7 +34,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var classDomains =  await _classService.GetAllAsync();
+            var userId = User.Identity.GetUserId();
+
+            var classDomains =  await _classService.GetAllAvailableClassesForUserAsync(userId);
 
             var classViewModels = _mappingService.Map<IEnumerable<ClassViewModel>>(classDomains);
 
@@ -85,14 +87,17 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             if (file != null && file.ContentLength > 0)
             {
-                if (extenstion == ".xls" || extenstion == ".xlsx")
+                // xls - 98 - 03
+                if (extenstion == ".xlsx")
                 {
                     var fileName = Path.GetFileName(file.FileName);
 
                     var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
                     file.SaveAs(path);
 
-                    _exelParser.ReadFile(path);
+                    var userId = User.Identity.GetUserId();
+
+                    _exelParser.CreateClassForUser(path, userId);
 
                     return this.RedirectToAction<ClassController>(x => x.Index());
                 }
