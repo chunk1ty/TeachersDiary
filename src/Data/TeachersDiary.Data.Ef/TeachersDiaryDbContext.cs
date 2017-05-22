@@ -56,5 +56,29 @@ namespace TeachersDiary.Data.Ef
         {
             Create().BulkSaveChanges();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserEntity>().ToTable("Users");
+
+            modelBuilder.Entity<UserEntity>()
+                .Ignore(x => x.EmailConfirmed)
+                .Ignore(x => x.PhoneNumber)
+                .Ignore(x => x.PhoneNumberConfirmed)
+                .Ignore(x => x.TwoFactorEnabled);
+                //.Ignore(x => x.LockoutEndDateUtc)
+                //.Ignore(x => x.LockoutEnabled)
+                //.Ignore(x => x.AccessFailedCount)
+                //.Ignore(x => x.UserName);
+                
+
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
+
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
+        }
     }
 }
