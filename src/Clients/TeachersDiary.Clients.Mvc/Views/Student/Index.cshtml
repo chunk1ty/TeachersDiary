@@ -14,10 +14,16 @@
     </style>
 }
 
+
+
 <div class="row border-bottom white-bg dashboard-header">
 <h2 class="text-center">@Model.Name клас</h2>
+    
+    <a href="@(Url.Action<ClassController>(x => x.Index()))">
+        Обратно
+    </a>
 
-@using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post, null, new {id= "student-form"}))
+    @using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post, null, new {id= "student-form"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => Model.EncodedId)
