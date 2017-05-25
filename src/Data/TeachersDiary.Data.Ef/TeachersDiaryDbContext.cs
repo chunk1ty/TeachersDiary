@@ -5,7 +5,8 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef
 {
@@ -25,6 +26,8 @@ namespace TeachersDiary.Data.Ef
         public virtual IDbSet<StudentEntity> Students { get; set; }
 
         public virtual IDbSet<AbsenceEntity> Absences { get; set; }
+
+        public virtual IDbSet<SchoolAdminEntity> SchoolAdmins { get; set; }
 
         public static TeachersDiaryDbContext Create()
         {

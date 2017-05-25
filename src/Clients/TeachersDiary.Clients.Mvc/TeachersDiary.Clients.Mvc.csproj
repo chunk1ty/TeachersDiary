@@ -1652,10 +1652,6 @@
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
-      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
-      <Name>TeachersDiary.Data.Ef.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>

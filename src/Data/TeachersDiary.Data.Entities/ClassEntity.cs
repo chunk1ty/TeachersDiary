@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 using TeachersDiary.Common.Constants.Validation;
 
-namespace TeachersDiary.Data.Ef.Entities
+namespace TeachersDiary.Data.Entities
 {
     [Table("Classes")]
     public class ClassEntity
@@ -17,12 +16,12 @@ namespace TeachersDiary.Data.Ef.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Microsoft.Build.Framework.Required]
         [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
-        public int? SchoolId { get; set; }
+        public int SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
 
         public string CreatedBy { get; set; }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
-namespace TeachersDiary.Data.Ef.Entities
+namespace TeachersDiary.Data.Entities
 {
     [Table("Students")]
     public class StudentEntity

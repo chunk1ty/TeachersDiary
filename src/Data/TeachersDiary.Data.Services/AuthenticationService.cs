@@ -4,7 +4,7 @@ using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using TeachersDiary.Common.Constants;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services.Contracts;
@@ -41,7 +41,7 @@ namespace TeachersDiary.Data.Services
 
             if (selectedSchool != "-1")
             {
-                userEntity.SchoolId = _encryptingService.DecodeId(selectedSchool);
+                //userEntity.SchoolId = _encryptingService.DecodeId(selectedSchool);
             }
 
             var result = await _identityUserManagerService.CreateAsync(userEntity, password);

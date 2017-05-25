@@ -1,18 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeachersDiary.Data.Ef.Entities
+namespace TeachersDiary.Data.Entities
 {
     [Table("Teachers")]
     public class TeacherEntity
     {
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public int? SchoolId { get; set; }
+        public int SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
 {

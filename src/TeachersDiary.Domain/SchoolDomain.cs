@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Entities;
 using TeachersDiary.Services;
 using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Mapping.Contracts;

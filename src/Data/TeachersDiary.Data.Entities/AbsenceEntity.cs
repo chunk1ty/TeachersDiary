@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeachersDiary.Data.Ef.Entities
+namespace TeachersDiary.Data.Entities
 {
     [Table("Absences")]
     public class AbsenceEntity

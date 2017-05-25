@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeachersDiary.Data.Ef.Entities
+namespace TeachersDiary.Data.Entities
 {
     [Table("Schools")]
     public class SchoolEntity
@@ -11,6 +10,7 @@ namespace TeachersDiary.Data.Ef.Entities
         {
             Teachers = new HashSet<TeacherEntity>();
             Classes = new HashSet<ClassEntity>();
+            SchoolAdmins = new HashSet<SchoolAdminEntity>();
         }
 
         public int Id { get; set; }
@@ -20,5 +20,7 @@ namespace TeachersDiary.Data.Ef.Entities
         public IEnumerable<TeacherEntity> Teachers { get; set; }
 
         public IEnumerable<ClassEntity> Classes { get; set; }
+
+        public IEnumerable<SchoolAdminEntity> SchoolAdmins { get; set; }
     }
 }

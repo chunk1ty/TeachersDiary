@@ -3,8 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TeachersDiary.Data.Contracts;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
 using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Data.Identity

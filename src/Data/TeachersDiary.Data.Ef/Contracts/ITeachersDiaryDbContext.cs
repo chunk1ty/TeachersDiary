@@ -2,7 +2,8 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Contracts
 {
@@ -22,6 +23,8 @@ namespace TeachersDiary.Data.Ef.Contracts
         IDbSet<StudentEntity> Students { get; set; }
 
         IDbSet<AbsenceEntity> Absences { get; set; }
+
+        IDbSet<SchoolAdminEntity> SchoolAdmins { get; set; }
 
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Common.Constants.Validation;
-using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 

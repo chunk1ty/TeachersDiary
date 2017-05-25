@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Bytes2you.Validation;
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Data.Ef.Extensions;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
 {

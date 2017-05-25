@@ -4,7 +4,7 @@ using Bytes2you.Validation;
 
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts;
