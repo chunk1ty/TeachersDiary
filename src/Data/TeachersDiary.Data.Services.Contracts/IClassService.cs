@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IClassService
     {
-        void Add(ClassDomain system);
-
-        void AddRange(List<ClassDomain> classes);
-
         Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId);
 
         Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId);
+
+        void AddRange(List<ClassDomain> classes);
 
         Task DeleteById(string classId);
     }

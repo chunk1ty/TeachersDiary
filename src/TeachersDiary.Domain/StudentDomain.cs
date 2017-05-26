@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+
 using AutoMapper;
+
 using TeachersDiary.Common.Extensions;
-using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Data.Entities;
+using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-    public class StudentDomain : IMapTo<StudentEntity>, IMapFrom<StudentEntity>, ICustomMappings
+    public class StudentDomain : IMap<StudentEntity>, ICustomMappings
     {
         public StudentDomain()
         {
@@ -45,6 +45,7 @@ namespace TeachersDiary.Domain
             }
         }
 
+        // TODo move it in client side
         public string TotalNotExcusedAbsencesAsFractionNumber
         {
             get

@@ -6,7 +6,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Student
 {
-    public class StudentViewModel : IMapFrom<StudentDomain>, IMapTo<StudentDomain>
+    public class StudentViewModel : IMap<StudentDomain>
     {
         public StudentViewModel()
         {

@@ -63,13 +63,27 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="Migrations\201705222037190_InitialMigration.cs" />
-    <Compile Include="Migrations\201705222037190_InitialMigration.Designer.cs">
-      <DependentUpon>201705222037190_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201705261853443_Initial.cs" />
+    <Compile Include="Migrations\201705261853443_Initial.Designer.cs">
+      <DependentUpon>201705261853443_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705261858223_AddUserIdToStudentTable.cs" />
+    <Compile Include="Migrations\201705261858223_AddUserIdToStudentTable.Designer.cs">
+      <DependentUpon>201705261858223_AddUserIdToStudentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705261944409_AddTeacherRole.cs" />
+    <Compile Include="Migrations\201705261944409_AddTeacherRole.Designer.cs">
+      <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705262044438_RequiredNameColumnInClass.cs" />
+    <Compile Include="Migrations\201705262044438_RequiredNameColumnInClass.Designer.cs">
+      <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repositories\EfClassRepository.cs" />
-    <Compile Include="Repositories\EfSchoolRepository.cs" />
+    <Compile Include="Models\UserEntity.cs" />
+    <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\TeacherRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -78,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
-      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
-      <Name>TeachersDiary.Common.Constants</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
       <Name>TeachersDiary.Services.Mapping</Name>
@@ -90,14 +100,23 @@
       <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
       <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
-      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
-      <Name>TeachersDiary.Data.Ef.Entities</Name>
+    <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
+      <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
+      <Name>TeachersDiary.Data.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705222037190_InitialMigration.resx">
-      <DependentUpon>201705222037190_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705261853443_Initial.resx">
+      <DependentUpon>201705261853443_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261858223_AddUserIdToStudentTable.resx">
+      <DependentUpon>201705261858223_AddUserIdToStudentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261944409_AddTeacherRole.resx">
+      <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705262044438_RequiredNameColumnInClass.resx">
+      <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using AutoMapper;
+
 using TeachersDiary.Common.Extensions;
-using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Data.Entities;
+using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-    public class ClassDomain : IMapTo<ClassEntity>, IMapFrom<ClassEntity>, ICustomMappings
+    public class ClassDomain : IMap<ClassEntity>, ICustomMappings
     {
         public ClassDomain()
         {
@@ -19,6 +20,8 @@ namespace TeachersDiary.Domain
         public string EncodedId { get; set; }
 
         public string Name { get; set; }
+
+        public int SchoolId { get; set; }
 
         public double TotalExcusedAbsences
         {
@@ -36,6 +39,7 @@ namespace TeachersDiary.Domain
             }
         }
 
+        // TODO move it in client side 
         public string TotalNotExcusedAbsencesAsFractionNumber
         {
             get

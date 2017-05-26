@@ -1,10 +1,9 @@
-﻿using System;
-using TeachersDiary.Domain;
+﻿using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
 {
-    public class AbsenceViewModel : IMapFrom<AbsenceDomain>, IMapTo<AbsenceDomain>
+    public class AbsenceViewModel : IMap<AbsenceDomain>
     {
         public string EncodedId { get; set; }
 

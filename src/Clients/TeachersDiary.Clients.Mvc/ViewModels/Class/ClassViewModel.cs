@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
-using TeachersDiary.Common.Constants.Validation;
-using TeachersDiary.Data.Ef.Entities;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Class
 {
-    public class ClassViewModel : IMapTo<ClassDomain>, IMapFrom<ClassDomain>
+    public class ClassViewModel : IMap<ClassDomain>
     {
         public ClassViewModel()
         {
@@ -17,9 +13,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
         }
 
         public string EncodedId { get; set; }
-
-        [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
-        [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
+       
         public string Name { get; set; }
 
         public double TotalExcusedAbsences { get; set; }

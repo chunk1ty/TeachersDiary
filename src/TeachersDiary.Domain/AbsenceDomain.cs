@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+
 using TeachersDiary.Common.Extensions;
-using TeachersDiary.Data.Ef.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Data.Entities;
+using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-   public class AbsenceDomain : IMapTo<AbsenceEntity>, IMapFrom<AbsenceEntity>, ICustomMappings
+   public class AbsenceDomain : IMap<AbsenceEntity>, ICustomMappings
     {
         public string EncodedId { get; set; }
 
