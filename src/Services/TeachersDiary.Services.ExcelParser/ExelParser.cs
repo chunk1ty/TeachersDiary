@@ -1,28 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.IO;
+
 using Excel;
+
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Services.ExcelParser
 {
     public class ExelParser : IExelParser
     {
         private readonly IClassService _classService;
-        private readonly IEncryptingService _encryptingService;
 
-        public ExelParser(IClassService classService, IEncryptingService encryptingService)
+        public ExelParser(IClassService classService)
         {
             _classService = classService;
-            _encryptingService = encryptingService;
         }
 
         public void CreateClassForUser(string filePath, string userId)
         {
             FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-            //TODO exel file extension validation
 
             //Choose one of either 1 or 2
             //1. Reading from a binary Excel file ('97-2003 format; *.xls)
@@ -42,65 +40,51 @@ namespace TeachersDiary.Services.ExcelParser
             //5. Data Reader methods
             var clases = new List<ClassDomain>();
 
-            for (int i = 0; i < result.Tables.Count; i++)
+            for (int sheetIndex = 0; sheetIndex < result.Tables.Count; sheetIndex++)
             {
-                var @class = new ClassDomain();
-                @class.Name = result.Tables[i].TableName;
-                @class.CreatedBy = userId;
+                var @class = new ClassDomain
+                {
+                    Name = result.Tables[sheetIndex].TableName,
+                    CreatedBy = userId,
+                    // TODO works only for Blagoev
+                    SchoolId = 1
+                };
 
-                DataTable sheet = result.Tables[i];
-
+                var sheet = result.Tables[sheetIndex];
 
                 // skip first rows
-                for (int j = 2; j < sheet.Rows.Count; j++)
+                for (var row = 2; row < sheet.Rows.Count; row++)
                 {
-                    if (sheet.Rows[j].ItemArray[0].ToString() == "")
+                    if (sheet.Rows[row].ItemArray[0].ToString() == "")
                     {
                         break;
                     }
 
                     var student = new StudentDomain
                     {
-                        Number = int.Parse(sheet.Rows[j].ItemArray[0].ToString()),
-                        FirstName = sheet.Rows[j].ItemArray[1].ToString(),
-                        MiddleName = sheet.Rows[j].ItemArray[2].ToString(),
-                        LastName = sheet.Rows[j].ItemArray[3].ToString()
+                        Number = int.Parse(sheet.Rows[row].ItemArray[0].ToString()),
+                        FirstName = sheet.Rows[row].ItemArray[1].ToString(),
+                        MiddleName = sheet.Rows[row].ItemArray[2].ToString(),
+                        LastName = sheet.Rows[row].ItemArray[3].ToString()
                     };
 
                     var monthId = 1;
 
-                    for (var k = 4; k <= sheet.Rows[j].ItemArray.Length; k += 2)
+                    // start from 4 because in exel file absenses starts from 4 column
+                    for (var col = 4; col <= sheet.Rows[row].ItemArray.Length; col += 2)
                     {
-                        if (sheet.Rows[j].ItemArray[k].ToString() == "" && sheet.Rows[j].ItemArray[k + 1].ToString() == "")
+                        if (sheet.Rows[row].ItemArray[col].ToString() == "" && sheet.Rows[row].ItemArray[col + 1].ToString() == "")
                         {
                             break;
                         }
 
                         var absence = new AbsenceDomain();
 
-                        double excusedAbsence;
-                        string excusedAbsenceAsString = sheet.Rows[j].ItemArray[k].ToString();
+                        var excusedAbsenceAsString = sheet.Rows[row].ItemArray[col].ToString();
+                        absence.Excused = double.TryParse(excusedAbsenceAsString, out double excusedAbsence) ? excusedAbsence : 0;
 
-                        if (double.TryParse(excusedAbsenceAsString, out excusedAbsence))
-                        {
-                            absence.Excused = excusedAbsence;
-                        }
-                        else
-                        {
-                            absence.Excused = 0;
-                        }
-
-                        double notExcusedAbsence;
-                        string notExcusedAbsenceAsString = sheet.Rows[j].ItemArray[k + 1].ToString();
-
-                        if (double.TryParse(notExcusedAbsenceAsString, out notExcusedAbsence))
-                        {
-                            absence.NotExcused = notExcusedAbsence;
-                        }
-                        else
-                        {
-                            absence.NotExcused = 0;
-                        }
+                        var notExcusedAbsenceAsString = sheet.Rows[row].ItemArray[col + 1].ToString();
+                        absence.NotExcused = double.TryParse(notExcusedAbsenceAsString, out double notExcusedAbsence) ? notExcusedAbsence : 0;
 
                         absence.MonthId = monthId;
 

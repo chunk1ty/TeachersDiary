@@ -44,28 +44,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add(ClassViewModel model)
-        {
-            if (!ModelState.IsValid || model == null)
-            {
-                return View(model);
-            }
-
-            var classDomain = _mappingService.Map<ClassDomain>(model);
-
-            _classService.Add(classDomain);
-
-            return this.RedirectToAction<ClassController>(x => x.Index());
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Delete(string classId)
         {
             await _classService.DeleteById(classId);

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef
 {
@@ -26,6 +26,8 @@ namespace TeachersDiary.Data.Ef
 
         public virtual IDbSet<AbsenceEntity> Absences { get; set; }
 
+        public virtual IDbSet<SchoolAdminEntity> SchoolAdmins { get; set; }
+
         public static TeachersDiaryDbContext Create()
         {
             return new TeachersDiaryDbContext();
@@ -37,11 +39,6 @@ namespace TeachersDiary.Data.Ef
             return base.Set<TEntity>();
         }
 
-        public void SaveChanges()
-        {
-            base.SaveChanges();
-        }
-
         public void Insert<T>(IEnumerable<T> entities) where T : class
         {
             Create().BulkInsert(entities);
@@ -50,11 +47,6 @@ namespace TeachersDiary.Data.Ef
         public void Update<T>(IEnumerable<T> entities) where T : class
         {
             Create().BulkUpdate(entities);
-        }
-
-        public void BulkSave()
-        {
-            Create().BulkSaveChanges();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

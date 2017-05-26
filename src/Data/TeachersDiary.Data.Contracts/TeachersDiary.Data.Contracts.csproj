@@ -43,15 +43,16 @@
   <ItemGroup>
     <Compile Include="IClassRepository.cs" />
     <Compile Include="ISchoolRepository.cs" />
+    <Compile Include="ITeacherRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TeachersDiary.Data.Ef.Entities\TeachersDiary.Data.Ef.Entities.csproj">
-      <Project>{5C2B5521-8EBE-4659-A77D-EF896687D5CB}</Project>
-      <Name>TeachersDiary.Data.Ef.Entities</Name>
+    <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
+      <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
+      <Name>TeachersDiary.Data.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

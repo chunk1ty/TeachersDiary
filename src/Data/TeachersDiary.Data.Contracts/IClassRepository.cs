@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TeachersDiary.Data.Ef.Entities;
+
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Contracts
 {
@@ -8,13 +9,11 @@ namespace TeachersDiary.Data.Contracts
     {
         Task<ClassEntity> GetClassWithStudentsAndAbsencesByClassIdAsync(int classId);
 
-        Task<IEnumerable<ClassEntity>> GetAllForUserAsync(string userId);
+        Task<IEnumerable<ClassEntity>> GetAllClassesForUserAsync(string userId);
 
-        Task<ClassEntity> GetByIdAsync(int classId);
+        Task<ClassEntity> GetClassByIdAsync(int classId);
 
-        void Add(ClassEntity system);
-
-        void AddRange(List<ClassEntity> clases);
+        void BulkInsert(List<ClassEntity> clases);
 
         void Delete(ClassEntity @class);
     }

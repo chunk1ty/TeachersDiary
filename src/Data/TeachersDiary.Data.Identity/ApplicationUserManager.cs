@@ -1,11 +1,12 @@
 ﻿using System;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using TeachersDiary.Data.Contracts;
+
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Entities;
+using TeachersDiary.Data.Ef.Models;
 using TeachersDiary.Data.Identity.Contracts;
 
 namespace TeachersDiary.Data.Identity

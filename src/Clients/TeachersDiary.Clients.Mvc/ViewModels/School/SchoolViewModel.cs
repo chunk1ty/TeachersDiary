@@ -3,7 +3,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.School
 {
-    public class SchoolViewModel : IMapFrom<SchoolDomain>
+    public class SchoolViewModel : IMap<SchoolDomain>
     {
         public string Name { get; set; }
     }
