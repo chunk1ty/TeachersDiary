@@ -12,7 +12,8 @@ namespace TeachersDiary.Common.Extensions
 
         public static double FractionToDoubleNumber(this string fraction)
         {
-            if (double.TryParse(fraction, out double result))
+            double result;
+            if (double.TryParse(fraction, out result))
             {
                 return result;
             }
@@ -21,14 +22,16 @@ namespace TeachersDiary.Common.Extensions
 
             if (split.Length == 2 || split.Length == 3)
             {
-                if (int.TryParse(split[0], out int a) && int.TryParse(split[1], out int b))
+                int a, b;
+                if (int.TryParse(split[0], out a) && int.TryParse(split[1], out b))
                 {
                     if (split.Length == 2)
                     {
                         return (double)a / b;
                     }
 
-                    if (int.TryParse(split[2], out int c))
+                    int c;
+                    if (int.TryParse(split[2], out c))
                     {
                         return a + (double)b / c;
                     }
