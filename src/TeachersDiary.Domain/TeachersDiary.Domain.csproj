@@ -62,16 +62,13 @@
       <Project>{7B1AF903-26DD-451D-A37C-DE14FBBD8047}</Project>
       <Name>TeachersDiary.Data.Identity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
-      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
-      <Name>TeachersDiary.Services.Mapping</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
       <Name>TeachersDiary.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

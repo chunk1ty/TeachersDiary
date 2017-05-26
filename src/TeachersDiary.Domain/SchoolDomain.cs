@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain

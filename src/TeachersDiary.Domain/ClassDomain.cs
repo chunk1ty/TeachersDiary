@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using AutoMapper;
+
 using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
@@ -38,6 +39,7 @@ namespace TeachersDiary.Domain
             }
         }
 
+        // TODO move it in client side 
         public string TotalNotExcusedAbsencesAsFractionNumber
         {
             get

@@ -92,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
-      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
-      <Name>TeachersDiary.Common.Constants</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
       <Name>TeachersDiary.Services.Mapping</Name>

@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
     </Reference>
@@ -61,10 +58,6 @@
     <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
       <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
       <Name>TeachersDiary.Common.Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
-      <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
-      <Name>TeachersDiary.Services.Mapping</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>

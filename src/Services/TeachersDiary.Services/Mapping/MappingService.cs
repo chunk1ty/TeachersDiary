@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Services.Mapping

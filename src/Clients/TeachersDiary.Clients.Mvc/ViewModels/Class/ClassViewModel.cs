@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;

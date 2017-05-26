@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
-using TeachersDiary.Services.Contracts;
 
-namespace TeachersDiary.Services
+namespace TeachersDiary.Services.Encrypting
 {
     public class EncryptingService : IEncryptingService
     {
