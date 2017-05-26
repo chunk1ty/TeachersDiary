@@ -146,7 +146,6 @@
   </data>
   <data name="OtherLabel" xml:space="preserve">
     <value>Друго</value>
-    <comment>Register dropdown list</comment>
   </data>
   <data name="SelectSchool" xml:space="preserve">
     <value>Изберете училище</value>

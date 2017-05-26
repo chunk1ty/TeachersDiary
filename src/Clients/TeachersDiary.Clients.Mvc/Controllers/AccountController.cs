@@ -7,7 +7,6 @@ using System.Web.Mvc.Expressions;
 using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Resources;
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
 using TeachersDiary.Data.Services.Contracts;
 
@@ -15,6 +14,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 {
     public class AccountController : BaseController
     {
+        //TODO ISchoolService injection ??
         private readonly ISchoolService _schoolService;
         private readonly IAuthenticationService _authenticationService;
 
@@ -58,7 +58,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
-            ModelState.AddModelError(string.Empty, GlobalResources.IncorrentEmailOrPasswordMessage);
+            ModelState.AddModelError(string.Empty, Resources.Resources.IncorrentEmailOrPasswordMessage);
 
             return View(model);
         }
@@ -123,11 +123,11 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return View(model);
             }
 
-            var result = await _authenticationService.CreateAccountAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result = await _authenticationService.ChangePassword(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
 
             if (result.Succeeded)
             {
-                return this.RedirectToAction<LandingController>(x => x.Index());
+                return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
             AddErrors(result);
@@ -154,7 +154,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             schoolLists.Add(new SelectListItem()
             {
-                Text = GlobalResources.OtherLabel,
+                Text = Resources.Resources.OtherLabel,
                 Value = "-1"
             });
 
