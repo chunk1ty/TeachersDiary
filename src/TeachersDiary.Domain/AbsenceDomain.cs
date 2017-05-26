@@ -7,7 +7,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-   public class AbsenceDomain : IMapTo<AbsenceEntity>, IMapFrom<AbsenceEntity>, ICustomMappings
+   public class AbsenceDomain : IMap<AbsenceEntity>, ICustomMappings
     {
         public string EncodedId { get; set; }
 

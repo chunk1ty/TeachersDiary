@@ -1,6 +1,6 @@
 ﻿namespace TeachersDiary.Services.Mapping.Contracts
 {
-    public interface IMapTo<T>
+    public interface IMap<T>
         where T : class
     {
     }

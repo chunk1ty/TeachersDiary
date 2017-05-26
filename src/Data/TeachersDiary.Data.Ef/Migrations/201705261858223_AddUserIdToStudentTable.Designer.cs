@@ -7,13 +7,13 @@ namespace TeachersDiary.Data.Ef.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class AddUserIdToStudentTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserIdToStudentTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705222037190_InitialMigration"; }
+            get { return "201705261858223_AddUserIdToStudentTable"; }
         }
         
         string IMigrationMetadata.Source

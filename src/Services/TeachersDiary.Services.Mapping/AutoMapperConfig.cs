@@ -46,7 +46,7 @@ namespace TeachersDiary.Services.Mapping
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
-                        where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>) &&
+                        where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMap<>) &&
                               !t.IsAbstract &&
                               !t.IsInterface
                         select new

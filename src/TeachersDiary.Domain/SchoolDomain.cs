@@ -6,7 +6,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-    public class SchoolDomain : IMapFrom<SchoolEntity>, ICustomMappings
+    public class SchoolDomain : IMap<SchoolEntity>, ICustomMappings
     {
         public string Id { get; set; }
 

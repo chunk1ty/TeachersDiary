@@ -10,7 +10,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-    public class StudentDomain : IMapTo<StudentEntity>, IMapFrom<StudentEntity>, ICustomMappings
+    public class StudentDomain : IMap<StudentEntity>, ICustomMappings
     {
         public StudentDomain()
         {

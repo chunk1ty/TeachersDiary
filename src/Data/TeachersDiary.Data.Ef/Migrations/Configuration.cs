@@ -1,9 +1,6 @@
 ﻿using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using TeachersDiary.Common.Constants;
+
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Migrations
@@ -25,7 +22,7 @@ namespace TeachersDiary.Data.Ef.Migrations
 
         private void AddShchools(TeachersDiaryDbContext context)
         {
-            if (!context.Schools.Any(x => x.Name == "СОУ Димитър Благоев"))
+            if (!context.Schools.Any(x => x.Name == "СУ Димитър Благоев"))
             {
                 context.Schools.Add(new SchoolEntity()
                 {

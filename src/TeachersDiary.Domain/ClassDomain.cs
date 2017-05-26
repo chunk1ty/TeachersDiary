@@ -9,7 +9,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {
-    public class ClassDomain : IMapTo<ClassEntity>, IMapFrom<ClassEntity>, ICustomMappings
+    public class ClassDomain : IMap<ClassEntity>, ICustomMappings
     {
         public ClassDomain()
         {

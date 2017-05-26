@@ -15,6 +15,8 @@ namespace TeachersDiary.Data.Entities
         [Key]
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         public int Number { get; set; }
 
         public string FirstName { get; set; }

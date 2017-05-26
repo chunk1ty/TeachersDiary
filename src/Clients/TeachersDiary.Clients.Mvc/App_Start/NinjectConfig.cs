@@ -96,14 +96,15 @@ namespace TeachersDiary.Clients.Mvc
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
                 .InRequestScope();
 
-            kernel.Bind<IClassRepository>().To<EfClassRepository>();
-            kernel.Bind<ISchoolRepository>().To<EfSchoolRepository>();
+            kernel.Bind<IClassRepository>().To<ClassRepository>();
+            kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
+            kernel.Bind<ITeacherRepository>().To<TeacherRepository>();
 
             kernel.Bind<IAbsenceService>().To<AbsenceService>();
             kernel.Bind<IClassService>().To<ClassService>();
             kernel.Bind<ISchoolService>().To<SchoolService>();
             kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
-
+            kernel.Bind<ITeacherService>().To<TeacherService>();
         }
     }
 }

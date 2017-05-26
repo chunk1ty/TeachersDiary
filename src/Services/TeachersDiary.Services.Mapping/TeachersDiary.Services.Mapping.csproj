@@ -60,9 +60,8 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Contracts\ICustomMappings.cs" />
-    <Compile Include="Contracts\IMapFrom.cs" />
+    <Compile Include="Contracts\IMap.cs" />
     <Compile Include="Contracts\IMappingService.cs" />
-    <Compile Include="Contracts\IMapTo.cs" />
     <Compile Include="MappingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

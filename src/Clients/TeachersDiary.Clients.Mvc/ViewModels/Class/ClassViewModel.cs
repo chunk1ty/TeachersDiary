@@ -8,7 +8,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Class
 {
-    public class ClassViewModel : IMapTo<ClassDomain>, IMapFrom<ClassDomain>
+    public class ClassViewModel : IMap<ClassDomain>
     {
         public ClassViewModel()
         {

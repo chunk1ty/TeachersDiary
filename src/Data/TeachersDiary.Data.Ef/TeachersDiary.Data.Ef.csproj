@@ -63,14 +63,23 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="Migrations\201705222037190_InitialMigration.cs" />
-    <Compile Include="Migrations\201705222037190_InitialMigration.Designer.cs">
-      <DependentUpon>201705222037190_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201705261853443_Initial.cs" />
+    <Compile Include="Migrations\201705261853443_Initial.Designer.cs">
+      <DependentUpon>201705261853443_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705261858223_AddUserIdToStudentTable.cs" />
+    <Compile Include="Migrations\201705261858223_AddUserIdToStudentTable.Designer.cs">
+      <DependentUpon>201705261858223_AddUserIdToStudentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705261944409_AddTeacherRole.cs" />
+    <Compile Include="Migrations\201705261944409_AddTeacherRole.Designer.cs">
+      <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserEntity.cs" />
-    <Compile Include="Repositories\EfClassRepository.cs" />
-    <Compile Include="Repositories\EfSchoolRepository.cs" />
+    <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\TeacherRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,11 +106,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705222037190_InitialMigration.resx">
-      <DependentUpon>201705222037190_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705261853443_Initial.resx">
+      <DependentUpon>201705261853443_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261858223_AddUserIdToStudentTable.resx">
+      <DependentUpon>201705261858223_AddUserIdToStudentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261944409_AddTeacherRole.resx">
+      <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -11,11 +11,11 @@ using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
 {
-    public class EfClassRepository : IClassRepository
+    public class ClassRepository : IClassRepository
     {
         private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
 
-        public EfClassRepository(ITeachersDiaryDbContext teacherDiaryDbContext)
+        public ClassRepository(ITeachersDiaryDbContext teacherDiaryDbContext)
         {
             _teacherDiaryDbContext = teacherDiaryDbContext;
         }

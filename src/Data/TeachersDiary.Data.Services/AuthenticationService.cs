@@ -5,8 +5,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
@@ -17,11 +19,12 @@ namespace TeachersDiary.Data.Services
         private readonly IIdentityUserManagerService _identityUserManagerService;
         private readonly IIdentitySignInService _identitySignInService;
         private readonly IEncryptingService _encryptingService;
+        private readonly ITeacherService _teacherService;
 
         public AuthenticationService(
             IIdentitySignInService identitySignInService,
             IIdentityUserManagerService identityUserManagerService, 
-            IEncryptingService encryptingService)
+            IEncryptingService encryptingService, ITeacherService teacherService)
         {
             Guard.WhenArgument(identitySignInService, nameof(identitySignInService)).IsNull().Throw();
             Guard.WhenArgument(identityUserManagerService, nameof(identityUserManagerService)).IsNull().Throw();
@@ -29,6 +32,7 @@ namespace TeachersDiary.Data.Services
             _identitySignInService = identitySignInService;
             _identityUserManagerService = identityUserManagerService;
             _encryptingService = encryptingService;
+            _teacherService = teacherService;
         }
 
         public async Task<IdentityResult> CreateAccountAsync(string email, string password, string selectedSchool)
@@ -39,17 +43,23 @@ namespace TeachersDiary.Data.Services
                 UserName = email,
             };
 
-            if (selectedSchool != "-1")
-            {
-                //userEntity.SchoolId = _encryptingService.DecodeId(selectedSchool);
-            }
-
             var result = await _identityUserManagerService.CreateAsync(userEntity, password);
 
             if (result.Succeeded)
             {
                 await _identityUserManagerService.AddToRoleAsync(userEntity.Id, ApplicationRole.Teacher);
                 await _identitySignInService.SignInAsync(userEntity, false, false);
+
+                if (selectedSchool != "-1")
+                {
+                    var teacherEntity = new TeacherDomain()
+                    {
+                        UserId = userEntity.Id,
+                        SchoolId = _encryptingService.DecodeId(selectedSchool)
+                    };
+
+                    _teacherService.Add(teacherEntity);
+                }
             }
 
             return result;

@@ -8,11 +8,11 @@ using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
 {
-    public class EfSchoolRepository : ISchoolRepository
+    public class SchoolRepository : ISchoolRepository
     {
         private readonly ITeachersDiaryDbContext _teachersDiaryDb;
 
-        public EfSchoolRepository(ITeachersDiaryDbContext teachersDiaryDb)
+        public SchoolRepository(ITeachersDiaryDbContext teachersDiaryDb)
         {
             _teachersDiaryDb = teachersDiaryDb;
         }

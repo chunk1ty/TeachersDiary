@@ -3,7 +3,7 @@ namespace TeachersDiary.Data.Ef.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -40,12 +40,12 @@ namespace TeachersDiary.Data.Ef.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 3),
-                        SchoolId = c.Int(),
+                        Name = c.String(maxLength: 3),
+                        SchoolId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Schools", t => t.SchoolId)
+                .ForeignKey("dbo.Schools", t => t.SchoolId, cascadeDelete: true)
                 .Index(t => t.SchoolId);
             
             CreateTable(
@@ -63,8 +63,6 @@ namespace TeachersDiary.Data.Ef.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
-                        IsVisible = c.Boolean(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
@@ -83,16 +81,29 @@ namespace TeachersDiary.Data.Ef.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.SchoolAdmins",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(),
+                        SchoolId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Schools", t => t.SchoolId, cascadeDelete: true)
+                .Index(t => t.SchoolId);
+            
+            CreateTable(
                 "dbo.Teachers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        SchoolId = c.Int(),
+                        SchoolId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Schools", t => t.SchoolId)
+                .ForeignKey("dbo.Schools", t => t.SchoolId, cascadeDelete: true)
                 .Index(t => t.SchoolId);
             
             CreateTable(
@@ -100,7 +111,6 @@ namespace TeachersDiary.Data.Ef.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        SchoolId = c.Int(),
                         Email = c.String(maxLength: 256),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
@@ -110,8 +120,6 @@ namespace TeachersDiary.Data.Ef.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Schools", t => t.SchoolId)
-                .Index(t => t.SchoolId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
@@ -143,11 +151,11 @@ namespace TeachersDiary.Data.Ef.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Users", "SchoolId", "dbo.Schools");
             DropForeignKey("dbo.UserRole", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserLogin", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserClaim", "UserId", "dbo.Users");
             DropForeignKey("dbo.Teachers", "SchoolId", "dbo.Schools");
+            DropForeignKey("dbo.SchoolAdmins", "SchoolId", "dbo.Schools");
             DropForeignKey("dbo.UserRole", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.Students", "ClassId", "dbo.Classes");
             DropForeignKey("dbo.Classes", "SchoolId", "dbo.Schools");
@@ -155,8 +163,8 @@ namespace TeachersDiary.Data.Ef.Migrations
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
             DropIndex("dbo.Users", "UserNameIndex");
-            DropIndex("dbo.Users", new[] { "SchoolId" });
             DropIndex("dbo.Teachers", new[] { "SchoolId" });
+            DropIndex("dbo.SchoolAdmins", new[] { "SchoolId" });
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.Roles", "RoleNameIndex");
@@ -167,6 +175,7 @@ namespace TeachersDiary.Data.Ef.Migrations
             DropTable("dbo.UserClaim");
             DropTable("dbo.Users");
             DropTable("dbo.Teachers");
+            DropTable("dbo.SchoolAdmins");
             DropTable("dbo.UserRole");
             DropTable("dbo.Roles");
             DropTable("dbo.Schools");

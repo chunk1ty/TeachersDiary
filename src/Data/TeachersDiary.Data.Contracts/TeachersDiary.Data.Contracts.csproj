@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IClassRepository.cs" />
     <Compile Include="ISchoolRepository.cs" />
+    <Compile Include="ITeacherRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
