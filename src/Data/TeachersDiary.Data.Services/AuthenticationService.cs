@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using System.Web;
+
 using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Ef.Models;
-using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
@@ -15,7 +15,6 @@ namespace TeachersDiary.Data.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        // TODO check IIdentityUserManagerService IIdentitySignInService do they have to be Disposable
         private readonly IIdentityUserManagerService _identityUserManagerService;
         private readonly IIdentitySignInService _identitySignInService;
         private readonly IEncryptingService _encryptingService;
@@ -87,25 +86,5 @@ namespace TeachersDiary.Data.Services
 
             return result;
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        if (_identityUserManagerService != null)
-        //        {
-        //            _identityUserManagerService.Dispose();
-        //            _identityUserManagerService = null;
-        //        }
-
-        //        if (_identityUserManagerService != null)
-        //        {
-        //            _identityUserManagerService.Dispose();
-        //            _identityUserManagerService = null;
-        //        }
-        //    }
-
-        //    base.Dispose(disposing);
-        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Bytes2you.Validation;
+
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
@@ -11,19 +12,19 @@ namespace TeachersDiary.Data.Services
     public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _teacherRepository;
-        private readonly IUnitOfWork _contextSaveChanges;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
 
         public TeacherService(
-            IUnitOfWork contextSaveChanges,
+            IUnitOfWork unitOfWork,
             IMappingService mappingService, 
             ITeacherRepository teacherRepository)
         {
-            Guard.WhenArgument(contextSaveChanges, nameof(contextSaveChanges)).IsNull().Throw();
+            Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
+            Guard.WhenArgument(teacherRepository, nameof(teacherRepository)).IsNull().Throw();
 
-           
-            _contextSaveChanges = contextSaveChanges;
+            _unitOfWork = unitOfWork;
             _mappingService = mappingService;
             _teacherRepository = teacherRepository;
         }
@@ -36,7 +37,7 @@ namespace TeachersDiary.Data.Services
 
             _teacherRepository.Add(classEntity);
 
-            _contextSaveChanges.SaveChanges();
+            _unitOfWork.SaveChanges();
         }
     }
 }

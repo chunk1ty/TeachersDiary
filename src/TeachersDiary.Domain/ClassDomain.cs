@@ -20,6 +20,8 @@ namespace TeachersDiary.Domain
 
         public string Name { get; set; }
 
+        public int SchoolId { get; set; }
+
         public double TotalExcusedAbsences
         {
             get

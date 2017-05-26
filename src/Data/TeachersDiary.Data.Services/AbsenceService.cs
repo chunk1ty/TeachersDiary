@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Bytes2you.Validation;
-using TeachersDiary.Data.Ef;
+
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
@@ -13,14 +14,16 @@ namespace TeachersDiary.Data.Services
 {
     public class AbsenceService : IAbsenceService
     {
+        // TODO ankk? IUnitOfWork ITeachersDiaryDbContext
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
         private readonly IEncryptingService _encryptingService;
 
-
-        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext, IEncryptingService encryptingService)
+        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext, IEncryptingService encryptingService, IUnitOfWork unitOfWork)
         {
             _teacherDiaryDbContext = teacherDiaryDbContext;
             _encryptingService = encryptingService;
+            _unitOfWork = unitOfWork;
         }
 
         public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
@@ -78,7 +81,7 @@ namespace TeachersDiary.Data.Services
                 _teacherDiaryDbContext.Update(absences);
             }
 
-            _teacherDiaryDbContext.SaveChanges();
+            _unitOfWork.SaveChanges();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
@@ -21,7 +21,7 @@ namespace TeachersDiary.Data.Services
 
         public async Task<IEnumerable<SchoolDomain>> GetAllSchoolNamesAsync()
         {
-            var schoolEntities = await _schoolRepository.GetAllSchoolNamesAsync();
+            var schoolEntities = await _schoolRepository.GetAllAsync();
 
             var schoolDomains = _mappingService.Map<IEnumerable<SchoolDomain>>(schoolEntities);
 

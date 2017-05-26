@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNet.Identity.Owin;
+
 using TeachersDiary.Data.Ef.Models;
 
 namespace TeachersDiary.Data.Identity.Contracts

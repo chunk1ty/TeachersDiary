@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using TeachersDiary.Data.Services;
+﻿using System.Collections.Generic;
+
 using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts

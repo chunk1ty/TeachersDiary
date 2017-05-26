@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
+
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
@@ -17,7 +17,7 @@ namespace TeachersDiary.Data.Ef.Repositories
             _teachersDiaryDb = teachersDiaryDb;
         }
 
-        public async Task<IEnumerable<SchoolEntity>> GetAllSchoolNamesAsync()
+        public async Task<IEnumerable<SchoolEntity>> GetAllAsync()
         {
             return await _teachersDiaryDb.Schools.ToListAsync();
         }

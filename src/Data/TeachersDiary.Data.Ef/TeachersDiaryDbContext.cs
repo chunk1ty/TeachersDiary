@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -40,11 +39,6 @@ namespace TeachersDiary.Data.Ef
             return base.Set<TEntity>();
         }
 
-        public void SaveChanges()
-        {
-            base.SaveChanges();
-        }
-
         public void Insert<T>(IEnumerable<T> entities) where T : class
         {
             Create().BulkInsert(entities);
@@ -53,11 +47,6 @@ namespace TeachersDiary.Data.Ef
         public void Update<T>(IEnumerable<T> entities) where T : class
         {
             Create().BulkUpdate(entities);
-        }
-
-        public void BulkSave()
-        {
-            Create().BulkSaveChanges();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
