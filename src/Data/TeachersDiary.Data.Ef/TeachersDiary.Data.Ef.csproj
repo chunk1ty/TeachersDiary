@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201705261944409_AddTeacherRole.Designer.cs">
       <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705262044438_RequiredNameColumnInClass.cs" />
+    <Compile Include="Migrations\201705262044438_RequiredNameColumnInClass.Designer.cs">
+      <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserEntity.cs" />
     <Compile Include="Repositories\ClassRepository.cs" />
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705261944409_AddTeacherRole.resx">
       <DependentUpon>201705261944409_AddTeacherRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705262044438_RequiredNameColumnInClass.resx">
+      <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,15 +41,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationRole.cs" />
-    <Compile Include="Validation\DbEntitesValidationConstants.cs" />
-    <Compile Include="Views\PartialViewConstants.cs" />
+    <Compile Include="DbEntitesValidationConstants.cs" />
+    <Compile Include="PartialViewConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

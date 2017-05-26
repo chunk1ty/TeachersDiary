@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TeachersDiary.Common.Constants.Validation;
+using TeachersDiary.Common.Constants;
 
 namespace TeachersDiary.Data.Entities
 {
@@ -16,7 +16,7 @@ namespace TeachersDiary.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        [Microsoft.Build.Framework.Required]
+        [Required]
         [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
         [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }

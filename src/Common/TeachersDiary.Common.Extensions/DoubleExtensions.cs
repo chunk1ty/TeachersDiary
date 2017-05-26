@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace TeachersDiary.Common.Extensions
 {
@@ -13,7 +10,7 @@ namespace TeachersDiary.Common.Extensions
             var integerPart = (int)number;
             var floatingPart = number - Math.Truncate(number);
 
-            var floatingPartAstring = floatingPart.ToString();
+            var floatingPartAstring = floatingPart.ToString(CultureInfo.InvariantCulture);
             var fractionalPart = string.Empty;
 
             if (floatingPartAstring.Contains("3333"))

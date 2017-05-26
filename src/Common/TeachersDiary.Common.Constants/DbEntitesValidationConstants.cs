@@ -1,4 +1,4 @@
-﻿namespace TeachersDiary.Common.Constants.Validation
+﻿namespace TeachersDiary.Common.Constants
 {
     public class DbEntitesValidationConstants
     {
