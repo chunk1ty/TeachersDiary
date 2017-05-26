@@ -81,10 +81,12 @@ namespace TeachersDiary.Services.ExcelParser
                         var absence = new AbsenceDomain();
 
                         var excusedAbsenceAsString = sheet.Rows[row].ItemArray[col].ToString();
-                        absence.Excused = double.TryParse(excusedAbsenceAsString, out double excusedAbsence) ? excusedAbsence : 0;
+                        double excusedAbsence;
+                        absence.Excused = double.TryParse(excusedAbsenceAsString, out excusedAbsence) ? excusedAbsence : 0;
 
                         var notExcusedAbsenceAsString = sheet.Rows[row].ItemArray[col + 1].ToString();
-                        absence.NotExcused = double.TryParse(notExcusedAbsenceAsString, out double notExcusedAbsence) ? notExcusedAbsence : 0;
+                        double notExcusedAbsence;
+                        absence.NotExcused = double.TryParse(notExcusedAbsenceAsString, out notExcusedAbsence) ? notExcusedAbsence : 0;
 
                         absence.MonthId = monthId;
 
