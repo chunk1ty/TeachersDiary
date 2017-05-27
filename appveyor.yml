@@ -13,7 +13,7 @@ build:
 
 environment:
   COVERALLS_REPO_TOKEN:            
-    secure: 4eoaN3KeNxyUVVYGXhUGzWt0TlDyEe/lM3NbUwQWIagKPFYBLtbnQjL56ZTEwbW5 
+    secure: ko/K7KqKctLI2WU4Tv/vRgiRM9vpYss42YEszZQW+hL4PlMdJTXy5cRyBtp6RJAw 
 
 after_test: 
   - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]* -[*]*ViewModel -[*]*Config" -target:"packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" -targetargs:"/domain:single   
