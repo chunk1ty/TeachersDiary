@@ -27,6 +27,12 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.Extensions
 
             var result = controller == currentController && action == currentAction ? cssClass : Empty;
 
+            // TODO temporary solution 
+            if (controller == "class" && currentController == "student")
+            {
+                result = cssClass;
+            }
+
             return result;
         }
     }
