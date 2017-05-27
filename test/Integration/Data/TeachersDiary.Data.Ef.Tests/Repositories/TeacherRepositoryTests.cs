@@ -23,7 +23,10 @@ namespace TeachersDiary.Data.Ef.Tests.Repositories
 
             var teacher = teachersDiaryContext.Teachers.FirstOrDefault(x => x.UserId == "1234");
 
+            var school = teachersDiaryContext.Schools.FirstOrDefault(x => x.Name == "School");
+
             teachersDiaryContext.Teachers.Remove(teacher);
+            teachersDiaryContext.Schools.Remove(school);
 
             teachersDiaryContext.SaveChanges();
         }
@@ -38,7 +41,10 @@ namespace TeachersDiary.Data.Ef.Tests.Repositories
 
             var teacher = new TeacherEntity()
             {
-                SchoolId = 1,
+                School = new SchoolEntity()
+                {
+                    Name = "School"
+                },
                 FirstName = "FirstName",
                 LastName = "LastName",
                 UserId = "1234"
