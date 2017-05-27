@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{666EEBC9-8FDD-430A-AE88-59357EA5BA7D}</ProjectGuid>
+    <ProjectGuid>{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TeachersDiary.Common.Extensions.Tests</RootNamespace>
@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,7 +51,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
+    <ProjectReference Include="..\..\..\..\src\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
       <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
       <Name>TeachersDiary.Common.Extensions</Name>
     </ProjectReference>
