@@ -58,7 +58,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                         $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}! След като въведете цялата част оставете интервал след което въведете и дробната";
 
                     ModelState.AddModelError(string.Empty, errorMsg);
-                    
+                   
                     return View("Index", model);
                 }
 

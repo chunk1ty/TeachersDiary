@@ -10,19 +10,20 @@
     @Styles.Render("~/googleFonts")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/teachersDiary")
 
     @RenderSection("styles", false)
 </head>
 <body>
     <div id="wrapper">
-        @Html.Partial("_Navigation")
+        @Html.Partial(PartialViewConstants.LeftNavigation)
 
         <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
-            @Html.Partial("_TopNavbar")
+            @Html.Partial(PartialViewConstants.TopNavigation)
             
             @RenderBody()
            
-            @Html.Partial("_Footer")
+            @Html.Partial(PartialViewConstants.Footer)
         </div>
     </div>
 

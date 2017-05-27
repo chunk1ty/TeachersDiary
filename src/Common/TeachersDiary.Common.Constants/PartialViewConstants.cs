@@ -2,6 +2,10 @@
 {
     public class PartialViewConstants
     {
-        public const string LoginPartial = "~/Views/Shared/_LoginPartial.cshtml";
+        public const string Footer = "~/Views/Shared/Partials/_Footer.cshtml";
+
+        public const string LeftNavigation = "~/Views/Shared/Partials/_LeftNavigation.cshtml";
+
+        public const string TopNavigation = "~/Views/Shared/Partials/_TopNavigation.cshtml";
     }
 }

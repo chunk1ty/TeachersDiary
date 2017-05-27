@@ -22,6 +22,7 @@ namespace TeachersDiary.Clients.Mvc
             bundles.UseCdn = true;
 
             RegisterScripts(bundles);
+            RegisterCustomScripts(bundles);
             RegisterStyles(bundles);
             RegisterFonts(bundles);
             //Inspinia(bundles);
@@ -39,6 +40,9 @@ namespace TeachersDiary.Clients.Mvc
 
             bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
                 "~/Content/plugins/dataTables/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/teachersDiary").Include(
+                "~/Content/teachersDiary.css"));
         }
 
         private static void RegisterScripts(BundleCollection bundles)
@@ -60,11 +64,17 @@ namespace TeachersDiary.Clients.Mvc
                 "~/Scripts/plugins/pace/pace.min.js",
                 "~/Scripts/app/inspinia.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/landing-controller").Include(
-                "~/Scripts/app/landing-controller/landing-controller.js"));
-
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                 "~/Scripts/plugins/dataTables/datatables.min.js"));
+        }
+
+        private static void RegisterCustomScripts(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/landing-controller").Include(
+                "~/Scripts/app/controllers/landing-controller.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/student-controller").Include(
+                "~/Scripts/app/controllers/student-controller.js"));
         }
 
         private static void RegisterFonts(BundleCollection bundles)

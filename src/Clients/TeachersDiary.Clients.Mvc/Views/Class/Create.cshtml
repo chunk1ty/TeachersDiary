@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = LayoutConstants.Layout;
 }
 
 <div class="row">
@@ -12,7 +12,7 @@
                 <p>
                     Моля изберете желания файл с ученици в долу посочената зона.
                 </p>
-                @using (Html.BeginForm("Create", "Class", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm<ClassController>(x => x.Create(), FormMethod.Post, null, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
