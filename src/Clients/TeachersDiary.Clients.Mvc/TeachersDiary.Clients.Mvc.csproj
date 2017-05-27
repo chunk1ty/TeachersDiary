@@ -182,17 +182,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
+    <Compile Include="Controllers\Abstracts\TeacherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Abstracts\BaseController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="App_Start\GlimpseConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Extensions\DoubleExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

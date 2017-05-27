@@ -159,4 +159,7 @@
   <data name="TeachersDiaryTitle" xml:space="preserve">
     <value>Учителски дневник</value>
   </data>
+  <data name="IncorrectFileFormat" xml:space="preserve">
+    <value>Невалиден файл формат!</value>
+  </data>
 </root>

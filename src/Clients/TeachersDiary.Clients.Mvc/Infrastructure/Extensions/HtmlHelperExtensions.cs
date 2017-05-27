@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using static System.String;
 
 namespace TeachersDiary.Clients.Mvc.Infrastructure.Extensions
 {
@@ -10,20 +7,25 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.Extensions
     {
         public static string IsSelected(this HtmlHelper html, string controller = null, string action = null, string cssClass = null)
         {
-
-            if (String.IsNullOrEmpty(cssClass))
+            if (IsNullOrEmpty(cssClass))
+            { 
                 cssClass = "active";
+            }
 
-            string currentAction = (string)html.ViewContext.RouteData.Values["action"];
-            string currentController = (string)html.ViewContext.RouteData.Values["controller"];
+            var currentAction = (string)html.ViewContext.RouteData.Values["action"];
+            var currentController = (string)html.ViewContext.RouteData.Values["controller"];
 
-            if (String.IsNullOrEmpty(controller))
+            if (IsNullOrEmpty(controller))
+            { 
                 controller = currentController;
+            }
 
-            if (String.IsNullOrEmpty(action))
+            if (IsNullOrEmpty(action))
+            { 
                 action = currentAction;
+            }
 
-            var result = controller == currentController && action == currentAction ? cssClass : String.Empty;
+            var result = controller == currentController && action == currentAction ? cssClass : Empty;
 
             return result;
         }

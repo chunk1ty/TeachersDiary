@@ -5,8 +5,8 @@ using System.Web.Mvc;
 
 using System.Web.Mvc.Expressions;
 using Microsoft.AspNet.Identity;
+using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
-using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
@@ -14,8 +14,7 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    [Authorize(Roles = ApplicationRole.Teacher)]
-    public class StudentController : BaseController
+    public class StudentController : TeacherController
     {
         private readonly IClassService _classService;
         private readonly IMappingService _mappingService;
@@ -53,13 +52,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                     totalNotExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
                     totalExcusedAbsences = double.Parse(student.TotalExcusedAbsences);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     var errorMsg =
                         $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}! След като въведете цялата част оставете интервал след което въведете и дробната";
 
                     ModelState.AddModelError(string.Empty, errorMsg);
-
+                    
                     return View("Index", model);
                 }
 

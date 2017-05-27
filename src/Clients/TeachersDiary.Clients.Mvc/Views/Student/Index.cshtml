@@ -14,8 +14,6 @@
     </style>
 }
 
-
-
 <div class="row border-bottom white-bg dashboard-header">
 <h2 class="text-center">@Model.Name клас</h2>
     
@@ -88,7 +86,7 @@
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
 
                         <td class="text-center">
-                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionNumber()))
                         </td>
 
                         <td class="text-center">
@@ -122,17 +120,17 @@
             <td class="text-center"></td>
             <td class="text-center">Общо</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
+            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
             <td class="text-center" style="color: red">@Model.TotalExcusedAbsences</td>
             <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
         </tr>
@@ -155,7 +153,7 @@
                     paging: false,
                     "bFilter": false,
                     "bInfo": false,
-                    "scrollX": true,
+                    //"scrollX": true,
                     pagingType: "full_numbers",
                     dom: '<"html5buttons"B>lTfgitp',
                     buttons: [{
