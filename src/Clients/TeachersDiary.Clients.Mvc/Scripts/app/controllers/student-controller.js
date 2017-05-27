@@ -7,7 +7,7 @@
             paging: false,
             "bFilter": false,
             "bInfo": false,
-            //"scrollX": true,
+            "scrollX": true,
             pagingType: "full_numbers",
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [{
