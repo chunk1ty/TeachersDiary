@@ -13,7 +13,7 @@ namespace TeachersDiary.Data.Contracts
 
         Task<ClassEntity> GetClassByIdAsync(int classId);
 
-        void BulkInsert(List<ClassEntity> clases);
+        void AddRange(List<ClassEntity> clases);
 
         void Delete(ClassEntity @class);
     }

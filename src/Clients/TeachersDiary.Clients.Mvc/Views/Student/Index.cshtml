@@ -1,67 +1,59 @@
 ﻿@model ClassViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = LayoutConstants.Layout;
 }
 
 @section styles{
     <link href='https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-
-    <style>
-        .container.body-content {
-            max-width: 100% !important;
-        }
-    </style>
 }
 
-
-
 <div class="row border-bottom white-bg dashboard-header">
-<h2 class="text-center">@Model.Name клас</h2>
+    <h2 class="text-center">@Model.Name клас</h2>
     
     <a href="@(Url.Action<ClassController>(x => x.Index()))">
         Обратно
     </a>
 
     @using (Html.BeginForm<StudentController>(c => c.CalculateAbsenses(null), FormMethod.Post, null, new {id= "student-form"}))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => Model.EncodedId)
-    @Html.HiddenFor(x => Model.Name)
-    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => Model.EncodedId)
+        @Html.HiddenFor(x => Model.Name)
+        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
 
-    <table id="student-grid" class="display">
-        <thead>
-        <tr>
-            <th class="text-center" colspan="2">Ученик</th>
-            <th class="text-center" colspan="2">Септември - Януари</th>
-            <th class="text-center" colspan="2">Февруари</th>
-            <th class="text-center" colspan="2">Март</th>
-            <th class="text-center" colspan="2">Април</th>
-            <th class="text-center" colspan="2">Май</th>
-            <th class="text-center" colspan="2">Юни</th>
-            <th class="text-center" colspan="2">Общо</th>
-        </tr>
-        <tr>
-            <th class="text-center">#</th>
-            <th class="text-center">Име</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-            <th class="text-center">Изв</th>
-            <th class="text-center">Неизв</th>
-        </tr>
-        </thead>
-        <tbody>
+        <table id="student-grid" class="display">
+            <thead>
+            <tr>
+                <th class="text-center" colspan="2">Ученик</th>
+                <th class="text-center" colspan="2">Септември - Януари</th>
+                <th class="text-center" colspan="2">Февруари</th>
+                <th class="text-center" colspan="2">Март</th>
+                <th class="text-center" colspan="2">Април</th>
+                <th class="text-center" colspan="2">Май</th>
+                <th class="text-center" colspan="2">Юни</th>
+                <th class="text-center" colspan="2">Общо</th>
+            </tr>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Име</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+                <th class="text-center">Изв</th>
+                <th class="text-center">Неизв</th>
+            </tr>
+            </thead>
+            <tbody>
             @for (var studentIndex = 0; studentIndex < Model.Students.Count; studentIndex++)
             {
                 <tr>
@@ -88,7 +80,7 @@
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].NotExcused)
 
                         <td class="text-center">
-                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionalNumber()))
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].Excused.ToFractionNumber()))
                         </td>
 
                         <td class="text-center">
@@ -117,100 +109,33 @@
                         <span class="hidden-values" style="display: none;"></span>
                     </td>
                 </tr>
-             }
-        <tr>
-            <td class="text-center"></td>
-            <td class="text-center">Общо</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.Excused)).Sum()</td>
-            <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionalNumber()</td>
-            <td class="text-center" style="color: red">@Model.TotalExcusedAbsences</td>
-            <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
-        </tr>
+            }
+            <tr>
+                <td class="text-center"></td>
+                <td class="text-center">Общо</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 1).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 2).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 3).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 4).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 5).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.Excused)).Sum()</td>
+                <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
+                <td class="text-center" style="color: red">@Model.TotalExcusedAbsences</td>
+                <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
+            </tr>
 
-        </tbody>
-    </table>
-}
+            </tbody>
+        </table>
+    }
     
 </div>
+
 @section scripts {
     @Scripts.Render("~/plugins/dataTables")
-
-    <script>
-        //$(function($) {
-            "use strict";
-            $(document).ready(function() {
-                //grid settings
-                var table = $('#student-grid').DataTable({
-                    "bSort": false,
-                    paging: false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "scrollX": true,
-                    pagingType: "full_numbers",
-                    dom: '<"html5buttons"B>lTfgitp',
-                    buttons: [{
-                        extend: 'print',
-                        text: 'Принтирай',
-                        exportOptions: {
-                            stripHtml: false
-                        }, 
-                        customize: function(win) {
-                            var $body = $(win.document.body);
-
-                            $body.addClass('white-bg');
-                            $body.css('font-size', '10px');
-
-                            $body.find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-
-
-                            $body.find('thead').prepend(
-                                    " <th class='text-center' colspan='2'>Ученик</th> <th class='text-center' colspan='2'>Септември - Януари</th> <th class='text-center' colspan='2'>Февруари</th> <th class='text-center' colspan='2'>Март</th> <th class='text-center' colspan='2'>Април</th> <th class='text-center' colspan='2'>Май</th> <th class='text-center' colspan='2'>Юни</th> <th class='text-center' colspan='2'>Общо</th>");
-                           
-
-                            $body.find('.total-absences').each(function (i) {
-                                var val = $(this).val();
-                                $(this).next().text(val);
-                                $(this).css('display', 'none');
-                            });
-
-                            $body.find('.hidden-values')
-                                .css('display', 'block');
-                        }
-                    },{
-                        text: 'Изчисли',
-                        className: 'sent-data'}]
-                });
-
-                $('#student-grid tbody').on('click','tr' , function() {
-                        if ($(this).hasClass('selected')) {
-                            $(this).removeClass('selected');
-                        } else {
-                            table.$('tr.selected').removeClass('selected');
-                            $(this).addClass('selected');
-                        }
-                    });
-
-                $('#button').click(function() {
-                    table.row('.selected').remove().draw(false);
-                });
-
-                $('.sent-data').on('click',
-                    function() {
-                        $('#student-form').submit();
-                });
-            });
-        //}($));
-    </script>
+    @Scripts.Render("~/bundles/student-controller")
 }

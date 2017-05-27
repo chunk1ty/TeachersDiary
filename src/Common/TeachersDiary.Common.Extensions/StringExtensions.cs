@@ -12,28 +12,53 @@ namespace TeachersDiary.Common.Extensions
 
         public static double FractionToDoubleNumber(this string fraction)
         {
-            double result;
-            if (double.TryParse(fraction, out result))
+            var input = fraction.Split(' ');
+
+            if (input.Length == 1)
             {
-                return result;
+                double result;
+                if (double.TryParse(fraction, out result))
+                {
+                    return result;
+                }
+
+                var fractionNumber = fraction.Split('/');
+                int divisible, divider;
+
+                if (int.TryParse(fractionNumber[0], out divisible) &&
+                    int.TryParse(fractionNumber[1], out divider))
+                {
+                    if ((divisible == 1 || divisible == 2) && divider == 3)
+                    {
+                        var fractionalNumberAsDouble = (double)divisible / divider;
+
+                        return fractionalNumberAsDouble;
+                    }
+                }
             }
 
-            var split = fraction.Split(' ', '/');
-
-            if (split.Length == 2 || split.Length == 3)
+            if (input.Length == 2)
             {
-                int a, b;
-                if (int.TryParse(split[0], out a) && int.TryParse(split[1], out b))
-                {
-                    if (split.Length == 2)
-                    {
-                        return (double)a / b;
-                    }
+                var fractionNumber = input[1].Split('/');
 
-                    int c;
-                    if (int.TryParse(split[2], out c))
+                if (fractionNumber.Length == 2)
+                {
+                    // делимо       делител
+                    int integerpart, divisible, divider;
+
+                    if (int.TryParse(input[0], out integerpart) &&
+                        int.TryParse(fractionNumber[0], out divisible) && 
+                        int.TryParse(fractionNumber[1], out divider))
                     {
-                        return a + (double)b / c;
+                        if ((divisible == 1 || divisible == 2) && divider == 3)
+                        {
+                            var fractionalNumberAsDouble = (double)divisible / divider;
+
+                            var result = integerpart + fractionalNumberAsDouble;
+
+                            return result;
+                        }
+                       
                     }
                 }
             }

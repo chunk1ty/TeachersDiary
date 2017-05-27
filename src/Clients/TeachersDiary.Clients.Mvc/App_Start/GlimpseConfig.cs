@@ -1,12 +1,9 @@
-
-//Uncomment this class to provide custom runtime policy for Glimpse
-
 using Glimpse.AspNet.Extensions;
 using Glimpse.Core.Extensibility;
 
 namespace TeachersDiary.Clients.Mvc
 {
-    public class GlimpseSecurityPolicy : IRuntimePolicy
+    public class GlimpseConfig : IRuntimePolicy
     {
         public RuntimePolicy Execute(IRuntimePolicyContext policyContext)
         {

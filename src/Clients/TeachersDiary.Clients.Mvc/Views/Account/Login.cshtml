@@ -23,7 +23,7 @@
             <p>
                 Най-добрият помощник за всеки учител.
             </p>
-            <p>@GlobalResources.LogInLabel.</p>
+            <p>@Resources.LogInLabel</p>
 
             @using (Html.BeginForm<AccountController>(c => c.Login(), FormMethod.Post, null, new { @class = "m-t" }))
             {
@@ -44,14 +44,14 @@
                 </div>
 
                 <button id="submit-btn" class="btn btn-primary block full-width m-b" type="submit">
-                    @GlobalResources.LogInLabel
+                    @Resources.LogInLabel
                 </button>
 
                 <p class="text-muted text-center">
                     <small>Нямате акаунт?</small>
                 </p>
                 @(Html.ActionLink<AccountController>(
-                  GlobalResources.SignUpLabel,
+                      Resources.SignUpLabel,
                   c => c.Register(),
                   null,
                   new { @class = "btn btn-sm btn-white btn-block" }))

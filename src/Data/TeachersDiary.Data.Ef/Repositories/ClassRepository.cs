@@ -7,6 +7,7 @@ using Bytes2you.Validation;
 
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
+using TeachersDiary.Data.Ef.Extensions;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
@@ -51,11 +52,11 @@ namespace TeachersDiary.Data.Ef.Repositories
             return await _teacherDiaryDbContext.Classes.FirstOrDefaultAsync(x => x.Id == classId);
         }
 
-        public void BulkInsert(List<ClassEntity> clases)
+        public void AddRange(List<ClassEntity> clases)
         {
             Guard.WhenArgument(clases, nameof(clases)).IsNull().Throw();
 
-            _teacherDiaryDbContext.Insert(clases);
+            _teacherDiaryDbContext.Classes.AddRange(clases);
         }
 
         public void Delete(ClassEntity @class)

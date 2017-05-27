@@ -4,19 +4,20 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
+
 using Microsoft.AspNet.Identity;
+
+using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
-using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Domain;
 using TeachersDiary.Services.ExcelParser;
 using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    [Authorize(Roles = ApplicationRole.Teacher)]
-    public class ClassController : BaseController
+    public class ClassController : TeacherController
     {
+        //TODO IExelParser injection ??
         private readonly IClassService _classService;
         private readonly IMappingService _mappingService;
         private readonly IExelParser _exelParser;
@@ -61,9 +62,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase file)
         {
-            string extenstion = Path.GetExtension(file.FileName);
+            var extenstion = Path.GetExtension(file.FileName);
 
-            if (file != null && file.ContentLength > 0)
+            if (file.ContentLength > 0)
             {
                 // xls - 98 - 03
                 if (extenstion == ".xlsx")
@@ -80,7 +81,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                     return this.RedirectToAction<ClassController>(x => x.Index());
                 }
 
-                ModelState.AddModelError("", "Невалиден файл формат!");
+                ModelState.AddModelError("", Resources.Resources.IncorrectFileFormat);
             }
 
             return View();

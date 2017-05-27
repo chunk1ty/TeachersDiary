@@ -44,14 +44,14 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, GlobalResources.SelectSchool
+                    @Html.DropDownListFor(x => x.SelectedSchool, Model.Schools, Resources.SelectSchool
                    ,new {@class = "form-control m-b" })
                     @Html.ValidationMessageFor(model => model.SelectedSchool, "", new { @class = "text-danger" })
                 </div>
 
                 <div>
                     <button id="submit-btn" class="btn btn-primary block full-width m-b" type="submit">
-                        @GlobalResources.CreateButton
+                        @Resources.CreateButton
                     </button>
                 </div>
 
@@ -59,7 +59,7 @@
                     <small>Имате регистриран акаунт?</small>
                 </p>
 
-                @(Html.ActionLink<AccountController>(GlobalResources.LogInLabel, c => c.Login(), null, new {@class = "btn btn-sm btn-white btn-block" }))
+                @(Html.ActionLink<AccountController>(Resources.LogInLabel, c => c.Login(), null, new {@class = "btn btn-sm btn-white btn-block" }))
                
             }
            

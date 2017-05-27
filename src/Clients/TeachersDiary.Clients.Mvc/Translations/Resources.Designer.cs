@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Невалиден файл формат!.
+        /// </summary>
+        public static string IncorrectFileFormat {
+            get {
+                return ResourceManager.GetString("IncorrectFileFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Невалиден имейл или парола..
         /// </summary>
         public static string IncorrentEmailOrPasswordMessage {

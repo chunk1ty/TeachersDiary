@@ -62,9 +62,6 @@ namespace TeachersDiary.Clients.Mvc.Tests.Controllers
                 ControllerContext = mockContext.Object
             };
 
-            string returnUrl = "url";
-
-
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Login())
@@ -85,8 +82,6 @@ namespace TeachersDiary.Clients.Mvc.Tests.Controllers
                 ControllerContext = mockContext.Object
             };
 
-            string returnUrl = "url";
-
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Login())
@@ -104,14 +99,14 @@ namespace TeachersDiary.Clients.Mvc.Tests.Controllers
             accountController.ModelState.AddModelError("errorKey", "error");
 
             LoginViewModel model = new LoginViewModel();
-            string returnUrl = "url";
 
             // Act & Assert
             accountController
                 .WithCallTo(c => c.Login(model))
                 .ShouldRenderDefaultView()
                 .WithModel(model)
-                .AndModelError("errorKey");
+                .AndModelError("errorKey")
+                .ThatEquals("error");
         }
 
         [Test]
@@ -186,7 +181,8 @@ namespace TeachersDiary.Clients.Mvc.Tests.Controllers
                 .WithCallTo(c => c.Register(model))
                 .ShouldRenderDefaultView()
                 .WithModel(model)
-                .AndModelError("errorKey");
+                .AndModelError("errorKey")
+                .ThatEquals("error");
         }
 
         [Test]

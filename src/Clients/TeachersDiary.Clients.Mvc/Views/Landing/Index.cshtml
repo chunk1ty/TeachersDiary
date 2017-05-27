@@ -38,10 +38,10 @@
                             <a class="page-scroll" href="#contact">Контакти</a>
                         </li>
                         <li>
-                            @(Html.ActionLink<AccountController>("Вход", c => c.Login(), null, new {@class ="page-scroll"}))
+                            @(Html.ActionLink<AccountController>(Resources.LogInLabel, c => c.Login(), null, new {@class ="page-scroll"}))
                         </li>
                         <li>
-                            @(Html.ActionLink<AccountController>("Регистрация", c => c.Register(), null, new {@class ="page-scroll"}))
+                            @(Html.ActionLink<AccountController>(Resources.SignUpLabel, c => c.Register(), null, new {@class ="page-scroll"}))
                         </li>
                     </ul>
                 </div>
@@ -116,7 +116,7 @@
             </div>
         </div>
     </section>
-    <!-- Section for main scripts render -->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/plugins/slimScroll")

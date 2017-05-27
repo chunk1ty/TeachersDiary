@@ -62,7 +62,9 @@ namespace TeachersDiary.Data.Services
 
             var classEntities = _mappingService.Map<List<ClassEntity>>(classDomains);
 
-            _classRepository.BulkInsert(classEntities);
+            _classRepository.AddRange(classEntities);
+
+            _unitOfWork.SaveChanges();
         }
 
         // TODO delete with only one query ??
