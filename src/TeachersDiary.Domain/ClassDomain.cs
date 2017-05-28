@@ -3,7 +3,6 @@ using System.Linq;
 
 using AutoMapper;
 
-using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping.Contracts;
@@ -36,15 +35,6 @@ namespace TeachersDiary.Domain
             get
             {
                 return Students.Sum(x => x.TotalNotExcusedAbsences);
-            }
-        }
-
-        // TODO move it in client side 
-        public string TotalNotExcusedAbsencesAsFractionNumber
-        {
-            get
-            {
-                return Students.Sum(x => x.TotalNotExcusedAbsences).ToFractionNumber();
             }
         }
 

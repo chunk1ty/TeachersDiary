@@ -23,7 +23,7 @@ namespace TeachersDiary.Common.Extensions
                 fractionalPart = "2/3";
             }
 
-            if (floatingPartAstring.Contains("9999"))
+            if (floatingPartAstring.Contains("9999") || floatingPartAstring == "1")
             {
                 integerPart++;
             }
