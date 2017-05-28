@@ -28,7 +28,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                if (IsDoubleNumber(student.TotalExcusedAbsences) && IsFractionNumber(student.TotalNotExcusedAbsences))
+                if (student.TotalExcusedAbsences.IsDoubleNumber() && student.TotalNotExcusedAbsences.IsFractionNumber())
                 {
                     continue;
                 }
@@ -46,30 +46,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             _absenceService.CalculateStudentsAbsencesForLastMonth(studentDomains);
 
             return this.RedirectToAction<ClassController>(x => x.Index(model.EncodedId));
-        }
-
-        private bool IsDoubleNumber(string input)
-        {
-            double price;
-            var isDouble = double.TryParse(input, out price);
-
-            return isDouble;
-        }
-
-        private bool IsFractionNumber(string input)
-        {
-            bool result = true;
-
-            try
-            {
-                input.ToDoubleNumber();
-            }
-            catch (FormatException)
-            {
-                result = false;
-
-            }
-            return result;
         }
     }
 }
