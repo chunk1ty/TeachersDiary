@@ -19,6 +19,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
     {
         //TODO IExelParser injection ??
         private readonly IClassService _classService;
+
         private readonly IMappingService _mappingService;
         private readonly IExelParser _exelParser;
 
@@ -33,15 +34,26 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> All()
         {
             var userId = User.Identity.GetUserId();
 
             var classDomains =  await _classService.GetAllAvailableClassesForUserAsync(userId);
 
-            var classViewModels = _mappingService.Map<IEnumerable<ClassViewModel>>(classDomains);
+            var classViewModels = _mappingService.Map<IList<ClassViewModel>>(classDomains);
 
             return View(classViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Index(string classId)
+        {
+            var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
+
+            User.Identity.GetUserId();
+            var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
+
+            return View(classViewModel);
         }
 
         [HttpGet]
@@ -49,7 +61,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             await _classService.DeleteById(classId);
 
-            return this.RedirectToAction<ClassController>(x => x.Index());
+            return this.RedirectToAction<ClassController>(x => x.All());
         }
 
         [HttpGet]
@@ -78,7 +90,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
                     _exelParser.CreateClassForUser(path, userId);
 
-                    return this.RedirectToAction<ClassController>(x => x.Index());
+                    return this.RedirectToAction<ClassController>(x => x.All());
                 }
 
                 ModelState.AddModelError("", Resources.Resources.IncorrectFileFormat);

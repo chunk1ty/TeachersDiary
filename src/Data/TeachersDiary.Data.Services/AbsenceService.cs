@@ -40,12 +40,15 @@ namespace TeachersDiary.Data.Services
             {
                 foreach (var student in students)
                 {
+                    var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
+                    var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
+
                     var studentId = _encryptingService.DecodeId(student.EncodedId);
 
                     var absence = new AbsenceEntity()
                     {
-                        Excused = student.EnteredTotalExcusedAbsences - student.TotalExcusedAbsences,
-                        NotExcused = student.EnteredTotalNotExcusedAbsences - student.TotalNotExcusedAbsences,
+                        Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
+                        NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
                         MonthId = previousMonthId
                     };
@@ -59,14 +62,17 @@ namespace TeachersDiary.Data.Services
             {
                 foreach (var student in students)
                 {
+                    var totalExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.Excused);
+                    var totalNotExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.NotExcused);
+
                     var studentId = _encryptingService.DecodeId(student.EncodedId);
                     var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().EncodedId);
 
                     var absence = new AbsenceEntity()
                     {
                         Id = absenseId,
-                        Excused = student.EnteredTotalExcusedAbsences - student.TotalExcusedAbsences,
-                        NotExcused = student.EnteredTotalNotExcusedAbsences - student.TotalNotExcusedAbsences,
+                        Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
+                        NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
                         MonthId = previousMonthId
                     };
