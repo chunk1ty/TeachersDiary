@@ -46,7 +46,7 @@
             </li>
 
             <li class="@Html.IsSelected("class")">
-                <a href="@(Url.Action<ClassController>(x => x.Index()))">
+                <a href="@(Url.Action<ClassController>(x => x.All()))">
                     <i class="fa fa-pie-chart"></i>
                     <span class="nav-label" data-i18n="nav.metrics">
                         Класове
@@ -55,7 +55,7 @@
                 </a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
                     <li class="@Html.IsSelected(action: "class")">
-                        <a href="@(Url.Action<ClassController>(x => x.Index()))">Преглед</a>
+                        <a href="@(Url.Action<ClassController>(x => x.All()))">Преглед</a>
                     </li>
                     <li class="@Html.IsSelected(action: "create")">
                         <a href="@(Url.Action<ClassController>(x => x.Create()))">Създай клас</a>

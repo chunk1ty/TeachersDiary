@@ -44,16 +44,6 @@ namespace TeachersDiary.Domain
                 return Absences.Sum(x => x.NotExcused);
             }
         }
-
-        // TODo move it in client side
-        public string TotalNotExcusedAbsencesAsFractionNumber
-        {
-            get
-            {
-                return Absences.Sum(x => x.NotExcused).ToFractionNumber();
-            }
-        }
-
         public double EnteredTotalNotExcusedAbsences { get; set; }
 
         public double EnteredTotalExcusedAbsences { get; set; }

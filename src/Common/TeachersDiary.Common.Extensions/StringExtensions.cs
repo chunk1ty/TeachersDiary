@@ -10,14 +10,14 @@ namespace TeachersDiary.Common.Extensions
             return value.All(c => c >= '0' && c <= '9');
         }
 
-        public static double FractionToDoubleNumber(this string fraction)
+        public static double ToDoubleNumber(this string fraction)
         {
             var input = fraction.Split(' ');
 
             if (input.Length == 1)
             {
-                double result;
-                if (double.TryParse(fraction, out result))
+                int result;
+                if (int.TryParse(fraction, out result))
                 {
                     return result;
                 }
@@ -64,6 +64,30 @@ namespace TeachersDiary.Common.Extensions
             }
 
             throw new FormatException("Not a valid fraction.");
+        }
+
+        public static bool IsDoubleNumber(this string value)
+        {
+            double price;
+            var isDouble = double.TryParse(value, out price);
+
+            return isDouble;
+        }
+
+        public static bool IsFractionNumber(this string value)
+        {
+            bool result = true;
+
+            try
+            {
+                value.ToDoubleNumber();
+            }
+            catch (FormatException)
+            {
+                result = false;
+
+            }
+            return result;
         }
     }
 }
