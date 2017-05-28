@@ -14,7 +14,7 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("2/3", 0.66666666666666663)]
         public void FractionToDouble_WithValidParam_ShouldReturnDouble(string fraction, double @double)
         {
-            var actualResult = fraction.FractionToDoubleNumber();
+            var actualResult = fraction.ToDoubleNumber();
 
             Assert.AreEqual(@double, actualResult);
         }
@@ -27,7 +27,7 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("2 3/3")]
         public void FractionToDouble_WithInvalidFractionNumber_ShouldThrowFormatException(string fraction)
         {
-            Assert.That(() => fraction.FractionToDoubleNumber(),
+            Assert.That(() => fraction.ToDoubleNumber(),
                 Throws.TypeOf<FormatException>()
                     .With.Message.EqualTo("Not a valid fraction."));
         }

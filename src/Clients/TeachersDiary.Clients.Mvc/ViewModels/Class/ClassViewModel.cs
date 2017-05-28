@@ -18,7 +18,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
 
         public double TotalExcusedAbsences { get; set; }
 
-        public string TotalNotExcusedAbsencesAsFractionNumber { get; set; }
+        public double TotalNotExcusedAbsences { get; set; }
 
         public List<StudentViewModel> Students { get; set; }
     }

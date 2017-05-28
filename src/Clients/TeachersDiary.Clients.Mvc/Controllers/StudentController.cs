@@ -44,28 +44,17 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                double totalNotExcusedAbsences;
-                double totalExcusedAbsences;
-
-                try
+                if (IsDoubleNumber(student.TotalExcusedAbsences) && IsFractionNumber(student.TotalNotExcusedAbsences))
                 {
-                    totalNotExcusedAbsences = student.TotalNotExcusedAbsencesAsFractionNumber.FractionToDoubleNumber();
-                    totalExcusedAbsences = double.Parse(student.TotalExcusedAbsences);
-                }
-                catch (Exception)
-                {
-                    var errorMsg =
-                        $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}! След като въведете цялата част оставете интервал след което въведете и дробната";
-
-                    ModelState.AddModelError(string.Empty, errorMsg);
-                   
-                    return View("Index", model);
+                    continue;    
                 }
 
-                student.TotalNotExcusedAbsences = totalNotExcusedAbsences;
+                var errorMsg =
+                    $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}! След като въведете цялата част оставете интервал след което въведете и дробната";
 
-                student.EnteredTotalExcusedAbsences = totalExcusedAbsences;
-                student.EnteredTotalNotExcusedAbsences = totalNotExcusedAbsences;
+                ModelState.AddModelError(string.Empty, errorMsg);
+
+                return View("Index", model);
             }
 
             var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students);
@@ -73,6 +62,30 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             _absenceService.CalculateStudentsAbsencesForLastMonth(studentDomains);
 
             return this.RedirectToAction<StudentController>(x => x.Index(model.EncodedId));
+        }
+
+        private bool IsDoubleNumber(string input)
+        {
+            double price;
+            var isDouble = double.TryParse(input, out price);
+
+            return isDouble;
+        }
+
+        private bool IsFractionNumber(string input)
+        {
+            bool result = true;
+
+            try
+            {
+                input.ToDoubleNumber();
+            }
+            catch (FormatException)
+            {
+                result = false;
+
+            }
+            return result;
         }
     }
 }

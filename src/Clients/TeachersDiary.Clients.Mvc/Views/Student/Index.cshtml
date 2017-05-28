@@ -84,7 +84,7 @@
                         </td>
 
                         <td class="text-center">
-                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcusedAsFractionNumber))
+                            @Html.Raw((Model.Students[studentIndex].Absences[absenceIndex].NotExcused.ToFractionNumber()))
                         </td>
                         {
                             mounthIndex += 1;
@@ -104,8 +104,18 @@
                         @Html.TextBoxFor(x => Model.Students[studentIndex].TotalExcusedAbsences, new {maxlength = "8", size = "8", @class = "total-absences"})
                         <span class="hidden-values" style="display: none;"></span>
                     </td>
+
                     <td class="text-center">
-                        @Html.TextBoxFor(x => Model.Students[studentIndex].TotalNotExcusedAbsencesAsFractionNumber, new {maxlength = "8", size = "8", @class = "total-absences" })
+                        @Html.TextBoxFor(x =>
+                                            Model.Students[studentIndex].TotalNotExcusedAbsences,
+                                            new
+                                            {
+                                                @class = "total-absences",
+                                                maxlength = "8",
+                                                size = "8",
+                                                Value = Model.Students[studentIndex].GetTotalNotExcusedAbsences()
+                                            })
+
                         <span class="hidden-values" style="display: none;"></span>
                     </td>
                 </tr>
@@ -126,7 +136,7 @@
                 <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.Excused)).Sum()</td>
                 <td class="text-center" style="color: red">@Model.Students.Select(x => x.Absences.Where(y => y.MonthId == 6).Sum(y => y.NotExcused)).Sum().ToFractionNumber()</td>
                 <td class="text-center" style="color: red">@Model.TotalExcusedAbsences</td>
-                <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsencesAsFractionNumber</td>
+                <td class="text-center" style="color: red">@Model.TotalNotExcusedAbsences.ToFractionNumber()</td>
             </tr>
 
             </tbody>
