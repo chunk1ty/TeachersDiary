@@ -63,6 +63,9 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
+    <Compile Include="GenericRepository\Contracts\IEntityFrameworkGenericRepository.cs" />
+    <Compile Include="GenericRepository\EntityFrameworkGenericRepository.cs" />
+    <Compile Include="GenericRepository\QuerySettings.cs" />
     <Compile Include="Migrations\201705261853443_Initial.cs" />
     <Compile Include="Migrations\201705261853443_Initial.Designer.cs">
       <DependentUpon>201705261853443_Initial.cs</DependentUpon>

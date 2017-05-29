@@ -1,36 +1,25 @@
-﻿using System.Data.Entity;
-
-using Bytes2you.Validation;
+﻿using Bytes2you.Validation;
 
 using TeachersDiary.Data.Contracts;
-using TeachersDiary.Data.Ef.Contracts;
+using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Repositories
 {
     public class TeacherRepository : ITeacherRepository
     {
-        private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
+        private readonly IEntityFrameworkGenericRepository<TeacherEntity> _genericRepository;
 
-        public TeacherRepository(ITeachersDiaryDbContext teacherDiaryDbContext)
+        public TeacherRepository(IEntityFrameworkGenericRepository<TeacherEntity> genericRepository)
         {
-            _teacherDiaryDbContext = teacherDiaryDbContext;
+            _genericRepository = genericRepository;
         }
 
         public void Add(TeacherEntity teacher)
         {
             Guard.WhenArgument(teacher, nameof(teacher)).IsNull().Throw();
 
-            var entry = _teacherDiaryDbContext.Entry(teacher);
-
-            if (entry.State != EntityState.Detached)
-            {
-                entry.State = EntityState.Added;
-            }
-            else
-            {
-                _teacherDiaryDbContext.Teachers.Add(teacher);
-            }
+            _genericRepository.Add(teacher);
         }
     }
 }

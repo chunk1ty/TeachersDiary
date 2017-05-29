@@ -11,6 +11,8 @@ using TeachersDiary.Clients.Mvc;
 using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
+using TeachersDiary.Data.Ef.GenericRepository;
+using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Ef.Repositories;
 using TeachersDiary.Data.Identity;
 using TeachersDiary.Data.Identity.Contracts;
@@ -94,6 +96,8 @@ namespace TeachersDiary.Clients.Mvc
                     typeof(IUnitOfWork))
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
                 .InRequestScope();
+
+            kernel.Bind(typeof(IEntityFrameworkGenericRepository<>)).To(typeof(EntityFrameworkGenericRepository<>));
 
             kernel.Bind<IClassRepository>().To<ClassRepository>();
             kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
