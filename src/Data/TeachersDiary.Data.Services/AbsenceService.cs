@@ -83,7 +83,7 @@ namespace TeachersDiary.Data.Services
                 _teacherDiaryDbContext.Update(absences);
             }
 
-            _unitOfWork.SaveChanges();
+            _unitOfWork.Commit();
         }
     }
 }

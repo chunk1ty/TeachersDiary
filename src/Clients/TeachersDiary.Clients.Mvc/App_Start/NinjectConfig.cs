@@ -98,6 +98,7 @@ namespace TeachersDiary.Clients.Mvc
                 .InRequestScope();
 
             kernel.Bind(typeof(IEntityFrameworkGenericRepository<>)).To(typeof(EntityFrameworkGenericRepository<>));
+            kernel.Bind(typeof(IQuerySettings<>)).To(typeof(QuerySettings<>));
 
             kernel.Bind<IClassRepository>().To<ClassRepository>();
             kernel.Bind<ISchoolRepository>().To<SchoolRepository>();

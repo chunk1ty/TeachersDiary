@@ -28,7 +28,7 @@ namespace TeachersDiary.Data.Ef.Tests.Repositories
     //        teachersDiaryContext.Teachers.Remove(teacher);
     //        teachersDiaryContext.Schools.Remove(school);
 
-    //        teachersDiaryContext.SaveChanges();
+    //        teachersDiaryContext.Commit();
     //    }
 
     //    [Test]
@@ -53,7 +53,7 @@ namespace TeachersDiary.Data.Ef.Tests.Repositories
     //        // Act
     //        teacherRepository.Add(teacher);
 
-    //        teachersDiaryContext.SaveChanges();
+    //        teachersDiaryContext.Commit();
 
     //        // Assert
     //        var teacherDbEntity = teachersDiaryContext.Teachers.Where(x => x.UserId == "1234");

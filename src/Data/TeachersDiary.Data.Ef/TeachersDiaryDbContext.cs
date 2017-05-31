@@ -72,5 +72,10 @@ namespace TeachersDiary.Data.Ef
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
         }
+
+        public void Commit()
+        {
+            base.SaveChanges();
+        }
     }
 }

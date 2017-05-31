@@ -27,7 +27,7 @@ namespace TeachersDiary.Data.Ef.GenericRepository
 
         protected IDbSet<TEntity> DbSet { get; set; }
 
-        public async Task<IEnumerable<TEntity>> All(QuerySettings<TEntity> setting = null)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(IQuerySettings<TEntity> setting = null)
         {
             IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
 
@@ -54,6 +54,12 @@ namespace TeachersDiary.Data.Ef.GenericRepository
             }
 
             return await query.ToListAsync();
+        }
+      
+
+        public async Task<TEntity> GetByIdAsync(object id)
+        {
+            return await _teachersDiaryDbContext.Set<TEntity>().FindAsync(id);
         }
 
         public void Add(TEntity entity)

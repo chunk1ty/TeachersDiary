@@ -37,7 +37,7 @@ namespace TeachersDiary.Data.Services
 
             _teacherRepository.Add(classEntity);
 
-            _unitOfWork.SaveChanges();
+            _unitOfWork.Commit();
         }
     }
 }
