@@ -1653,10 +1653,6 @@
       <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
       <Name>TeachersDiary.Common.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
-      <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
-      <Name>TeachersDiary.Data.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>

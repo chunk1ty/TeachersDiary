@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
 
-using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
 using TeachersDiary.Data.Ef.GenericRepository.Contracts;
@@ -15,60 +14,54 @@ using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services
 {
-    // to much responsibilities ?
     public class ClassService : IClassService
     {
-        private readonly IEntityFrameworkGenericRepository<ClassEntity> _repository;
         private readonly IQuerySettings<ClassEntity> _querySettings;
+        private readonly IEntityFrameworkGenericRepository<ClassEntity> _entityFrameworkGenericRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
-
-        // injections ?
+       
         public ClassService(
-            IEntityFrameworkGenericRepository<ClassEntity> repository, 
+            IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository, 
             IUnitOfWork unitOfWork, 
             IMappingService mappingService, 
             IEncryptingService encryptingService, 
             IQuerySettings<ClassEntity> querySettings)
         {
-            Guard.WhenArgument(repository, nameof(repository)).IsNull().Throw();
+            Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
             Guard.WhenArgument(encryptingService, nameof(encryptingService)).IsNull().Throw();
 
-            _repository = repository;
+            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
             _encryptingService = encryptingService;
             _querySettings = querySettings;
         }
-
-        // to much responsibilities ?
+      
         public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId)
         {
             var decodedClassId = _encryptingService.DecodeId(classId);
 
-            //var claaEntity = await _repository.GetClassWithStudentsAndAbsencesByClassIdAsync(decodedClassId);
             _querySettings.Include(x => x.Students.Select(y => y.Absences));
             _querySettings.Where(x => x.Id == decodedClassId);
             _querySettings.ReadOnly = true;
 
-            var claaEntity =  await _repository.GetAllAsync(_querySettings);
+            var claaEntity =  await _entityFrameworkGenericRepository.GetByIdAsync(decodedClassId, _querySettings);
 
-            var classDomain = _mappingService.Map<ClassDomain>(claaEntity.SingleOrDefault());
+            var classDomain = _mappingService.Map<ClassDomain>(claaEntity);
 
             return classDomain;
         }
         
         public async Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId)
         {
-            //var classeEntities = await _repository.GetAllClassesForUserAsync(userId);
-
             _querySettings.Where(x => x.CreatedBy == userId);
             _querySettings.ReadOnly = true;
 
-            var classeEntities = await _repository.GetAllAsync(_querySettings);
+            var classeEntities = await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
 
             var classDomains = _mappingService.Map<IEnumerable<ClassDomain>>(classeEntities);
 
@@ -81,7 +74,7 @@ namespace TeachersDiary.Data.Services
 
             var classEntities = _mappingService.Map<List<ClassEntity>>(classDomains);
 
-            _repository.AddRange(classEntities);
+            _entityFrameworkGenericRepository.AddRange(classEntities);
             _unitOfWork.Commit();
         }
 
@@ -90,11 +83,9 @@ namespace TeachersDiary.Data.Services
         {
             var decodedClassId = _encryptingService.DecodeId(classId);
 
-            //var classEntity = await _repository.GetClassByIdAsync(decodedClassId);
+            var classEntity = await _entityFrameworkGenericRepository.GetByIdAsync(decodedClassId);
 
-            var classEntity = await _repository.GetByIdAsync(decodedClassId);
-
-            _repository.Delete(classEntity);
+            _entityFrameworkGenericRepository.Delete(classEntity);
 
             _unitOfWork.Commit();
         }

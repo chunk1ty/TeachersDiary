@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using TeachersDiary.Data.Ef.Repositories;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Tests.Repositories

@@ -33,8 +33,7 @@ namespace TeachersDiary.Data.Ef.GenericRepository
             WhereFilter = filter;
         }
     }
-
-    // properties ??
+   
     public interface IQuerySettings<TEntity>
         where TEntity : class
     {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Extensions;
@@ -29,37 +28,16 @@ namespace TeachersDiary.Data.Ef.GenericRepository
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(IQuerySettings<TEntity> setting = null)
         {
-            IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
-
-            if (setting != null)
-            {
-                if (setting.IncludePaths != null)
-                {
-                    foreach (var path in setting.IncludePaths)
-                    {
-                        query = query.Include(path);
-                    }
-                }
-
-                if (setting.WhereFilter != null)
-                {
-                    query = query.Where(setting.WhereFilter);
-                }
-
-                if (setting.ReadOnly)
-                {
-                    query = query.AsNoTracking();
-                }
-                
-            }
+            var query = QueryBuilder(setting);
 
             return await query.ToListAsync();
         }
-      
 
-        public async Task<TEntity> GetByIdAsync(object id)
+        public async Task<TEntity> GetByIdAsync(object id, IQuerySettings<TEntity> setting = null)
         {
-            return await _teachersDiaryDbContext.Set<TEntity>().FindAsync(id);
+            var query = QueryBuilder(setting);
+
+            return await query.SingleOrDefaultAsync();
         }
 
         public void Add(TEntity entity)
@@ -111,6 +89,33 @@ namespace TeachersDiary.Data.Ef.GenericRepository
         public void DeleteRange(IEnumerable<TEntity> entity)
         {
             _teachersDiaryDbContext.Set<TEntity>().RemoveRange(entity);
+        }
+
+        private IQueryable<TEntity> QueryBuilder(IQuerySettings<TEntity> setting)
+        {
+            IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
+
+            if (setting != null)
+            {
+                if (setting.IncludePaths != null)
+                {
+                    foreach (var path in setting.IncludePaths)
+                    {
+                        query = query.Include(path);
+                    }
+                }
+
+                if (setting.WhereFilter != null)
+                {
+                    query = query.Where(setting.WhereFilter);
+                }
+
+                if (setting.ReadOnly)
+                {
+                    query = query.AsNoTracking();
+                }
+            }
+            return query;
         }
     }
 }

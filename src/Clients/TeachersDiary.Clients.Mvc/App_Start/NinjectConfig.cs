@@ -8,12 +8,10 @@ using Ninject;
 using Ninject.Web.Common;
 
 using TeachersDiary.Clients.Mvc;
-using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
 using TeachersDiary.Data.Ef.GenericRepository.Contracts;
-using TeachersDiary.Data.Ef.Repositories;
 using TeachersDiary.Data.Identity;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services;
@@ -99,10 +97,6 @@ namespace TeachersDiary.Clients.Mvc
 
             kernel.Bind(typeof(IEntityFrameworkGenericRepository<>)).To(typeof(EntityFrameworkGenericRepository<>));
             kernel.Bind(typeof(IQuerySettings<>)).To(typeof(QuerySettings<>));
-
-            kernel.Bind<IClassRepository>().To<ClassRepository>();
-            kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
-            kernel.Bind<ITeacherRepository>().To<TeacherRepository>();
 
             kernel.Bind<IAbsenceService>().To<AbsenceService>();
             kernel.Bind<IClassService>().To<ClassService>();

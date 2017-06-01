@@ -26,9 +26,5 @@ namespace TeachersDiary.Data.Ef.Contracts
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
-
-        void Insert<T>(IEnumerable<T> entities) where T : class;
-
-        void Update<T>(IEnumerable<T> entities) where T : class;
     }
 }
