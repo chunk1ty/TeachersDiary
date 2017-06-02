@@ -16,18 +16,18 @@ namespace TeachersDiary.Data.Services
 {
     public class ClassService : IClassService
     {
-        private readonly IQuerySettings<ClassEntity> _querySettings;
         private readonly IEntityFrameworkGenericRepository<ClassEntity> _entityFrameworkGenericRepository;
+        private readonly IQuerySettings<ClassEntity> _querySettings;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
        
         public ClassService(
-            IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository, 
+            IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository,
+            IQuerySettings<ClassEntity> querySettings,
             IUnitOfWork unitOfWork, 
             IMappingService mappingService, 
-            IEncryptingService encryptingService, 
-            IQuerySettings<ClassEntity> querySettings)
+            IEncryptingService encryptingService)
         {
             Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
@@ -47,11 +47,17 @@ namespace TeachersDiary.Data.Services
 
             _querySettings.Include(x => x.Students.Select(y => y.Absences));
             _querySettings.Where(x => x.Id == decodedClassId);
-            _querySettings.ReadOnly = true;
+            _querySettings.ReadOnly = false;
 
-            var claaEntity =  await _entityFrameworkGenericRepository.GetByIdAsync(decodedClassId, _querySettings);
+            var classEntities =  await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
 
-            var classDomain = _mappingService.Map<ClassDomain>(claaEntity);
+            var @class = classEntities.SingleOrDefault();
+            if (@class == null)
+            {
+                return new ClassDomain();
+            }
+
+            var classDomain = _mappingService.Map<ClassDomain>(@class);
 
             return classDomain;
         }

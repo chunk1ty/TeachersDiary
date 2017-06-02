@@ -7,7 +7,7 @@ namespace TeachersDiary.Data.Ef.GenericRepository.Contracts
     {
         Task<IEnumerable<TEntity>> GetAllAsync(IQuerySettings<TEntity> includes = null);
 
-        Task<TEntity> GetByIdAsync(object id, IQuerySettings<TEntity> setting = null);
+        Task<TEntity> GetByIdAsync(object id);
 
         void Add(TEntity entity);
 

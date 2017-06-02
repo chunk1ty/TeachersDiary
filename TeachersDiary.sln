@@ -63,6 +63,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2D0808
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Common.Extensions.Tests", "test\Unit\Common\TeachersDiary.Common.Extensions.Tests\TeachersDiary.Common.Extensions.Tests.csproj", "{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D9F33544-A5BF-411F-8F3C-217FC5E88BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Services.Tests", "test\Unit\Services\TeachersDiary.Services.Tests\TeachersDiary.Services.Tests.csproj", "{8EAD5DFD-CE92-49D8-9E12-77174667D99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Services.Tests", "test\Integration\Data\TeachersDiary.Data.Services.Tests\TeachersDiary.Data.Services.Tests.csproj", "{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Common", "src\TeachersDiary.Common\TeachersDiary.Common.csproj", "{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +137,18 @@ Global
 		{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EAD5DFD-CE92-49D8-9E12-77174667D99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EAD5DFD-CE92-49D8-9E12-77174667D99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EAD5DFD-CE92-49D8-9E12-77174667D99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EAD5DFD-CE92-49D8-9E12-77174667D99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,5 +178,9 @@ Global
 		{617F9B76-0E6C-457B-8946-AC6FE0710012} = {7B943785-B027-42DF-9495-F95BB3268EB4}
 		{2D0808A4-6732-4666-B62B-6A4A4C90238B} = {597C6642-D48B-489E-982F-07E7F624320E}
 		{D2B2FF6F-2ACA-4B81-B49F-5BD172C6B151} = {2D0808A4-6732-4666-B62B-6A4A4C90238B}
+		{D9F33544-A5BF-411F-8F3C-217FC5E88BE2} = {597C6642-D48B-489E-982F-07E7F624320E}
+		{8EAD5DFD-CE92-49D8-9E12-77174667D99D} = {D9F33544-A5BF-411F-8F3C-217FC5E88BE2}
+		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950} = {0F9944ED-4423-4FF2-81F6-39B17A820475}
+		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
 	EndGlobalSection
 EndGlobal

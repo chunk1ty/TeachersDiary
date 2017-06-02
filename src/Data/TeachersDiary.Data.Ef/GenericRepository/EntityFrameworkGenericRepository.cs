@@ -28,16 +28,35 @@ namespace TeachersDiary.Data.Ef.GenericRepository
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(IQuerySettings<TEntity> setting = null)
         {
-            var query = QueryBuilder(setting);
+            IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
+
+            if (setting != null)
+            {
+                if (setting.IncludePaths != null)
+                {
+                    foreach (var path in setting.IncludePaths)
+                    {
+                        query = query.Include(path);
+                    }
+                }
+
+                if (setting.WhereFilter != null)
+                {
+                    query = query.Where(setting.WhereFilter);
+                }
+
+                if (setting.ReadOnly)
+                {
+                    query = query.AsNoTracking();
+                }
+            }
 
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(object id, IQuerySettings<TEntity> setting = null)
+        public async Task<TEntity> GetByIdAsync(object id)
         {
-            var query = QueryBuilder(setting);
-
-            return await query.SingleOrDefaultAsync();
+            return await _teachersDiaryDbContext.Set<TEntity>().FindAsync(id);
         }
 
         public void Add(TEntity entity)
@@ -89,33 +108,6 @@ namespace TeachersDiary.Data.Ef.GenericRepository
         public void DeleteRange(IEnumerable<TEntity> entity)
         {
             _teachersDiaryDbContext.Set<TEntity>().RemoveRange(entity);
-        }
-
-        private IQueryable<TEntity> QueryBuilder(IQuerySettings<TEntity> setting)
-        {
-            IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
-
-            if (setting != null)
-            {
-                if (setting.IncludePaths != null)
-                {
-                    foreach (var path in setting.IncludePaths)
-                    {
-                        query = query.Include(path);
-                    }
-                }
-
-                if (setting.WhereFilter != null)
-                {
-                    query = query.Where(setting.WhereFilter);
-                }
-
-                if (setting.ReadOnly)
-                {
-                    query = query.AsNoTracking();
-                }
-            }
-            return query;
         }
     }
 }
