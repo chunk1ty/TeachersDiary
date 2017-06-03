@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
-
-using TeachersDiary.Data.Contracts;
+using TeachersDiary.Common.Exceptions;
 using TeachersDiary.Data.Ef.Contracts;
+using TeachersDiary.Data.Ef.GenericRepository;
+using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
@@ -14,42 +17,63 @@ namespace TeachersDiary.Data.Services
 {
     public class ClassService : IClassService
     {
-        private readonly IClassRepository _classRepository;
+        private readonly IEntityFrameworkGenericRepository<ClassEntity> _entityFrameworkGenericRepository;
+        private readonly IQuerySettings<ClassEntity> _querySettings;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
-
+       
         public ClassService(
-            IClassRepository classRepository, 
+            IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository,
+            IQuerySettings<ClassEntity> querySettings,
             IUnitOfWork unitOfWork, 
             IMappingService mappingService, 
             IEncryptingService encryptingService)
         {
-            Guard.WhenArgument(classRepository, nameof(classRepository)).IsNull().Throw();
+            Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
+            Guard.WhenArgument(querySettings, nameof(querySettings)).IsNull().Throw();
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
             Guard.WhenArgument(encryptingService, nameof(encryptingService)).IsNull().Throw();
 
-            _classRepository = classRepository;
+            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
             _encryptingService = encryptingService;
+            _querySettings = querySettings;
         }
-
+      
         public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId)
         {
+           Guard.WhenArgument(classId, nameof(classId)).IsNull().Throw();
+
             var decodedClassId = _encryptingService.DecodeId(classId);
 
-            var claaEntity = await _classRepository.GetClassWithStudentsAndAbsencesByClassIdAsync(decodedClassId);
+            _querySettings.Include(x => x.Students.Select(y => y.Absences));
+            _querySettings.Where(x => x.Id == decodedClassId);
+            _querySettings.ReadOnly = false;
 
-            var classDomain = _mappingService.Map<ClassDomain>(claaEntity);
+            var classEntities =  await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
+
+            var @class = classEntities.SingleOrDefault();
+            if (@class == null)
+            {
+                return new ClassDomain();
+            }
+
+            var classDomain = _mappingService.Map<ClassDomain>(@class);
 
             return classDomain;
         }
-
+        
         public async Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId)
         {
-            var classeEntities = await _classRepository.GetAllClassesForUserAsync(userId);
+            Guard.WhenArgument(userId, nameof(userId)).IsNull().Throw();
+
+            _querySettings.Where(x => x.CreatedBy == userId);
+            _querySettings.ReadOnly = true;
+
+            var classeEntities = await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
 
             var classDomains = _mappingService.Map<IEnumerable<ClassDomain>>(classeEntities);
 
@@ -62,21 +86,25 @@ namespace TeachersDiary.Data.Services
 
             var classEntities = _mappingService.Map<List<ClassEntity>>(classDomains);
 
-            _classRepository.AddRange(classEntities);
-
-            _unitOfWork.SaveChanges();
+            _entityFrameworkGenericRepository.AddRange(classEntities);
+            _unitOfWork.Commit();
         }
 
         // TODO delete with only one query ??
-        public async Task DeleteById(string classId)
+        public async Task DeleteByIdAsync(string classId)
         {
+            Guard.WhenArgument(classId, nameof(classId)).IsNull().Throw();
+
             var decodedClassId = _encryptingService.DecodeId(classId);
 
-            var classEntity = await _classRepository.GetClassByIdAsync(decodedClassId);
+            var classEntity = await _entityFrameworkGenericRepository.GetByIdAsync(decodedClassId);
 
-            _classRepository.Delete(classEntity);
+            if (classEntity != null)
+            {
+                _entityFrameworkGenericRepository.Delete(classEntity);
 
-            _unitOfWork.SaveChanges();
+                _unitOfWork.Commit();
+            }
         }
     }
 }

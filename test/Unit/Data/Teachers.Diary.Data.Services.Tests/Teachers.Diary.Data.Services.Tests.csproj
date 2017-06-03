@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B438553-54EE-45B1-9A49-694E40485F78}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Teachers.Diary.Data.Services.Tests</RootNamespace>
+    <AssemblyName>Teachers.Diary.Data.Services.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.7.12.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Moq.4.7.12\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\NUnit.3.7.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassServicesTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\Data\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
+      <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
+      <Name>TeachersDiary.Data.Ef</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\Data\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
+      <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
+      <Name>TeachersDiary.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\Data\TeachersDiary.Data.Services.Contracts\TeachersDiary.Data.Services.Contracts.csproj">
+      <Project>{35C455BF-326C-47B4-A20E-2E4E67E59649}</Project>
+      <Name>TeachersDiary.Data.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\Data\TeachersDiary.Data.Services\TeachersDiary.Data.Services.csproj">
+      <Project>{32C7407C-43B7-4208-828F-030323646860}</Project>
+      <Name>TeachersDiary.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
+      <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
+      <Name>TeachersDiary.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}</Project>
+      <Name>TeachersDiary.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\TeachersDiary.Domain\TeachersDiary.Domain.csproj">
+      <Project>{2EF30906-2AB7-46F5-AAA3-C1AEDCAB824C}</Project>
+      <Name>TeachersDiary.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

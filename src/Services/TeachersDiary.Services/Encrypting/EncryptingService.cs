@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 
+using Bytes2you.Validation;
+
 namespace TeachersDiary.Services.Encrypting
 {
     public class EncryptingService : IEncryptingService
@@ -9,7 +11,9 @@ namespace TeachersDiary.Services.Encrypting
 
         public int DecodeId(string id)
         {
-            var base64EncodedBytes = Convert.FromBase64String(id);
+            Guard.WhenArgument(id, nameof(id)).IsNull().Throw();
+
+            byte[] base64EncodedBytes = Convert.FromBase64String(id);
             var bytesAsString = Encoding.UTF8.GetString(base64EncodedBytes);
             bytesAsString = bytesAsString.Replace(Salt, string.Empty);
 

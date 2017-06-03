@@ -13,7 +13,7 @@ namespace TeachersDiary.Domain
     {
         public ClassDomain()
         {
-            Students = new HashSet<StudentDomain>();
+            Students = new List<StudentDomain>();
         }
 
         public string EncodedId { get; set; }
@@ -40,7 +40,7 @@ namespace TeachersDiary.Domain
 
         public string CreatedBy { get; set; }
 
-        public ICollection<StudentDomain> Students { get; set; }
+        public IList<StudentDomain> Students { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

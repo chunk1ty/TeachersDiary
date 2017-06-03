@@ -59,7 +59,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(string classId)
         {
-            await _classService.DeleteById(classId);
+            await _classService.DeleteByIdAsync(classId);
 
             return this.RedirectToAction<ClassController>(x => x.All());
         }

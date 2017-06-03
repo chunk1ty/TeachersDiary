@@ -5,13 +5,16 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
+using Ninject.Syntax;
 using Ninject.Web.Common;
+using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Conventions.Syntax;
 
 using TeachersDiary.Clients.Mvc;
-using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Repositories;
+using TeachersDiary.Data.Ef.GenericRepository;
+using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Identity;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services;
@@ -27,20 +30,20 @@ using TeachersDiary.Services.Mapping.Contracts;
 namespace TeachersDiary.Clients.Mvc
 {
     [ExcludeFromCodeCoverage]
-    public static class NinjectConfig 
+    public static class NinjectConfig
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -48,12 +51,12 @@ namespace TeachersDiary.Clients.Mvc
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        private static IKernel CreateKernel()
+        public static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
@@ -77,7 +80,7 @@ namespace TeachersDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            RegisterDbModule(kernel);
+            RegisterDataModule(kernel);
 
             kernel.Bind<IExelParser>().To<ExelParser>();
             kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
@@ -88,22 +91,19 @@ namespace TeachersDiary.Clients.Mvc
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
         }
 
-        private static void RegisterDbModule(IKernel kernel)
+        private static void RegisterDataModule(IKernel kernel)
         {
-            kernel.Bind(typeof(ITeachersDiaryDbContext),
-                    typeof(IUnitOfWork))
+            kernel.Bind(typeof(ITeachersDiaryDbContext), typeof(IUnitOfWork))
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
                 .InRequestScope();
 
-            kernel.Bind<IClassRepository>().To<ClassRepository>();
-            kernel.Bind<ISchoolRepository>().To<SchoolRepository>();
-            kernel.Bind<ITeacherRepository>().To<TeacherRepository>();
+            kernel.Bind(typeof(IEntityFrameworkGenericRepository<>)).To(typeof(EntityFrameworkGenericRepository<>));
+            kernel.Bind(typeof(IQuerySettings<>)).To(typeof(QuerySettings<>));
 
-            kernel.Bind<IAbsenceService>().To<AbsenceService>();
-            kernel.Bind<IClassService>().To<ClassService>();
-            kernel.Bind<ISchoolService>().To<SchoolService>();
-            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
-            kernel.Bind<ITeacherService>().To<TeacherService>();
+            kernel.Bind(x => x
+                    .FromAssembliesMatching("TeachersDiary.Data.Services.*")
+                    .SelectAllClasses()
+                    .BindDefaultInterface());
         }
     }
 }

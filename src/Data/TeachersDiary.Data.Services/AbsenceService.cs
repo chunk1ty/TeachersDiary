@@ -5,6 +5,8 @@ using System.Linq;
 using Bytes2you.Validation;
 
 using TeachersDiary.Data.Ef.Contracts;
+using TeachersDiary.Data.Ef.Extensions;
+using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
@@ -14,16 +16,18 @@ namespace TeachersDiary.Data.Services
 {
     public class AbsenceService : IAbsenceService
     {
-        // TODO ankk? IUnitOfWork ITeachersDiaryDbContext
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
         private readonly IEncryptingService _encryptingService;
+        private readonly IEntityFrameworkGenericRepository<AbsenceEntity> _entityFrameworkGenericRepository;
 
-        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext, IEncryptingService encryptingService, IUnitOfWork unitOfWork)
+        public AbsenceService(
+            IEncryptingService encryptingService, 
+            IUnitOfWork unitOfWork, 
+            IEntityFrameworkGenericRepository<AbsenceEntity> entityFrameworkGenericRepository)
         {
-            _teacherDiaryDbContext = teacherDiaryDbContext;
             _encryptingService = encryptingService;
             _unitOfWork = unitOfWork;
+            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
         }
 
         public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
@@ -56,7 +60,7 @@ namespace TeachersDiary.Data.Services
                     absences.Add(absence);
                 }
 
-                _teacherDiaryDbContext.Insert(absences);
+                _entityFrameworkGenericRepository.AddRange(absences);
             }
             else
             {
@@ -78,12 +82,13 @@ namespace TeachersDiary.Data.Services
                     };
 
                     absences.Add(absence);
+                    _entityFrameworkGenericRepository.Update(absence);
                 }
 
-                _teacherDiaryDbContext.Update(absences);
+               
             }
 
-            _unitOfWork.SaveChanges();
+            _unitOfWork.Commit();
         }
     }
 }

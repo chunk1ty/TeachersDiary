@@ -39,16 +39,6 @@ namespace TeachersDiary.Data.Ef
             return base.Set<TEntity>();
         }
 
-        public void Insert<T>(IEnumerable<T> entities) where T : class
-        {
-            Create().BulkInsert(entities);
-        }
-
-        public void Update<T>(IEnumerable<T> entities) where T : class
-        {
-            Create().BulkUpdate(entities);
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -71,6 +61,16 @@ namespace TeachersDiary.Data.Ef
 
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
+        }
+
+        public int GetHash
+        {
+            get { return base.GetHashCode(); }
+        }
+
+        public void Commit()
+        {
+            base.SaveChanges();
         }
     }
 }
