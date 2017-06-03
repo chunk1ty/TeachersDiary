@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
-
+using TeachersDiary.Common.Exceptions;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
 using TeachersDiary.Data.Ef.GenericRepository.Contracts;
@@ -30,6 +31,7 @@ namespace TeachersDiary.Data.Services
             IEncryptingService encryptingService)
         {
             Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
+            Guard.WhenArgument(querySettings, nameof(querySettings)).IsNull().Throw();
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
             Guard.WhenArgument(encryptingService, nameof(encryptingService)).IsNull().Throw();
@@ -43,6 +45,8 @@ namespace TeachersDiary.Data.Services
       
         public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId)
         {
+           Guard.WhenArgument(classId, nameof(classId)).IsNull().Throw();
+
             var decodedClassId = _encryptingService.DecodeId(classId);
 
             _querySettings.Include(x => x.Students.Select(y => y.Absences));
@@ -64,6 +68,8 @@ namespace TeachersDiary.Data.Services
         
         public async Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId)
         {
+            Guard.WhenArgument(userId, nameof(userId)).IsNull().Throw();
+
             _querySettings.Where(x => x.CreatedBy == userId);
             _querySettings.ReadOnly = true;
 
@@ -85,15 +91,20 @@ namespace TeachersDiary.Data.Services
         }
 
         // TODO delete with only one query ??
-        public async Task DeleteById(string classId)
+        public async Task DeleteByIdAsync(string classId)
         {
+            Guard.WhenArgument(classId, nameof(classId)).IsNull().Throw();
+
             var decodedClassId = _encryptingService.DecodeId(classId);
 
             var classEntity = await _entityFrameworkGenericRepository.GetByIdAsync(decodedClassId);
 
-            _entityFrameworkGenericRepository.Delete(classEntity);
+            if (classEntity != null)
+            {
+                _entityFrameworkGenericRepository.Delete(classEntity);
 
-            _unitOfWork.Commit();
+                _unitOfWork.Commit();
+            }
         }
     }
 }

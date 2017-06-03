@@ -71,6 +71,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Data.Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersDiary.Common", "src\TeachersDiary.Common\TeachersDiary.Common.csproj", "{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1D8303FD-3B8B-4883-8535-BA8D0757A645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teachers.Diary.Data.Services.Tests", "test\Unit\Data\Teachers.Diary.Data.Services.Tests\Teachers.Diary.Data.Services.Tests.csproj", "{0B438553-54EE-45B1-9A49-694E40485F78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +153,10 @@ Global
 		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B438553-54EE-45B1-9A49-694E40485F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B438553-54EE-45B1-9A49-694E40485F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B438553-54EE-45B1-9A49-694E40485F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B438553-54EE-45B1-9A49-694E40485F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,5 +190,7 @@ Global
 		{8EAD5DFD-CE92-49D8-9E12-77174667D99D} = {D9F33544-A5BF-411F-8F3C-217FC5E88BE2}
 		{811A1AF0-11EB-4ADE-A1B5-B3E1B617A950} = {0F9944ED-4423-4FF2-81F6-39B17A820475}
 		{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D} = {BD9A4336-EB90-4D20-A2DC-F0ADC2543643}
+		{1D8303FD-3B8B-4883-8535-BA8D0757A645} = {597C6642-D48B-489E-982F-07E7F624320E}
+		{0B438553-54EE-45B1-9A49-694E40485F78} = {1D8303FD-3B8B-4883-8535-BA8D0757A645}
 	EndGlobalSection
 EndGlobal
