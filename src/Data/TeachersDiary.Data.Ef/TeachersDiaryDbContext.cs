@@ -63,6 +63,11 @@ namespace TeachersDiary.Data.Ef
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
         }
 
+        public int GetHash
+        {
+            get { return base.GetHashCode(); }
+        }
+
         public void Commit()
         {
             base.SaveChanges();

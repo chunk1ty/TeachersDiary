@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using Ninject;
 using NUnit.Framework;
 using TeachersDiary.Clients.Mvc;
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Extensions;
 using TeachersDiary.Data.Ef.GenericRepository;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.Mapping;
-using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services.Tests.Services
 {
@@ -83,7 +82,6 @@ namespace TeachersDiary.Data.Services.Tests.Services
         public void SetUp()
         {
             kernel = NinjectConfig.CreateKernel();
-
             var dbContext = kernel.Get<TeachersDiaryDbContext>();
 
             dbContext.Schools.Add(school);
@@ -98,12 +96,6 @@ namespace TeachersDiary.Data.Services.Tests.Services
             students[0].ClassId = classes[0].Id;
             students[1].ClassId = classes[1].Id;
 
-            //if (students[0].Absences.Count > 0)
-            //{
-            //    students[0].Absences = new List<AbsenceEntity>();
-            //    students[1].Absences = new List<AbsenceEntity>();
-            //}
-
             dbContext.Students.AddRange(students);
             dbContext.SaveChanges();
 
@@ -112,39 +104,62 @@ namespace TeachersDiary.Data.Services.Tests.Services
 
             dbContext.Absences.AddRange(absences);
             dbContext.SaveChanges();
+
         }
 
         [TearDown]
         public void TearDown()
         {
-            kernel = NinjectConfig.CreateKernel();
+            //kernel = NinjectConfig.CreateKernel();
 
+            // Entity Framework Optimistic Concurrency Patterns
+            // https://msdn.microsoft.com/en-us/data/jj592904
             var dbContext = kernel.Get<TeachersDiaryDbContext>();
 
             dbContext.Schools.Attach(school);
             dbContext.Schools.Remove(school);
 
-            dbContext.SaveChanges();
+            bool saveFailed;
+            do
+            {
+                saveFailed = false;
+
+                try
+                {
+                    dbContext.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    saveFailed = true;
+
+                    // Update the values of the entity that failed to save from the store 
+                    ex.Entries.Single().Reload();
+                }
+
+            } while (saveFailed);
+
         }
 
         [Test]
         public async Task GetClassWithStudentsByClassIdAsync_WithValidClassId_ReturnClass()
         {
             // Arrange
-            var entityframeworkRepository = kernel.Get<IEntityFrameworkGenericRepository<ClassEntity>>();
-            var querySettings = kernel.Get<IQuerySettings<ClassEntity>>();
-            var mappingService = kernel.Get<IMappingService>();
-            var unitOfWork = kernel.Get<IUnitOfWork>();
-            var encryptingService = kernel.Get<IEncryptingService>();
+            //var dbContext = new TeachersDiaryDbContext();
+            //var entityframeworkRepository = new EntityFrameworkGenericRepository<ClassEntity>(dbContext);
+            //var querySettings = new QuerySettings<ClassEntity>();
+            //var mappingService = new MappingService();
+            //var encryptingService = new EncryptingService();
 
-            var claaService = new ClassService(
-                entityframeworkRepository,
-                querySettings,
-                unitOfWork,
-                mappingService,
-                encryptingService);
+            //var claaService = new ClassService(
+            //    entityframeworkRepository,
+            //    querySettings,
+            //    dbContext,
+            //    mappingService,
+            //    encryptingService);
 
-            var encoderId = encryptingService.EncodeId(classes[0].Id);
+            var claaService = kernel.Get<IClassService>();
+
+            var encoderId = kernel.Get<IEncryptingService>().EncodeId(classes[0].Id);
 
             // Act
             var @class = await claaService.GetClassWithStudentsByClassIdAsync(encoderId);
@@ -162,22 +177,23 @@ namespace TeachersDiary.Data.Services.Tests.Services
         public async Task GetAllAvailableClassesForUserAsync_WhenUserIdExist_ReturnAllClasses()
         {
             // Arrange
-            var entityframeworkRepository = kernel.Get<IEntityFrameworkGenericRepository<ClassEntity>>();
-            var querySettings = kernel.Get<IQuerySettings<ClassEntity>>();
-            var mappingService = kernel.Get<IMappingService>();
-            var unitOfWork = kernel.Get<IUnitOfWork>();
-            var encryptingService = kernel.Get<IEncryptingService>();
+            //var dbContext = new TeachersDiaryDbContext();
+            //var entityframeworkRepository = new EntityFrameworkGenericRepository<ClassEntity>(dbContext);
+            //var querySettings = new QuerySettings<ClassEntity>();
+            //var mappingService = new MappingService();
+            //var encryptingService = new EncryptingService();
 
-            var claaService = new ClassService(
-                entityframeworkRepository,
-                querySettings,
-                unitOfWork,
-                mappingService,
-                encryptingService);
+            //var claaService = new ClassService(
+            //    entityframeworkRepository,
+            //    querySettings,
+            //    dbContext,
+            //    mappingService,
+            //    encryptingService);
+            var claaService = kernel.Get<IClassService>();
 
             // Act
             var @class = await claaService.GetAllAvailableClassesForUserAsync(User2Id);
-
+           
             Assert.IsInstanceOf<IEnumerable<ClassDomain>>(@class);
             Assert.AreEqual(1, @class.Count());
             Assert.AreEqual("2a", @class.ToList()[0].Name);
@@ -187,20 +203,22 @@ namespace TeachersDiary.Data.Services.Tests.Services
         public void AddRange_WhenPassedCollectionIsValid_ShouldAddClasesToDb()
         {
             // Arrange
-            var entityframeworkRepository = kernel.Get<IEntityFrameworkGenericRepository<ClassEntity>>();
-            var querySettings = kernel.Get<IQuerySettings<ClassEntity>>();
-            var mappingService = kernel.Get<IMappingService>();
-            var unitOfWork = kernel.Get<IUnitOfWork>();
-            var encryptingService = kernel.Get<IEncryptingService>();
+            var dbContext = kernel.Get<TeachersDiaryDbContext>();
+            var entityframeworkRepository = new EntityFrameworkGenericRepository<ClassEntity>(dbContext);
+            var querySettings = new QuerySettings<ClassEntity>();
+            var mappingService = new MappingService();
+            var encryptingService = new EncryptingService();
 
             var claaService = new ClassService(
                 entityframeworkRepository,
                 querySettings,
-                unitOfWork,
+                dbContext,
                 mappingService,
                 encryptingService);
 
-            var classes = new List<ClassDomain>()
+            //var claaService = kernel.Get<IClassService>();
+
+            var classeCollection = new List<ClassDomain>()
             {
                 new ClassDomain()
                 {
@@ -215,10 +233,11 @@ namespace TeachersDiary.Data.Services.Tests.Services
             };
 
             // Act
-            claaService.AddRange(classes);
+            claaService.AddRange(classeCollection);
 
             // Assert
-            var classesInDb = kernel.Get<TeachersDiaryDbContext>().Classes.ToList();
+            var classesInDb = dbContext.Classes.ToList();
+           
             Assert.AreEqual(4, classesInDb.Count);
         }
 
@@ -226,16 +245,17 @@ namespace TeachersDiary.Data.Services.Tests.Services
         public async Task DeleteByIdAsync_WhenClassIdExist_ShouldRemoveClassFromDb()
         {
             // Arrange
-            var entityframeworkRepository = kernel.Get<IEntityFrameworkGenericRepository<ClassEntity>>();
-            var querySettings = kernel.Get<IQuerySettings<ClassEntity>>();
-            var mappingService = kernel.Get<IMappingService>();
-            var unitOfWork = kernel.Get<IUnitOfWork>();
-            var encryptingService = kernel.Get<IEncryptingService>();
+            var dbContext = kernel.Get<TeachersDiaryDbContext>();
+
+            var entityframeworkRepository = new EntityFrameworkGenericRepository<ClassEntity>(dbContext);
+            var querySettings = new QuerySettings<ClassEntity>();
+            var mappingService = new MappingService();
+            var encryptingService = new EncryptingService();
 
             var claaService = new ClassService(
                 entityframeworkRepository,
                 querySettings,
-                unitOfWork,
+                dbContext,
                 mappingService,
                 encryptingService);
 
@@ -245,7 +265,7 @@ namespace TeachersDiary.Data.Services.Tests.Services
             await claaService.DeleteByIdAsync(decodedClassId);
 
             // Assert
-            var classesInDb = kernel.Get<TeachersDiaryDbContext>().Classes.ToList();
+            var classesInDb = dbContext.Classes.ToList();
 
             Assert.AreEqual(1, classesInDb.Count);
             Assert.AreEqual("2a", classesInDb[0].Name);
@@ -255,16 +275,16 @@ namespace TeachersDiary.Data.Services.Tests.Services
         public async Task DeleteByIdAsync_WhenClassIdDoestExist_ShouldNotRemoveClassFromDb()
         {
             // Arrange
-            var entityframeworkRepository = kernel.Get<IEntityFrameworkGenericRepository<ClassEntity>>();
-            var querySettings = kernel.Get<IQuerySettings<ClassEntity>>();
-            var mappingService = kernel.Get<IMappingService>();
-            var unitOfWork = kernel.Get<IUnitOfWork>();
-            var encryptingService = kernel.Get<IEncryptingService>();
+            var dbContext = new TeachersDiaryDbContext();
+            var entityframeworkRepository = new EntityFrameworkGenericRepository<ClassEntity>(dbContext);
+            var querySettings = new QuerySettings<ClassEntity>();
+            var mappingService = new MappingService();
+            var encryptingService = new EncryptingService();
 
             var claaService = new ClassService(
                 entityframeworkRepository,
                 querySettings,
-                unitOfWork,
+                dbContext,
                 mappingService,
                 encryptingService);
 
@@ -274,7 +294,7 @@ namespace TeachersDiary.Data.Services.Tests.Services
             await claaService.DeleteByIdAsync(decodedClassId);
 
             // Assert
-            var classesInDb = kernel.Get<TeachersDiaryDbContext>().Classes.ToList();
+            var classesInDb = dbContext.Classes.ToList();
 
             Assert.AreEqual(2, classesInDb.Count);
         }
