@@ -5,7 +5,10 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
+using Ninject.Syntax;
 using Ninject.Web.Common;
+using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Conventions.Syntax;
 
 using TeachersDiary.Clients.Mvc;
 using TeachersDiary.Data.Ef;
@@ -77,7 +80,7 @@ namespace TeachersDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            RegisterDbModule(kernel);
+            RegisterDataModule(kernel);
 
             kernel.Bind<IExelParser>().To<ExelParser>();
             kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
@@ -88,7 +91,7 @@ namespace TeachersDiary.Clients.Mvc
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
         }
 
-        private static void RegisterDbModule(IKernel kernel)
+        private static void RegisterDataModule(IKernel kernel)
         {
             kernel.Bind(typeof(ITeachersDiaryDbContext), typeof(IUnitOfWork))
                 .ToMethod(ctx => ctx.Kernel.Get<TeachersDiaryDbContext>())
@@ -97,11 +100,10 @@ namespace TeachersDiary.Clients.Mvc
             kernel.Bind(typeof(IEntityFrameworkGenericRepository<>)).To(typeof(EntityFrameworkGenericRepository<>));
             kernel.Bind(typeof(IQuerySettings<>)).To(typeof(QuerySettings<>));
 
-            kernel.Bind<IAbsenceService>().To<AbsenceService>();
-            kernel.Bind<IClassService>().To<ClassService>();
-            kernel.Bind<ISchoolService>().To<SchoolService>();
-            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
-            kernel.Bind<ITeacherService>().To<TeacherService>();
+            kernel.Bind(x => x
+                    .FromAssembliesMatching("TeachersDiary.Data.Services.*")
+                    .SelectAllClasses()
+                    .BindDefaultInterface());
         }
     }
 }
