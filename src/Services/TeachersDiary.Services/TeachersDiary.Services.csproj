@@ -71,8 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTime\DateTimeService.cs" />
+    <Compile Include="DateTime\IDateTimeService.cs" />
     <Compile Include="Encrypting\EncryptingService.cs" />
     <Compile Include="Encrypting\IEncryptingService.cs" />
+    <Compile Include="Logging\ILoggingService.cs" />
+    <Compile Include="Logging\LoggingService.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\Contracts\ICustomMappings.cs" />
     <Compile Include="Mapping\Contracts\IMap.cs" />

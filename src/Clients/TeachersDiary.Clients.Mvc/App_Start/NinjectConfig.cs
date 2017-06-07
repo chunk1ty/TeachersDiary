@@ -82,13 +82,18 @@ namespace TeachersDiary.Clients.Mvc
         {
             RegisterDataModule(kernel);
 
-            kernel.Bind<IExelParser>().To<ExelParser>();
-            kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
+            //kernel.Bind<IExelParser>().To<ExelParser>();
+            //kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
 
             kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
 
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+
+            kernel.Bind(x => x
+                .FromAssembliesMatching("TeachersDiary.Service*")
+                .SelectAllClasses()
+                .BindDefaultInterface());
         }
 
         private static void RegisterDataModule(IKernel kernel)
