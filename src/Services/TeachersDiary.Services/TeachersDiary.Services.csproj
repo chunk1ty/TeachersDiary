@@ -83,16 +83,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTime\DateTimeService.cs" />
-    <Compile Include="DateTime\IDateTimeService.cs" />
-    <Compile Include="Encrypting\EncryptingService.cs" />
-    <Compile Include="Encrypting\IEncryptingService.cs" />
-    <Compile Include="Logging\ILoggingService.cs" />
-    <Compile Include="Logging\LoggingService.cs" />
+    <Compile Include="DateTimeService.cs" />
+    <Compile Include="EncryptingService.cs" />
+    <Compile Include="LoggingService.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />
-    <Compile Include="Mapping\Contracts\ICustomMappings.cs" />
-    <Compile Include="Mapping\Contracts\IMap.cs" />
-    <Compile Include="Mapping\Contracts\IMappingService.cs" />
     <Compile Include="Mapping\MappingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +96,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
+      <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
+      <Name>TeachersDiary.Services.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

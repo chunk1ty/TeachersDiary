@@ -4,8 +4,9 @@ using System.Linq;
 using AutoMapper;
 
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services.Encrypting;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services;
+using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain
 {

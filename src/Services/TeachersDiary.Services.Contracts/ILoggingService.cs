@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeachersDiary.Services.Logging
+namespace TeachersDiary.Services.Contracts
 {
     public interface ILoggingService
     {

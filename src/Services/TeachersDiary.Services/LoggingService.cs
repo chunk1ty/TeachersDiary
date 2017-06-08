@@ -2,7 +2,9 @@
 
 using Common.Logging;
 
-namespace TeachersDiary.Services.Logging
+using TeachersDiary.Services.Contracts;
+
+namespace TeachersDiary.Services
 {
     public class LoggingService : ILoggingService
     {

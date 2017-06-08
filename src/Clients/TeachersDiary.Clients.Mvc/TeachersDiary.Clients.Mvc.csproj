@@ -1658,14 +1658,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
-      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
-      <Name>TeachersDiary.Common.Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
-      <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
-      <Name>TeachersDiary.Common.Extensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
@@ -1682,6 +1674,10 @@
       <Project>{32C7407C-43B7-4208-828F-030323646860}</Project>
       <Name>TeachersDiary.Data.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
+      <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
+      <Name>TeachersDiary.Services.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.ExcelParser\TeachersDiary.Services.ExcelParser.csproj">
       <Project>{1A9EC2F9-335B-49BB-9533-C3846267A555}</Project>
       <Name>TeachersDiary.Services.ExcelParser</Name>
@@ -1689,6 +1685,10 @@
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
       <Name>TeachersDiary.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}</Project>
+      <Name>TeachersDiary.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\TeachersDiary.Domain\TeachersDiary.Domain.csproj">
       <Project>{2EF30906-2AB7-46F5-AAA3-C1AEDCAB824C}</Project>

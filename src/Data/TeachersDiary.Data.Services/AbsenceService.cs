@@ -5,12 +5,10 @@ using System.Linq;
 using Bytes2you.Validation;
 
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Extensions;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Data.Services
 {

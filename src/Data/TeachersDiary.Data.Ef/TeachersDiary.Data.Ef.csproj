@@ -60,7 +60,8 @@
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="GenericRepository\Contracts\IEntityFrameworkGenericRepository.cs" />
+    <Compile Include="Contracts\IEntityFrameworkGenericRepository.cs" />
+    <Compile Include="Contracts\IQuerySettings.cs" />
     <Compile Include="GenericRepository\EntityFrameworkGenericRepository.cs" />
     <Compile Include="GenericRepository\QuerySettings.cs" />
     <Compile Include="Migrations\201705261853443_Initial.cs" />

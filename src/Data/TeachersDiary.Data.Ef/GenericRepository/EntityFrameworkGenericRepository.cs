@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Extensions;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 
 namespace TeachersDiary.Data.Ef.GenericRepository
 {

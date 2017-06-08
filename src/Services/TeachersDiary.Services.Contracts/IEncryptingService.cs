@@ -1,4 +1,4 @@
-namespace TeachersDiary.Services.Encrypting
+namespace TeachersDiary.Services.Contracts
 {
     public interface IEncryptingService
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TeachersDiary.Data.Ef.GenericRepository.Contracts
+namespace TeachersDiary.Data.Ef.Contracts
 {
     public interface IEntityFrameworkGenericRepository<TEntity> where TEntity : class
     {

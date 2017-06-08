@@ -12,7 +12,8 @@ using TeachersDiary.Data.Ef.GenericRepository;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services;
+using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Mapping;
 
 namespace TeachersDiary.Data.Services.Tests.Services

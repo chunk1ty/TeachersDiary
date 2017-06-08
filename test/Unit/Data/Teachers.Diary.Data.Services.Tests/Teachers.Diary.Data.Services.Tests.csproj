@@ -72,6 +72,10 @@
       <Project>{32C7407C-43B7-4208-828F-030323646860}</Project>
       <Name>TeachersDiary.Data.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\src\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
+      <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
+      <Name>TeachersDiary.Services.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\src\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
       <Name>TeachersDiary.Services</Name>

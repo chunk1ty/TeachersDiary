@@ -10,8 +10,8 @@ using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 using TeachersDiary.Services.ExcelParser;
-using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {

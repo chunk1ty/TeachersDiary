@@ -1,6 +1,8 @@
 ﻿using System;
+
 using NUnit.Framework;
-using TeachersDiary.Services.Encrypting;
+
+using TeachersDiary.Services.Contracts;
 
 namespace TeachersDiary.Services.Tests
 {
