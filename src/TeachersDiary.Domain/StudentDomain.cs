@@ -3,10 +3,10 @@ using System.Linq;
 
 using AutoMapper;
 
-using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services.Encrypting;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services;
+using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain
 {
@@ -14,7 +14,7 @@ namespace TeachersDiary.Domain
     {
         public StudentDomain()
         {
-            Absences = new HashSet<AbsenceDomain>();
+            Absences = new List<AbsenceDomain>();
         }
 
         public string EncodedId { get; set; }
@@ -48,7 +48,7 @@ namespace TeachersDiary.Domain
 
         public double EnteredTotalExcusedAbsences { get; set; }
 
-        public ICollection<AbsenceDomain> Absences { get; set; }
+        public IList<AbsenceDomain> Absences { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

@@ -1,5 +1,5 @@
 ﻿using TeachersDiary.Domain;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
 {

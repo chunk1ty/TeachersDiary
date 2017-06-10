@@ -4,8 +4,9 @@ using System.Linq;
 using AutoMapper;
 
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services.Encrypting;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services;
+using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain
 {
@@ -13,7 +14,7 @@ namespace TeachersDiary.Domain
     {
         public ClassDomain()
         {
-            Students = new HashSet<StudentDomain>();
+            Students = new List<StudentDomain>();
         }
 
         public string EncodedId { get; set; }
@@ -40,7 +41,7 @@ namespace TeachersDiary.Domain
 
         public string CreatedBy { get; set; }
 
-        public ICollection<StudentDomain> Students { get; set; }
+        public IList<StudentDomain> Students { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

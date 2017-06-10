@@ -1,32 +1,31 @@
 ﻿using Bytes2you.Validation;
 
-using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Data.Services
 {
     public class TeacherService : ITeacherService
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IEntityFrameworkGenericRepository<TeacherEntity> _entityFrameworkGenericRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
 
         public TeacherService(
             IUnitOfWork unitOfWork,
-            IMappingService mappingService, 
-            ITeacherRepository teacherRepository)
+            IMappingService mappingService,
+            IEntityFrameworkGenericRepository<TeacherEntity> entityFrameworkGenericRepository)
         {
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
-            Guard.WhenArgument(teacherRepository, nameof(teacherRepository)).IsNull().Throw();
+            Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
 
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
-            _teacherRepository = teacherRepository;
+            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
         }
 
         public void Add(TeacherDomain teacherDomain)
@@ -35,9 +34,9 @@ namespace TeachersDiary.Data.Services
 
             var classEntity = _mappingService.Map<TeacherEntity>(teacherDomain);
 
-            _teacherRepository.Add(classEntity);
+            _entityFrameworkGenericRepository.Add(classEntity);
 
-            _unitOfWork.SaveChanges();
+            _unitOfWork.Commit();
         }
     }
 }
