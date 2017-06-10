@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\NUnit.3.7.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,9 +51,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\TeachersDiary.Common\TeachersDiary.Common.csproj">
-      <Project>{7cda362c-6e1d-4ce2-83e3-c8ff3a10047d}</Project>
-      <Name>TeachersDiary.Common</Name>
+    <ProjectReference Include="..\..\..\..\src\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
+      <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
+      <Name>TeachersDiary.Common.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

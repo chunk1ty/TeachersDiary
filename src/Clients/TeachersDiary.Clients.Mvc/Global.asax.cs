@@ -13,7 +13,6 @@ namespace TeachersDiary.Clients.Mvc
             ViewEngineConfig.RegisterViewEngine();
             AutoMapperConfig.RegisterAutomapper();
             DbConfig.RegisterDb();
-            LoggingConfig.RegisterLog4Net();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

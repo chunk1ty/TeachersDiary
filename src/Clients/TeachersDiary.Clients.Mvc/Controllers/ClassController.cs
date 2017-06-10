@@ -10,8 +10,8 @@ using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.Contracts.Mapping;
 using TeachersDiary.Services.ExcelParser;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -59,7 +59,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(string classId)
         {
-            await _classService.DeleteByIdAsync(classId);
+            await _classService.DeleteById(classId);
 
             return this.RedirectToAction<ClassController>(x => x.All());
         }

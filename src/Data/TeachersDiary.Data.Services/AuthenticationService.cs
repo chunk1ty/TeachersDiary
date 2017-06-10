@@ -3,12 +3,13 @@
 using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Data.Ef.Models;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Encrypting;
 
 namespace TeachersDiary.Data.Services
 {

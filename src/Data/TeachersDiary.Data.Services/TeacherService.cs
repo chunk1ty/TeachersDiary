@@ -1,31 +1,32 @@
 ﻿using Bytes2you.Validation;
 
+using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services
 {
     public class TeacherService : ITeacherService
     {
-        private readonly IEntityFrameworkGenericRepository<TeacherEntity> _entityFrameworkGenericRepository;
+        private readonly ITeacherRepository _teacherRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
 
         public TeacherService(
             IUnitOfWork unitOfWork,
-            IMappingService mappingService,
-            IEntityFrameworkGenericRepository<TeacherEntity> entityFrameworkGenericRepository)
+            IMappingService mappingService, 
+            ITeacherRepository teacherRepository)
         {
             Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
             Guard.WhenArgument(mappingService, nameof(mappingService)).IsNull().Throw();
-            Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
+            Guard.WhenArgument(teacherRepository, nameof(teacherRepository)).IsNull().Throw();
 
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
-            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
+            _teacherRepository = teacherRepository;
         }
 
         public void Add(TeacherDomain teacherDomain)
@@ -34,9 +35,9 @@ namespace TeachersDiary.Data.Services
 
             var classEntity = _mappingService.Map<TeacherEntity>(teacherDomain);
 
-            _entityFrameworkGenericRepository.Add(classEntity);
+            _teacherRepository.Add(classEntity);
 
-            _unitOfWork.Commit();
+            _unitOfWork.SaveChanges();
         }
     }
 }

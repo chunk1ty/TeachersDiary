@@ -10,7 +10,7 @@ namespace TeachersDiary.Data.Entities
         public SchoolEntity()
         {
             Teachers = new HashSet<TeacherEntity>();
-            Classes = new List<ClassEntity>();
+            Classes = new HashSet<ClassEntity>();
             SchoolAdmins = new HashSet<SchoolAdminEntity>();
         }
 
@@ -19,10 +19,10 @@ namespace TeachersDiary.Data.Entities
 
         public string Name { get; set; }
 
-        public ICollection<TeacherEntity> Teachers { get; set; }
+        public IEnumerable<TeacherEntity> Teachers { get; set; }
 
-        public IList<ClassEntity> Classes { get; set; }
+        public IEnumerable<ClassEntity> Classes { get; set; }
 
-        public ICollection<SchoolAdminEntity> SchoolAdmins { get; set; }
+        public IEnumerable<SchoolAdminEntity> SchoolAdmins { get; set; }
     }
 }
