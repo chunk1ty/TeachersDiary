@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace TeachersDiary.Services.Mapping.Contracts
+namespace TeachersDiary.Services.Contracts.Mapping
 {
     public interface ICustomMappings
     {

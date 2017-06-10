@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using TeachersDiary.Data.Ef.Contracts;
 
 namespace TeachersDiary.Data.Ef.GenericRepository
 {
@@ -32,19 +30,5 @@ namespace TeachersDiary.Data.Ef.GenericRepository
         {
             WhereFilter = filter;
         }
-    }
-   
-    public interface IQuerySettings<TEntity>
-        where TEntity : class
-    {
-        void Where(Expression<Func<TEntity, bool>> filter);
-
-        IQuerySettings<TEntity> Include(Expression<Func<TEntity, object>> path);
-
-        bool ReadOnly { get; set; }
-
-        Expression<Func<TEntity, bool>> WhereFilter { get; set; }
-
-        IEnumerable<Expression<Func<TEntity, object>>> IncludePaths { get; }
     }
 }

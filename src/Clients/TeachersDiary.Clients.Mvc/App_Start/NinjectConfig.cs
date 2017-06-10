@@ -14,15 +14,12 @@ using TeachersDiary.Clients.Mvc;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Identity;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services;
 using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.Encrypting;
 using TeachersDiary.Services.ExcelParser;
 using TeachersDiary.Services.Mapping;
-using TeachersDiary.Services.Mapping.Contracts;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectConfig), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectConfig), "Stop")]
@@ -82,13 +79,13 @@ namespace TeachersDiary.Clients.Mvc
         {
             RegisterDataModule(kernel);
 
-            kernel.Bind<IExelParser>().To<ExelParser>();
-            kernel.Bind<IEncryptingService>().To<EncryptingService>().InSingletonScope();
-
-            kernel.Bind<IMappingService>().To<MappingService>().InSingletonScope();
-
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+
+            kernel.Bind(x => x
+                .FromAssembliesMatching("TeachersDiary.Service*")
+                .SelectAllClasses()
+                .BindDefaultInterface());
         }
 
         private static void RegisterDataModule(IKernel kernel)
@@ -101,7 +98,7 @@ namespace TeachersDiary.Clients.Mvc
             kernel.Bind(typeof(IQuerySettings<>)).To(typeof(QuerySettings<>));
 
             kernel.Bind(x => x
-                    .FromAssembliesMatching("TeachersDiary.Data.Services.*")
+                    .FromAssembliesMatching("TeachersDiary.Data.Services*")
                     .SelectAllClasses()
                     .BindDefaultInterface());
         }

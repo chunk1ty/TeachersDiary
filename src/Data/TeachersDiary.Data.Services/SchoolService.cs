@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
+using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Data.Services
 {

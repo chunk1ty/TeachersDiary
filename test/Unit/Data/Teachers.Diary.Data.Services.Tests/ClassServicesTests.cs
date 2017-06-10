@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using TeachersDiary.Common.Exceptions;
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.GenericRepository;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Encrypting;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace Teachers.Diary.Data.Services.Tests
 {

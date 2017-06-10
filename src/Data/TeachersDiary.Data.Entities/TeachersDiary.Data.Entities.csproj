@@ -44,9 +44,9 @@
     <Compile Include="TeacherEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
-      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
-      <Name>TeachersDiary.Common.Constants</Name>
+    <ProjectReference Include="..\..\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}</Project>
+      <Name>TeachersDiary.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-
 using Bytes2you.Validation;
+using TeachersDiary.Services.Contracts;
 
-namespace TeachersDiary.Services.Encrypting
+namespace TeachersDiary.Services
 {
     public class EncryptingService : IEncryptingService
     {

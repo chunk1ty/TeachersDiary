@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
-using TeachersDiary.Common.Exceptions;
+
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.GenericRepository;
-using TeachersDiary.Data.Ef.GenericRepository.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Encrypting;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Data.Services
 {

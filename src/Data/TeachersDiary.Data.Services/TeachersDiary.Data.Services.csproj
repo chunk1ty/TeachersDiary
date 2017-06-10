@@ -55,9 +55,9 @@
     <Compile Include="TeacherService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\TeachersDiary.Common.Constants\TeachersDiary.Common.Constants.csproj">
-      <Project>{650857DB-DDBE-4586-9E16-62A27E0FF209}</Project>
-      <Name>TeachersDiary.Common.Constants</Name>
+    <ProjectReference Include="..\..\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
+      <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
+      <Name>TeachersDiary.Services.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>

@@ -48,13 +48,13 @@
     <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\Common\TeachersDiary.Common.Extensions\TeachersDiary.Common.Extensions.csproj">
-      <Project>{5d12cb90-074a-452c-911a-bbbb7cf2cb07}</Project>
-      <Name>TeachersDiary.Common.Extensions</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\..\..\src\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7cda362c-6e1d-4ce2-83e3-c8ff3a10047d}</Project>
+      <Name>TeachersDiary.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
