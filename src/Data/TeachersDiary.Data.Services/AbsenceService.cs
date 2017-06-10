@@ -8,24 +8,22 @@ using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts;
+using TeachersDiary.Services.Encrypting;
 
 namespace TeachersDiary.Data.Services
 {
     public class AbsenceService : IAbsenceService
     {
+        // TODO ankk? IUnitOfWork ITeachersDiaryDbContext
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ITeachersDiaryDbContext _teacherDiaryDbContext;
         private readonly IEncryptingService _encryptingService;
-        private readonly IEntityFrameworkGenericRepository<AbsenceEntity> _entityFrameworkGenericRepository;
 
-        public AbsenceService(
-            IEncryptingService encryptingService, 
-            IUnitOfWork unitOfWork, 
-            IEntityFrameworkGenericRepository<AbsenceEntity> entityFrameworkGenericRepository)
+        public AbsenceService(ITeachersDiaryDbContext teacherDiaryDbContext, IEncryptingService encryptingService, IUnitOfWork unitOfWork)
         {
+            _teacherDiaryDbContext = teacherDiaryDbContext;
             _encryptingService = encryptingService;
             _unitOfWork = unitOfWork;
-            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
         }
 
         public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
@@ -58,7 +56,7 @@ namespace TeachersDiary.Data.Services
                     absences.Add(absence);
                 }
 
-                _entityFrameworkGenericRepository.AddRange(absences);
+                _teacherDiaryDbContext.Insert(absences);
             }
             else
             {
@@ -80,13 +78,12 @@ namespace TeachersDiary.Data.Services
                     };
 
                     absences.Add(absence);
-                    _entityFrameworkGenericRepository.Update(absence);
                 }
 
-               
+                _teacherDiaryDbContext.Update(absences);
             }
 
-            _unitOfWork.Commit();
+            _unitOfWork.SaveChanges();
         }
     }
 }
