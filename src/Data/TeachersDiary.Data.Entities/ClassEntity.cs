@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 using TeachersDiary.Common.Constants;
 
 namespace TeachersDiary.Data.Entities
@@ -11,7 +10,7 @@ namespace TeachersDiary.Data.Entities
     {
         public ClassEntity()
         {
-            Students = new HashSet<StudentEntity>();
+            Students = new List<StudentEntity>();
         }
 
         [Key]
@@ -27,6 +26,6 @@ namespace TeachersDiary.Data.Entities
 
         public string CreatedBy { get; set; }
 
-        public ICollection<StudentEntity> Students { get; set; }
+        public IList<StudentEntity> Students { get; set; }
     }
 }

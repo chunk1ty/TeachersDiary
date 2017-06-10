@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using AutoMapper;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Services.Mapping
 {
