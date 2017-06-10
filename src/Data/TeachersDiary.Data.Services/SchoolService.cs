@@ -1,30 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Entities;
+using TeachersDiary.Data.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Data.Services
 {
     public class SchoolService : ISchoolService
     {
-        private readonly IEntityFrameworkGenericRepository<SchoolEntity> _entityFrameworkGenericRepository;
+        private readonly ISchoolRepository _schoolRepository;
         private readonly IMappingService _mappingService;
 
-        public SchoolService(
-            IEntityFrameworkGenericRepository<SchoolEntity> entityFrameworkGenericRepository, 
-            IMappingService mappingService)
+        public SchoolService(ISchoolRepository schoolRepository, IMappingService mappingService)
         {
-            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
+            _schoolRepository = schoolRepository;
             _mappingService = mappingService;
         }
 
         public async Task<IEnumerable<SchoolDomain>> GetAllSchoolNamesAsync()
         {
-            var schoolEntities = await _entityFrameworkGenericRepository.GetAllAsync();
+            var schoolEntities = await _schoolRepository.GetAllAsync();
 
             var schoolDomains = _mappingService.Map<IEnumerable<SchoolDomain>>(schoolEntities);
 

@@ -2,9 +2,8 @@
 
 using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Entities;
-using TeachersDiary.Services;
-using TeachersDiary.Services.Contracts;
-using TeachersDiary.Services.Contracts.Mapping;
+using TeachersDiary.Services.Encrypting;
+using TeachersDiary.Services.Mapping.Contracts;
 
 namespace TeachersDiary.Domain
 {

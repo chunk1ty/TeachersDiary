@@ -7,7 +7,7 @@ using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Extensions;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
-using TeachersDiary.Services.Contracts.Mapping;
+using TeachersDiary.Services.Mapping.Contracts;
 
 
 namespace TeachersDiary.Clients.Mvc.Controllers
