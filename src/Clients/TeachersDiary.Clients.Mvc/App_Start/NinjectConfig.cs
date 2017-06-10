@@ -86,6 +86,7 @@ namespace TeachersDiary.Clients.Mvc
                 .FromAssembliesMatching("TeachersDiary.Service*")
                 .SelectAllClasses()
                 .BindDefaultInterface());
+
         }
 
         private static void RegisterDataModule(IKernel kernel)
