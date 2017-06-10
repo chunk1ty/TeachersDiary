@@ -9,6 +9,7 @@ using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Mapping.Contracts;
 
+
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
     public class AbsenseController : TeacherController
