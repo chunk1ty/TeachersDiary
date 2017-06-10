@@ -1,5 +1,5 @@
 ﻿using TeachersDiary.Data.Entities;
-using TeachersDiary.Services.Mapping.Contracts;
+using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain
 {

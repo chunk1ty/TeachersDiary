@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-
 using TeachersDiary.Common.Constants;
 
 namespace TeachersDiary.Clients.Mvc.Controllers.Abstracts
