@@ -9,7 +9,7 @@ namespace TeachersDiary.Data.Entities
     {
         public StudentEntity()
         {
-            Absences = new HashSet<AbsenceEntity>();
+            Absences = new List<AbsenceEntity>();
         }
 
         [Key]
@@ -26,6 +26,6 @@ namespace TeachersDiary.Data.Entities
         public int ClassId { get; set; }
         public virtual ClassEntity Class { get; set; }
 
-        public ICollection<AbsenceEntity> Absences { get; set; }
+        public IList<AbsenceEntity> Absences { get; set; }
     }
 }
