@@ -55,15 +55,14 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="Z.EntityFramework.Extensions, Version=3.11.20.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Z.EntityFramework.Extensions.3.11.20\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ITeachersDiaryDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Extensions\DbSetExtensions.cs" />
-    <Compile Include="Contracts\IEntityFrameworkGenericRepository.cs" />
-    <Compile Include="Contracts\IQuerySettings.cs" />
-    <Compile Include="GenericRepository\EntityFrameworkGenericRepository.cs" />
-    <Compile Include="GenericRepository\QuerySettings.cs" />
     <Compile Include="Migrations\201705261853443_Initial.cs" />
     <Compile Include="Migrations\201705261853443_Initial.Designer.cs">
       <DependentUpon>201705261853443_Initial.cs</DependentUpon>
@@ -82,6 +81,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserEntity.cs" />
+    <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\TeacherRepository.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +95,10 @@
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Mapping\TeachersDiary.Services.Mapping.csproj">
       <Project>{1D928A42-C202-4A10-96D0-2FA59B7EE73B}</Project>
       <Name>TeachersDiary.Services.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Contracts\TeachersDiary.Data.Contracts.csproj">
+      <Project>{F9468348-493F-47E5-B0F3-8A952B7BCC53}</Project>
+      <Name>TeachersDiary.Data.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
       <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
