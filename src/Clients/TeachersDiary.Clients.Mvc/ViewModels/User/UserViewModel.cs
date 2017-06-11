@@ -1,14 +1,14 @@
-﻿using TeachersDiary.Data.Ef.Models;
+﻿using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;
 
-namespace TeachersDiary.Domain
+namespace TeachersDiary.Clients.Mvc.ViewModels.User
 {
-    public class UserDomain : IMap<UserEntity>
+    public class UserViewModel : IMap<UserDomain>
     {
         public string Email { get; set; }
-        
+
         public string Id { get; set; }
-       
+
         public string UserName { get; set; }
 
         public int SchoolId { get; set; }

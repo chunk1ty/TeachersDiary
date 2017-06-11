@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Microsoft.AspNet.Identity;
@@ -16,5 +17,7 @@ namespace TeachersDiary.Data.Identity.Contracts
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
 
         Task<IdentityResult> AddToRoleAsync(string userId, string role);
+
+        Task<IEnumerable<UserEntity>> GetAllAsync();
     }
 }

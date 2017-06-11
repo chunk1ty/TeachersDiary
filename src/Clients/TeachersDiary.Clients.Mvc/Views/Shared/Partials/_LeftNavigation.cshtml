@@ -64,7 +64,42 @@
                     </li>
                 </ul>
             </li>
+            
+            @if (User.IsInRole(ApplicationRole.SchoolAdministrator))
+            {
+                <li class="@Html.IsSelected("class")">
+                    <a href="@(Url.Action<AdminController>(x => x.Index()))">
+                        <i class="fa fa-pie-chart"></i>
+                        <span class="nav-label" data-i18n="nav.metrics">
+                            Училищен Админ
+                        </span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "class")">
+                            <a href="@(Url.Action<AdminController>(x => x.Index()))">Потребители</a>
+                        </li>
+                    </ul>
+                </li>
+            }
 
+            @if (User.IsInRole(ApplicationRole.Administrator))
+            {
+                <li class="@Html.IsSelected("class")">
+                    <a href="@(Url.Action<AdminController>(x => x.Index()))">
+                        <i class="fa fa-pie-chart"></i>
+                        <span class="nav-label" data-i18n="nav.metrics">
+                            Администратор
+                        </span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "class")">
+                            <a href="@(Url.Action<AdminController>(x => x.Index()))">Потребители</a>
+                        </li>
+                    </ul>
+                </li>
+            }
         </ul>
     </div>
 </nav>

@@ -80,6 +80,14 @@
     <Compile Include="Migrations\201705262044438_RequiredNameColumnInClass.Designer.cs">
       <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706102045287_AddApplicationRoles.cs" />
+    <Compile Include="Migrations\201706102045287_AddApplicationRoles.Designer.cs">
+      <DependentUpon>201706102045287_AddApplicationRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706102102521_AddSchoolIdToUserTable.cs" />
+    <Compile Include="Migrations\201706102102521_AddSchoolIdToUserTable.Designer.cs">
+      <DependentUpon>201706102102521_AddSchoolIdToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserEntity.cs" />
     <Compile Include="TeachersDiaryDbContext.cs" />
@@ -111,6 +119,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705262044438_RequiredNameColumnInClass.resx">
       <DependentUpon>201705262044438_RequiredNameColumnInClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706102045287_AddApplicationRoles.resx">
+      <DependentUpon>201706102045287_AddApplicationRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706102102521_AddSchoolIdToUserTable.resx">
+      <DependentUpon>201706102102521_AddSchoolIdToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

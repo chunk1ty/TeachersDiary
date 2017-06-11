@@ -8,6 +8,8 @@ namespace TeachersDiary.Data.Ef.Models
 {
     public class UserEntity : IdentityUser
     {
+        public int SchoolId { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<UserEntity> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

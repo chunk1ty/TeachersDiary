@@ -70,6 +70,7 @@
     <Compile Include="IClassService.cs" />
     <Compile Include="ISchoolService.cs" />
     <Compile Include="ITeacherService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

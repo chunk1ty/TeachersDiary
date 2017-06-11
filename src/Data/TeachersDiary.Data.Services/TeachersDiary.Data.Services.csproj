@@ -53,6 +53,7 @@
     <Compile Include="SchoolService.cs" />
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="TeacherService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">

@@ -1,0 +1,37 @@
+﻿@model IList<UserViewModel>
+
+@{
+    Layout = LayoutConstants.Layout;
+}
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Потребители</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Имейл</th>
+                            <th>Училище</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.Email</td>
+                                <td>@user.SchoolId</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+</div>
