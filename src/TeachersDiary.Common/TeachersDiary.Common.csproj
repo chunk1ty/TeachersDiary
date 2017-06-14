@@ -44,6 +44,7 @@
     <Compile Include="Constants\DbEntitesValidationConstants.cs" />
     <Compile Include="Constants\LayoutConstants.cs" />
     <Compile Include="Constants\PartialViewConstants.cs" />
+    <Compile Include="Enumerations\ApplicationRoles.cs" />
     <Compile Include="Exceptions\ClassNotFoundException.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

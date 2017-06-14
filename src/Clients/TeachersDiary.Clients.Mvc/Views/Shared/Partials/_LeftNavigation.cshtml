@@ -46,7 +46,9 @@
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
                 </ul>
             </li>
-
+            
+        @if (User.IsInRole(ApplicationRole.SchoolAdministrator) || User.IsInRole(ApplicationRole.Administrator) || User.IsInRole(ApplicationRole.Teacher))
+        {
             <li class="@Html.IsSelected("class")">
                 <a href="@(Url.Action<ClassController>(x => x.All()))">
                     <i class="fa fa-pie-chart"></i>
@@ -64,8 +66,9 @@
                     </li>
                 </ul>
             </li>
+        }
             
-            @if (User.IsInRole(ApplicationRole.SchoolAdministrator))
+            @if (User.IsInRole(ApplicationRole.SchoolAdministrator) || User.IsInRole(ApplicationRole.Administrator))
             {
                 <li class="@Html.IsSelected("class")">
                     <a href="@(Url.Action<AdminController>(x => x.Index()))">
