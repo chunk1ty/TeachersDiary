@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Microsoft.AspNet.Identity;
-
 using TeachersDiary.Data.Ef.Models;
 
 namespace TeachersDiary.Data.Identity.Contracts
@@ -16,5 +16,13 @@ namespace TeachersDiary.Data.Identity.Contracts
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
 
         Task<IdentityResult> AddToRoleAsync(string userId, string role);
+
+        Task<IdentityResult> RemoveFromRoleAsync(string userId, string role);
+     
+        Task<IdentityResult> RemoveFromRolesAsync(string userId, params string[] roles);
+
+        Task<IEnumerable<UserEntity>> GetAllAsync();
+
+        Task<bool> IsInRoleAsync(string userId, string role);
     }
 }

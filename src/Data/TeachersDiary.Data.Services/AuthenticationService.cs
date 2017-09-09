@@ -45,7 +45,6 @@ namespace TeachersDiary.Data.Services
 
             if (result.Succeeded)
             {
-                await _identityUserManagerService.AddToRoleAsync(userEntity.Id, ApplicationRole.Teacher);
                 await _identitySignInService.SignInAsync(userEntity, false, false);
 
                 if (selectedSchool != "-1")

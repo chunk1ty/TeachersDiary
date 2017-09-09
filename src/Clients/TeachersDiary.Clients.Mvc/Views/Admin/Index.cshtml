@@ -1,0 +1,136 @@
+﻿@model IList<UserViewModel>
+
+@{
+    Layout = LayoutConstants.Layout;
+}
+
+@section Styles {
+    @Styles.Render("~/plugins/sweetAlertStyles")
+}
+
+
+<div class="wrapper wrapper-content animated fadeInRight row">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Потребители</h5>
+        </div>
+        <div class="ibox-content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Имейл</th>
+                    <th>Училище</th>
+                    <th>Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Email</td>
+                        <td>@user.SchoolId</td>
+                        <td>
+                            <span class="change-btn btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" data-id="@user.Id" data-email="@user.Email">
+                                Промени
+                            </span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ChangeUserRoleModal")
+
+@section scripts {
+    @Scripts.Render("~/plugins/sweetAlert")
+    <script>
+        $(document).ready(function () {
+            var userId,
+                email;
+
+            $('tbody').on('click', '.change-btn', function () {
+                userId = $(this).attr('data-id');
+
+                email = $(this).attr('data-email');
+
+                $('#modal-content').text(email);
+            });
+
+
+            $('#delete-vote-system-btn').on('click', function () {
+                var token = $('input[name="__RequestVerificationToken"]').val();
+                var role = $('#roles option:selected').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/UserRole',
+                    data: {
+                        __RequestVerificationToken: token,
+                        userId: userId,
+                        roleId: role
+                    },
+                    success: function () {
+                        $('#cancel-btn').trigger('click');
+
+                        $(userId).parent().parent().remove();
+                    },
+                    error: function (ex) {
+                        alert('Can not delete vote system!' + ex);
+                    }
+                });
+            });
+
+            //$('.change-btn').click(function () {
+            //    var userId = $(this).attr('id');
+            //    swal({
+            //            title: "Are you sure?",
+            //            text: "Your will not be able to recover this imaginary file!",
+            //            type: "warning",
+            //            showCancelButton: true,
+            //            confirmButtonColor: "#DD6B55",
+            //            confirmButtonText: "Yes, delete it!",
+            //            cancelButtonText: "No, cancel plx!",
+            //            closeOnConfirm: false,
+            //            closeOnCancel: false
+            //        },
+            //        function(isConfirm) {
+            //            if (isConfirm) {
+            //                debugger;
+            //                changeUserRole(userId);
+
+            //                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            //            } else {
+            //                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            //            }
+            //        });
+            //});
+
+            //function changeUserRole(userId) {
+            //    //var token = $('input[name="__RequestVerificationToken"]').val();
+
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: '/admin/userrole',
+            //        data: {
+            //            //__RequestVerificationToken: token,
+            //            userId: userId
+            //        },
+            //        success: function () {
+            //            $('#cancel-btn').trigger('click');
+
+            //            $(selectedVoteSystemId).parent().remove();
+            //        },
+            //        error: function (ex) {
+            //            alert('Can not delete vote system!' + ex);
+            //        }
+            //    });
+            //}
+        });
+    </script>
+}
