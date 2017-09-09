@@ -21,9 +21,9 @@ namespace TeachersDiary.Data.Identity
         {
         }
 
-        public async Task<IEnumerable<UserEntity>> GetAllAsync()
+        public async Task<IEnumerable<UserEntity>> GetAllBySchoolIdAsync(int id)
         {
-            return await Users.ToListAsync();
+            return await Users.Where(x => x.SchoolId == id).ToListAsync();
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

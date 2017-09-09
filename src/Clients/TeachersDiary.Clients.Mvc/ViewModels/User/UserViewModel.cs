@@ -1,4 +1,5 @@
-﻿using TeachersDiary.Domain;
+﻿using TeachersDiary.Common.Enumerations;
+using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.ViewModels.User
@@ -18,5 +19,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.User
         public string UserName { get; set; }
 
         public int SchoolId { get; set; }
+
+        public ApplicationRoles Role { get; set; }
     }
 }

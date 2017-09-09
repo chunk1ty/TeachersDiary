@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+
 using TeachersDiary.Common.Enumerations;
-using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
 
@@ -15,23 +16,28 @@ namespace TeachersDiary.Data.Services
             _identityUserManagerService = identityUserManagerService;
         }
 
-        public async Task ChangeUserRoleAsync(string userId, ApplicationRoles role)
+        public async Task<bool> IsChangeUserRoleSuccessfulAsync(string userId, ApplicationRoles role)
         {
-            var roles = new []
-            {
-                ApplicationRoles.Student.ToString(),
-                ApplicationRoles.Teacher.ToString(),
-                ApplicationRoles.Administrator.ToString(),
-                ApplicationRoles.SchoolAdministrator.ToString(),
-            };
+            var roles = await _identityUserManagerService.GetRolesAsync(userId);
 
-            await _identityUserManagerService.RemoveFromRolesAsync(userId, roles);
-            
+            if (roles.Count > 0)
+            {
+                var identityResult = await _identityUserManagerService.RemoveFromRolesAsync(userId, roles.ToArray());
+
+                if (!identityResult.Succeeded)
+                {
+                    return false;
+                }
+            }
 
             if (role != ApplicationRoles.None)
             {
-                await _identityUserManagerService.AddToRoleAsync(userId, role.ToString());
+                var retuResult = await _identityUserManagerService.AddToRoleAsync(userId, role.ToString());
+
+                return retuResult.Succeeded;
             }
+
+            return true;
         }
     }
 }

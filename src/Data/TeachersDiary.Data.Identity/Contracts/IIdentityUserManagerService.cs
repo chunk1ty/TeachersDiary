@@ -21,8 +21,10 @@ namespace TeachersDiary.Data.Identity.Contracts
      
         Task<IdentityResult> RemoveFromRolesAsync(string userId, params string[] roles);
 
-        Task<IEnumerable<UserEntity>> GetAllAsync();
+        Task<IEnumerable<UserEntity>> GetAllBySchoolIdAsync(int id);
 
         Task<bool> IsInRoleAsync(string userId, string role);
+
+        Task<IList<string>> GetRolesAsync(string userId);
     }
 }

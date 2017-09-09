@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-
+using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using TeachersDiary.Data.Ef.Contracts;
@@ -67,5 +67,23 @@ namespace TeachersDiary.Data.Ef
         {
             base.SaveChanges();
         }
+
+        public List<TeachersDiaryRole> GetRoles()
+        {
+            var roles = this.Roles.Select(x => new TeachersDiaryRole()
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
+
+            return roles;
+        }
+    }
+
+    public class TeachersDiaryRole
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

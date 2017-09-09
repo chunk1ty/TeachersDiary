@@ -4,11 +4,6 @@
     Layout = LayoutConstants.Layout;
 }
 
-@section Styles {
-    @Styles.Render("~/plugins/sweetAlertStyles")
-}
-
-
 <div class="wrapper wrapper-content animated fadeInRight row">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -22,7 +17,8 @@
                     <th>Презиме</th>
                     <th>Фамилия</th>
                     <th>Имейл</th>
-                    <th>Действие</th>
+                    <th>Роля</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,8 +29,9 @@
                         <td>@user.MiddleName</td>
                         <td>@user.LastName</td>
                         <td>@user.Email</td>
+                        <td>@Html.DisplayApplicationRole(user.Role)</td>
                         <td>
-                            <span class="change-btn btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" data-id="@user.Id" data-email="@user.Email">
+                            <span class="change-btn btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" data-id="@user.Id" data-email="@user.Email">
                                 Промени
                             </span>
                         </td>
@@ -50,7 +47,6 @@
 @Html.Partial("_ChangeUserRoleModal")
 
 @section scripts {
-    @Scripts.Render("~/plugins/sweetAlert")
     <script>
         $(document).ready(function () {
             var userId,
@@ -65,7 +61,7 @@
             });
 
 
-            $('#delete-vote-system-btn').on('click', function () {
+            $('#confirm-btn').on('click', function () {
                 var token = $('input[name="__RequestVerificationToken"]').val();
                 var role = $('#roles option:selected').val();
 
@@ -78,61 +74,13 @@
                         roleId: role
                     },
                     success: function () {
-                        $('#cancel-btn').trigger('click');
-
-                        $(userId).parent().parent().remove();
+                        location.reload();
                     },
                     error: function (ex) {
                         alert('Не може да промените ролята' + ex);
                     }
                 });
             });
-
-            //$('.change-btn').click(function () {
-            //    var userId = $(this).attr('id');
-            //    swal({
-            //            title: "Are you sure?",
-            //            text: "Your will not be able to recover this imaginary file!",
-            //            type: "warning",
-            //            showCancelButton: true,
-            //            confirmButtonColor: "#DD6B55",
-            //            confirmButtonText: "Yes, delete it!",
-            //            cancelButtonText: "No, cancel plx!",
-            //            closeOnConfirm: false,
-            //            closeOnCancel: false
-            //        },
-            //        function(isConfirm) {
-            //            if (isConfirm) {
-            //                debugger;
-            //                changeUserRole(userId);
-
-            //                swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            //            } else {
-            //                swal("Cancelled", "Your imaginary file is safe :)", "error");
-            //            }
-            //        });
-            //});
-
-            //function changeUserRole(userId) {
-            //    //var token = $('input[name="__RequestVerificationToken"]').val();
-
-            //    $.ajax({
-            //        type: 'POST',
-            //        url: '/admin/userrole',
-            //        data: {
-            //            //__RequestVerificationToken: token,
-            //            userId: userId
-            //        },
-            //        success: function () {
-            //            $('#cancel-btn').trigger('click');
-
-            //            $(selectedVoteSystemId).parent().remove();
-            //        },
-            //        error: function (ex) {
-            //            alert('Can not delete vote system!' + ex);
-            //        }
-            //    });
-            //}
         });
     </script>
 }

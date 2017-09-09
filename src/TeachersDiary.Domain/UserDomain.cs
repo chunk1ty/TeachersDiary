@@ -1,4 +1,5 @@
-﻿using TeachersDiary.Data.Entities;
+﻿using TeachersDiary.Common.Enumerations;
+using TeachersDiary.Data.Entities;
 using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain
@@ -18,5 +19,7 @@ namespace TeachersDiary.Domain
         public string UserName { get; set; }
 
         public int SchoolId { get; set; }
+
+        public ApplicationRoles Role { get; set; }
     }
 }

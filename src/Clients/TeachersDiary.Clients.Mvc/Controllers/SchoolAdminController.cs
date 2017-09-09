@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.User;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
@@ -17,12 +21,14 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         private readonly IUserService _userService;
         private readonly IMappingService _mappingService;
         private readonly IRoleService _roleService;
+        private readonly ILoggingService _loggingService;
 
-        public SchoolAdminController(IUserService userService, IMappingService mappingService, IRoleService roleService)
+        public SchoolAdminController(IUserService userService, IMappingService mappingService, IRoleService roleService, ILoggingService loggingService)
         {
             _userService = userService;
             _mappingService = mappingService;
             _roleService = roleService;
+            _loggingService = loggingService;
         }
 
         // GET: Admin
@@ -37,13 +43,22 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> UserRole(string userId, string roleId)
+        public async Task<HttpStatusCodeResult> UserRole(string userId, string roleId)
         {
-            var role = GetRole(roleId);
-           
-            await _roleService.ChangeUserRoleAsync(userId, role);
+            try
+            {
+                var role = GetRole(roleId);
 
-            return Json(new object());
+                var result = await _roleService.IsChangeUserRoleSuccessfulAsync(userId, role);
+
+                return result ? new HttpStatusCodeResult(HttpStatusCode.OK) : new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Error(ex.Message, ex);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         private ApplicationRoles GetRole(string roleId)
