@@ -68,7 +68,9 @@
     <Compile Include="IAbsenceService.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="IClassService.cs" />
+    <Compile Include="IRoleService.cs" />
     <Compile Include="ISchoolService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +78,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}</Project>
+      <Name>TeachersDiary.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\TeachersDiary.Domain\TeachersDiary.Domain.csproj">
       <Project>{2EF30906-2AB7-46F5-AAA3-C1AEDCAB824C}</Project>
       <Name>TeachersDiary.Domain</Name>

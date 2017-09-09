@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Abstracts\TeacherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Abstracts\BaseController.cs" />
+    <Compile Include="Controllers\SchoolAdminController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="ViewModels\Class\ClassViewModel.cs" />
     <Compile Include="ViewModels\School\SchoolViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentViewModel.cs" />
+    <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="500.html" />
@@ -1650,6 +1652,8 @@
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Shared\Partials\_LeftNavigation.cshtml" />
     <Content Include="Views\Shared\Partials\_TopNavigation.cshtml" />
+    <Content Include="Views\SchoolAdmin\Index.cshtml" />
+    <Content Include="Views\SchoolAdmin\_ChangeUserRoleModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

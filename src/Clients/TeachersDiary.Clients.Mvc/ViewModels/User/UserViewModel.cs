@@ -1,9 +1,9 @@
-﻿using TeachersDiary.Data.Entities;
+﻿using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;
 
-namespace TeachersDiary.Domain
+namespace TeachersDiary.Clients.Mvc.ViewModels.User
 {
-    public class UserDomain : IMap<UserEntity>
+    public class UserViewModel : IMap<UserDomain>
     {
         public string FirstName { get; set; }
 
@@ -12,9 +12,9 @@ namespace TeachersDiary.Domain
         public string LastName { get; set; }
 
         public string Email { get; set; }
-        
+
         public string Id { get; set; }
-       
+
         public string UserName { get; set; }
 
         public int SchoolId { get; set; }
