@@ -98,7 +98,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return View(model);
             }
 
-            var result = await _authenticationService.CreateAccountAsync(model.Email, model.Password, model.SelectedSchool);
+            var result = await _authenticationService.CreateAccountAsync(
+                model.Email, 
+                model.Password, 
+                model.FirstName, 
+                model.MiddleName, 
+                model.LastName,
+                model.SelectedSchool);
 
             if (result.Succeeded)
             {

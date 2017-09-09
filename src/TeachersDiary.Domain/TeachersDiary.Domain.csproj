@@ -42,7 +42,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolDomain.cs" />
     <Compile Include="StudentDomain.cs" />
-    <Compile Include="TeacherDomain.cs" />
     <Compile Include="UserDomain.cs" />
   </ItemGroup>
   <ItemGroup>

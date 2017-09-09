@@ -34,6 +34,21 @@
                 </div>
 
                 <div class="form-group">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Име" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", placeholder = "Презиме" })
+                    @Html.ValidationMessageFor(m => m.MiddleName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Фамилия" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Парола" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>

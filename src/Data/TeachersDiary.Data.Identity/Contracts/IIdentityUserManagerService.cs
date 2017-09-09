@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 
 using Microsoft.AspNet.Identity;
-
-using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Identity.Contracts
 {

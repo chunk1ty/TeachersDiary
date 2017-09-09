@@ -1,4 +1,4 @@
-﻿using TeachersDiary.Data.Ef.Models;
+﻿using TeachersDiary.Data.Entities;
 using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Domain

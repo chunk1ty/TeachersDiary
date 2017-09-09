@@ -85,6 +85,10 @@
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
+      <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
+      <Name>TeachersDiary.Data.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

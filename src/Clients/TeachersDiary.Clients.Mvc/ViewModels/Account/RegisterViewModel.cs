@@ -12,6 +12,15 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Account
         [EmailAddress(ErrorMessage = "Невалиден имейл формат.")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "FirstName е задължителен.")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "MiddleName е задължителен.")]
+        public string MiddleName { get; set; }
+
+        [Required(ErrorMessage = "LastName е задължителен.")]
+        public string LastName { get; set; }
+
         [Required(ErrorMessage = "Паролата е задължителна.")]
         [StringLength(100, ErrorMessage = "Паролата трябва да е с дължина минимум {2} символа.", MinimumLength = 6)]
         [DataType(DataType.Password)]        
