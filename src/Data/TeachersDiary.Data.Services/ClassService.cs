@@ -19,13 +19,14 @@ namespace TeachersDiary.Data.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
+        private readonly IUserService _userService;
        
         public ClassService(
             IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository,
             IQuerySettings<ClassEntity> querySettings,
             IUnitOfWork unitOfWork, 
             IMappingService mappingService, 
-            IEncryptingService encryptingService)
+            IEncryptingService encryptingService, IUserService userService)
         {
             Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
             Guard.WhenArgument(querySettings, nameof(querySettings)).IsNull().Throw();
@@ -37,6 +38,7 @@ namespace TeachersDiary.Data.Services
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
             _encryptingService = encryptingService;
+            _userService = userService;
             _querySettings = querySettings;
         }
       
@@ -63,16 +65,22 @@ namespace TeachersDiary.Data.Services
             return classDomain;
         }
         
-        public async Task<IEnumerable<ClassDomain>> GetAllAvailableClassesForUserAsync(string userId)
+        public async Task<IEnumerable<ClassDomain>> GetAllClassesBySchoolIdAsync(int  schoolId)
         {
-            Guard.WhenArgument(userId, nameof(userId)).IsNull().Throw();
-
-            _querySettings.Where(x => x.ClassTeacherId == userId);
+            _querySettings.Where(x => x.SchoolId == schoolId);
             _querySettings.ReadOnly = true;
 
             var classeEntities = await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
-
             var classDomains = _mappingService.Map<IEnumerable<ClassDomain>>(classeEntities);
+
+            var users = await _userService.GetTeachersBySchoolIdAsync();
+
+            foreach (var @class in classDomains)
+            {
+                var classTeacher = users.SingleOrDefault(x => x.Id == @class.ClassTeacherId);
+
+                @class.ClassTeacher = classTeacher;
+            }
 
             return classDomains;
         }

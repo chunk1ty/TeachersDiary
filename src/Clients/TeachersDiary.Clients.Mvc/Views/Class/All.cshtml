@@ -1,50 +1,58 @@
-﻿@model IList<ClassViewModel>
+﻿@using TeachersDiary.Common.Enumerations
+@model IList<ClassViewModel>
 
 @{
     Layout = LayoutConstants.Layout;
 }
 
-<div class="row">
+<div class="wrapper wrapper-content animated fadeInRight row">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h2>Класове</h2>
         </div>
         <div class="ibox-content">
-            @if (Model.Count > 0)
-            {
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Клас</th>
-                            <th>Действие</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @for (int i = 0; i < Model.Count; i++)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Име</th>
+                        <th>Класен</th>
+                        @if (User.IsInRole(ApplicationRoles.SchoolAdministrator.ToString()))
                         {
-                            <tr>
-                                <td>
-                                    @(i + 1)
-                                </td>
-                                <td>
-                                    @(Html.ActionLink<ClassController>(Model[i].Name, c => c.Index(Model[i].EncodedId), new {area = string.Empty}, new {@class = "btn btn-default"}))
-                                </td>
-                                <td>
-                                    @(Html.ActionLink<ClassController>("Изтрий", c => c.Delete(Model[i].EncodedId), new {area = string.Empty}, new {@class = "btn btn-danger"}))
-                                </td>
-                            </tr>
+                            <th>Действия</th>
                         }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <div>
-                    Няма налични класове.
-                </div>
-            }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var classs in Model)
+                    {
+                        <tr>
+                            @if (User.Identity.GetUserId() == classs.ClassTeacher.Id || User.IsInRole(ApplicationRoles.SchoolAdministrator.ToString()))
+                            {
+                                <td>
+                                    @(Html.ActionLink<ClassController>(classs.Name, c => c.Index(classs.EncodedId), new { area = string.Empty }, new { @class = "btn btn-primary" }))
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @classs.Name
+                                </td>
+                            }
+                            <td>
+                                @classs.ClassTeacher.FullName
+                            </td>
+                            @if (User.IsInRole(ApplicationRoles.SchoolAdministrator.ToString()))
+                            {
+                                <td>
+                                    @(Html.ActionLink<ClassController>("Изтрий", c => c.Delete(classs.EncodedId), new { area = string.Empty }, new { @class = "btn btn-danger" }))
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>

@@ -135,21 +135,21 @@ namespace Teachers.Diary.Data.Services.Tests
             Assert.IsNull(result.EncodedId);
         }
 
-        [Test]
-        public void GetAllAvailableClassesForUserAsync_WhenUserIdIsNull_ThrowsArgumentNullException()
-        {
-            var classService = new ClassService(
-                _mockedEntityFrameworkRepository.Object,
-                _mockedQuerySettings.Object,
-                _mockedUnitOfWorkd.Object,
-                _mockedMapperService.Object,
-                _mockedEncryptingService.Object);
+        //[Test]
+        //public void GetAllAvailableClassesForUserAsync_WhenUserIdIsNull_ThrowsArgumentNullException()
+        //{
+        //    var classService = new ClassService(
+        //        _mockedEntityFrameworkRepository.Object,
+        //        _mockedQuerySettings.Object,
+        //        _mockedUnitOfWorkd.Object,
+        //        _mockedMapperService.Object,
+        //        _mockedEncryptingService.Object);
 
 
-            Assert.That(async () => await classService.GetAllAvailableClassesForUserAsync(null),
-                Throws.TypeOf<ArgumentNullException>()
-                    .With.Message.Contain("userId"));
-        }
+        //    Assert.That(async () => await classService.GetAllClassesBySchoolIdAsync(1),
+        //        Throws.TypeOf<ArgumentNullException>()
+        //            .With.Message.Contain("userId"));
+        //}
 
         [Test]
         public void AddRange_WhenCollectionIsNull_ThrowsArgumentNullException()

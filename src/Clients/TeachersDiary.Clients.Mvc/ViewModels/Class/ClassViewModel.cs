@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
+using TeachersDiary.Clients.Mvc.ViewModels.User;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;
 
@@ -21,5 +22,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
         public double TotalNotExcusedAbsences { get; set; }
 
         public List<StudentViewModel> Students { get; set; }
+
+        public UserViewModel ClassTeacher { get; set; }
     }
 }

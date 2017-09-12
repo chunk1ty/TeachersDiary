@@ -25,7 +25,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         private readonly IClassService _classService;
         private readonly IUserService _userService;
         private readonly ILoggingService _loggingService;
-
         private readonly IMappingService _mappingService;
 
         public ClassController(
@@ -43,9 +42,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> All()
         {
-            var userId = User.Identity.GetUserId();
-
-            var classDomains =  await _classService.GetAllAvailableClassesForUserAsync(userId);
+            var classDomains =  await _classService.GetAllClassesBySchoolIdAsync(1);
 
             var classViewModels = _mappingService.Map<IList<ClassViewModel>>(classDomains);
 

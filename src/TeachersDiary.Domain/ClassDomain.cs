@@ -39,6 +39,7 @@ namespace TeachersDiary.Domain
             }
         }
 
+        public UserDomain ClassTeacher { get; set; }
         public string ClassTeacherId { get; set; }
 
         public IList<StudentDomain> Students { get; set; }
