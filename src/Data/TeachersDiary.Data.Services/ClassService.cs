@@ -67,7 +67,7 @@ namespace TeachersDiary.Data.Services
         {
             Guard.WhenArgument(userId, nameof(userId)).IsNull().Throw();
 
-            _querySettings.Where(x => x.CreatedBy == userId);
+            _querySettings.Where(x => x.ClassTeacherId == userId);
             _querySettings.ReadOnly = true;
 
             var classeEntities = await _entityFrameworkGenericRepository.GetAllAsync(_querySettings);
@@ -102,6 +102,19 @@ namespace TeachersDiary.Data.Services
 
                 _unitOfWork.Commit();
             }
+        }
+
+        public void Add(ClassDomain @class)
+        {
+            Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
+
+            // TODO techdeb only 1 for Blagoev
+            @class.SchoolId = 1;
+
+            var classEntity = _mappingService.Map<ClassEntity>(@class);
+
+            _entityFrameworkGenericRepository.Add(classEntity);
+            _unitOfWork.Commit();
         }
     }
 }

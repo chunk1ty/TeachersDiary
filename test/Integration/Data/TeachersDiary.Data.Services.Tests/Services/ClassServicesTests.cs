@@ -34,12 +34,12 @@ namespace TeachersDiary.Data.Services.Tests.Services
             new ClassEntity()
             {
                 Name = "1a",
-                CreatedBy = User1Id
+                ClassTeacherId = User1Id
             },
             new ClassEntity()
             {
                 Name = "2a",
-                CreatedBy = User2Id
+                ClassTeacherId = User2Id
             }
         };
 

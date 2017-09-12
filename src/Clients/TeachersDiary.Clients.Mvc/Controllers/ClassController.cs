@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
@@ -8,8 +9,12 @@ using System.Web.Mvc.Expressions;
 using Microsoft.AspNet.Identity;
 
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
+using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
+using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Services.Contracts;
+using TeachersDiary.Domain;
+using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Contracts.Mapping;
 using TeachersDiary.Services.ExcelParser;
 
@@ -17,20 +22,22 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 {
     public class ClassController : TeacherController
     {
-        //TODO IExelParser injection ??
         private readonly IClassService _classService;
+        private readonly IUserService _userService;
+        private readonly ILoggingService _loggingService;
 
         private readonly IMappingService _mappingService;
-        private readonly IExelParser _exelParser;
 
         public ClassController(
             IClassService classService, 
             IMappingService mappingService, 
-            IExelParser exelParser)
+            IUserService userService, 
+            ILoggingService loggingService)
         {
             _classService = classService;
             _mappingService = mappingService;
-            _exelParser = exelParser;
+            _userService = userService;
+            _loggingService = loggingService;
         }
 
         [HttpGet]
@@ -65,38 +72,47 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var createClassViewModel = new CreateClassViewModel();
+
+            var teachers = await _userService.GetTeachersBySchoolIdAsync();
+            createClassViewModel.Teachers = new SelectList(teachers, "Id", "FullName", 1);
+
+            return View(createClassViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file)
+        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
+        public ActionResult Create(CreateClassViewModel model)
         {
-            var extenstion = Path.GetExtension(file.FileName);
-
-            if (file.ContentLength > 0)
+            if (!ModelState.IsValid)
             {
-                // xls - 98 - 03
-                if (extenstion == ".xlsx")
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-
-                    var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-                    file.SaveAs(path);
-
-                    var userId = User.Identity.GetUserId();
-
-                    _exelParser.CreateClassForUser(path, userId);
-
-                    return this.RedirectToAction<ClassController>(x => x.All());
-                }
-
-                ModelState.AddModelError("", Resources.Resources.IncorrectFileFormat);
+                return View(model);
             }
 
-            return View();
+            if (string.IsNullOrEmpty(model.ClassTeacherId))
+            {
+                ModelState.AddModelError("", Resources.Resources.PleaseSelectClassTeacher);
+                return View(model);
+            }
+
+            try
+            {
+                var classDomain = _mappingService.Map<ClassDomain>(model);
+                _classService.Add(classDomain);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Error(ex.Message, ex);
+
+                ModelState.AddModelError("", Resources.Resources.ErrorOnCreationOfNewClass);
+                return View(model);
+            }
+
+            return this.RedirectToAction<ClassController>(x => x.All());
         }
     }
 }

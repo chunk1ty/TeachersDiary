@@ -61,9 +61,12 @@
                     <li class="@Html.IsSelected(action: "class")">
                         <a href="@(Url.Action<ClassController>(x => x.All()))">Преглед</a>
                     </li>
-                    <li class="@Html.IsSelected(action: "create")">
-                        <a href="@(Url.Action<ClassController>(x => x.Create()))">Създай клас</a>
-                    </li>
+                    @if (User.IsInRole(ApplicationRole.SchoolAdministrator))
+                    {
+                        <li class="@Html.IsSelected(action: "create")">
+                            <a href="@(Url.Action<ClassController>(x => x.Create()))">Създай клас</a>
+                        </li>
+                    }
                 </ul>
             </li>
         }

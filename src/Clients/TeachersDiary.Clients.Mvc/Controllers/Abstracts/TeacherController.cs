@@ -1,10 +1,9 @@
-﻿using System.Web.Mvc;
-using TeachersDiary.Common.Constants;
+﻿using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
+using TeachersDiary.Common.Enumerations;
 
 namespace TeachersDiary.Clients.Mvc.Controllers.Abstracts
 {
-    // TODO use enum insted of string
-    [Authorize(Roles = ApplicationRole.Teacher)]
+    [TeachersDiaryAuthorize(ApplicationRoles.Teacher, ApplicationRoles.SchoolAdministrator)]
     public abstract class TeacherController : BaseController
     {   
     }

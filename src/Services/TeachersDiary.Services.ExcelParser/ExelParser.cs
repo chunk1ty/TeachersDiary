@@ -45,7 +45,7 @@ namespace TeachersDiary.Services.ExcelParser
                 var @class = new ClassDomain
                 {
                     Name = result.Tables[sheetIndex].TableName,
-                    CreatedBy = userId,
+                    ClassTeacherId = userId,
                     // TODO works only for Blagoev
                     SchoolId = 1
                 };

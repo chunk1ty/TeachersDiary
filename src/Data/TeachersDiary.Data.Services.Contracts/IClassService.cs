@@ -13,6 +13,8 @@ namespace TeachersDiary.Data.Services.Contracts
 
         void AddRange(List<ClassDomain> classes);
 
+        void Add(ClassDomain @class);
+
         Task DeleteByIdAsync(string classId);
     }
 }

@@ -44,5 +44,18 @@ namespace TeachersDiary.Data.Services
 
             return usersDomain;
         }
+
+        public async Task<IEnumerable<UserDomain>> GetTeachersBySchoolIdAsync()
+        {
+            // TODO techdeb only 1 for Blagoev
+            var users = await _userManager.GetAllBySchoolIdAsync(1);
+            var roles = _dbContext.GetRoles();
+
+            var teacherRole = roles.SingleOrDefault(x => x.Name == ApplicationRoles.Teacher.ToString());
+            var teachers = users.Where(x => x.Roles.Any(y => y.RoleId == teacherRole.Id));
+            var teachersDomain = _mappingService.Map<IEnumerable<UserDomain>>(teachers).ToList();
+
+            return teachersDomain;
+        }
     }
 }

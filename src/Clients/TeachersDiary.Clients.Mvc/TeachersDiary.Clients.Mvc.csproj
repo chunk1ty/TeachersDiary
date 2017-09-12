@@ -210,6 +210,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Attribute\TeachersDiaryAuthorize.cs" />
     <Compile Include="Infrastructure\Helpers\ApplicationRolesHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Class\ClassViewModel.cs" />
+    <Compile Include="ViewModels\Class\CreateClassViewModel.cs" />
     <Compile Include="ViewModels\School\SchoolViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />

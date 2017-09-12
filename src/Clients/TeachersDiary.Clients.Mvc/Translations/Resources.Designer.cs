@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при създаването на клас. Моля свържете се със училищният администратор!.
+        /// </summary>
+        public static string ErrorOnCreationOfNewClass {
+            get {
+                return ResourceManager.GetString("ErrorOnCreationOfNewClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Изпрати файл.
         /// </summary>
         public static string FileSentLabel {
@@ -156,6 +165,15 @@ namespace Resources {
         public static string OtherLabel {
             get {
                 return ResourceManager.GetString("OtherLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля изберете учител.
+        /// </summary>
+        public static string PleaseSelectClassTeacher {
+            get {
+                return ResourceManager.GetString("PleaseSelectClassTeacher", resourceCulture);
             }
         }
         

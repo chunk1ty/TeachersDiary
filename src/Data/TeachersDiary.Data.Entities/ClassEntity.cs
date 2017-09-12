@@ -18,15 +18,15 @@ namespace TeachersDiary.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        [MinLength(DbEntitesValidationConstants.ClassNameMinLength)]
-        [MaxLength(DbEntitesValidationConstants.ClassNameMaxLength)]
         public string Name { get; set; }
 
+        [Required]
         public int SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
 
-        public string CreatedBy { get; set; }
-
         public IList<StudentEntity> Students { get; set; }
+
+        [Required]
+        public string ClassTeacherId { get; set; }
     }
 }

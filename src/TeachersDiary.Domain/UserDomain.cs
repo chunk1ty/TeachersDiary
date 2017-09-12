@@ -21,5 +21,7 @@ namespace TeachersDiary.Domain
         public int SchoolId { get; set; }
 
         public ApplicationRoles Role { get; set; }
+
+        public string FullName => FirstName + " " + MiddleName + " " + LastName;
     }
 }

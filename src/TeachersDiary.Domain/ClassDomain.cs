@@ -39,7 +39,7 @@ namespace TeachersDiary.Domain
             }
         }
 
-        public string CreatedBy { get; set; }
+        public string ClassTeacherId { get; set; }
 
         public IList<StudentDomain> Students { get; set; }
 

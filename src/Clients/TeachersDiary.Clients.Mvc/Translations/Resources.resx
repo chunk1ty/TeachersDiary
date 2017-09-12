@@ -162,4 +162,10 @@
   <data name="IncorrectFileFormat" xml:space="preserve">
     <value>Невалиден файл формат!</value>
   </data>
+  <data name="PleaseSelectClassTeacher" xml:space="preserve">
+    <value>Моля изберете учител</value>
+  </data>
+  <data name="ErrorOnCreationOfNewClass" xml:space="preserve">
+    <value>Възникна грешка при създаването на клас. Моля свържете се със училищният администратор!</value>
+  </data>
 </root>
