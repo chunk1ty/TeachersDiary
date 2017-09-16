@@ -46,7 +46,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             _absenceService.CalculateStudentsAbsencesForLastMonth(studentDomains);
 
-            return this.RedirectToAction<ClassController>(x => x.Index(model.EncodedId));
+            return this.RedirectToAction<ClassController>(x => x.Index(model.Id));
         }
     }
 }

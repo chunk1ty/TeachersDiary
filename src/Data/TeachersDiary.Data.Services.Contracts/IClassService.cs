@@ -7,9 +7,9 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IClassService
     {
-        Task<IEnumerable<ClassDomain>> GetAllClassesBySchoolIdAsync(int schoolId);
+        Task<IEnumerable<ClassDomain>> GetClassesBySchoolIdAsync(int schoolId);
 
-        Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId);
+        Task<ClassDomain> GetClassByClassIdAsync(string classId);
 
         void AddRange(List<ClassDomain> classes);
 

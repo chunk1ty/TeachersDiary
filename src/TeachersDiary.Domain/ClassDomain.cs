@@ -17,7 +17,7 @@ namespace TeachersDiary.Domain
             Students = new List<StudentDomain>();
         }
 
-        public string EncodedId { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -49,10 +49,10 @@ namespace TeachersDiary.Domain
             IEncryptingService encryptingService = new EncryptingService();
 
             configuration.CreateMap<ClassEntity, ClassDomain>()
-                .ForMember(domain => domain.EncodedId, x => x.MapFrom(entity => encryptingService.EncodeId(entity.Id)));
+                .ForMember(domain => domain.Id, x => x.MapFrom(entity => encryptingService.EncodeId(entity.Id)));
 
             configuration.CreateMap<ClassDomain, ClassEntity>()
-                .ForMember(entity => entity.Id, x => x.MapFrom(domain => encryptingService.DecodeId(domain.EncodedId)));
+                .ForMember(entity => entity.Id, x => x.MapFrom(domain => encryptingService.DecodeId(domain.Id)));
         }
     }
 }

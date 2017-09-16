@@ -18,7 +18,7 @@
     @using (Html.BeginForm<AbsenseController>(c => c.CalculateAbsenses(null), FormMethod.Post, null, new {id= "student-form"}))
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(x => Model.EncodedId)
+        @Html.HiddenFor(x => Model.Id)
         @Html.HiddenFor(x => Model.Name)
         @Html.ValidationSummary(true, null, new { @class = "text-danger" })
 
@@ -63,7 +63,7 @@
                     <td class="text-center">
                         @Html.HiddenFor(x => x.Students[studentIndex].FirstName)
                         @Html.HiddenFor(x => x.Students[studentIndex].LastName)
-                        @Html.HiddenFor(x => x.Students[studentIndex].EncodedId)
+                        @Html.HiddenFor(x => x.Students[studentIndex].Id)
 
                         @Model.Students[studentIndex].FirstName @Model.Students[studentIndex].LastName
                     </td>

@@ -42,7 +42,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> All()
         {
-            var classDomains =  await _classService.GetAllClassesBySchoolIdAsync(1);
+            var classDomains =  await _classService.GetClassesBySchoolIdAsync(1);
 
             var classViewModels = _mappingService.Map<IList<ClassViewModel>>(classDomains);
 
@@ -52,7 +52,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(string classId)
         {
-            var classDomain = await _classService.GetClassWithStudentsByClassIdAsync(classId);
+            var classDomain = await _classService.GetClassByClassIdAsync(classId);
 
             User.Identity.GetUserId();
             var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);

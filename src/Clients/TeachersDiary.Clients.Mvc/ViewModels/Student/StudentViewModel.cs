@@ -16,7 +16,9 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
             Absences = new List<AbsenceViewModel>();
         }
 
-        public string EncodedId { get; set; }
+        public string Id { get; set; }
+
+        public string Number { get; set; }
 
         public string FirstName { get; set; }
 

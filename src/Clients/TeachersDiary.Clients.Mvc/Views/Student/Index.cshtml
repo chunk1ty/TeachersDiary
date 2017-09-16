@@ -1,0 +1,188 @@
+﻿@model ClassViewModel
+
+@{
+    Layout = LayoutConstants.Layout;
+}
+
+@section styles{
+    <link href='https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+}
+
+<div class="wrapper wrapper-content animated fadeInRight row">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h2>
+                @Model.Name клас
+            </h2>
+        </div>
+        <div class="ibox-content">
+            <div class="panel-body">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-url="@Url.Action("Create","Student", new { classId = Model.Id })" id="btnCreateAsset">
+                    Нов Ученик
+                </button>
+
+                <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%;"></table>
+            </div>
+
+            <div class="modal fade" id="createAssetModal" tabindex="-1" role="dialog" aria-labelledby="CreateAssetModal" aria-hidden="true" data-backdrop="static">
+                <div id="createAssetContainer">
+                </div>
+            </div>
+
+            <div class="modal fade" id="editAssetModal" tabindex="-1" role="dialog" aria-labelledby="EditAssetModal" aria-hidden="true" data-backdrop="static">
+                <div id="editAssetContainer">
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteAssetModal" tabindex="-1" role="dialog" aria-labelledby="DeleteAssetModal" aria-hidden="true" data-backdrop="static">
+                <div id="deleteAssetContainer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusiveajax")
+    @Scripts.Render("~/plugins/dataTables")
+
+    <script type="text/javascript">
+        var assetListVM;
+        $(function () {
+            assetListVM = {
+                dt: null,
+
+                init: function () {
+                    dt = $('#assets-data-table').DataTable({
+                        "bFilter": false,
+                        "bInfo": false,
+                        "serverSide": true,
+                        "processing": true,
+                        paging: false,
+                        "ajax": {
+                            "url": "@Url.Action("GetAllByClassId", "Student")" + "?classId=" + '@Model.Id',
+                            "data": function (data) {
+                                data.FirstName = $("#FirstName").val();
+                                data.MiddleName = $("#MiddleName").val();
+                                data.LastName = $("#LastName").val();
+                            }
+                        },
+                        "columns": [
+                            { "title": "№", "data": "Number", "searchable": false, "sortable": false },
+                            { "title": "Име", "data": "FirstName", "searchable": false, "sortable": false },
+                            { "title": "Презиме", "data": "MiddleName", "searchable": false, "sortable": false },
+                            { "title": "Фамилия", "data": "LastName", "searchable": false, "sortable": false },
+                            {
+                                "title": "Действия",
+                                "data": "Id",
+                                "searchable": false,
+                                "sortable": false,
+                                "render": function (data, type, full, meta) {
+                                    return '<a href="@Url.Action("Edit","Student")?id=' + data + '" class="editAsset">Промени</a> | <a href="@Url.Action("Delete","Student")?id=' + data + '" class="deleteAsset">Изтрий</a>';
+                                }
+                            }
+                        ],
+                        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    });
+                },
+
+                refresh: function () {
+                    dt.ajax.reload();
+                }
+            }
+
+            // Advanced Search Modal Search button click handler
+            $('#btnPerformAdvancedSearch').on("click", assetListVM.refresh);
+
+            // initialize the datatables
+            assetListVM.init();
+
+            $("#btnCreateAsset").on("click", function () {
+
+                var url = $(this).data("url");
+
+                $.get(url, function (data) {
+                    $('#createAssetContainer').html(data);
+
+                    $('#createAssetModal').modal('show');
+                });
+
+            });
+
+
+
+            $('#assets-data-table').on("click", ".editAsset", function (event) {
+
+                event.preventDefault();
+
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $('#editAssetContainer').html(data);
+
+                    $('#editAssetModal').modal('show');
+                });
+
+            });
+
+
+            $('#assets-data-table').on("click", ".deleteAsset", function (event) {
+
+                event.preventDefault();
+
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $('#deleteAssetContainer').html(data);
+
+                    $('#deleteAssetModal').modal('show');
+                });
+
+            });
+
+        });
+
+        /**** Create Asset Ajax Form CallBack ********/
+
+        function CreateAssetSuccess(data) {
+            if (data != "success") {
+                $('#createAssetContainer').html(data);
+                return;
+            }
+            $('#createAssetModal').modal('hide');
+            $('#createAssetContainer').html("");
+            assetListVM.refresh();
+
+        }
+
+        /**** Edit Asset Ajax Form CallBack ********/
+
+        function UpdateAssetSuccess(data) {
+
+            if (data != "success") {
+                $('#editAssetContainer').html(data);
+                return;
+            }
+            $('#editAssetModal').modal('hide');
+            $('#editAssetContainer').html("");
+            assetListVM.refresh();
+
+        }
+
+        /**** Delet Asset Ajax Form CallBack ********/
+
+        function DeleteAssetSuccess(data) {
+
+            if (data != "success") {
+                $('#deleteAssetContainer').html(data);
+                return;
+            }
+            $('#deleteAssetModal').modal('hide');
+            $('#deleteAssetContainer').html("");
+            assetListVM.refresh();
+
+        }
+    </script>
+}

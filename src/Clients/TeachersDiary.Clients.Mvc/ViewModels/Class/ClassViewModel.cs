@@ -13,7 +13,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
             Students = new List<StudentViewModel>();
         }
 
-        public string EncodedId { get; set; }
+        public string Id { get; set; }
        
         public string Name { get; set; }
 

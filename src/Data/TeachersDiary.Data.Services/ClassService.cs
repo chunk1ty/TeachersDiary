@@ -42,7 +42,7 @@ namespace TeachersDiary.Data.Services
             _querySettings = querySettings;
         }
       
-        public async Task<ClassDomain> GetClassWithStudentsByClassIdAsync(string classId)
+        public async Task<ClassDomain> GetClassByClassIdAsync(string classId)
         {
            Guard.WhenArgument(classId, nameof(classId)).IsNull().Throw();
 
@@ -65,7 +65,7 @@ namespace TeachersDiary.Data.Services
             return classDomain;
         }
         
-        public async Task<IEnumerable<ClassDomain>> GetAllClassesBySchoolIdAsync(int  schoolId)
+        public async Task<IEnumerable<ClassDomain>> GetClassesBySchoolIdAsync(int  schoolId)
         {
             _querySettings.Where(x => x.SchoolId == schoolId);
             _querySettings.ReadOnly = true;

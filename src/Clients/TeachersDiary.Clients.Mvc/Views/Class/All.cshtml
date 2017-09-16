@@ -30,7 +30,7 @@
                             @if (User.Identity.GetUserId() == classs.ClassTeacher.Id || User.IsInRole(ApplicationRoles.SchoolAdministrator.ToString()))
                             {
                                 <td>
-                                    @(Html.ActionLink<ClassController>(classs.Name, c => c.Index(classs.EncodedId), new { area = string.Empty }, new { @class = "btn btn-primary" }))
+                                    @(Html.ActionLink<StudentController>(classs.Name, c => c.Index(classs.Id), new { area = string.Empty }, new { @class = "btn btn-primary" }))
                                 </td>
                             }
                             else
@@ -45,7 +45,7 @@
                             @if (User.IsInRole(ApplicationRoles.SchoolAdministrator.ToString()))
                             {
                                 <td>
-                                    @(Html.ActionLink<ClassController>("Изтрий", c => c.Delete(classs.EncodedId), new { area = string.Empty }, new { @class = "btn btn-danger" }))
+                                    @(Html.ActionLink<ClassController>("Изтрий", c => c.Delete(classs.Id), new { area = string.Empty }, new { @class = "btn btn-danger" }))
                                 </td>
                             }
                         </tr>

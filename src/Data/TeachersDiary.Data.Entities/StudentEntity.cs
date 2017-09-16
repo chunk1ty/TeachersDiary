@@ -15,8 +15,7 @@ namespace TeachersDiary.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        public string UserId { get; set; }
-
+        [Index("IX_UniqueNumberInClass", 1, IsUnique = true)]
         public int Number { get; set; }
 
         public string FirstName { get; set; }
@@ -25,6 +24,7 @@ namespace TeachersDiary.Data.Entities
 
         public string LastName { get; set; }
 
+        [Index("IX_UniqueNumberInClass", 2, IsUnique = true)]
         public int ClassId { get; set; }
         public virtual ClassEntity Class { get; set; }
 

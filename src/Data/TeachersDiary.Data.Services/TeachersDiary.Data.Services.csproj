@@ -53,6 +53,7 @@
     <Compile Include="RoleService.cs" />
     <Compile Include="SchoolService.cs" />
     <Compile Include="AuthenticationService.cs" />
+    <Compile Include="StudentService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>

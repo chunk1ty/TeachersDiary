@@ -63,6 +63,9 @@
     <Reference Include="Common.Logging.Log4Net1215, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Common.Logging.Log4Net1215.3.3.1\lib\net40\Common.Logging.Log4Net1215.dll</HintPath>
     </Reference>
+    <Reference Include="DataTables.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\datatables.mvc5.0.1.0\lib\net45\DataTables.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.AspNet, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
     </Reference>
@@ -202,6 +205,7 @@
     <Compile Include="Controllers\Abstracts\TeacherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Abstracts\BaseController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SchoolAdminController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -235,6 +239,8 @@
     <Compile Include="ViewModels\Class\ClassViewModel.cs" />
     <Compile Include="ViewModels\Class\CreateClassViewModel.cs" />
     <Compile Include="ViewModels\School\SchoolViewModel.cs" />
+    <Compile Include="ViewModels\Student\CreateStudentViewModel.cs" />
+    <Compile Include="ViewModels\Student\StudentsViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
@@ -1276,6 +1282,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1657,6 +1665,10 @@
     <Content Include="Views\Shared\Partials\_TopNavigation.cshtml" />
     <Content Include="Views\SchoolAdmin\Index.cshtml" />
     <Content Include="Views\SchoolAdmin\_ChangeUserRoleModal.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\_CreatePartial.cshtml" />
+    <Content Include="Views\Student\_DeletePartial.cshtml" />
+    <Content Include="Views\Student\_EditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

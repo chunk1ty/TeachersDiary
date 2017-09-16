@@ -163,7 +163,7 @@
 //            var encoderId = kernel.Get<IEncryptingService>().EncodeId(classes[0].Id);
 
 //            // Act
-//            var @class = await claaService.GetClassWithStudentsByClassIdAsync(encoderId);
+//            var @class = await claaService.GetClassByClassIdAsync(encoderId);
 
 //            // Assert
 //            Assert.IsInstanceOf<ClassDomain>(@class);
@@ -193,7 +193,7 @@
 //            var claaService = kernel.Get<IClassService>();
 
 //            // Act
-//            var @class = await claaService.GetAllClassesBySchoolIdAsync(User2Id);
+//            var @class = await claaService.GetClassesBySchoolIdAsync(User2Id);
            
 //            Assert.IsInstanceOf<IEnumerable<ClassDomain>>(@class);
 //            Assert.AreEqual(1, @class.Count());

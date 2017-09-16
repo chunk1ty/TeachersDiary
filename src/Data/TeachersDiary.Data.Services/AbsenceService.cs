@@ -45,7 +45,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
 
-                    var studentId = _encryptingService.DecodeId(student.EncodedId);
+                    var studentId = _encryptingService.DecodeId(student.Id);
 
                     var absence = new AbsenceEntity()
                     {
@@ -67,7 +67,7 @@ namespace TeachersDiary.Data.Services
                     var totalExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.Excused);
                     var totalNotExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.NotExcused);
 
-                    var studentId = _encryptingService.DecodeId(student.EncodedId);
+                    var studentId = _encryptingService.DecodeId(student.Id);
                     var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().EncodedId);
 
                     var absence = new AbsenceEntity()
