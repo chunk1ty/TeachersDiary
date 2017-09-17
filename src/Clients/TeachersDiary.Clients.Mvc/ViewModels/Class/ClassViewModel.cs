@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TeachersDiary.Clients.Mvc.Controllers;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Clients.Mvc.ViewModels.User;
 using TeachersDiary.Domain;
@@ -24,5 +25,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
         public List<StudentViewModel> Students { get; set; }
 
         public UserViewModel ClassTeacher { get; set; }
+
+        public List<Month> AvailableMonths { get; set; }
     }
 }

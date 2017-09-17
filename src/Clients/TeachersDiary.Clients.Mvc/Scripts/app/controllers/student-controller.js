@@ -28,7 +28,18 @@
 
 
                     $body.find('thead').prepend(
-                        " <th class='text-center' colspan='2'>Ученик</th> <th class='text-center' colspan='2'>Септември - Януари</th> <th class='text-center' colspan='2'>Февруари</th> <th class='text-center' colspan='2'>Март</th> <th class='text-center' colspan='2'>Април</th> <th class='text-center' colspan='2'>Май</th> <th class='text-center' colspan='2'>Юни</th> <th class='text-center' colspan='2'>Общо</th>");
+                        " <th class='text-center' colspan='2'>Ученик</th>" +
+                        " <th class='text-center' colspan='2'>Септември</th> " +
+                        " <th class='text-center' colspan='2'>Октомври</th> " +
+                        " <th class='text-center' colspan='2'>Ноември</th> " +
+                        " <th class='text-center' colspan='2'>Декември</th> " +
+                        " <th class='text-center' colspan='2'>Януари</th> " +
+                        "<th class='text-center' colspan='2'>Февруари</th> " +
+                        "<th class='text-center' colspan='2'>Март</th> " +
+                        "<th class='text-center' colspan='2'>Април</th>" +
+                        " <th class='text-center' colspan='2'>Май</th>" +
+                        " <th class='text-center' colspan='2'>Юни</th>" +
+                        " <th class='text-center' colspan='2'>Общо</th>");
 
 
                     $body.find('.total-absences').each(function (i) {
@@ -42,7 +53,7 @@
                 }
             }, {
                 text: 'Изчисли',
-                className: 'sent-data'
+                className: 'calculate-btn'
             }]
         });
 
@@ -59,9 +70,12 @@
             table.row('.selected').remove().draw(false);
         });
 
-        $('.sent-data').on('click',
-            function () {
-                $('#student-form').submit();
-            });
+        $('.calculate-btn').on('click', function () {
+            $('#myModal').modal();
+         });
+
+        $('#sent-data-btn').on('click', function () {
+            $('#student-form').submit();
+         });
     });
 }($));

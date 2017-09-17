@@ -28,22 +28,24 @@ namespace TeachersDiary.Data.Services
             _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
         }
 
-        public void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students)
+        public void CalculateStudentAbsences(List<StudentDomain> students, string month)
         {
             Guard.WhenArgument(students, nameof(students)).IsNull().Throw();
+            Guard.WhenArgument(month, nameof(month)).IsNull().Throw();
 
-            var absences = new List<AbsenceEntity>();
+            var selectedMonthId = int.Parse(month);
 
-            var previousMonthId = DateTime.UtcNow.Month - 1;
-            var twoMonthAgoId = previousMonthId - 1;
-
-            // first time calculate
-            if (students.FirstOrDefault().Absences.Count == twoMonthAgoId)
+            // calculate absences for the first time for selected month
+            if (!students.FirstOrDefault().Absences.Any(x => x.MonthId == selectedMonthId))
             {
+                var absences = new List<AbsenceEntity>();
+
                 foreach (var student in students)
                 {
-                    var totalExcusedAbsences = student.Absences.Sum(x => x.Excused);
-                    var totalNotExcusedAbsences = student.Absences.Sum(x => x.NotExcused);
+                    var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
+
+                    var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
+                    var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
 
                     var studentId = _encryptingService.DecodeId(student.Id);
 
@@ -52,7 +54,7 @@ namespace TeachersDiary.Data.Services
                         Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
                         NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
-                        MonthId = previousMonthId
+                        MonthId = selectedMonthId
                     };
 
                     absences.Add(absence);
@@ -64,11 +66,13 @@ namespace TeachersDiary.Data.Services
             {
                 foreach (var student in students)
                 {
-                    var totalExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.Excused);
-                    var totalNotExcusedAbsences = student.Absences.Take(twoMonthAgoId).Sum(x => x.NotExcused);
+                    var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
+
+                    var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
+                    var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
 
                     var studentId = _encryptingService.DecodeId(student.Id);
-                    var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().EncodedId);
+                    var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().Id);
 
                     var absence = new AbsenceEntity()
                     {
@@ -76,14 +80,11 @@ namespace TeachersDiary.Data.Services
                         Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
                         NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
                         StudentId = studentId,
-                        MonthId = previousMonthId
+                        MonthId = selectedMonthId
                     };
-
-                    absences.Add(absence);
+                   
                     _entityFrameworkGenericRepository.Update(absence);
                 }
-
-               
             }
 
             _unitOfWork.Commit();

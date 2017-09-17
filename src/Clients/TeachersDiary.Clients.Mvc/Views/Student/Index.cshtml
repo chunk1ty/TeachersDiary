@@ -20,6 +20,8 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-url="@Url.Action("Create","Student", new { classId = Model.Id })" id="btnCreateAsset">
                     Нов Ученик
                 </button>
+                
+                @(Html.ActionLink<AbsenseController>("Отсъствия", c => c.Index(Model.Id), new { area = string.Empty }, new { @class = "btn btn-default" }))
 
                 <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%;"></table>
             </div>

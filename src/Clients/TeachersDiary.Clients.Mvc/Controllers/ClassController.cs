@@ -50,17 +50,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(string classId)
-        {
-            var classDomain = await _classService.GetClassByClassIdAsync(classId);
-
-            User.Identity.GetUserId();
-            var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
-
-            return View(classViewModel);
-        }
-
-        [HttpGet]
         public async Task<ActionResult> Delete(string classId)
         {
             await _classService.DeleteByIdAsync(classId);

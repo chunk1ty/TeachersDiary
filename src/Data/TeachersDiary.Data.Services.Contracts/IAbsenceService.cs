@@ -6,6 +6,6 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IAbsenceService
     {
-        void CalculateStudentsAbsencesForLastMonth(List<StudentDomain> students);
+        void CalculateStudentAbsences(List<StudentDomain> students, string monthId);
     }
 }

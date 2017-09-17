@@ -5,9 +5,9 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Absence
 {
     public class AbsenceViewModel : IMap<AbsenceDomain>
     {
-        public string EncodedId { get; set; }
+        public string Id { get; set; }
 
-        public string EncodedStudentId { get; set; }
+        public string StudentId { get; set; }
 
         public int MonthId { get; set; }
 
