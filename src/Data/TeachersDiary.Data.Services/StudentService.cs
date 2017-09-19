@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
+using TeachersDiary.Common;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
@@ -19,13 +20,15 @@ namespace TeachersDiary.Data.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
+        private readonly ILoggingService _loggingService;
 
-        public StudentService(IEntityFrameworkGenericRepository<StudentEntity> entityFrameworkGenericRepository, IUnitOfWork unitOfWork, IMappingService mappingService, IEncryptingService encryptingService)
+        public StudentService(IEntityFrameworkGenericRepository<StudentEntity> entityFrameworkGenericRepository, IUnitOfWork unitOfWork, IMappingService mappingService, IEncryptingService encryptingService, ILoggingService loggingService)
         {
             _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
             _unitOfWork = unitOfWork;
             _mappingService = mappingService;
             _encryptingService = encryptingService;
+            _loggingService = loggingService;
         }
 
         public async Task<StudentDomain> GetByIdAsync(string id)
@@ -40,24 +43,59 @@ namespace TeachersDiary.Data.Services
             return studentDomain;
         }
 
-        public void Add(StudentDomain student)
+        public OperationStatus Add(StudentDomain student)
         {
             Guard.WhenArgument(student, nameof(student)).IsNull().Throw();
 
-            var studentEntity = _mappingService.Map<StudentEntity>(student);
+            try
+            {
+                var studentEntity = _mappingService.Map<StudentEntity>(student);
 
-            _entityFrameworkGenericRepository.Add(studentEntity);
-            _unitOfWork.Commit();
+                _entityFrameworkGenericRepository.Add(studentEntity);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.InnerException.Message.Contains("Cannot insert duplicate key row in object")){
+                    
+                    return new FailureStatus($"Ученик с номер { student.Number } вече съществува!");
+                }
+
+                // TODO how to log classEntity?
+                _loggingService.Error(ex);
+
+                return new FailureStatus("Възникна грешка при създаването на ученикът. Моля свържете се със ситемният администратор.");
+            }
+
+            return new SuccessStatus();
         }
 
-        public void Update(StudentDomain student)
+        public OperationStatus Update(StudentDomain student)
         {
             Guard.WhenArgument(student, nameof(student)).IsNull().Throw();
 
-            var studentEntity = _mappingService.Map<StudentEntity>(student);
+            try
+            {
+                var studentEntity = _mappingService.Map<StudentEntity>(student);
 
-            _entityFrameworkGenericRepository.Update(studentEntity);
-            _unitOfWork.Commit();
+                _entityFrameworkGenericRepository.Update(studentEntity);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.InnerException.Message.Contains("Cannot insert duplicate key row in object"))
+                {
+
+                    return new FailureStatus($"Ученик с номер { student.Number } вече съществува!");
+                }
+
+                // TODO how to log classEntity?
+                _loggingService.Error(ex);
+
+                return new FailureStatus("Възникна грешка при създаването на ученикът. Моля свържете се със ситемният администратор.");
+            }
+
+            return new SuccessStatus();
         }
 
 

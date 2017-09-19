@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using TeachersDiary.Common;
 using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
@@ -13,7 +13,7 @@ namespace TeachersDiary.Data.Services.Contracts
 
         void AddRange(List<ClassDomain> classes);
 
-        void Add(ClassDomain @class);
+        OperationStatus Add(ClassDomain @class);
 
         Task DeleteByIdAsync(string classId);
     }

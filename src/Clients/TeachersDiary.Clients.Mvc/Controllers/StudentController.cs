@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DataTables.Mvc;
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
+using TeachersDiary.Clients.Mvc.Infrastructure.Constants;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Common.Enumerations;
@@ -60,53 +61,43 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpGet]
         public ActionResult Create(string classId)
         {
-            if (Request.IsAjaxRequest())
+            if (!Request.IsAjaxRequest())
             {
-                var model = new CreateStudentViewModel
-                {
-                    ClassId = classId
-                };
-
-                return PartialView("_CreatePartial", model);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var model = new CreateStudentViewModel
+            {
+                ClassId = classId
+            };
+
+            return PartialView(PartialViewConstants.StudentCreatePartial, model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateStudentViewModel model)
         {
-            if (Request.IsAjaxRequest())
-            {
-                if (!ModelState.IsValid)
-                {
-                    return PartialView("_CreatePartial", model);
-                }
-
-                try
-                {
-                    var classDomain = _mappingService.Map<StudentDomain>(model);
-                    _studentService.Add(classDomain);
-                }
-                catch (Exception  ex)
-                {
-                    if (ex.InnerException.InnerException.Message.Contains("Cannot insert duplicate key row in object"))
-                    {
-                        ModelState.AddModelError("", $"Ученик с номер {model.Number} вече съществува!");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Не успешно добавяне. Моля свържете се със училищният администратор.");
-                    }
-                    
-                    return PartialView("_CreatePartial", model);
-                }
-
-                return Content("success");
+            if (!Request.IsAjaxRequest())
+            { 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid)
+            {
+                return PartialView(PartialViewConstants.StudentCreatePartial, model);
+            }
+
+            var classDomain = _mappingService.Map<StudentDomain>(model);
+            var status = _studentService.Add(classDomain);
+
+            if (!status.IsSuccessful)
+            {
+                ModelState.AddModelError("", status.Message);
+                return PartialView(PartialViewConstants.StudentCreatePartial, model);
+            }
+
+            return Content("success");
         }
 
         [HttpGet]
@@ -118,7 +109,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 var student = await _studentService.GetByIdAsync(id);
                 var studentAsVm = _mappingService.Map<CreateStudentViewModel>(student);
 
-                return PartialView("_EditPartial", studentAsVm);
+                return PartialView(PartialViewConstants.StudentEditPartial, studentAsVm);
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,67 +119,55 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CreateStudentViewModel model)
         {
-            if (Request.IsAjaxRequest())
+            if (!Request.IsAjaxRequest())
             {
-                if (!ModelState.IsValid)
-                {
-                    return PartialView("_EditPartial", model);
-                }
-
-                try
-                {
-                    var classDomain = _mappingService.Map<StudentDomain>(model);
-                    _studentService.Update(classDomain);
-                }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException.InnerException.Message.Contains("Cannot insert duplicate key row in object"))
-                    {
-                        ModelState.AddModelError("", $"Ученик с номер {model.Number} вече съществува!");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Не успешно променяне. Моля свържете се със училищният администратор.");
-                    }
-
-                    return PartialView("_EditPartial", model);
-                }
-
-               
-
-                return Content("success");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid)
+            {
+                return PartialView(PartialViewConstants.StudentEditPartial, model);
+            }
+
+            var classDomain = _mappingService.Map<StudentDomain>(model);
+            var status = _studentService.Update(classDomain);
+
+            if (!status.IsSuccessful)
+            {
+                ModelState.AddModelError("", status.Message);
+                return PartialView(PartialViewConstants.StudentEditPartial, model);
+            }
+
+            return Content("success");
         }
 
         [HttpGet]
         public async Task<ActionResult> Delete(string id)
         {
-            if (Request.IsAjaxRequest())
+            if (!Request.IsAjaxRequest())
             {
-                // TODO add validation
-                var student = await _studentService.GetByIdAsync(id);
-                var studentAsVm = _mappingService.Map<CreateStudentViewModel>(student);
-
-                return PartialView("_DeletePartial", studentAsVm);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            // TODO add validation
+            var student = await _studentService.GetByIdAsync(id);
+            var studentAsVm = _mappingService.Map<CreateStudentViewModel>(student);
+
+            return PartialView(PartialViewConstants.StudentDeletePartial, studentAsVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteStudentById(string id)
         {
-            if (Request.IsAjaxRequest())
+            if (!Request.IsAjaxRequest())
             {
-                await _studentService.DeleteByIdAsync(id);
-
-                return Content("success");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            await _studentService.DeleteByIdAsync(id);
+
+            return Content("success");
         }
     }
 }

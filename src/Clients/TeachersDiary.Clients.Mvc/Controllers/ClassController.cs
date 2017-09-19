@@ -19,19 +19,16 @@ namespace TeachersDiary.Clients.Mvc.Controllers
     {
         private readonly IClassService _classService;
         private readonly IUserService _userService;
-        private readonly ILoggingService _loggingService;
         private readonly IMappingService _mappingService;
 
         public ClassController(
             IClassService classService, 
             IMappingService mappingService, 
-            IUserService userService, 
-            ILoggingService loggingService)
+            IUserService userService)
         {
             _classService = classService;
             _mappingService = mappingService;
             _userService = userService;
-            _loggingService = loggingService;
         }
 
         [HttpGet]
@@ -58,8 +55,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             var createClassViewModel = new CreateClassViewModel();
 
-            var teachers = await _userService.GetTeachersBySchoolIdAsync();
-            createClassViewModel.Teachers = new SelectList(teachers, "Id", "FullName", 1);
+            await GetTeachersBySchoolIdAsync(createClassViewModel);
 
             return View(createClassViewModel);
         }
@@ -71,26 +67,30 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var teachers = await _userService.GetTeachersBySchoolIdAsync();
-                model.Teachers = new SelectList(teachers, "Id", "FullName", 1);
+                await GetTeachersBySchoolIdAsync(model);
 
                 return View(model);
             }
 
-            try
-            {
-                var classDomain = _mappingService.Map<ClassDomain>(model);
-                _classService.Add(classDomain);
-            }
-            catch (Exception ex)
-            {
-                _loggingService.Error(ex.Message, ex);
+            var classDomain = _mappingService.Map<ClassDomain>(model);
+            var status = _classService.Add(classDomain);
 
-                ModelState.AddModelError("", Resources.Resources.ErrorOnCreationOfNewClass);
+            if (!status.IsSuccessful)
+            {
+                ModelState.AddModelError("", status.Message);
+
+                await GetTeachersBySchoolIdAsync(model);
+                
                 return View(model);
             }
 
             return this.RedirectToAction<ClassController>(x => x.All());
+        }
+
+        private async Task GetTeachersBySchoolIdAsync(CreateClassViewModel createClassViewModel)
+        {
+            var teachers = await _userService.GetTeachersBySchoolIdAsync();
+            createClassViewModel.Teachers = new SelectList(teachers, "Id", "FullName", 1);
         }
     }
 }

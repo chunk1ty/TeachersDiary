@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bytes2you.Validation;
-
+using TeachersDiary.Common;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
@@ -20,13 +21,14 @@ namespace TeachersDiary.Data.Services
         private readonly IMappingService _mappingService;
         private readonly IEncryptingService _encryptingService;
         private readonly IUserService _userService;
+        private readonly ILoggingService _loggingService;
        
         public ClassService(
             IEntityFrameworkGenericRepository<ClassEntity> entityFrameworkGenericRepository,
             IQuerySettings<ClassEntity> querySettings,
             IUnitOfWork unitOfWork, 
             IMappingService mappingService, 
-            IEncryptingService encryptingService, IUserService userService)
+            IEncryptingService encryptingService, IUserService userService, ILoggingService loggingService)
         {
             Guard.WhenArgument(entityFrameworkGenericRepository, nameof(entityFrameworkGenericRepository)).IsNull().Throw();
             Guard.WhenArgument(querySettings, nameof(querySettings)).IsNull().Throw();
@@ -39,6 +41,7 @@ namespace TeachersDiary.Data.Services
             _mappingService = mappingService;
             _encryptingService = encryptingService;
             _userService = userService;
+            _loggingService = loggingService;
             _querySettings = querySettings;
         }
       
@@ -112,17 +115,34 @@ namespace TeachersDiary.Data.Services
             }
         }
 
-        public void Add(ClassDomain @class)
+        public OperationStatus Add(ClassDomain @class)
         {
             Guard.WhenArgument(@class, nameof(@class)).IsNull().Throw();
+            
+            try
+            {
+                // TODO techdeb only 1 for Blagoev
+                @class.SchoolId = 1;
 
-            // TODO techdeb only 1 for Blagoev
-            @class.SchoolId = 1;
+                var classEntity = _mappingService.Map<ClassEntity>(@class);
+                _entityFrameworkGenericRepository.Add(classEntity);
 
-            var classEntity = _mappingService.Map<ClassEntity>(@class);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException.InnerException.Message.Contains("Cannot insert duplicate key row in object"))
+                {
+                    return new FailureStatus("Съществува клас с избраният класен ръководител.");
+                }
 
-            _entityFrameworkGenericRepository.Add(classEntity);
-            _unitOfWork.Commit();
+                // TODO how to log classEntity?
+                _loggingService.Error(ex);
+
+                return new FailureStatus("Възникна грешка при създаването на класа. Моля свържете се със ситемният администратор.");
+            }
+
+            return new SuccessStatus();
         }
     }
 }

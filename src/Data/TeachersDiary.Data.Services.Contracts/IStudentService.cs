@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using TeachersDiary.Common;
 using TeachersDiary.Domain;
 
 namespace TeachersDiary.Data.Services.Contracts
@@ -7,9 +8,9 @@ namespace TeachersDiary.Data.Services.Contracts
     {
         Task<StudentDomain> GetByIdAsync(string id);
 
-        void Add(StudentDomain student);
+        OperationStatus Add(StudentDomain student);
 
-        void Update(StudentDomain student);
+        OperationStatus Update(StudentDomain student);
 
         Task DeleteByIdAsync(string id);
     }

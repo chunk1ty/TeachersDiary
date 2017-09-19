@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using TeachersDiary.Common.Constants;
-
 namespace TeachersDiary.Data.Entities
 {
     [Table("Classes")]
@@ -16,17 +14,16 @@ namespace TeachersDiary.Data.Entities
 
         [Key]
         public int Id { get; set; }
-
-        [Required]
+        
         public string Name { get; set; }
-
-        [Required]
+        
         public int SchoolId { get; set; }
         public virtual SchoolEntity School { get; set; }
 
         public IList<StudentEntity> Students { get; set; }
-
-        [Required]
+        
+        [Index(IsUnique = true)]
+        [StringLength(36)]
         public string ClassTeacherId { get; set; }
     }
 }
