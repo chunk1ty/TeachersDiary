@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не може да изчислите отсъствията за избрания месец, защото няма въведени за предходният..
+        /// </summary>
+        public static string CannotCalculaetAbsencesForTheSelectedMonth {
+            get {
+                return ResourceManager.GetString("CannotCalculaetAbsencesForTheSelectedMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Класове.
         /// </summary>
         public static string ClassesLabel {
@@ -84,6 +93,15 @@ namespace Resources {
         public static string CreateButton {
             get {
                 return ResourceManager.GetString("CreateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна грешка при създаването на клас. Моля свържете се със училищният администратор!.
+        /// </summary>
+        public static string ErrorOnCreationOfNewClass {
+            get {
+                return ResourceManager.GetString("ErrorOnCreationOfNewClass", resourceCulture);
             }
         }
         
@@ -156,6 +174,15 @@ namespace Resources {
         public static string OtherLabel {
             get {
                 return ResourceManager.GetString("OtherLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Моля изберете учител.
+        /// </summary>
+        public static string PleaseSelectClassTeacher {
+            get {
+                return ResourceManager.GetString("PleaseSelectClassTeacher", resourceCulture);
             }
         }
         

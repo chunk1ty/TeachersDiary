@@ -9,9 +9,8 @@ namespace TeachersDiary.Data.Entities
     {
         public SchoolEntity()
         {
-            Teachers = new HashSet<TeacherEntity>();
+            Users = new HashSet<UserEntity>();
             Classes = new List<ClassEntity>();
-            SchoolAdmins = new HashSet<SchoolAdminEntity>();
         }
 
         [Key]
@@ -19,10 +18,8 @@ namespace TeachersDiary.Data.Entities
 
         public string Name { get; set; }
 
-        public ICollection<TeacherEntity> Teachers { get; set; }
+        public ICollection<UserEntity> Users { get; set; }
 
         public IList<ClassEntity> Classes { get; set; }
-
-        public ICollection<SchoolAdminEntity> SchoolAdmins { get; set; }
     }
 }

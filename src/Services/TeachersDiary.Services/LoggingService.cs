@@ -15,6 +15,11 @@ namespace TeachersDiary.Services
             _logger.Error(x => x(message), ex);
         }
 
+        public void Error(Exception ex)
+        {
+            _logger.Error(x => x(ex.Message), ex);
+        }
+
         public void Debug(string message)
         {
             _logger.Debug(message);

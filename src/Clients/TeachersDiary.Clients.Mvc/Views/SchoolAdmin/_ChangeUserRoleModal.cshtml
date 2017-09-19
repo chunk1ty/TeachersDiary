@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+@Html.AntiForgeryToken()
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" style="width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Добави роля</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Изберете роля за потребител <span id="modal-content" style="color:red;"></span>
+                </p>
+                <select id="roles">
+                    <option value="-1">Без роля</option>
+                    @*<option value="1">Студент</option>*@
+                    <option value="2">Учител</option>
+                    @*<option value="3">Училищен Администратор</option>
+                    <option value="4">Администратор</option>*@
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-btn" class="btn btn-default" type="button" data-dismiss="modal" style="margin: 0;">
+                    Откажи
+                </button>
+                <button id="confirm-btn" class="btn btn-danger" type="button">
+                    Потвърди
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

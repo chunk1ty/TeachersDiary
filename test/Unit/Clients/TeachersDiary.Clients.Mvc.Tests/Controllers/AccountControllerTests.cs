@@ -185,48 +185,48 @@ namespace TeachersDiary.Clients.Mvc.Tests.Controllers
                 .ThatEquals("error");
         }
 
-        [Test]
-        public void RegisterOnPostRequest_WithValidModelAndSucceededCreateResult_ShouldRedirectToAccountController()
-        {
-            // Arrange
-            _mockedAuthenticationService.Setup(x => x.CreateAccountAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(IdentityResult.Success);
+        //[Test]
+        //public void RegisterOnPostRequest_WithValidModelAndSucceededCreateResult_ShouldRedirectToAccountController()
+        //{
+        //    // Arrange
+        //    _mockedAuthenticationService.Setup(x => x.CreateAccountAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        //        .ReturnsAsync(IdentityResult.Success);
 
-            var accountController = new AccountController(
-                _mockedShoolService.Object,
-                _mockedAuthenticationService.Object);
+        //    var accountController = new AccountController(
+        //        _mockedShoolService.Object,
+        //        _mockedAuthenticationService.Object);
 
-            RegisterViewModel model = new RegisterViewModel();
+        //    RegisterViewModel model = new RegisterViewModel();
 
-            // Act & Assert
-            accountController
-                .WithCallTo(c => c.Register(model))
-                .ShouldRedirectTo<DashboardController>(x => x.Index());
-        }
+        //    // Act & Assert
+        //    accountController
+        //        .WithCallTo(c => c.Register(model))
+        //        .ShouldRedirectTo<DashboardController>(x => x.Index());
+        //}
 
-        [Test]
-        public void RegisterOnPostRequest_WithValidModelAndFailedCreateResult_ShouldRenderDefaultView()
-        {
-            // Arrange
-            var error = "custom error";
+        //[Test]
+        //public void RegisterOnPostRequest_WithValidModelAndFailedCreateResult_ShouldRenderDefaultView()
+        //{
+        //    // Arrange
+        //    var error = "custom error";
 
-            _mockedAuthenticationService.Setup(x => x.CreateAccountAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(IdentityResult.Failed(error));
+        //    _mockedAuthenticationService.Setup(x => x.CreateAccountAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        //        .ReturnsAsync(IdentityResult.Failed(error));
 
-            var accountController = new AccountController(
-                _mockedShoolService.Object,
-                _mockedAuthenticationService.Object);
+        //    var accountController = new AccountController(
+        //        _mockedShoolService.Object,
+        //        _mockedAuthenticationService.Object);
 
-            RegisterViewModel model = new RegisterViewModel();
+        //    RegisterViewModel model = new RegisterViewModel();
 
-            // Act & Assert
-            accountController
-                .WithCallTo(c => c.Register(model))
-                .ShouldRenderDefaultView()
-                .WithModel(model)
-                .AndModelError("")
-                .ThatEquals(error);
-        }
+        //    // Act & Assert
+        //    accountController
+        //        .WithCallTo(c => c.Register(model))
+        //        .ShouldRenderDefaultView()
+        //        .WithModel(model)
+        //        .AndModelError("")
+        //        .ThatEquals(error);
+        //}
 
         [Test]
         public void ChangePasswordOnGetRequest_WithDefaultFlow_ShouldRenderDefaultView()

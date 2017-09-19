@@ -1,0 +1,87 @@
+﻿@using TeachersDiary.Clients.Mvc.Infrastructure.Constants
+@model IList<UserViewModel>
+
+@{
+    Layout = LayoutConstants.Layout;
+}
+
+<div class="wrapper wrapper-content animated fadeInRight row">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Потребители</h5>
+        </div>
+        <div class="ibox-content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Име</th>
+                    <th>Презиме</th>
+                    <th>Фамилия</th>
+                    <th>Имейл</th>
+                    <th>Роля</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.FirstName</td>
+                        <td>@user.MiddleName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@Html.DisplayApplicationRole(user.Role)</td>
+                        <td>
+                            <span class="change-btn btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" data-id="@user.Id" data-email="@user.Email">
+                                Промени
+                            </span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ChangeUserRoleModal")
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var userId,
+                email;
+
+            $('tbody').on('click', '.change-btn', function () {
+                userId = $(this).attr('data-id');
+
+                email = $(this).attr('data-email');
+
+                $('#modal-content').text(email);
+            });
+
+
+            $('#confirm-btn').on('click', function () {
+                var token = $('input[name="__RequestVerificationToken"]').val();
+                var role = $('#roles option:selected').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/SchoolAdmin/UserRole',
+                    data: {
+                        __RequestVerificationToken: token,
+                        userId: userId,
+                        roleId: role
+                    },
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function (ex) {
+                        alert('Не може да промените ролята' + ex);
+                    }
+                });
+            });
+        });
+    </script>
+}

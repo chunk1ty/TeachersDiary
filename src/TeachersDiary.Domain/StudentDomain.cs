@@ -17,7 +17,7 @@ namespace TeachersDiary.Domain
             Absences = new List<AbsenceDomain>();
         }
 
-        public string EncodedId { get; set; }
+        public string Id { get; set; }
 
         public int Number { get; set; }
 
@@ -27,7 +27,7 @@ namespace TeachersDiary.Domain
 
         public string LastName { get; set; }
 
-        public string EncodedIdClassId { get; set; }
+        public string ClassId { get; set; }
 
         public double TotalExcusedAbsences
         {
@@ -55,12 +55,12 @@ namespace TeachersDiary.Domain
             IEncryptingService encryptingService = new EncryptingService();
 
             configuration.CreateMap<StudentEntity, StudentDomain>()
-                .ForMember(domain => domain.EncodedId, x => x.MapFrom(entity => encryptingService.EncodeId(entity.Id)))
-                .ForMember(domain => domain.EncodedIdClassId, x => x.MapFrom(entity => encryptingService.EncodeId(entity.ClassId)));
+                .ForMember(domain => domain.Id, x => x.MapFrom(entity => encryptingService.EncodeId(entity.Id)))
+                .ForMember(domain => domain.ClassId, x => x.MapFrom(entity => encryptingService.EncodeId(entity.ClassId)));
 
             configuration.CreateMap<StudentDomain, StudentEntity>()
-                .ForMember(entity => entity.Id, x => x.MapFrom(domain => encryptingService.DecodeId(domain.EncodedId)))
-                .ForMember(entity => entity.ClassId, x => x.MapFrom(domain => encryptingService.DecodeId(domain.EncodedIdClassId)));
+                .ForMember(entity => entity.Id, x => x.MapFrom(domain => encryptingService.DecodeId(domain.Id)))
+                .ForMember(entity => entity.ClassId, x => x.MapFrom(domain => encryptingService.DecodeId(domain.ClassId)));
         }
     }
 }

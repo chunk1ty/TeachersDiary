@@ -6,6 +6,8 @@ namespace TeachersDiary.Services.Contracts
     {
         void Error(string message, Exception ex);
 
+        void Error(Exception ex);
+
         void Debug(string message);
 
         void Warning(string message);

@@ -63,6 +63,9 @@
     <Reference Include="Common.Logging.Log4Net1215, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Common.Logging.Log4Net1215.3.3.1\lib\net40\Common.Logging.Log4Net1215.dll</HintPath>
     </Reference>
+    <Reference Include="DataTables.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\datatables.mvc5.0.1.0\lib\net45\DataTables.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.AspNet, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
     </Reference>
@@ -202,13 +205,19 @@
     <Compile Include="Controllers\Abstracts\TeacherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Abstracts\BaseController.cs" />
-    <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SchoolAdminController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="App_Start\GlimpseConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Attribute\TeachersDiaryAuthorize.cs" />
+    <Compile Include="Infrastructure\Constants\LayoutConstants.cs" />
+    <Compile Include="Infrastructure\Constants\PartialViewConstants.cs" />
+    <Compile Include="Infrastructure\Helpers\ApplicationRolesHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,8 +239,12 @@
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Class\ClassViewModel.cs" />
+    <Compile Include="ViewModels\Class\CreateClassViewModel.cs" />
     <Compile Include="ViewModels\School\SchoolViewModel.cs" />
+    <Compile Include="ViewModels\Student\CreateStudentViewModel.cs" />
+    <Compile Include="ViewModels\Student\StudentsViewModel.cs" />
     <Compile Include="ViewModels\Student\StudentViewModel.cs" />
+    <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="500.html" />
@@ -1271,6 +1284,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1641,8 +1656,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Class\All.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
-    <Content Include="Views\Class\Index.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Scripts\plugins\chartist\chartist.min.js.map" />
     <Content Include="Scripts\plugins\diff_match_patch\COPYING" />
     <Content Include="Scripts\plugins\justified-gallery\README.md" />
@@ -1650,6 +1663,14 @@
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Shared\Partials\_LeftNavigation.cshtml" />
     <Content Include="Views\Shared\Partials\_TopNavigation.cshtml" />
+    <Content Include="Views\SchoolAdmin\Index.cshtml" />
+    <Content Include="Views\SchoolAdmin\_ChangeUserRoleModal.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\_CreatePartial.cshtml" />
+    <Content Include="Views\Student\_DeletePartial.cshtml" />
+    <Content Include="Views\Student\_EditPartial.cshtml" />
+    <Content Include="Views\Absense\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1661,6 +1682,10 @@
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Ef\TeachersDiary.Data.Ef.csproj">
       <Project>{CDC2DD1B-3420-467A-B330-A90D71396999}</Project>
       <Name>TeachersDiary.Data.Ef</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\TeachersDiary.Data.Entities\TeachersDiary.Data.Entities.csproj">
+      <Project>{0EE826C5-185A-4BD6-B4AD-CDBE8191D7DF}</Project>
+      <Name>TeachersDiary.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\TeachersDiary.Data.Identity\TeachersDiary.Data.Identity.csproj">
       <Project>{7B1AF903-26DD-451D-A37C-DE14FBBD8047}</Project>
@@ -1677,10 +1702,6 @@
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
       <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
       <Name>TeachersDiary.Services.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Services\TeachersDiary.Services.ExcelParser\TeachersDiary.Services.ExcelParser.csproj">
-      <Project>{1A9EC2F9-335B-49BB-9533-C3846267A555}</Project>
-      <Name>TeachersDiary.Services.ExcelParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>

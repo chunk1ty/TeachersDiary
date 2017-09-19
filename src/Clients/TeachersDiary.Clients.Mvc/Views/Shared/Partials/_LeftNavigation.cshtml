@@ -9,8 +9,8 @@
                                 <strong class="font-bold">@User.Identity.GetUserName()</strong>
                             </span> 
                             <span class="text-muted text-xs block">
-                                Учител
-                                <b class="caret"></b>
+                                @*Учител
+                                <b class="caret"></b>*@
                             </span>
                         </span>
                     </a>
@@ -37,7 +37,7 @@
                 </div>
 
             </li>
-            <li class="@Html.IsSelected("dashboard")">
+            <li style="display: none">
                 <a href="@(Url.Action<DashboardController>(x => x.Index()))">
                     <i class="fa fa-th-large"></i> 
                     <span class="nav-label" data-i18n="nav.dashboard">Dashboards</span> 
@@ -46,7 +46,9 @@
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
                 </ul>
             </li>
-
+            
+        @if (User.IsInRole(ApplicationRole.SchoolAdministrator) || User.IsInRole(ApplicationRole.Administrator) || User.IsInRole(ApplicationRole.Teacher))
+        {
             <li class="@Html.IsSelected("class")">
                 <a href="@(Url.Action<ClassController>(x => x.All()))">
                     <i class="fa fa-pie-chart"></i>
@@ -59,12 +61,51 @@
                     <li class="@Html.IsSelected(action: "class")">
                         <a href="@(Url.Action<ClassController>(x => x.All()))">Преглед</a>
                     </li>
-                    <li class="@Html.IsSelected(action: "create")">
-                        <a href="@(Url.Action<ClassController>(x => x.Create()))">Създай клас</a>
-                    </li>
+                    @if (User.IsInRole(ApplicationRole.SchoolAdministrator))
+                    {
+                        <li class="@Html.IsSelected(action: "create")">
+                            <a href="@(Url.Action<ClassController>(x => x.Create()))">Създай клас</a>
+                        </li>
+                    }
                 </ul>
             </li>
+        }
+            
+            @if (User.IsInRole(ApplicationRole.SchoolAdministrator) || User.IsInRole(ApplicationRole.Administrator))
+            {
+                <li class="@Html.IsSelected("class")">
+                    <a href="@(Url.Action<SchoolAdminController>(x => x.Index()))">
+                        <i class="fa fa-pie-chart"></i>
+                        <span class="nav-label" data-i18n="nav.metrics">
+                            Училищен Админ
+                        </span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "class")">
+                            <a href="@(Url.Action<SchoolAdminController>(x => x.Index()))">Потребители</a>
+                        </li>
+                    </ul>
+                </li>
+            }
 
+            @if (User.IsInRole(ApplicationRole.Administrator))
+            {
+                <li class="@Html.IsSelected("class")">
+                    <a href="@(Url.Action<SchoolAdminController>(x => x.Index()))">
+                        <i class="fa fa-pie-chart"></i>
+                        <span class="nav-label" data-i18n="nav.metrics">
+                            Администратор
+                        </span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "class", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "class")">
+                            <a href="@(Url.Action<SchoolAdminController>(x => x.Index()))">Потребители</a>
+                        </li>
+                    </ul>
+                </li>
+            }
         </ul>
     </div>
 </nav>

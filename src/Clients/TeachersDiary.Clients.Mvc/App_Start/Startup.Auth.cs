@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using TeachersDiary.Data.Ef;
-using TeachersDiary.Data.Ef.Models;
+using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Identity;
 
 namespace TeachersDiary.Clients.Mvc
@@ -26,7 +26,7 @@ namespace TeachersDiary.Clients.Mvc
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/account/login"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

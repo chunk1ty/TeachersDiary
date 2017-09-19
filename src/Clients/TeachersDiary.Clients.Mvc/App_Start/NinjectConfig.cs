@@ -5,21 +5,14 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
-using Ninject.Syntax;
 using Ninject.Web.Common;
 using Ninject.Extensions.Conventions;
-using Ninject.Extensions.Conventions.Syntax;
-
 using TeachersDiary.Clients.Mvc;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
 using TeachersDiary.Data.Identity;
 using TeachersDiary.Data.Identity.Contracts;
-using TeachersDiary.Data.Services;
-using TeachersDiary.Data.Services.Contracts;
-using TeachersDiary.Services.ExcelParser;
-using TeachersDiary.Services.Mapping;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectConfig), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectConfig), "Stop")]

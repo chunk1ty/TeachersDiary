@@ -81,7 +81,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             RegisterViewModel model = new RegisterViewModel()
             {
-                Schools = await GetAllAvailableSchools()
+                Schools = await GetAllSchools()
             };
 
             return View(model);
@@ -94,11 +94,17 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Schools = await GetAllAvailableSchools();
+                model.Schools = await GetAllSchools();
                 return View(model);
             }
 
-            var result = await _authenticationService.CreateAccountAsync(model.Email, model.Password, model.SelectedSchool);
+            var result = await _authenticationService.CreateAccountAsync(
+                model.Email, 
+                model.Password, 
+                model.FirstName, 
+                model.MiddleName, 
+                model.LastName,
+                model.SelectedSchool);
 
             if (result.Succeeded)
             {
@@ -107,7 +113,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             AddErrors(result);
 
-            model.Schools = await GetAllAvailableSchools();
+            model.Schools = await GetAllSchools();
             return View(model);
         }
 
@@ -146,9 +152,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             }
         }
 
-        private async Task<IEnumerable<SelectListItem>> GetAllAvailableSchools()
+        private async Task<IEnumerable<SelectListItem>> GetAllSchools()
         {
-            var schoolNames = await _schoolService.GetAllSchoolNamesAsync();
+            var schoolNames = await _schoolService.GetAllAsync();
             var schoolLists = schoolNames.Select(x => new SelectListItem()
             {
                 Text = x.Name,

@@ -1,32 +1,53 @@
-﻿@{
+﻿@using TeachersDiary.Clients.Mvc.Infrastructure.Constants
+@model CreateClassViewModel
+
+@{
     Layout = LayoutConstants.Layout;
 }
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="ibox">
-            <div class="ibox-title">
-                <h5>Създавате на клас от същеструващ файл</h5>
-            </div>
-            <div class="ibox-content">
-                <p>
-                    Моля изберете желания файл с ученици в долу посочената зона.
-                </p>
-                @using (Html.BeginForm<ClassController>(x => x.Create(), FormMethod.Post, null, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
+<div class="wrapper wrapper-content animated fadeInRight row">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <span class="col-sm-2 control-label"></span>
 
+            <h3 class="col-sm-10">Създававе на клас</h3>
+        </div>
+        <div class="ibox-content">
+            @using (Html.BeginForm<ClassController>(x => x.Create(), FormMethod.Post,null, new {@class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-sm-10 col-sm-offset-2">
                     @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+                </div>
 
-                    <br />
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Name, new {@class = "col-sm-2 control-label" })
 
-                    <input type="file" name="file" id="file" />
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                    <br />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Select</label>
 
-                    <input type="submit" value="Изпрати"/>
-                }
-            </div>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(n => n.ClassTeacherId, Model.Teachers, "Изберете учител", new {@class = "form-control m-b" })
+                        @Html.ValidationMessageFor(m => m.ClassTeacherId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <a class="btn btn-white" href="@(Url.Action<ClassController>(c => c.All()))">
+                            Отказ
+                        </a>
+                        <button class="btn btn-primary" type="submit">Запиши</button>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

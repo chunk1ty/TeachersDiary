@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-
+using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 using TeachersDiary.Data.Ef.Contracts;
-using TeachersDiary.Data.Ef.Models;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef
@@ -16,8 +15,6 @@ namespace TeachersDiary.Data.Ef
         {
         }
 
-        public virtual IDbSet<TeacherEntity> Teachers { get; set; }
-
         public virtual IDbSet<SchoolEntity> Schools { get; set; }
 
         public virtual IDbSet<ClassEntity> Classes { get; set; }
@@ -25,8 +22,6 @@ namespace TeachersDiary.Data.Ef
         public virtual IDbSet<StudentEntity> Students { get; set; }
 
         public virtual IDbSet<AbsenceEntity> Absences { get; set; }
-
-        public virtual IDbSet<SchoolAdminEntity> SchoolAdmins { get; set; }
 
         public static TeachersDiaryDbContext Create()
         {
@@ -63,14 +58,29 @@ namespace TeachersDiary.Data.Ef
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
         }
 
-        public int GetHash
-        {
-            get { return base.GetHashCode(); }
-        }
+        public int GetHash => base.GetHashCode();
 
         public void Commit()
         {
             base.SaveChanges();
         }
+
+        public List<TeachersDiaryRole> GetRoles()
+        {
+            var roles = this.Roles.Select(x => new TeachersDiaryRole()
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
+
+            return roles;
+        }
+    }
+
+    public class TeachersDiaryRole
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

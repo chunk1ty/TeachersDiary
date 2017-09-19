@@ -88,6 +88,7 @@
     <Compile Include="LoggingService.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\MappingService.cs" />
+    <Compile Include="MonthService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -98,6 +99,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TeachersDiary.Common\TeachersDiary.Common.csproj">
+      <Project>{7CDA362C-6E1D-4CE2-83E3-C8FF3A10047D}</Project>
+      <Name>TeachersDiary.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">
       <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
       <Name>TeachersDiary.Services.Contracts</Name>

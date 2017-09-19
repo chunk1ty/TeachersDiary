@@ -42,11 +42,12 @@
   <ItemGroup>
     <Compile Include="Constants\ApplicationRole.cs" />
     <Compile Include="Constants\DbEntitesValidationConstants.cs" />
-    <Compile Include="Constants\LayoutConstants.cs" />
-    <Compile Include="Constants\PartialViewConstants.cs" />
+    <Compile Include="Enumerations\ApplicationRoles.cs" />
     <Compile Include="Exceptions\ClassNotFoundException.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Month.cs" />
+    <Compile Include="OperationStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

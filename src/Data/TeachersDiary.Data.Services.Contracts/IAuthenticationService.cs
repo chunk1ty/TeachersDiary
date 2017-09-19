@@ -7,7 +7,7 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface IAuthenticationService
     {
-        Task<IdentityResult> CreateAccountAsync(string email, string password, string selectedSchool);
+        Task<IdentityResult> CreateAccountAsync(string email, string password, string firstName, string middleName, string lastName,string selectedSchool);
 
         Task<SignInStatus> LogIn(string email, string password);
 

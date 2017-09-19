@@ -50,9 +50,11 @@
     <Compile Include="ClassService.cs" />
     <Compile Include="AbsenceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleService.cs" />
     <Compile Include="SchoolService.cs" />
     <Compile Include="AuthenticationService.cs" />
-    <Compile Include="TeacherService.cs" />
+    <Compile Include="StudentService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services.Contracts\TeachersDiary.Services.Contracts.csproj">

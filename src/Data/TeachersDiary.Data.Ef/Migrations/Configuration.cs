@@ -1,6 +1,8 @@
 ﻿using System.Data.Entity.Migrations;
 using System.Linq;
-
+using Microsoft.AspNet.Identity.EntityFramework;
+using TeachersDiary.Common.Constants;
+using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Migrations
@@ -10,8 +12,8 @@ namespace TeachersDiary.Data.Ef.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(TeachersDiaryDbContext context)
@@ -35,8 +37,30 @@ namespace TeachersDiary.Data.Ef.Migrations
 
         private void CreateRoles(TeachersDiaryDbContext context)
         {
-            if (context.Roles.Any())
-                return;
+            if (!context.Roles.Any())
+            {
+                context.Roles.Add(new IdentityRole()
+                {
+                    Name = ApplicationRoles.Student.ToString()
+                });
+
+                context.Roles.Add(new IdentityRole()
+                {
+                    Name = ApplicationRoles.Teacher.ToString()
+                });
+
+                context.Roles.Add(new IdentityRole()
+                {
+                    Name = ApplicationRoles.SchoolAdministrator.ToString()
+                });
+
+                context.Roles.Add(new IdentityRole()
+                {
+                    Name = ApplicationRoles.Administrator.ToString()
+                });
+
+                context.SaveChanges();
+            } 
         }
     }
 }

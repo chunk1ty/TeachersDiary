@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
+
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.Extensions;
 
@@ -51,6 +53,34 @@ namespace TeachersDiary.Data.Ef.GenericRepository
             }
 
             return await query.ToListAsync();
+        }
+
+        public IEnumerable<TEntity> GetAll(IQuerySettings<TEntity> setting = null)
+        {
+            IQueryable<TEntity> query = _teachersDiaryDbContext.Set<TEntity>();
+
+            if (setting != null)
+            {
+                if (setting.IncludePaths != null)
+                {
+                    foreach (var path in setting.IncludePaths)
+                    {
+                        query = query.Include(path);
+                    }
+                }
+
+                if (setting.WhereFilter != null)
+                {
+                    query = query.Where(setting.WhereFilter);
+                }
+
+                if (setting.ReadOnly)
+                {
+                    query = query.AsNoTracking();
+                }
+            }
+
+            return query.ToList();
         }
 
         public async Task<TEntity> GetByIdAsync(object id)

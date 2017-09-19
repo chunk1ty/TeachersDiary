@@ -9,5 +9,7 @@
         public const string SchoolAdministrator = "SchoolAdministrator";
 
         public const string Administrator = "Administrator";
+
+        public const string None = "None";
     }
 }
