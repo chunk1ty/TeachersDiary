@@ -58,7 +58,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public ActionResult Create(string classId)
         {
             if (Request.IsAjaxRequest())
@@ -76,7 +75,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public ActionResult Create(CreateStudentViewModel model)
         {
             if (Request.IsAjaxRequest())
@@ -112,7 +110,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public async Task<ActionResult> Edit(string id)
         {
             if (Request.IsAjaxRequest())
@@ -129,7 +126,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public ActionResult Edit(CreateStudentViewModel model)
         {
             if (Request.IsAjaxRequest())
@@ -167,7 +163,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public async Task<ActionResult> Delete(string id)
         {
             if (Request.IsAjaxRequest())
@@ -184,7 +179,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public async Task<ActionResult> DeleteStudentById(string id)
         {
             if (Request.IsAjaxRequest())

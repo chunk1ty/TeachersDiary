@@ -2,6 +2,7 @@
 using TeachersDiary.Clients.Mvc.Controllers;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
 using TeachersDiary.Clients.Mvc.ViewModels.User;
+using TeachersDiary.Common;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;
 

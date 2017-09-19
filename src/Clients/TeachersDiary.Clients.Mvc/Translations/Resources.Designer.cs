@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не може да изчислите отсъствията за избрания месец, защото няма въведени за предходният..
+        /// </summary>
+        public static string CannotCalculaetAbsencesForTheSelectedMonth {
+            get {
+                return ResourceManager.GetString("CannotCalculaetAbsencesForTheSelectedMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Класове.
         /// </summary>
         public static string ClassesLabel {
