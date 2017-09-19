@@ -7,6 +7,6 @@ namespace TeachersDiary.Data.Services.Contracts
 {
     public interface ISchoolService
     {
-        Task<IEnumerable<SchoolDomain>> GetAllSchoolNamesAsync();
+        Task<IEnumerable<SchoolDomain>> GetAllAsync();
     }
 }

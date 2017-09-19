@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-
+using TeachersDiary.Common;
 using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Identity.Contracts;
 using TeachersDiary.Data.Services.Contracts;
@@ -16,7 +16,7 @@ namespace TeachersDiary.Data.Services
             _identityUserManagerService = identityUserManagerService;
         }
 
-        public async Task<bool> IsChangeUserRoleSuccessfulAsync(string userId, ApplicationRoles role)
+        public async Task<OperationStatus> ChangeUserRoleAsync(string userId, ApplicationRoles role)
         {
             var roles = await _identityUserManagerService.GetRolesAsync(userId);
 
@@ -26,18 +26,21 @@ namespace TeachersDiary.Data.Services
 
                 if (!identityResult.Succeeded)
                 {
-                    return false;
+                    return new FailureStatus(identityResult.Errors.FirstOrDefault());
                 }
             }
 
             if (role != ApplicationRoles.None)
             {
-                var retuResult = await _identityUserManagerService.AddToRoleAsync(userId, role.ToString());
+                var identityResult = await _identityUserManagerService.AddToRoleAsync(userId, role.ToString());
 
-                return retuResult.Succeeded;
+                if (!identityResult.Succeeded)
+                {
+                    return new FailureStatus(identityResult.Errors.FirstOrDefault());
+                }
             }
 
-            return true;
+            return new SuccessStatus();
         }
     }
 }

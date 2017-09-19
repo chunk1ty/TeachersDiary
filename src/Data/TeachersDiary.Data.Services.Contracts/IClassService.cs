@@ -11,8 +11,6 @@ namespace TeachersDiary.Data.Services.Contracts
 
         Task<ClassDomain> GetClassByClassIdAsync(string classId);
 
-        void AddRange(List<ClassDomain> classes);
-
         OperationStatus Add(ClassDomain @class);
 
         Task DeleteByIdAsync(string classId);

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.Mvc.Expressions;
-
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
+using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
 using TeachersDiary.Clients.Mvc.ViewModels.User;
-using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Services.Contracts;
@@ -15,7 +13,7 @@ using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    [Authorize(Roles = ApplicationRole.SchoolAdministrator)]
+    [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
     public class SchoolAdminController : BaseController
     {
         private readonly IUserService _userService;
@@ -49,9 +47,9 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             {
                 var role = GetRole(roleId);
 
-                var result = await _roleService.IsChangeUserRoleSuccessfulAsync(userId, role);
+                var status = await _roleService.ChangeUserRoleAsync(userId, role);
 
-                return result ? new HttpStatusCodeResult(HttpStatusCode.OK) : new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return status.IsSuccessful ? new HttpStatusCodeResult(HttpStatusCode.OK) : new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {

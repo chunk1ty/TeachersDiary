@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-using Microsoft.AspNet.Identity;
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Common.Extensions;
@@ -12,7 +10,6 @@ using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Contracts.Mapping;
-
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -42,7 +39,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             return View(classViewModel);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

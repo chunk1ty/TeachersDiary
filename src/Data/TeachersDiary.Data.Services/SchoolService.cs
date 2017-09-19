@@ -22,7 +22,7 @@ namespace TeachersDiary.Data.Services
             _mappingService = mappingService;
         }
 
-        public async Task<IEnumerable<SchoolDomain>> GetAllSchoolNamesAsync()
+        public async Task<IEnumerable<SchoolDomain>> GetAllAsync()
         {
             var schoolEntities = await _entityFrameworkGenericRepository.GetAllAsync();
 

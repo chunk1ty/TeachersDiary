@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TeachersDiary.Common.Constants;
+using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Ef.Migrations
@@ -40,22 +41,22 @@ namespace TeachersDiary.Data.Ef.Migrations
             {
                 context.Roles.Add(new IdentityRole()
                 {
-                    Name = ApplicationRole.Student
+                    Name = ApplicationRoles.Student.ToString()
                 });
 
                 context.Roles.Add(new IdentityRole()
                 {
-                    Name = ApplicationRole.Teacher
+                    Name = ApplicationRoles.Teacher.ToString()
                 });
 
                 context.Roles.Add(new IdentityRole()
                 {
-                    Name = ApplicationRole.SchoolAdministrator
+                    Name = ApplicationRoles.SchoolAdministrator.ToString()
                 });
 
                 context.Roles.Add(new IdentityRole()
                 {
-                    Name = ApplicationRole.Administrator
+                    Name = ApplicationRoles.Administrator.ToString()
                 });
 
                 context.SaveChanges();

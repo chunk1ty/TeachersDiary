@@ -10,10 +10,7 @@ namespace TeachersDiary.Data.Ef.GenericRepository
     {
         private readonly List<Expression<Func<TEntity, object>>> _includes = new List<Expression<Func<TEntity, object>>>();
 
-        public IEnumerable<Expression<Func<TEntity, object>>> IncludePaths
-        {
-            get { return _includes.ToArray(); }
-        }
+        public IEnumerable<Expression<Func<TEntity, object>>> IncludePaths => _includes.ToArray();
 
         public bool ReadOnly { get; set; }
 

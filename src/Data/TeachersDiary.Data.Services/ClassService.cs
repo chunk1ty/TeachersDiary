@@ -88,16 +88,6 @@ namespace TeachersDiary.Data.Services
             return classDomains;
         }
 
-        public void AddRange(List<ClassDomain> classDomains)
-        {
-            Guard.WhenArgument(classDomains, nameof(classDomains)).IsNull().Throw();
-
-            var classEntities = _mappingService.Map<List<ClassEntity>>(classDomains);
-
-            _entityFrameworkGenericRepository.AddRange(classEntities);
-            _unitOfWork.Commit();
-        }
-
         // TODO delete with only one query ??
         public async Task DeleteByIdAsync(string classId)
         {

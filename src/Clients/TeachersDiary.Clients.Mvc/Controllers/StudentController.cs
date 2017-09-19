@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DataTables.Mvc;
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
-using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
 using TeachersDiary.Clients.Mvc.Infrastructure.Constants;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
 using TeachersDiary.Clients.Mvc.ViewModels.Student;
-using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts.Mapping;

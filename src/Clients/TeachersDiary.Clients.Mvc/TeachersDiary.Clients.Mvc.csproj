@@ -1703,10 +1703,6 @@
       <Project>{466D697E-0E8E-47B4-9997-901ECAD63465}</Project>
       <Name>TeachersDiary.Services.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Services\TeachersDiary.Services.ExcelParser\TeachersDiary.Services.ExcelParser.csproj">
-      <Project>{1A9EC2F9-335B-49BB-9533-C3846267A555}</Project>
-      <Name>TeachersDiary.Services.ExcelParser</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Services\TeachersDiary.Services\TeachersDiary.Services.csproj">
       <Project>{BCDA0869-B632-4B8D-B0E3-167C039BFF19}</Project>
       <Name>TeachersDiary.Services</Name>
