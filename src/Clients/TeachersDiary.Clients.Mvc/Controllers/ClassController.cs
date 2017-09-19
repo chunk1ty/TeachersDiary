@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-
-using Microsoft.AspNet.Identity;
 
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.Infrastructure.Attribute;
@@ -16,7 +12,6 @@ using TeachersDiary.Data.Services.Contracts;
 using TeachersDiary.Domain;
 using TeachersDiary.Services.Contracts;
 using TeachersDiary.Services.Contracts.Mapping;
-using TeachersDiary.Services.ExcelParser;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
@@ -72,16 +67,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
-        public ActionResult Create(CreateClassViewModel model)
+        public async Task<ActionResult> Create(CreateClassViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
-            }
+                var teachers = await _userService.GetTeachersBySchoolIdAsync();
+                model.Teachers = new SelectList(teachers, "Id", "FullName", 1);
 
-            if (string.IsNullOrEmpty(model.ClassTeacherId))
-            {
-                ModelState.AddModelError("", Resources.Resources.PleaseSelectClassTeacher);
                 return View(model);
             }
 

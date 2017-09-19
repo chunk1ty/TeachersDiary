@@ -1,4 +1,4 @@
-﻿namespace TeachersDiary.Common.Constants
+﻿namespace TeachersDiary.Clients.Mvc.Infrastructure.Constants
 {
     public class PartialViewConstants
     {

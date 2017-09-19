@@ -51,7 +51,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             if (!IsValidRequest(model, month))
             {
                 model.AvailableMonths = _monthService.GetCurrentAndNextMonth();
-                return View("~/Views/Absense/Index.cshtml", model);
+                return View("Index", model);
             }
 
             var studentDomains = _mappingService.Map<List<StudentDomain>>(model.Students);

@@ -1,4 +1,5 @@
-﻿@model ClassViewModel
+﻿@using TeachersDiary.Clients.Mvc.Infrastructure.Constants
+@model ClassViewModel
 
 @{
     Layout = LayoutConstants.Layout;
@@ -173,21 +174,7 @@
                         @Html.DropDownList(
                                "month",
                                new SelectList(Model.AvailableMonths.Select(x => new { Value = x.Id, Text = x.Name}),"Value","Text"),
-                               new {@class = "form-control m-b" }
-                               )
-                               
-                        @*<select class="form-control m-b" name="month">
-                            <option value="9">Септември</option>
-                            <option value="10">Октомври</option>
-                            <option value="11">Ноември</option>
-                            <option value="12">Декември</option>
-                            <option value="1">Януари</option>
-                            <option value="2">Февруари</option>
-                            <option value="3">Март</option>
-                            <option value="4">Април</option>
-                            <option value="5">Май</option>
-                            <option value="6">Юни</option>
-                        </select>*@
+                               new {@class = "form-control m-b" })
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Откажи</button>
@@ -199,8 +186,6 @@
     }
     
 </div>
-            
-
 
 @section scripts {
     @Scripts.Render("~/plugins/dataTables")

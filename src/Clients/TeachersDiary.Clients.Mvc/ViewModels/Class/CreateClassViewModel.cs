@@ -11,6 +11,8 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Class
         [Required(ErrorMessage = "Името на класът е задължително")]
         public string Name { get; set; }
 
+        [Required(ErrorMessageResourceName = nameof(Resources.Resources.PleaseSelectClassTeacher),
+            ErrorMessageResourceType = typeof(Resources.Resources))]
         public string ClassTeacherId { get; set; }
 
         public SelectList Teachers { get; set; }
