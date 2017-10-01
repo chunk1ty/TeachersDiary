@@ -2,6 +2,7 @@
     "use strict";
     $(document).ready(function () {
         //grid settings
+
         var table = $('#student-grid').DataTable({
             "bSort": false,
             paging: false,
@@ -13,6 +14,7 @@
             buttons: [{
                 extend: 'print',
                 text: 'Принтирай',
+                message: '<h2>' + $('#class-name').text() + '</h2>',
                 exportOptions: {
                     stripHtml: false
                 },
