@@ -35,7 +35,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             var classDomain = await _classService.GetClassByClassIdAsync(classId);
            
             var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
-            classViewModel.AvailableMonths = _monthService.GetCurrentAndNextMonth();
+            classViewModel.AvailableMonths = _monthService.GetCurrentAndPreviousMonth();
 
             return View(classViewModel);
         }
@@ -46,7 +46,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             if (!IsValidRequest(model, month))
             {
-                model.AvailableMonths = _monthService.GetCurrentAndNextMonth();
+                model.AvailableMonths = _monthService.GetCurrentAndPreviousMonth();
                 return View("Index", model);
             }
 
