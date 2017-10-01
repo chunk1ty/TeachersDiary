@@ -84,6 +84,8 @@
 
                     @{ int mounthIndex = 0; }
 
+                    @*TODO order students in the back end (sql query)*@
+                    @{ Model.Students = Model.Students.OrderBy(x => x.Number).ToList(); }
 
                     @for (var absenceIndex = 0; absenceIndex < Model.Students[studentIndex].Absences.Count; absenceIndex++)
                     {
