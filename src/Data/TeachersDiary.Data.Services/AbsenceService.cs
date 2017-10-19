@@ -38,41 +38,58 @@ namespace TeachersDiary.Data.Services
             // calculate absences for the first time for selected month
             if (!students.FirstOrDefault().Absences.Any(x => x.MonthId == selectedMonthId))
             {
-                var absences = new List<AbsenceEntity>();
-
-                foreach (var student in students)
-                {
-                    var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
-
-                    var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
-                    var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
-
-                    var studentId = _encryptingService.DecodeId(student.Id);
-
-                    var absence = new AbsenceEntity()
-                    {
-                        Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
-                        NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
-                        StudentId = studentId,
-                        MonthId = selectedMonthId
-                    };
-
-                    absences.Add(absence);
-                }
-
-                _entityFrameworkGenericRepository.AddRange(absences);
+                AddAbsences(students, selectedMonthId);
             }
             else
             {
-                foreach (var student in students)
+                UpdateAbsebces(students, selectedMonthId);
+            }
+
+            _unitOfWork.Commit();
+        }
+
+        private void AddAbsences(List<StudentDomain> students, int selectedMonthId)
+        {
+            var absences = new List<AbsenceEntity>();
+
+            foreach (var student in students)
+            {
+                var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
+
+                var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
+                var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
+
+                var studentId = _encryptingService.DecodeId(student.Id);
+
+                var absence = new AbsenceEntity()
                 {
-                    var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
+                    Excused = student.EnteredTotalExcusedAbsences - totalExcusedAbsences,
+                    NotExcused = student.EnteredTotalNotExcusedAbsences - totalNotExcusedAbsences,
+                    StudentId = studentId,
+                    MonthId = selectedMonthId
+                };
 
-                    var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
-                    var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
+                absences.Add(absence);
+            }
 
-                    var studentId = _encryptingService.DecodeId(student.Id);
-                    var absenseId = _encryptingService.DecodeId(student.Absences.LastOrDefault().Id);
+            _entityFrameworkGenericRepository.AddRange(absences);
+        }
+
+        private void UpdateAbsebces(List<StudentDomain> students, int selectedMonthId)
+        {
+            foreach (var student in students)
+            {
+                var studentAbsences = student.Absences.Where(x => x.MonthId < selectedMonthId).ToList();
+
+                var totalExcusedAbsences = studentAbsences.Sum(x => x.Excused);
+                var totalNotExcusedAbsences = studentAbsences.Sum(x => x.NotExcused);
+
+                var studentId = _encryptingService.DecodeId(student.Id);
+                var studentAbsence = student.Absences.LastOrDefault();
+
+                if (studentAbsence != null)
+                {
+                    var absenseId = _encryptingService.DecodeId(studentAbsence.Id);
 
                     var absence = new AbsenceEntity()
                     {
@@ -82,12 +99,23 @@ namespace TeachersDiary.Data.Services
                         StudentId = studentId,
                         MonthId = selectedMonthId
                     };
-                   
+
                     _entityFrameworkGenericRepository.Update(absence);
                 }
-            }
+                //if user do not fill row when update record
+                else
+                {
+                    var absence = new AbsenceEntity()
+                    {
+                        Excused = 0,
+                        NotExcused = 0,
+                        StudentId = studentId,
+                        MonthId = selectedMonthId
+                    };
 
-            _unitOfWork.Commit();
+                    _entityFrameworkGenericRepository.Add(absence);
+                }
+            }
         }
     }
 }

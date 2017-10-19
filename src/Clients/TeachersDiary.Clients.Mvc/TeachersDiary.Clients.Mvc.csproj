@@ -217,6 +217,7 @@
     <Compile Include="Infrastructure\Attribute\TeachersDiaryAuthorize.cs" />
     <Compile Include="Infrastructure\Constants\LayoutConstants.cs" />
     <Compile Include="Infrastructure\Constants\PartialViewConstants.cs" />
+    <Compile Include="Infrastructure\Filters\TeachersDiaryExeptionAttribute.cs" />
     <Compile Include="Infrastructure\Helpers\ApplicationRolesHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
