@@ -9,8 +9,8 @@
                                 <strong class="font-bold">@User.Identity.GetUserName()</strong>
                             </span> 
                             <span class="text-muted text-xs block">
-                                @*Учител
-                                <b class="caret"></b>*@
+                                Учител
+                                <b class="caret"></b>
                             </span>
                         </span>
                     </a>
@@ -28,12 +28,16 @@
                             </a>
                         </li>
                     </ul>
+
                     @using (Html.BeginForm<AccountController>(x => x.LogOff(), FormMethod.Post, null, new { id = "logoutForm"}))
                     {
                         @Html.AntiForgeryToken()
 
                         <input id="log-out-input" type="hidden" />
                     }
+                </div>
+                <div class="logo-element">
+                    Д
                 </div>
 
             </li>
@@ -75,7 +79,7 @@
             {
                 <li class="@Html.IsSelected("class")">
                     <a href="@(Url.Action<SchoolAdminController>(x => x.Index()))">
-                        <i class="fa fa-pie-chart"></i>
+                        <i class="fa fa-edit"></i>
                         <span class="nav-label" data-i18n="nav.metrics">
                             Училищен Админ
                         </span>
