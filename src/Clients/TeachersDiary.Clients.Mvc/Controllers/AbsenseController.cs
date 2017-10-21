@@ -57,6 +57,25 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             return this.RedirectToAction<AbsenseController>(x => x.Index(model.Id));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return this.RedirectToAction<ClassController>(x => x.All());
+            }
+
+            var status = await  _absenceService.DeleteByClassAsyncId(id);
+
+            if (!status.IsSuccessful)
+            {
+                ModelState.AddModelError("", status.Message);
+            }
+
+            return this.RedirectToAction<AbsenseController>(x => x.Index(id));
+        }
+
         private bool IsValidRequest(ClassViewModel model, string month)
         {
             foreach (var student in model.Students)
@@ -74,16 +93,16 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return false;
             }
 
-            // if we try to calculate absences for the future
-            // example
-            // sep october
-            // i don't have any absenses for sep but i select october
             var selectedMonth = int.Parse(month);
             if (selectedMonth == SeptemberId)
             {
                 return true;
             }
 
+            // if we try to calculate absences for the future
+            // example
+            // sep october
+            // and if I don't have any absenses for sep but i have selected october
             selectedMonth--;
            
             if (!model.Students.FirstOrDefault().Absences.Any(x => x.MonthId == selectedMonth))

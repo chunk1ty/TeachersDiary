@@ -14,7 +14,7 @@ namespace TeachersDiary.Data.Ef.GenericRepository
 
         public bool ReadOnly { get; set; }
 
-        public Expression<Func<TEntity, bool>> WhereFilter { get; set; }
+        public Expression<Func<TEntity, bool>> WhereFilter { get; private  set; }
 
         public IQuerySettings<TEntity> Include(Expression<Func<TEntity, object>> path)
         {

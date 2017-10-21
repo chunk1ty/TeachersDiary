@@ -76,8 +76,8 @@ namespace TeachersDiary.Clients.Mvc
             bundles.Add(new ScriptBundle("~/bundles/landing-controller").Include(
                 "~/Scripts/app/controllers/landing-controller.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/student-controller").Include(
-                "~/Scripts/app/controllers/student-controller.js"));
+            bundles.Add(new ScriptBundle("~/bundles/absence-controller").Include(
+                "~/Scripts/app/controllers/absence-controller.js"));
         }
 
         private static void RegisterFonts(BundleCollection bundles)

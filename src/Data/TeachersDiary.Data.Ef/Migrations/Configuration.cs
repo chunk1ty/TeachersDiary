@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity.Migrations;
 using System.Linq;
+
 using Microsoft.AspNet.Identity.EntityFramework;
-using TeachersDiary.Common.Constants;
+
 using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Entities;
 
@@ -12,8 +13,8 @@ namespace TeachersDiary.Data.Ef.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(TeachersDiaryDbContext context)

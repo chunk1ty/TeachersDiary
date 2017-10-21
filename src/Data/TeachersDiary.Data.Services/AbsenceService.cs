@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Bytes2you.Validation;
-
+using TeachersDiary.Common;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Entities;
 using TeachersDiary.Data.Services.Contracts;
@@ -16,16 +17,18 @@ namespace TeachersDiary.Data.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEncryptingService _encryptingService;
-        private readonly IEntityFrameworkGenericRepository<AbsenceEntity> _entityFrameworkGenericRepository;
+        private readonly IEntityFrameworkGenericRepository<AbsenceEntity> _absenceRepository;
+        private readonly IQuerySettings<AbsenceEntity> _querySettings;
 
         public AbsenceService(
             IEncryptingService encryptingService, 
             IUnitOfWork unitOfWork, 
-            IEntityFrameworkGenericRepository<AbsenceEntity> entityFrameworkGenericRepository)
+            IEntityFrameworkGenericRepository<AbsenceEntity> absenceRepository, IQuerySettings<AbsenceEntity> querySettings)
         {
             _encryptingService = encryptingService;
             _unitOfWork = unitOfWork;
-            _entityFrameworkGenericRepository = entityFrameworkGenericRepository;
+            _absenceRepository = absenceRepository;
+            _querySettings = querySettings;
         }
 
         public void CalculateStudentAbsences(List<StudentDomain> students, string month)
@@ -46,6 +49,34 @@ namespace TeachersDiary.Data.Services
             }
 
             _unitOfWork.Commit();
+        }
+
+        public async Task<OperationStatus> DeleteByClassAsyncId(string classId)
+        {
+            try
+            {
+                var decodedClassId = _encryptingService.DecodeId(classId);
+
+                _querySettings.Include(x => x.Student);
+                _querySettings.Where(x => x.Student.ClassId == decodedClassId);
+
+                var absences = await _absenceRepository.GetAllAsync(_querySettings);
+
+                if (!absences.Any())
+                {
+                    return new SuccessStatus();
+                }
+
+                _absenceRepository.DeleteRange(absences);
+
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new FailureStatus("Възникна грешка при изтриването на отсъствията. Моля свържете се със ситемният администратор.");
+            }
+
+            return new SuccessStatus();
         }
 
         private void AddAbsences(List<StudentDomain> students, int selectedMonthId)
@@ -72,7 +103,7 @@ namespace TeachersDiary.Data.Services
                 absences.Add(absence);
             }
 
-            _entityFrameworkGenericRepository.AddRange(absences);
+            _absenceRepository.AddRange(absences);
         }
 
         private void UpdateAbsebces(List<StudentDomain> students, int selectedMonthId)
@@ -100,7 +131,7 @@ namespace TeachersDiary.Data.Services
                         MonthId = selectedMonthId
                     };
 
-                    _entityFrameworkGenericRepository.Update(absence);
+                    _absenceRepository.Update(absence);
                 }
                 //if user do not fill row when update record
                 else
@@ -113,7 +144,7 @@ namespace TeachersDiary.Data.Services
                         MonthId = selectedMonthId
                     };
 
-                    _entityFrameworkGenericRepository.Add(absence);
+                    _absenceRepository.Add(absence);
                 }
             }
         }

@@ -55,7 +55,10 @@
                 }
             }, {
                 text: 'Изчисли',
-                className: 'calculate-btn'
+                className: 'select-month-btn'
+            }, {
+                text: 'Изтриий',
+                className: 'delete-btn'
             }]
         });
 
@@ -72,12 +75,20 @@
             table.row('.selected').remove().draw(false);
         });
 
-        $('.calculate-btn').on('click', function () {
-            $('#myModal').modal();
-         });
+        $('.select-month-btn').on('click', function () {
+            $('#selectMonthModal').modal();
+        });
 
         $('#sent-data-btn').on('click', function () {
             $('#student-form').submit();
-         });
+        });
+
+        $('.delete-btn').on('click', function () {
+            $('#deleteModal').modal();
+        });
+
+        $('#confirm-delete-absence-btn').on('click', function () {
+            $('#absence-delete-form').submit();
+        });
     });
 }($));
