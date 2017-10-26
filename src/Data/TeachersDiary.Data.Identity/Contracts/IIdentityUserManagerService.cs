@@ -13,6 +13,10 @@ namespace TeachersDiary.Data.Identity.Contracts
 
         Task<UserEntity> FindByIdAsync(string userId);
 
+        Task<UserEntity> GetUserWithSchoolByUserIdAsync(string userId);
+
+        UserEntity GetUserWithSchoolByUserId(string userId);
+
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
 
         Task<IdentityResult> AddToRoleAsync(string userId, string role);

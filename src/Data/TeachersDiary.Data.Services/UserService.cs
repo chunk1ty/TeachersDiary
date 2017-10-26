@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bytes2you.Validation;
 using TeachersDiary.Common.Constants;
 using TeachersDiary.Common.Enumerations;
 using TeachersDiary.Data.Ef.Contracts;
@@ -56,6 +57,49 @@ namespace TeachersDiary.Data.Services
             var teachersDomain = _mappingService.Map<IEnumerable<UserDomain>>(teachers).ToList();
 
             return teachersDomain;
+        }
+
+        public async Task<UserDomain> GetUserByIdAsync(string id)
+        {
+            // TODO ??
+            if (id == null)
+            {
+                return null;
+            }
+
+            var userEntity = await _userManager.GetUserWithSchoolByUserIdAsync(id);
+            
+            if (userEntity == null)
+            {
+                // null or new User ??
+                return null;
+            }
+
+            var userDomain = _mappingService.Map<UserDomain>(userEntity);
+
+            return userDomain;
+        }
+
+
+        public UserDomain GetUserById(string id)
+        {
+            // TODO ??
+            if (id == null)
+            {
+                return null;
+            }
+
+            var userEntity = _userManager.GetUserWithSchoolByUserId(id);
+
+            if (userEntity == null)
+            {
+                // null or new User ??
+                return null;
+            }
+
+            var userDomain = _mappingService.Map<UserDomain>(userEntity);
+
+            return userDomain;
         }
     }
 }

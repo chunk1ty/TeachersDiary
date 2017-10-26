@@ -18,6 +18,7 @@ namespace TeachersDiary.Domain
        
         public string UserName { get; set; }
 
+        public SchoolDomain School { get; set; }
         public int SchoolId { get; set; }
 
         public ApplicationRoles Role { get; set; }

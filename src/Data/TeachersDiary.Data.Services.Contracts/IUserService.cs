@@ -10,5 +10,9 @@ namespace TeachersDiary.Data.Services.Contracts
         Task<IEnumerable<UserDomain>> GetAllAsync();
 
         Task<IEnumerable<UserDomain>> GetTeachersBySchoolIdAsync();
+
+        Task<UserDomain> GetUserByIdAsync(string id);
+
+        UserDomain GetUserById(string id);
     }
 }

@@ -26,6 +26,20 @@ namespace TeachersDiary.Data.Identity
             return await Users.Where(x => x.SchoolId == id).ToListAsync();
         }
 
+        public async Task<UserEntity> GetUserWithSchoolByUserIdAsync(string userId)
+        {
+            return await Users
+                .Include(x => x.School)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+        }
+
+        public UserEntity GetUserWithSchoolByUserId(string userId)
+        {
+            return Users
+                .Include(x => x.School)
+                .FirstOrDefault(x => x.Id == userId);
+        }
+
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<UserEntity>(context.Get<TeachersDiaryDbContext>()));
