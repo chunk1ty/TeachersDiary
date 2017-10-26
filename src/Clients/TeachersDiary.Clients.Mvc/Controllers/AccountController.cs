@@ -60,8 +60,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             if (result == SignInStatus.Success)
             {
-                //await _sessionStateService.SetAsync(HttpContext);
-
                 return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
@@ -114,8 +112,6 @@ namespace TeachersDiary.Clients.Mvc.Controllers
 
             if (result.Succeeded)
             {
-                //await _sessionStateService.SetAsync(HttpContext);
-
                 return this.RedirectToAction<DashboardController>(x => x.Index());
             }
 
