@@ -203,9 +203,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="Controllers\AbsenseController.cs" />
-    <Compile Include="Controllers\Abstracts\TeacherController.cs" />
+    <Compile Include="Controllers\Abstracts\NonAuthorizeController.cs" />
+    <Compile Include="Controllers\Abstracts\SchoolAdminAuthorizeController.cs" />
+    <Compile Include="Controllers\Abstracts\TeacherAndSchoolAdminAuthorizeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Abstracts\BaseController.cs" />
+    <Compile Include="Controllers\Abstracts\BaseAuthorizeController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SchoolAdminController.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="Infrastructure\Helpers\ApplicationRolesHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
+    <Compile Include="Infrastructure\Session\ISessionStateService.cs" />
     <Compile Include="Infrastructure\Session\SessionState.cs" />
     <Compile Include="Infrastructure\Session\SessionStateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

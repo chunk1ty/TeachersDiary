@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 using Ninject;
+
 using TeachersDiary.Clients.Mvc.Infrastructure.Session;
 using TeachersDiary.Common.Enumerations;
 
@@ -23,7 +25,7 @@ namespace TeachersDiary.Clients.Mvc.Infrastructure.Attribute
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            SessionState.SyncSession(httpContext);
+            Task.Run(async () => await SessionState.SyncAsync(httpContext));
 
             return base.AuthorizeCore(httpContext);
         }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -19,25 +15,6 @@ namespace TeachersDiary.Data.Identity
         public ApplicationUserManager(IUserStore<UserEntity> store)
             : base(store)
         {
-        }
-
-        public async Task<IEnumerable<UserEntity>> GetAllBySchoolIdAsync(int id)
-        {
-            return await Users.Where(x => x.SchoolId == id).ToListAsync();
-        }
-
-        public async Task<UserEntity> GetUserWithSchoolByUserIdAsync(string userId)
-        {
-            return await Users
-                .Include(x => x.School)
-                .FirstOrDefaultAsync(x => x.Id == userId);
-        }
-
-        public UserEntity GetUserWithSchoolByUserId(string userId)
-        {
-            return Users
-                .Include(x => x.School)
-                .FirstOrDefault(x => x.Id == userId);
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

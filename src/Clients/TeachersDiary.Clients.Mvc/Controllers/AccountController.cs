@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-using System.Web.Security;
 using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -17,8 +15,7 @@ using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseAuthorizeController
     {
         private readonly ISchoolService _schoolService;
         private readonly IAuthenticationService _authenticationService;

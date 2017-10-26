@@ -2,7 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+
 using DataTables.Mvc;
+
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
 using TeachersDiary.Clients.Mvc.Infrastructure.Constants;
 using TeachersDiary.Clients.Mvc.ViewModels.Class;
@@ -13,7 +15,7 @@ using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class StudentController : TeacherController
+    public class StudentController : TeacherAndSchoolAdminAuthorizeController
     {
         private readonly IClassService _classService;
         private readonly IMappingService _mappingService;

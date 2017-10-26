@@ -13,9 +13,10 @@ using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class AbsenseController : TeacherController
+    public class AbsenseController : TeacherAndSchoolAdminAuthorizeController
     {
         private const int SeptemberId = 9;
+
         private readonly IAbsenceService _absenceService;
         private readonly IMappingService _mappingService;
         private readonly IMonthService _monthService;
