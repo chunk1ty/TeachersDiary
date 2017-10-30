@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -202,9 +203,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="Controllers\AbsenseController.cs" />
-    <Compile Include="Controllers\Abstracts\TeacherController.cs" />
+    <Compile Include="Controllers\Abstracts\NonAuthorizeController.cs" />
+    <Compile Include="Controllers\Abstracts\SchoolAdminAuthorizeController.cs" />
+    <Compile Include="Controllers\Abstracts\TeacherAndSchoolAdminAuthorizeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Abstracts\BaseController.cs" />
+    <Compile Include="Controllers\Abstracts\BaseAuthorizeController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SchoolAdminController.cs" />
@@ -216,10 +219,15 @@
     </Compile>
     <Compile Include="Infrastructure\Attribute\TeachersDiaryAuthorize.cs" />
     <Compile Include="Infrastructure\Constants\LayoutConstants.cs" />
+    <Compile Include="Infrastructure\Constants\MvcConstants.cs" />
     <Compile Include="Infrastructure\Constants\PartialViewConstants.cs" />
+    <Compile Include="Infrastructure\Filters\TeachersDiaryExeptionAttribute.cs" />
     <Compile Include="Infrastructure\Helpers\ApplicationRolesHtmlHelpers.cs" />
     <Compile Include="Infrastructure\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\CultureModule.cs" />
+    <Compile Include="Infrastructure\Session\ISessionStateService.cs" />
+    <Compile Include="Infrastructure\Session\SessionState.cs" />
+    <Compile Include="Infrastructure\Session\SessionStateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Translations\Resources.en.Designer.cs">
@@ -1271,9 +1279,10 @@
     <Content Include="fonts\font-awesome\scss\_screen-reader.scss" />
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app\controllers\landing-controller.js" />
-    <Content Include="Scripts\app\controllers\student-controller.js" />
+    <Content Include="Scripts\app\controllers\absence-controller.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />

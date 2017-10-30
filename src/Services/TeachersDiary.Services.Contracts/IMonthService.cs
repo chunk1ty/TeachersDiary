@@ -9,6 +9,6 @@ namespace TeachersDiary.Services.Contracts
 {
     public interface IMonthService
     {
-        List<Month> GetCurrentAndNextMonth();
+        List<Month> GetCurrentAndPreviousMonth();
     }
 }

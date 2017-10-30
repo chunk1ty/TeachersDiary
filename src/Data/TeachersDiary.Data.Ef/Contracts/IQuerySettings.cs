@@ -13,7 +13,7 @@ namespace TeachersDiary.Data.Ef.Contracts
 
         bool ReadOnly { get; set; }
 
-        Expression<Func<TEntity, bool>> WhereFilter { get; set; }
+        Expression<Func<TEntity, bool>> WhereFilter { get; }
 
         IEnumerable<Expression<Func<TEntity, object>>> IncludePaths { get; }
     }

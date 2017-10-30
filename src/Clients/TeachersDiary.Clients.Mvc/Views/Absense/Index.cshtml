@@ -10,11 +10,37 @@
 }
 
 <div class="row border-bottom white-bg dashboard-header">
-    <h2 class="text-center">@Model.Name клас</h2>
+    <h2 id="class-name" class="text-center">@Model.Name клас</h2>
     
     <a href="@(Url.Action<ClassController>(x => x.All()))">
         Обратно
     </a>
+    
+    @using (Html.BeginForm<AbsenseController>(c => c.Delete(string.Empty), FormMethod.Post, null, new {id = "absence-delete-form" }))
+    {
+        @Html.HiddenFor(x => Model.Id)
+        @Html.AntiForgeryToken()      
+        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="deleteLabel">
+                            Сигурни ли сте че искате да изтриете всички отсъствията за <span style="color: red">@Model.Name</span> клас ?
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Откажи</button>
+                        <button type="button" class="btn btn-primary" id="confirm-delete-absence-btn">Потвърди</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     @using (Html.BeginForm<AbsenseController>(c => c.CalculateAbsenses(null, string.Empty), FormMethod.Post, null, new {id= "student-form"}))
     {
@@ -84,10 +110,12 @@
 
                     @{ int mounthIndex = 0; }
 
+                    @*TODO order students in the back end (sql query)*@
+                    @{ Model.Students = Model.Students.OrderBy(x => x.Number).ToList(); }
 
                     @for (var absenceIndex = 0; absenceIndex < Model.Students[studentIndex].Absences.Count; absenceIndex++)
                     {
-                       mounthIndex += 1;
+                        mounthIndex += 1;
 
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].Id)
                         @Html.HiddenFor(x => x.Students[studentIndex].Absences[absenceIndex].MonthId)
@@ -163,18 +191,20 @@
             </tbody>
         </table>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="selectMonthModal" tabindex="-1" role="dialog" aria-labelledby="selectMonthLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Изберете месец</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="selectMonthLabel">Изберете месец</h4>
                     </div>
                     <div class="modal-body">
                         @Html.DropDownList(
-                               "month",
-                               new SelectList(Model.AvailableMonths.Select(x => new { Value = x.Id, Text = x.Name}),"Value","Text"),
-                               new {@class = "form-control m-b" })
+                            "month",
+                            new SelectList(Model.AvailableMonths.Select(x => new { Value = x.Id, Text = x.Name}),"Value","Text"),
+                            new {@class = "form-control m-b" })
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Откажи</button>
@@ -189,5 +219,5 @@
 
 @section scripts {
     @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/bundles/student-controller")
+    @Scripts.Render("~/bundles/absence-controller")
 }

@@ -1,5 +1,10 @@
 ﻿<div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <a href="javascript:document.getElementById('log-out-input').click()">
@@ -7,11 +12,11 @@
                 </a>
             </li>
         </ul>
-        @using (Html.BeginForm<AccountController>(x => x.LogOff(), FormMethod.Post, null, new { id = "logoutForm"}))
+        @using (Html.BeginForm<AccountController>(x => x.LogOff(), FormMethod.Post, null, new {id = "logoutForm"}))
         {
             @Html.AntiForgeryToken()
 
-            <input id="log-out-input" type="hidden" />
+            <input id="log-out-input" type="hidden"/>
         }
     </nav>
 </div>

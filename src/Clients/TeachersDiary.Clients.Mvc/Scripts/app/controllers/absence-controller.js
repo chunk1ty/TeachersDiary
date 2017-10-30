@@ -2,6 +2,7 @@
     "use strict";
     $(document).ready(function () {
         //grid settings
+
         var table = $('#student-grid').DataTable({
             "bSort": false,
             paging: false,
@@ -13,6 +14,7 @@
             buttons: [{
                 extend: 'print',
                 text: 'Принтирай',
+                message: '<h2>' + $('#class-name').text() + '</h2>',
                 exportOptions: {
                     stripHtml: false
                 },
@@ -53,7 +55,10 @@
                 }
             }, {
                 text: 'Изчисли',
-                className: 'calculate-btn'
+                className: 'select-month-btn'
+            }, {
+                text: 'Изтриий',
+                className: 'delete-btn'
             }]
         });
 
@@ -70,12 +75,20 @@
             table.row('.selected').remove().draw(false);
         });
 
-        $('.calculate-btn').on('click', function () {
-            $('#myModal').modal();
-         });
+        $('.select-month-btn').on('click', function () {
+            $('#selectMonthModal').modal();
+        });
 
         $('#sent-data-btn').on('click', function () {
             $('#student-form').submit();
-         });
+        });
+
+        $('.delete-btn').on('click', function () {
+            $('#deleteModal').modal();
+        });
+
+        $('#confirm-delete-absence-btn').on('click', function () {
+            $('#absence-delete-form').submit();
+        });
     });
 }($));

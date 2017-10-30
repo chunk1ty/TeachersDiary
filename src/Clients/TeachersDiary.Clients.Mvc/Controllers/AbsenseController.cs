@@ -13,9 +13,10 @@ using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class AbsenseController : TeacherController
+    public class AbsenseController : TeacherAndSchoolAdminAuthorizeController
     {
         private const int SeptemberId = 9;
+
         private readonly IAbsenceService _absenceService;
         private readonly IMappingService _mappingService;
         private readonly IMonthService _monthService;
@@ -35,7 +36,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             var classDomain = await _classService.GetClassByClassIdAsync(classId);
            
             var classViewModel = _mappingService.Map<ClassViewModel>(classDomain);
-            classViewModel.AvailableMonths = _monthService.GetCurrentAndNextMonth();
+            classViewModel.AvailableMonths = _monthService.GetCurrentAndPreviousMonth();
 
             return View(classViewModel);
         }
@@ -46,7 +47,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             if (!IsValidRequest(model, month))
             {
-                model.AvailableMonths = _monthService.GetCurrentAndNextMonth();
+                model.AvailableMonths = _monthService.GetCurrentAndPreviousMonth();
                 return View("Index", model);
             }
 
@@ -55,6 +56,25 @@ namespace TeachersDiary.Clients.Mvc.Controllers
             _absenceService.CalculateStudentAbsences(studentDomains, month);
 
             return this.RedirectToAction<AbsenseController>(x => x.Index(model.Id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return this.RedirectToAction<ClassController>(x => x.All());
+            }
+
+            var status = await  _absenceService.DeleteByClassAsyncId(id);
+
+            if (!status.IsSuccessful)
+            {
+                ModelState.AddModelError("", status.Message);
+            }
+
+            return this.RedirectToAction<AbsenseController>(x => x.Index(id));
         }
 
         private bool IsValidRequest(ClassViewModel model, string month)
@@ -74,16 +94,16 @@ namespace TeachersDiary.Clients.Mvc.Controllers
                 return false;
             }
 
-            // if we try to calculate absences for the future
-            // example
-            // sep october
-            // i don't have any absenses for sep but i select october
             var selectedMonth = int.Parse(month);
             if (selectedMonth == SeptemberId)
             {
                 return true;
             }
 
+            // if we try to calculate absences for the future
+            // example
+            // sep october
+            // and if I don't have any absenses for sep but i have selected october
             selectedMonth--;
            
             if (!model.Students.FirstOrDefault().Absences.Any(x => x.MonthId == selectedMonth))

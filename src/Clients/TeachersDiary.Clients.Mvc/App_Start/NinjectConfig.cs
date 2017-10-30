@@ -8,6 +8,7 @@ using Ninject;
 using Ninject.Web.Common;
 using Ninject.Extensions.Conventions;
 using TeachersDiary.Clients.Mvc;
+using TeachersDiary.Clients.Mvc.Infrastructure.Session;
 using TeachersDiary.Data.Ef;
 using TeachersDiary.Data.Ef.Contracts;
 using TeachersDiary.Data.Ef.GenericRepository;
@@ -55,6 +56,7 @@ namespace TeachersDiary.Clients.Mvc
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                RegisterDataModule(kernel);
                 return kernel;
             }
             catch
@@ -70,10 +72,9 @@ namespace TeachersDiary.Clients.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            RegisterDataModule(kernel);
-
             kernel.Bind<IIdentitySignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IIdentityUserManagerService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+            kernel.Bind<ISessionStateService>().To<SessionStateService>();
 
             kernel.Bind(x => x
                 .FromAssembliesMatching("TeachersDiary.Service*")

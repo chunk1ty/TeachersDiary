@@ -7,13 +7,14 @@ namespace TeachersDiary.Services
 {
     public class MonthService : IMonthService
     {
-        public List<Month> GetCurrentAndNextMonth()
+        public List<Month> GetCurrentAndPreviousMonth()
         {
             var monthId = DateTime.UtcNow.Month;
             var months = new List<Month>();
 
+            // get previous month
+            months.Add(monthId != 1 ? GetMonth(monthId - 1) : GetMonth(12));
             months.Add(GetMonth(monthId));
-            months.Add(monthId != 12 ? GetMonth(monthId + 1) : GetMonth(1));
 
             return months;
         }

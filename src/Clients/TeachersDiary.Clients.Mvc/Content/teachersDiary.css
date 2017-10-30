@@ -5,3 +5,9 @@
  #student-grid {
      width: 100% !important;
  }
+
+.delete-btn {
+    background-color: #ed5565 !important;
+    border-color: #ed5565 !important;
+    color: #FFFFFF !important;
+}
