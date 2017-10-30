@@ -35,7 +35,7 @@ namespace TeachersDiary.Clients.Mvc.ViewModels.Student
         public string GetTotalNotExcusedAbsences()
         {
             // workaround if TotalNotExcusedAbsences comes after error
-            if (TotalNotExcusedAbsences.IsDoubleNumber())
+            if (TotalNotExcusedAbsences.IsPositiveDoubleNumber())
             {
                 var totalNotExcusedAbsencesAsDouble = double.Parse(TotalNotExcusedAbsences);
                 var totalNotExcusedAbsencesAsFraction = totalNotExcusedAbsencesAsDouble.ToFractionNumber();

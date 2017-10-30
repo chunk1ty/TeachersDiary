@@ -81,13 +81,13 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         {
             foreach (var student in model.Students)
             {
-                if (student.TotalExcusedAbsences.IsDoubleNumber() && student.TotalNotExcusedAbsences.IsFractionNumber())
+                if (student.TotalExcusedAbsences.IsPositiveDoubleNumber() && student.TotalNotExcusedAbsences.IsPositiveFractionNumber())
                 {
                     continue;
                 }
 
                 var errorMsg =
-                    $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}. Извинените отсъствия трябва да са цяло число, а за неизвинените след като въведете цялата част оставете интервал след което въведете и дробната. Дробната част се въвежда с '/' разделител.";
+                    $"Некоректно въведени данни за {student.FirstName + " " + student.MiddleName + " " + student.LastName}. Извинените отсъствия трябва да са цяло число, а за неизвинените дробно. След като въведете цялата част оставете интервал след което въведете и дробната. Дробната част се въвежда с '/' разделител.";
 
                 ModelState.AddModelError(string.Empty, errorMsg);
 

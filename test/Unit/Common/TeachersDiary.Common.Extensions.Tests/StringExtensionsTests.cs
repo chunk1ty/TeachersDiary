@@ -38,7 +38,7 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("0.666")]
         public void IsDoubleNumber_WithValidInput_ShouldReturnTrue(string input)
         {
-            var actualResult = input.IsDoubleNumber();
+            var actualResult = input.IsPositiveDoubleNumber();
 
             Assert.IsTrue(actualResult);
         }
@@ -47,9 +47,11 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("2.s.2")]
         [TestCase("2.2.2")]
         [TestCase("0d.666")]
+        [TestCase("-3")]
+        [TestCase("-13")]
         public void IsDoubleNumber_WithInValidInput_ShouldReturnFalse(string input)
         {
-            var actualResult = input.IsDoubleNumber();
+            var actualResult = input.IsPositiveDoubleNumber();
 
             Assert.IsFalse(actualResult);
         }
@@ -60,7 +62,7 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("1/3")]
         public void IsFractionNumber_WithValidInput_ShouldReturnTrue(string input)
         {
-            var actualResult = input.IsFractionNumber();
+            var actualResult = input.IsPositiveFractionNumber();
 
             Assert.IsTrue(actualResult);
         }
@@ -69,9 +71,12 @@ namespace TeachersDiary.Common.Extensions.Tests
         [TestCase("dsdas")]
         [TestCase("2.2")]
         [TestCase("0d.666")]
+        [TestCase("-1 1/3")]
+        [TestCase("-15 2/3")]
+        [TestCase("15 -2/3")]
         public void IsFractionNumber_WithInValidInput_ShouldReturnFalse(string input)
         {
-            var actualResult = input.IsFractionNumber();
+            var actualResult = input.IsPositiveFractionNumber();
 
             Assert.IsFalse(actualResult);
         }

@@ -66,28 +66,40 @@ namespace TeachersDiary.Common.Extensions
             throw new FormatException("Not a valid fraction.");
         }
 
-        public static bool IsDoubleNumber(this string value)
+        public static bool IsPositiveDoubleNumber(this string value)
         {
-            double price;
-            var isDouble = double.TryParse(value, out price);
+            double number;
+            var isDouble = double.TryParse(value, out number);
 
-            return isDouble;
+            if (!isDouble)
+            {
+                return false;
+            }
+
+            var isPositiveNumber = number >= 0;
+
+            return isPositiveNumber;
         }
 
-        public static bool IsFractionNumber(this string value)
+        public static bool IsPositiveFractionNumber(this string value)
         {
             bool result = true;
 
+            double number; 
+
             try
             {
-                value.ToDoubleNumber();
+                number = value.ToDoubleNumber();
             }
             catch (FormatException)
             {
                 result = false;
 
             }
-            return result;
+
+            var isPositiveNumber = number >= 0; 
+
+            return isPositiveNumber;
         }
     }
 }
