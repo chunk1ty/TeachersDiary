@@ -4,32 +4,34 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
-
 using Bytes2you.Validation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using TeachersDiary.Clients.Mvc.Controllers.Abstracts;
+using TeachersDiary.Clients.Mvc.Infrastructure.Session;
 using TeachersDiary.Clients.Mvc.ViewModels.Account;
 using TeachersDiary.Data.Services.Contracts;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : BaseAuthorizeController
     {
-        //TODO ISchoolService injection ??
         private readonly ISchoolService _schoolService;
         private readonly IAuthenticationService _authenticationService;
+        private readonly ISessionStateService _sessionStateService;
 
         public AccountController(
             ISchoolService schoolService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService, 
+            ISessionStateService sessionStateService)
         {
             Guard.WhenArgument(schoolService, nameof(schoolService)).IsNull().Throw();
             Guard.WhenArgument(authenticationService, nameof(authenticationService)).IsNull().Throw();
 
             _schoolService = schoolService;
             _authenticationService = authenticationService;
+            _sessionStateService = sessionStateService;
         }
 
         [HttpGet]
@@ -70,6 +72,8 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            _sessionStateService.Abandon(HttpContext);
+
             HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             return this.RedirectToAction<AccountController>(x => x.Login());

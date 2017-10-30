@@ -13,7 +13,7 @@ using TeachersDiary.Services.Contracts.Mapping;
 
 namespace TeachersDiary.Clients.Mvc.Controllers
 {
-    public class ClassController : TeacherController
+    public class ClassController : TeacherAndSchoolAdminAuthorizeController
     {
         private readonly IClassService _classService;
         private readonly IUserService _userService;
@@ -40,6 +40,7 @@ namespace TeachersDiary.Clients.Mvc.Controllers
         }
 
         [HttpGet]
+        [TeachersDiaryAuthorize(ApplicationRoles.SchoolAdministrator)]
         public async Task<ActionResult> Delete(string classId)
         {
             await _classService.DeleteByIdAsync(classId);

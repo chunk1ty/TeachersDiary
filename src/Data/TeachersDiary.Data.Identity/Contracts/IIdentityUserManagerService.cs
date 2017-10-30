@@ -7,7 +7,7 @@ using TeachersDiary.Data.Entities;
 
 namespace TeachersDiary.Data.Identity.Contracts
 {
-    public interface IIdentityUserManagerService : IDisposable
+    public interface IIdentityUserManagerService
     {
         Task<IdentityResult> CreateAsync(UserEntity user, string password);
 
@@ -20,8 +20,6 @@ namespace TeachersDiary.Data.Identity.Contracts
         Task<IdentityResult> RemoveFromRoleAsync(string userId, string role);
      
         Task<IdentityResult> RemoveFromRolesAsync(string userId, params string[] roles);
-
-        Task<IEnumerable<UserEntity>> GetAllBySchoolIdAsync(int id);
 
         Task<bool> IsInRoleAsync(string userId, string role);
 
